@@ -14,6 +14,6 @@ public abstract class ConfigBase {
     /**
      * Email address that the code can safely send emails to, hopefully without upsetting anyone.
      */
-    public static final String SAFE_EMAIL_ADDRESS = "siemens-sen-ccs@tngtech.com";
+    public static final String SAFE_EMAIL_ADDRESS = "mail@tngtech.com";
 
 }
