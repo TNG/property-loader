@@ -7,4 +7,5 @@ build
 .classpath
 .settings
 .project
+.idea
 target
