@@ -20,4 +20,5 @@ dependencies {
     compile 'log4j:log4j:1.2.16'
     compile 'log4j:apache-log4j-extras:1.1'
     compile 'javax.servlet:servlet-api:2.5'
+    testCompile 'junit:junit:4.10'
 }
