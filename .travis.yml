@@ -1,0 +1,5 @@
+language: java
+install: "gradle assemble"
+script: "gradle clean build"
+jdk:
+  - oraclejdk6
