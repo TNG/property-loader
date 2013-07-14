@@ -3,6 +3,7 @@ package com.tngtech.propertyloader;
 import com.tngtech.infrastructure.exception.PreconditionException;
 import com.tngtech.propertyloader.impl.openers.OpenerConfig;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Properties;
@@ -20,7 +21,7 @@ public class PropertyLoaderTest {
 
         loader.getOpeners().add(OpenerConfig.relativeTo(PropertyLoaderTest.class));
     }
-    
+
     @Test(expected = PreconditionException.class)
     public void testLoadWithEmptyBaseName() {
         loader.load();
