@@ -61,8 +61,6 @@ public class PropertyLoaderTest {
     }
 
     private void assertSingleDemoAppConfig(Properties props) {
-        // assertEquals("undefined variables are resolved", "${undefined}",
-        // props.getProperty("undefined"));
         assertEquals("externalsystem.url not resolved", "http://development", props.getProperty("coresystem.url"));
         assertEquals("variable replacement does not work", props.getProperty("c"), "Hello, World!");
         assertEquals("include does not work", "yes", props.getProperty("xxx"));
