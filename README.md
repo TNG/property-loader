@@ -1,4 +1,4 @@
-# Property loader
+# Property loader [![Build Status](https://travis-ci.org/TNG/property-loader.png?branch=master)](https://travis-ci.org/TNG/property-loader)
 
 The property loader is a java library for managing property configurations.
 
