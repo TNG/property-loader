@@ -31,3 +31,7 @@ $ gradle assemble
         Properties props = loader.load("test", "properties");
 ```
 
+### JavaDoc###
+
+Full javadoc of the code can be found here http://tng.github.io/property-loader/
+
