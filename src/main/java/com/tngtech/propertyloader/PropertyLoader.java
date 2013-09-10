@@ -82,10 +82,12 @@ public class PropertyLoader {
     {
         try{
             InputStream stream = opener.open(fileName);
-            OrderedPropertiesLoader orderedPropertiesLoader = propertyLoaderFactory.getOrderedPropertiesLoader();
-            OrderedProperties newProperties = orderedPropertiesLoader.loadOrderedPropertiesFromStream(stream, PROPERTY_FILE_ENCODING);
-            stream.close();
-            return newProperties;
+            if(stream != null){
+                OrderedPropertiesLoader orderedPropertiesLoader = propertyLoaderFactory.getOrderedPropertiesLoader();
+                OrderedProperties newProperties = orderedPropertiesLoader.loadOrderedPropertiesFromStream(stream, PROPERTY_FILE_ENCODING);
+                stream.close();
+                return newProperties;
+            }
         }
         catch(IOException e){
 

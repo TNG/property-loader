@@ -10,4 +10,8 @@ public class OpenerConfig {
     {
         return openers;
     }
+
+    public void setOpeners(List<PropertyLoaderOpener> openers) {
+        this.openers = openers;
+    }
 }

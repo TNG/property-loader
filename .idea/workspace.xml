@@ -2,23 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="746541af-d99d-47aa-9fa4-443f43350afd" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/ClassLoaderOpener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/ContextClassLoaderOpener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/FilesystemOpener.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/RelativeToClass.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/WebOpener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OpenerConfig.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OpenerConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="property-loader-rewrite.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/pom.xml" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378726136805" ignored="false" />
     <file path="/fragment.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378731659030" ignored="false" />
-    <file path="/PropertyLoader.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378737843311" ignored="false" />
+    <file path="/PropertyLoader.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378820861191" ignored="false" />
     <file path="/OpenerConfig.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378722116991" ignored="false" />
     <file path="/SuffixConfig.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378724572271" ignored="false" />
     <file path="/PropertyLoaderFactory.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378737809592" ignored="false" />
     <file path="/OrderedProperties.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378724699952" ignored="false" />
-    <file path="/PropertyLoaderTest.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378733903611" ignored="false" />
+    <file path="/PropertyLoaderTest.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378821283898" ignored="false" />
     <file path="/ReaderHelper.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378731533552" ignored="false" />
     <file path="/OrderedPropertiesLoader.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378738689153" ignored="false" />
     <file path="/CharacterMatcherHelper.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378734669256" ignored="false" />
     <file path="$PROJECT_DIR$/../property-loader/src/main/java/com/tngtech/infrastructure/io/OrderedPropertiesLoader.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378738107610" ignored="false" />
-    <file path="/Dummy.txt" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378802839771" ignored="false" />
+    <file path="/Dummy.txt" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378819960114" ignored="false" />
+    <file path="/FilesystemOpener.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378820047279" ignored="false" />
+    <file path="/WebOpener.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378820485122" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +80,23 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <line_breakpoints>
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" line="59" class="com.tngtech.propertyloader.PropertyLoader" package="com.tngtech.propertyloader">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -82,65 +109,57 @@
       <file leaf-file-name="PropertyLoader.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="113" selection-start="2530" selection-end="2530" vertical-scroll-proportion="0.0">
+            <state line="9" column="13" selection-start="226" selection-end="226" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OrderedPropertiesLoader.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OrderedPropertiesLoader.java">
+      <file leaf-file-name="OpenerConfig.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OpenerConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="179" column="39" selection-start="6535" selection-end="6535" vertical-scroll-proportion="0.74882996">
+            <state line="6" column="44" selection-start="139" selection-end="139" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClassLoaderOpener.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/ClassLoaderOpener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="56" selection-start="165" selection-end="197" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FilesystemOpener.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/FilesystemOpener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="22" selection-start="238" selection-end="254" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1866#1882#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IllegalArgumentException.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar:///opt/jdk1.7.0_25/src.zip!/java/lang/IllegalArgumentException.java">
+      <file leaf-file-name="ContextClassLoaderOpener.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/ContextClassLoaderOpener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="11" selection-start="839" selection-end="839" vertical-scroll-proportion="0.0">
+            <state line="6" column="6" selection-start="147" selection-end="147" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dummy.properties" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/resources/dummy.properties">
+      <file leaf-file-name="WebOpener.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/WebOpener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReaderHelper.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/helpers/ReaderHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="131" selection-start="374" selection-end="402" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CharacterMatcher.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/infrastructure/io/CharacterMatcher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="17" selection-start="789" selection-end="789" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PropertyLoaderFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyLoaderFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="60" selection-start="1357" selection-end="1357" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="17" column="48" selection-start="430" selection-end="430" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -154,20 +173,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WhitespaceMatcher.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/infrastructure/io/charactermatchers/WhitespaceMatcher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="13" selection-start="815" selection-end="815" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PropertyLoaderTest.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="PropertyLoaderTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="132" selection-start="1946" selection-end="1946" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="70" column="40" selection-start="2774" selection-end="2790" vertical-scroll-proportion="0.66012084">
+              <folding>
+                <element signature="e#2724#2746#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -197,9 +209,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/SuffixConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OrderedProperties.java" />
-        <option value="$PROJECT_DIR$/src/test/java/PropertyLoaderTest.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyLoaderOpener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/helpers/ReaderHelper.java" />
@@ -209,10 +218,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/infrastructure/io/CharacterMatcher.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/helpers/CharacterMatcherHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyLoaderFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/FilesystemOpener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OrderedPropertiesLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/FilesystemOpener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/ContextClassLoaderOpener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/WebOpener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OpenerConfig.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" />
       </list>
     </option>
   </component>
@@ -259,7 +271,7 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="64" />
+    <option name="x" value="1430" />
     <option name="y" value="-4" />
     <option name="width" value="1857" />
     <option name="height" value="1205" />
@@ -290,6 +302,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -460,13 +473,50 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="propertyloader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="openers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="property-loader-rewrite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="property-loader-rewrite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tngtech" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="io" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -484,9 +534,9 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -617,6 +667,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -642,19 +705,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -760,27 +810,27 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-4" width="1857" height="1205" extended-state="6" />
+    <frame x="1430" y="-4" width="1857" height="1205" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32923368" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39924315" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39924315" sideWeight="0.4997236" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32923368" sideWeight="0.5002764" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32923368" sideWeight="0.4997236" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32923368" sideWeight="0.4997236" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32923368" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18850194" sideWeight="0.6707663" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13266999" sideWeight="0.6707663" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27473742" sideWeight="0.6707663" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33680227" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1901603" sideWeight="0.6707663" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33680227" sideWeight="0.4997236" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32923368" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -851,63 +901,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/org/junit/runner/JUnitCore.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="35" selection-start="1403" selection-end="1403" vertical-scroll-proportion="0.67863894" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OrderedProperties.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="5" selection-start="1573" selection-end="1573" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/org/junit/internal/runners/JUnit38ClassRunner.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="16" selection-start="534" selection-end="534" vertical-scroll-proportion="0.34026465" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="21" selection-start="1266" selection-end="1266" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/infrastructure/io/ExtendedReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="5" selection-start="2155" selection-end="2155" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/infrastructure/io/charactermatchers/InverseMatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="13" selection-start="856" selection-end="856" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/infrastructure/io/charactermatchers/WhitespaceMatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="13" selection-start="815" selection-end="815" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/infrastructure/io/CharacterMatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="17" selection-start="789" selection-end="789" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/helpers/ReaderHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="131" selection-start="374" selection-end="402" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyLoaderFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="60" selection-start="1357" selection-end="1357" vertical-scroll-proportion="0.0">
@@ -915,30 +908,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="113" selection-start="2530" selection-end="2530" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/resources/dummy.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="132" selection-start="1946" selection-end="1946" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyLoaderOpener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="17" selection-start="480" selection-end="480" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -952,10 +924,100 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OrderedPropertiesLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="179" column="39" selection-start="6535" selection-end="6535" vertical-scroll-proportion="0.74882996">
+        <state line="205" column="62" selection-start="7408" selection-end="7408" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1866#1882#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/ContextClassLoaderOpener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="6" selection-start="147" selection-end="147" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/ClassLoaderOpener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="56" selection-start="165" selection-end="197" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/WebOpener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="48" selection-start="430" selection-end="430" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-all/1.9.5/mockito-all-1.9.5.jar!/org/mockito/internal/creation/MethodInterceptorFilter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="28" selection-start="805" selection-end="805" vertical-scroll-proportion="-8.4">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/org/junit/runner/JUnitCore.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="35" selection-start="1403" selection-end="1403" vertical-scroll-proportion="0.6980462">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/org/junit/internal/runners/JUnit38ClassRunner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="16" selection-start="534" selection-end="534" vertical-scroll-proportion="-7.2">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-all/1.9.5/mockito-all-1.9.5.jar!/org/mockito/cglib/proxy/MethodProxy.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="28" selection-start="1456" selection-end="1456" vertical-scroll-proportion="0.34727272">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OpenerConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="44" selection-start="139" selection-end="139" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="13" selection-start="226" selection-end="226" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyLoaderOpener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="17" selection-start="480" selection-end="480" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/FilesystemOpener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="22" selection-start="238" selection-end="254" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="40" selection-start="2774" selection-end="2790" vertical-scroll-proportion="0.66012084">
+          <folding>
+            <element signature="e#2724#2746#0" expanded="true" />
           </folding>
         </state>
       </provider>

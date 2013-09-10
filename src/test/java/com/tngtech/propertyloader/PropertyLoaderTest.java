@@ -1,11 +1,14 @@
 package com.tngtech.propertyloader;
 
+import com.tngtech.propertyloader.impl.OpenerConfig;
 import com.tngtech.propertyloader.impl.OrderedProperties;
+import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import static org.mockito.Mockito.*;
@@ -52,7 +55,7 @@ public class PropertyLoaderTest extends TestCase{
         assertEquals(propertyLoader.getExtension(), fileExtension);
     }
 
-    /*@org.junit.Test
+    @org.junit.Test
     public void testApp()
     {
         String[] args = {"/home/matthias/Projects/property-loader/src/test/resources/demoapp-configuration",
@@ -62,9 +65,15 @@ public class PropertyLoaderTest extends TestCase{
 
         PropertyLoader propertyLoader = spy(new PropertyLoader());
         propertyLoader.setExtension("properties");
+        propertyLoader.setBaseNames(new ArrayList<String>());
+        OpenerConfig openerConfig = new OpenerConfig();
+        List<PropertyLoaderOpener> openers = new ArrayList<PropertyLoaderOpener>();
+        openers.add(new FilesystemOpener());
+        openerConfig.setOpeners(openers);
+        propertyLoader.setOpenerConfig(openerConfig);
         Properties properties = propertyLoader.loadProperties(args, "properties").asProperties();
         properties.list(System.out);
         System.out.println("fertig!");
         assertTrue(true);
-    }*/
+    }
 }
