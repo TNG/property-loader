@@ -68,11 +68,11 @@ public class PropertyLoader {
     public OrderedProperties loadProperties(){
 
         OrderedProperties loadedProperties = propertyLoaderFactory.getOrderedProperties();
-        for (PropertyLoaderOpener opener : openerConfig.getOpeners())
+        for (String filename : suffixConfig.getFileNames(baseNames, fileExtension))
         {
-            for (String filename : suffixConfig.getFileNames(baseNames, fileExtension))
+            for (PropertyLoaderOpener opener : openerConfig.getOpeners())
             {
-                        loadedProperties.addAll(loadOrderedPropertiesFromFile(filename, opener));
+                loadedProperties.addAll(loadOrderedPropertiesFromFile(filename, opener));
             }
         }
         return loadedProperties;

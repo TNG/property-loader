@@ -4,6 +4,7 @@ import com.tngtech.propertyloader.impl.OpenerConfig;
 import com.tngtech.propertyloader.impl.OrderedProperties;
 import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
 import com.tngtech.propertyloader.impl.SuffixConfig;
+import com.tngtech.propertyloader.impl.openers.ContextClassLoaderOpener;
 import com.tngtech.propertyloader.impl.openers.FilesystemOpener;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -60,7 +61,7 @@ public class PropertyLoaderTest extends TestCase{
     @org.junit.Test
     public void testApp()
     {
-        String[] args = {"/home/matthias/Projects/property-loader/src/test/resources/demoapp-configuration",
+        String[] args = {"demoapp-configuration",
                 "/home/matthias/Projects/property-loader/src/test/resources/umlauts",
                 "/home/matthias/Projects/property-loader/src/test/resources/abc.def",
         };
@@ -70,6 +71,7 @@ public class PropertyLoaderTest extends TestCase{
         propertyLoader.setBaseNames(new ArrayList<String>());
         OpenerConfig openerConfig = new OpenerConfig();
         List<PropertyLoaderOpener> openers = new ArrayList<PropertyLoaderOpener>();
+        openers.add(new ContextClassLoaderOpener());
         openers.add(new FilesystemOpener());
         openerConfig.setOpeners(openers);
         propertyLoader.setOpenerConfig(openerConfig);
