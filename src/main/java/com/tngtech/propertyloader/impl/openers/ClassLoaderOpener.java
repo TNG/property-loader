@@ -4,7 +4,7 @@ import java.io.InputStream;
 
 import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
 
-class ClassLoaderOpener implements PropertyLoaderOpener {
+public class ClassLoaderOpener implements PropertyLoaderOpener {
     private final ClassLoader classLoader;
 
     public ClassLoaderOpener(ClassLoader classLoader) {

@@ -4,7 +4,7 @@ import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
 
 import java.io.InputStream;
 
-class ContextClassLoaderOpener implements PropertyLoaderOpener {
+public class ContextClassLoaderOpener implements PropertyLoaderOpener {
     public InputStream open(String filename) {
         ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
         return contextClassLoader.getResourceAsStream(filename);

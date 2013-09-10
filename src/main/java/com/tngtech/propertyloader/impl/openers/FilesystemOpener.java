@@ -7,10 +7,10 @@ import java.io.InputStream;
 
 import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
 
-class FilesystemOpener implements PropertyLoaderOpener {
+public class FilesystemOpener implements PropertyLoaderOpener {
     private final String prefix;
 
-    FilesystemOpener() {
+    public FilesystemOpener() {
         this.prefix = "";
     }
 

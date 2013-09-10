@@ -4,7 +4,7 @@ import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
 
 import java.io.InputStream;
 
-class RelativeToClass implements PropertyLoaderOpener {
+public class RelativeToClass implements PropertyLoaderOpener {
     private final Class<?> reference;
 
     RelativeToClass(Class<?> reference) {

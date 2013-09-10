@@ -3,6 +3,8 @@ package com.tngtech.propertyloader;
 import com.tngtech.propertyloader.impl.OpenerConfig;
 import com.tngtech.propertyloader.impl.OrderedProperties;
 import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
+import com.tngtech.propertyloader.impl.SuffixConfig;
+import com.tngtech.propertyloader.impl.openers.FilesystemOpener;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -71,6 +73,7 @@ public class PropertyLoaderTest extends TestCase{
         openers.add(new FilesystemOpener());
         openerConfig.setOpeners(openers);
         propertyLoader.setOpenerConfig(openerConfig);
+        propertyLoader.setSuffixConfig((new SuffixConfig()));
         Properties properties = propertyLoader.loadProperties(args, "properties").asProperties();
         properties.list(System.out);
         System.out.println("fertig!");
