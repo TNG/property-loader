@@ -12,42 +12,42 @@ import java.util.Properties;
 public class PropertyLoader {
     private String propertyFileEncoding = "ISO-8859-1";
     private List<String> baseNames;
-    private String fileExtension;
-    private SuffixConfig suffixConfig;
-    private OpenerConfig openerConfig;
+    private String fileExtension = "properties";
+    private PropertySuffix propertySuffix;
+    private PropertyLocation propertyLocation;
 
     public PropertyLoader() {
     }
 
-    public void setEncoding(String propertyFileEncoding) {
+    public void withEncoding(String propertyFileEncoding) {
         this.propertyFileEncoding = propertyFileEncoding;
     }
 
-    public SuffixConfig getSuffixes() {
-        return suffixConfig;
+    public PropertySuffix getSuffixes() {
+        return propertySuffix;
     }
 
-    public void setSuffixConfig(SuffixConfig suffixConfig) {
-        this.suffixConfig = suffixConfig;
+    public void searchSuffixes(PropertySuffix propertySuffix) {
+        this.propertySuffix = propertySuffix;
     }
 
-    public OpenerConfig getOpeners() {
-        return openerConfig;
+    public PropertyLocation getOpeners() {
+        return propertyLocation;
     }
 
-    public void setOpenerConfig(OpenerConfig openerConfig) {
-        this.openerConfig = openerConfig;
+    public void searchLocations(PropertyLocation propertyLocation) {
+        this.propertyLocation = propertyLocation;
     }
 
     public String getExtension() {
         return fileExtension;
     }
 
-    public void setExtension(String extension) {
+    public void withExtension(String extension) {
         this.fileExtension = extension;
     }
 
-    public void setBaseNames(List<String> baseNames) {
+    public void withBaseNames(List<String> baseNames) {
         this.baseNames = baseNames;
     }
 
@@ -73,18 +73,18 @@ public class PropertyLoader {
     public Properties loadProperties(){
 
         Properties loadedProperties = new Properties();
-        for (String filename : suffixConfig.getFileNames(baseNames, fileExtension))
+        for (String filename : propertySuffix.getFileNames(baseNames, fileExtension))
         {
-            for (PropertyLoaderOpener opener : openerConfig.getOpeners())
+            for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
             {
-                loadOrderedPropertiesFromFile(filename, opener, loadedProperties);
+                loadPropertiesFromFile(filename, opener, loadedProperties);
 
             }
         }
         return loadedProperties;
     }
 
-    private void loadOrderedPropertiesFromFile(String fileName, PropertyLoaderOpener opener, Properties loadedProperties)
+    private void loadPropertiesFromFile(String fileName, PropertyLoaderOpener opener, Properties loadedProperties)
     {
         try{
             InputStream stream = opener.open(fileName);

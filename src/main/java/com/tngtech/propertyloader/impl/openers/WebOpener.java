@@ -10,6 +10,10 @@ import java.net.URL;
 public class WebOpener implements PropertyLoaderOpener {
     private String address;
 
+    public WebOpener(URL url){
+        this.address = url.toString();
+    }
+
     public InputStream open(String fileName) throws IOException{
         URL url = new URL(address + fileName);
         return url.openStream();

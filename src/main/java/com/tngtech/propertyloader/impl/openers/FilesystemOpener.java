@@ -14,7 +14,7 @@ public class FilesystemOpener implements PropertyLoaderOpener {
         this.prefix = "";
     }
 
-    FilesystemOpener(String prefix) {
+    public FilesystemOpener(String prefix) {
         if (! prefix.endsWith("/")) {
             prefix = prefix + "/";
         }

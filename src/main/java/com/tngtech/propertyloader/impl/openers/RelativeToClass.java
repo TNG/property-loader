@@ -7,7 +7,7 @@ import java.io.InputStream;
 public class RelativeToClass implements PropertyLoaderOpener {
     private final Class<?> reference;
 
-    RelativeToClass(Class<?> reference) {
+    public RelativeToClass(Class<?> reference) {
         this.reference = reference;
     }
 
