@@ -1,7 +1,6 @@
 package com.tngtech.propertyloader;
 
 import com.tngtech.propertyloader.impl.OpenerConfig;
-import com.tngtech.propertyloader.impl.OrderedProperties;
 import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
 import com.tngtech.propertyloader.impl.SuffixConfig;
 import com.tngtech.propertyloader.impl.openers.ContextClassLoaderOpener;
@@ -10,6 +9,10 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -28,7 +31,7 @@ public class PropertyLoaderTest extends TestCase{
         return new TestSuite( PropertyLoaderTest.class );
     }
 
-    @org.junit.Test
+    /*@org.junit.Test
     public void testLoadPropertiesWithString()
     {
         PropertyLoader propertyLoader = spy(new PropertyLoader());
@@ -56,7 +59,7 @@ public class PropertyLoaderTest extends TestCase{
         verify(propertyLoader).addBaseName(baseName);
         verify(propertyLoader).loadProperties();
         assertEquals(propertyLoader.getExtension(), fileExtension);
-    }
+    }*/
 
     @org.junit.Test
     public void testApp()
@@ -76,9 +79,31 @@ public class PropertyLoaderTest extends TestCase{
         openerConfig.setOpeners(openers);
         propertyLoader.setOpenerConfig(openerConfig);
         propertyLoader.setSuffixConfig((new SuffixConfig()));
-        Properties properties = propertyLoader.loadProperties(args, "properties").asProperties();
+        Properties properties = propertyLoader.loadProperties(args, "properties");
         properties.list(System.out);
         System.out.println("fertig!");
         assertTrue(true);
     }
+
+    @org.junit.Test
+    public void testEnc()
+    {
+        FilesystemOpener filesystemOpener = new FilesystemOpener();
+        Properties properties = new Properties();
+        try{
+            System.out.println("start!");
+            InputStream stream = filesystemOpener.open("/home/matthias/Projects/property-loader/src/test/resources/demoapp-configuration.properties");
+            Reader reader = new InputStreamReader(stream, "UTF-8");
+            properties.load(reader);
+            stream = filesystemOpener.open("/home/matthias/Projects/property-loader/src/test/resources/demoapp-configuration-second.properties");
+            reader = new InputStreamReader(stream, "UTF-8");
+            properties.load(reader);
+            reader.close();
+            properties.list(System.out);
+            System.out.println("fertig!");
+            assertTrue(true);
+        }
+        catch(IOException e){}
+    }
+
 }

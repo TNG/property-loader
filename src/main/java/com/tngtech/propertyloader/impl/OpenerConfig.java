@@ -4,6 +4,10 @@ import java.util.List;
 
 public class OpenerConfig {
 
+    public OpenerConfig(){
+
+    }
+
     private List<PropertyLoaderOpener> openers;
 
     public List<PropertyLoaderOpener> getOpeners()

@@ -1,21 +1,26 @@
 package com.tngtech.propertyloader;
 
-import com.tngtech.infrastructure.io.ExtendedReader;
 import com.tngtech.propertyloader.impl.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.List;
+import java.util.Properties;
 
 public class PropertyLoader {
-    private static final String PROPERTY_FILE_ENCODING = "ISO-8859-1";
+    private String propertyFileEncoding = "ISO-8859-1";
     private List<String> baseNames;
     private String fileExtension;
     private SuffixConfig suffixConfig;
     private OpenerConfig openerConfig;
-    private PropertyLoaderFactory propertyLoaderFactory = new PropertyLoaderFactory();
 
     public PropertyLoader() {
+    }
+
+    public void setEncoding(String propertyFileEncoding) {
+        this.propertyFileEncoding = propertyFileEncoding;
     }
 
     public SuffixConfig getSuffixes() {
@@ -50,13 +55,13 @@ public class PropertyLoader {
         baseNames.add(baseName);
     }
 
-    public OrderedProperties loadProperties(String baseName, String extension) {
+    public Properties loadProperties(String baseName, String extension) {
         addBaseName(baseName);
         fileExtension = extension;
         return loadProperties();
     }
 
-    public OrderedProperties loadProperties(String[] baseNames, String extension) {
+    public Properties loadProperties(String[] baseNames, String extension) {
         for(String baseName : baseNames)
         {
             addBaseName(baseName);
@@ -65,36 +70,32 @@ public class PropertyLoader {
         return loadProperties();
     }
 
-    public OrderedProperties loadProperties(){
+    public Properties loadProperties(){
 
-        OrderedProperties loadedProperties = propertyLoaderFactory.getOrderedProperties();
+        Properties loadedProperties = new Properties();
         for (String filename : suffixConfig.getFileNames(baseNames, fileExtension))
         {
             for (PropertyLoaderOpener opener : openerConfig.getOpeners())
             {
-                loadedProperties.addAll(loadOrderedPropertiesFromFile(filename, opener));
+                loadOrderedPropertiesFromFile(filename, opener, loadedProperties);
+
             }
         }
         return loadedProperties;
     }
 
-    private OrderedProperties loadOrderedPropertiesFromFile(String fileName, PropertyLoaderOpener opener)
+    private void loadOrderedPropertiesFromFile(String fileName, PropertyLoaderOpener opener, Properties loadedProperties)
     {
         try{
             InputStream stream = opener.open(fileName);
             if(stream != null){
-                OrderedPropertiesLoader orderedPropertiesLoader = propertyLoaderFactory.getOrderedPropertiesLoader();
-                OrderedProperties newProperties = orderedPropertiesLoader.loadOrderedPropertiesFromStream(stream, PROPERTY_FILE_ENCODING);
-                stream.close();
-                return newProperties;
+                Reader reader = new InputStreamReader(stream, propertyFileEncoding);
+                loadedProperties.load(reader);
             }
         }
         catch(IOException e){
 
         }
-        return propertyLoaderFactory.getOrderedProperties();
     }
-
-
 }
 
