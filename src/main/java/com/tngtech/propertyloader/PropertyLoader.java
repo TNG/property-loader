@@ -97,6 +97,5 @@ public class PropertyLoader {
         return propertyFileReader.getProperties();
     }
 
-
 }
 
