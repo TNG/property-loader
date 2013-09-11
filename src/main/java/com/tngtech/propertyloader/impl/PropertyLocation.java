@@ -19,15 +19,10 @@ public class PropertyLocation {
         return openers;
     }
 
-    public PropertyLocation defaultConfig(){
+    public PropertyLocation atDefaultLocations(){
         atCurrentDirectory();
         atContextClassPath();
         atHomeDirectory();
-        return this;
-    }
-
-    public PropertyLocation setOpeners(List<PropertyLoaderOpener> openers) {
-        this.openers = openers;
         return this;
     }
 

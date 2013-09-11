@@ -1,5 +1,6 @@
 package com.tngtech.propertyloader;
 
+import com.tngtech.propertyloader.impl.PropertyLoaderFactory;
 import com.tngtech.propertyloader.impl.PropertyLocation;
 import com.tngtech.propertyloader.impl.PropertySuffix;
 import junit.framework.Test;
@@ -7,6 +8,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import static org.mockito.Mockito.*;
@@ -27,6 +29,7 @@ public class PropertyLoaderTest extends TestCase{
     public void testLoadPropertiesWithString()
     {
         PropertyLoader propertyLoader = spy(new PropertyLoader());
+        propertyLoader.setPropertyLoaderFactory(new PropertyLoaderFactory());
         propertyLoader.withBaseNames(new ArrayList<String>());
         String baseName = "baseName";
         String fileExtension = "fileExtension";
@@ -38,22 +41,43 @@ public class PropertyLoaderTest extends TestCase{
         assertEquals(propertyLoader.getExtension(), fileExtension);
     }
 
+    @org.junit.Test
+    public void testPropertySuffixAddUserName()
+    {
+        PropertySuffix propertySuffix = new PropertySuffix();
+        String userName =  System.getProperty("user.name");
+        assertEquals(propertySuffix, propertySuffix.addUserName());
+        assertTrue(propertySuffix.getSuffixes().contains(userName));
+    }
+
+    @org.junit.Test
+    public void testPropertySuffixGetFileNames()
+    {
+        PropertySuffix propertySuffix = new PropertySuffix();
+        List<String> baseNames = new ArrayList<String>();
+        baseNames.add("baseName1");
+        propertySuffix.addString("suffix1");
+        assertTrue(propertySuffix.getFileNames(baseNames, "fileExtension").contains("baseName1" + "." + "suffix1" + "." + "fileExtension"));
+    }
+
+
+
     /*@org.junit.Test
     public void testLoadProperties()
     {
         PropertyLoader propertyLoader = spy(new PropertyLoader());
         propertyLoader.withBaseNames(new ArrayList<String>());
         propertyLoader.addBaseName("baseName");
-        propertyLoader.searchSuffixes(mock(PropertySuffix.class));
-        propertyLoader.searchLocations(mock(PropertyLocation.class));
-        PropertyLoaderOpener opener = mock(PropertyLoaderOpener.class);
-        doReturn(opener).when(propertyLoader).getOpeners();
-        String fileExtension = "fileExtension";
-        Properties properties = mock(Properties.class);
-        doReturn(properties).when(propertyLoader).loadProperties();
-        assertEquals(properties, propertyLoader.loadProperties());
-        verify(propertyLoader).loadPropertiesFromFile("baseName" + "." + "fileExtension", opener, loadedProperties);
-        assertEquals(propertyLoader.getExtension(), fileExtension);
+        propertyLoader.withExtension("fileExtension");
+        PropertyLocation propertyLocation = new PropertyLocation();
+        propertyLoader.searchLocations(propertyLocation.atDefaultLocations());
+        PropertySuffix propertySuffix = new PropertySuffix();
+        propertyLoader.searchSuffixes(propertySuffix.atDefaultLocations());
+        PropertyLoaderFactory propertyLoaderFactory = new PropertyLoaderFactory();
+        propertyLoader.setPropertyLoaderFactory(propertyLoaderFactory);
+        assertEquals(new Properties(), propertyLoaderFactory.getEmptyProperties());
+        doReturn()
+
     }*/
 
     @org.junit.Test
@@ -65,10 +89,11 @@ public class PropertyLoaderTest extends TestCase{
         };
 
         PropertyLoader propertyLoader = spy(new PropertyLoader());
+        propertyLoader.setPropertyLoaderFactory(new PropertyLoaderFactory());
         propertyLoader.withExtension("properties");
         propertyLoader.withBaseNames(new ArrayList<String>());
         PropertyLocation propertyLocation = new PropertyLocation();
-        propertyLoader.searchLocations(propertyLocation.defaultConfig());
+        propertyLoader.searchLocations(propertyLocation.atDefaultLocations());
         PropertySuffix propertySuffix = new PropertySuffix();
         propertyLoader.searchSuffixes(propertySuffix.defaultConfig());
         Properties properties = propertyLoader.loadProperties(args, "properties");

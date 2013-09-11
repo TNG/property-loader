@@ -15,6 +15,7 @@ public class PropertyLoader {
     private String fileExtension = "properties";
     private PropertySuffix propertySuffix;
     private PropertyLocation propertyLocation;
+    private PropertyLoaderFactory propertyLoaderFactory;
 
     public PropertyLoader() {
     }
@@ -72,7 +73,7 @@ public class PropertyLoader {
 
     public Properties loadProperties(){
 
-        Properties loadedProperties = new Properties();
+        Properties loadedProperties = propertyLoaderFactory.getEmptyProperties();
         for (String filename : propertySuffix.getFileNames(baseNames, fileExtension))
         {
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
@@ -89,13 +90,17 @@ public class PropertyLoader {
         try{
             InputStream stream = opener.open(fileName);
             if(stream != null){
-                Reader reader = new InputStreamReader(stream, propertyFileEncoding);
+                Reader reader = propertyLoaderFactory.getInputStreamReader(stream, propertyFileEncoding);
                 loadedProperties.load(reader);
             }
         }
         catch(IOException e){
 
         }
+    }
+
+    public void setPropertyLoaderFactory(PropertyLoaderFactory propertyLoaderFactory) {
+        this.propertyLoaderFactory = propertyLoaderFactory;
     }
 }
 
