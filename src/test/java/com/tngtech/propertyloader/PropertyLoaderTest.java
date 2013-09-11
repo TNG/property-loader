@@ -85,7 +85,7 @@ public class PropertyLoaderTest extends TestCase{
         assertTrue(true);
     }
 
-    @org.junit.Test
+    /*@org.junit.Test
     public void testEnc()
     {
         FilesystemOpener filesystemOpener = new FilesystemOpener();
@@ -104,6 +104,6 @@ public class PropertyLoaderTest extends TestCase{
             assertTrue(true);
         }
         catch(IOException e){}
-    }
+    }*/
 
 }

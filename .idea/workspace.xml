@@ -2,18 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="746541af-d99d-47aa-9fa4-443f43350afd" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/infrastructure/io/CharacterMatcher.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/infrastructure/io/ExtendedReader.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/infrastructure/io/charactermatchers/AsciiCharacterMatcher.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/infrastructure/io/charactermatchers/CompoundMatcher.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/infrastructure/io/charactermatchers/InverseMatcher.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/infrastructure/io/charactermatchers/WhitespaceMatcher.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OrderedProperties.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OrderedPropertiesLoader.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyLoaderFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/helpers/ReaderHelper.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OpenerConfig.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OpenerConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -31,7 +19,7 @@
     <file path="/OrderedPropertiesLoader.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378738689153" ignored="false" />
     <file path="/CharacterMatcherHelper.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378734669256" ignored="false" />
     <file path="$PROJECT_DIR$/../property-loader/src/main/java/com/tngtech/infrastructure/io/OrderedPropertiesLoader.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378738107610" ignored="false" />
-    <file path="/Dummy.txt" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378824781098" ignored="false" />
+    <file path="/Dummy.txt" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378883615799" ignored="false" />
     <file path="/FilesystemOpener.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378821950263" ignored="false" />
     <file path="/WebOpener.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378820485122" ignored="false" />
     <file path="/RelativeToClass.java" changelist="746541af-d99d-47aa-9fa4-443f43350afd" time="1378821909280" ignored="false" />
@@ -114,10 +102,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PropertyLoader.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PropertyLoader.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="0" selection-start="2655" selection-end="2655" vertical-scroll-proportion="0.8394495">
+            <state line="100" column="0" selection-start="2655" selection-end="2655" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -170,10 +158,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PropertyLoaderTest.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="PropertyLoaderTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="6" selection-start="917" selection-end="917" vertical-scroll-proportion="0.0">
+            <state line="106" column="7" selection-start="4306" selection-end="4306" vertical-scroll-proportion="1.206422">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2915#2937#0" expanded="true" />
@@ -230,8 +218,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/ClassLoaderOpener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/FilesystemOpener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/OpenerConfig.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" />
       </list>
     </option>
   </component>
@@ -344,6 +332,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -699,7 +691,11 @@
       <created>1378824784039</created>
       <updated>1378824784039</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="replaced OrderedPropertiesLoader with Java internal">
+      <created>1378883623190</created>
+      <updated>1378883623190</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -740,7 +736,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13432837" sideWeight="0.66319776" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1901603" sideWeight="0.66319776" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1901603" sideWeight="0.66319776" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33680227" sideWeight="0.4997236" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -790,7 +786,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed order of file loading" />
+    <option name="LAST_COMMIT_MESSAGE" value="replaced OrderedPropertiesLoader with Java internal" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -809,6 +805,7 @@
     <MESSAGE value="first working commit" />
     <MESSAGE value="travis.yml" />
     <MESSAGE value="fixed order of file loading" />
+    <MESSAGE value="replaced OrderedPropertiesLoader with Java internal" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -888,21 +885,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="6" selection-start="917" selection-end="917" vertical-scroll-proportion="0.0">
+        <state line="100" column="0" selection-start="2655" selection-end="2655" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2915#2937#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="0" selection-start="2655" selection-end="2655" vertical-scroll-proportion="0.8394495">
+        <state line="106" column="7" selection-start="4306" selection-end="4306" vertical-scroll-proportion="1.206422">
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2915#2937#0" expanded="true" />
           </folding>
         </state>
       </provider>
