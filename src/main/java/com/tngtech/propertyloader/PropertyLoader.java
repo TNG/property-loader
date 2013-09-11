@@ -1,27 +1,39 @@
 package com.tngtech.propertyloader;
 
 import com.tngtech.propertyloader.impl.*;
+import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
 import java.util.Properties;
 
+@Component
 public class PropertyLoader {
+
+    private final PropertyLoaderFactory propertyLoaderFactory;
+    private final PropertyFileNameHelper propertyFileNameHelper;
+    private final PropertyFileReader propertyFileReader;
+
     private String propertyFileEncoding = "ISO-8859-1";
     private List<String> baseNames;
     private String fileExtension = "properties";
     private PropertySuffix propertySuffix;
     private PropertyLocation propertyLocation;
-    private PropertyLoaderFactory propertyLoaderFactory;
 
-    public PropertyLoader() {
+    @Autowired
+    public PropertyLoader(PropertyLoaderFactory propertyLoaderFactory, PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader) {
+        this.propertyLoaderFactory = propertyLoaderFactory;
+        this.propertyFileNameHelper = propertyFileNameHelper;
+        this.propertyFileReader = propertyFileReader;
     }
 
-    public void withEncoding(String propertyFileEncoding) {
+    public PropertyLoader withEncoding(String propertyFileEncoding) {
         this.propertyFileEncoding = propertyFileEncoding;
+        return this;
     }
 
     public PropertySuffix getSuffixes() {
@@ -44,12 +56,14 @@ public class PropertyLoader {
         return fileExtension;
     }
 
-    public void withExtension(String extension) {
+    public PropertyLoader withExtension(String extension) {
         this.fileExtension = extension;
+        return this;
     }
 
-    public void withBaseNames(List<String> baseNames) {
+    public PropertyLoader withBaseNames(List<String> baseNames) {
         this.baseNames = baseNames;
+        return this;
     }
 
     public void addBaseName(String baseName) {
@@ -73,34 +87,16 @@ public class PropertyLoader {
 
     public Properties loadProperties(){
 
-        Properties loadedProperties = propertyLoaderFactory.getEmptyProperties();
-        for (String filename : propertySuffix.getFileNames(baseNames, fileExtension))
+        for (String filename : propertyFileNameHelper.getFileNames(baseNames, propertySuffix.getSuffixes(), fileExtension))
         {
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
             {
-                loadPropertiesFromFile(filename, opener, loadedProperties);
-
+                propertyFileReader.read(filename, propertyFileEncoding, opener);
             }
         }
-        return loadedProperties;
+        return propertyFileReader.getProperties();
     }
 
-    private void loadPropertiesFromFile(String fileName, PropertyLoaderOpener opener, Properties loadedProperties)
-    {
-        try{
-            InputStream stream = opener.open(fileName);
-            if(stream != null){
-                Reader reader = propertyLoaderFactory.getInputStreamReader(stream, propertyFileEncoding);
-                loadedProperties.load(reader);
-            }
-        }
-        catch(IOException e){
 
-        }
-    }
-
-    public void setPropertyLoaderFactory(PropertyLoaderFactory propertyLoaderFactory) {
-        this.propertyLoaderFactory = propertyLoaderFactory;
-    }
 }
 

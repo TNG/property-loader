@@ -1,35 +1,49 @@
 package com.tngtech.propertyloader;
 
-import com.tngtech.propertyloader.impl.PropertyLoaderFactory;
-import com.tngtech.propertyloader.impl.PropertyLocation;
-import com.tngtech.propertyloader.impl.PropertySuffix;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import com.google.common.collect.Lists;
+import com.tngtech.propertyloader.impl.*;
+import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
-public class PropertyLoaderTest extends TestCase{
+@RunWith(MockitoJUnitRunner.class)
+public class PropertyLoaderTest{
 
-    public PropertyLoaderTest(String testName)
-    {
-        super( testName );
+    private PropertyLoader propertyLoader;
+    @Mock
+    private PropertyLoaderFactory propertyLoaderFactory;
+    @Mock
+    private PropertyFileNameHelper propertyFileNameHelper;
+    @Mock
+    private PropertyFileReader propertyFileReader;
+
+    @Mock
+    private Properties properties;
+    @Mock
+    private PropertySuffix propertySuffix;
+    @Mock
+    private PropertyLocation propertyLocation;
+    @Mock
+    private PropertyLoaderOpener propertyLoaderOpener;
+
+    @Before
+    public void setUp(){
+        propertyLoader = new PropertyLoader(propertyLoaderFactory, propertyFileNameHelper, propertyFileReader);
     }
 
-    public static Test suite()
-    {
-        return new TestSuite( PropertyLoaderTest.class );
-    }
-
-    @org.junit.Test
+    /*@org.junit.Test
     public void testLoadPropertiesWithString()
     {
-        PropertyLoader propertyLoader = spy(new PropertyLoader());
-        propertyLoader.setPropertyLoaderFactory(new PropertyLoaderFactory());
         propertyLoader.withBaseNames(new ArrayList<String>());
         String baseName = "baseName";
         String fileExtension = "fileExtension";
@@ -39,7 +53,8 @@ public class PropertyLoaderTest extends TestCase{
         verify(propertyLoader).addBaseName(baseName);
         verify(propertyLoader).loadProperties();
         assertEquals(propertyLoader.getExtension(), fileExtension);
-    }
+        assertTrue(propertyLoader.)
+    }*/
 
     @org.junit.Test
     public void testPropertySuffixAddUserName()
@@ -50,55 +65,29 @@ public class PropertyLoaderTest extends TestCase{
         assertTrue(propertySuffix.getSuffixes().contains(userName));
     }
 
-    @org.junit.Test
-    public void testPropertySuffixGetFileNames()
+   @org.junit.Test
+    public void testGetFileNames()
     {
-        PropertySuffix propertySuffix = new PropertySuffix();
+        PropertyFileNameHelper propertyFileNameHelper = new PropertyFileNameHelper();
         List<String> baseNames = new ArrayList<String>();
         baseNames.add("baseName1");
-        propertySuffix.addString("suffix1");
-        assertTrue(propertySuffix.getFileNames(baseNames, "fileExtension").contains("baseName1" + "." + "suffix1" + "." + "fileExtension"));
+        baseNames.add("baseName2");
+        List<String> suffixes = Lists.newArrayList("suffix");
+        assertTrue(propertyFileNameHelper.getFileNames(baseNames, suffixes, "fileExtension").contains("baseName1" + "." + "suffix" + "." + "fileExtension"));
+        assertTrue(propertyFileNameHelper.getFileNames(baseNames, suffixes, "fileExtension").contains("baseName2" + "." + "suffix" + "." + "fileExtension"));
     }
 
 
-
-    /*@org.junit.Test
-    public void testLoadProperties()
-    {
-        PropertyLoader propertyLoader = spy(new PropertyLoader());
-        propertyLoader.withBaseNames(new ArrayList<String>());
-        propertyLoader.addBaseName("baseName");
-        propertyLoader.withExtension("fileExtension");
-        PropertyLocation propertyLocation = new PropertyLocation();
-        propertyLoader.searchLocations(propertyLocation.atDefaultLocations());
-        PropertySuffix propertySuffix = new PropertySuffix();
-        propertyLoader.searchSuffixes(propertySuffix.atDefaultLocations());
-        PropertyLoaderFactory propertyLoaderFactory = new PropertyLoaderFactory();
-        propertyLoader.setPropertyLoaderFactory(propertyLoaderFactory);
-        assertEquals(new Properties(), propertyLoaderFactory.getEmptyProperties());
-        doReturn()
-
-    }*/
 
     @org.junit.Test
-    public void testApp()
+    public void testLoadProperties()
     {
-        String[] args = {"demoapp-configuration",
-                "/home/matthias/Projects/property-loader/src/test/resources/umlauts",
-                "/home/matthias/Projects/property-loader/src/test/resources/abc.def",
-        };
-
-        PropertyLoader propertyLoader = spy(new PropertyLoader());
-        propertyLoader.setPropertyLoaderFactory(new PropertyLoaderFactory());
-        propertyLoader.withExtension("properties");
-        propertyLoader.withBaseNames(new ArrayList<String>());
-        PropertyLocation propertyLocation = new PropertyLocation();
-        propertyLoader.searchLocations(propertyLocation.atDefaultLocations());
-        PropertySuffix propertySuffix = new PropertySuffix();
-        propertyLoader.searchSuffixes(propertySuffix.defaultConfig());
-        Properties properties = propertyLoader.loadProperties(args, "properties");
-        properties.list(System.out);
-        System.out.println("fertig!");
-        assertTrue(true);
+        when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);
+        List<String> fileNames = Lists.newArrayList("file1", "file2");
+        ArrayList<String> suffixes = Lists.newArrayList("suffix1", "suffix2");
+        when(propertySuffix.getSuffixes()).thenReturn(suffixes);
+        when(propertyFileNameHelper.getFileNames(Lists.<String>newArrayList(),suffixes,"fileExtension")).thenReturn(fileNames);
+        when(propertyLocation.getOpeners()).thenReturn(Lists.<PropertyLoaderOpener>newArrayList(propertyLoaderOpener));
     }
+
 }
