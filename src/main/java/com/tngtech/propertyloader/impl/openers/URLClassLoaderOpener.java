@@ -13,7 +13,7 @@ public class URLClassLoaderOpener implements PropertyLoaderOpener {
         this.classLoader = classLoader;
     }
 
-    public InputStream open(String filename) {
-        return classLoader.getResourceAsStream(filename);
+    public InputStream open(String fileName) {
+        return classLoader.getResourceAsStream(fileName);
     }
 }

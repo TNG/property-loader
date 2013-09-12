@@ -5,9 +5,9 @@ import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
 import java.io.InputStream;
 
 public class ContextClassLoaderOpener implements PropertyLoaderOpener {
-    public InputStream open(String filename) {
+    public InputStream open(String fileName) {
         ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-        return contextClassLoader.getResourceAsStream(filename);
+        return contextClassLoader.getResourceAsStream(fileName);
     }
 
     @Override

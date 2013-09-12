@@ -11,9 +11,9 @@ public class ClassLoaderOpener implements PropertyLoaderOpener {
         this.classLoader = classLoader;
     }
 
-    public InputStream open(String filename) {
+    public InputStream open(String fileName) {
 
-        return classLoader.getResourceAsStream(filename);
+        return classLoader.getResourceAsStream(fileName);
     }
 
     @Override

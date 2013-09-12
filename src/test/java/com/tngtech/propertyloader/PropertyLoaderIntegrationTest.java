@@ -31,7 +31,7 @@ public class PropertyLoaderIntegrationTest {
         PropertyLocation propertyLocation = new PropertyLocation(new PropertyLoaderFactory());
         propertyLoader.searchLocations(propertyLocation.atDefaultLocations());
         PropertySuffix propertySuffix = new PropertySuffix(new HostsHelper());
-        propertyLoader.searchSuffixes(propertySuffix.defaultConfig());
+        propertyLoader.searchSuffixes(propertySuffix.addDefaultConfig());
         Properties properties = propertyLoader.loadProperties(args, "properties");
         properties.list(System.out);
         System.out.println("fertig!");

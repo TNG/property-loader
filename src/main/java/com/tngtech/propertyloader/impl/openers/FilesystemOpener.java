@@ -21,15 +21,15 @@ public class FilesystemOpener implements PropertyLoaderOpener {
         this.prefix = prefix;
     }
 
-    public InputStream open(String filename){
-        filename = prefix + filename;
-        String osFilename = filename.replace("/", File.separator);
+    public InputStream open(String fileName){
+        fileName = prefix + fileName;
+        String osFilename = fileName.replace("/", File.separator);
         File file = new File(osFilename);
         if (file.exists()) {
             try {
                 return new FileInputStream(file);
             } catch (FileNotFoundException e) {
-                throw new OpenerException(String.format("error while creating inputstream from file '%s'", filename), e);
+                throw new OpenerException(String.format("error while creating inputstream from file '%s'", fileName), e);
             }
         } else {
             return null;

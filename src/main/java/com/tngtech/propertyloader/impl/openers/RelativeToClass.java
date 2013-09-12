@@ -11,8 +11,8 @@ public class RelativeToClass implements PropertyLoaderOpener {
         this.reference = reference;
     }
 
-    public InputStream open(String filename) {
-        return reference.getResourceAsStream(filename);
+    public InputStream open(String fileName) {
+        return reference.getResourceAsStream(fileName);
     }
 
     @Override

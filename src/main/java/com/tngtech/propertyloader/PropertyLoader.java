@@ -85,11 +85,11 @@ public class PropertyLoader {
 
     public Properties loadProperties(){
 
-        for (String filename : propertyFileNameHelper.getFileNames(baseNames, propertySuffix.getSuffixes(), fileExtension))
+        for (String fileName : propertyFileNameHelper.getFileNames(baseNames, propertySuffix.getSuffixes(), fileExtension))
         {
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
             {
-                propertyFileReader.read(filename, propertyFileEncoding, opener);
+                propertyFileReader.read(fileName, propertyFileEncoding, opener);
             }
         }
         return propertyFileReader.getProperties();

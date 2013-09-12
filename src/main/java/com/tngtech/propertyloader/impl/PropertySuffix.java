@@ -50,7 +50,7 @@ public class PropertySuffix {
         return suffixes;
     }
 
-    public PropertySuffix defaultConfig() {
+    public PropertySuffix addDefaultConfig() {
 
         addUserName();
         addHostNames();
