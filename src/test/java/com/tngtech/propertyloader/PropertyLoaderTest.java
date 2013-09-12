@@ -41,7 +41,7 @@ public class PropertyLoaderTest{
 
     @Before
     public void setUp(){
-        propertyLoader = new PropertyLoader(propertyFileNameHelper, propertyFileReader);
+        propertyLoader = new PropertyLoader(propertyFileNameHelper, propertyFileReader, propertyLoaderFactory);
     }
 
     /*@org.junit.Test

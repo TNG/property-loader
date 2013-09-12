@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-class IncludeFilter implements PropertyLoaderFilter {
+public class IncludeFilter implements PropertyLoaderFilter {
     private static final String INCLUDE_KEY = "%%include%%";
     private PropertyLoader propertyLoader;
 

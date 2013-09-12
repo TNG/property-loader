@@ -16,6 +16,7 @@ public class PropertyLoader {
 
     private final PropertyFileNameHelper propertyFileNameHelper;
     private final PropertyFileReader propertyFileReader;
+    private final PropertyLoaderFactory propertyLoaderFactory;
 
     private String propertyFileEncoding = "ISO-8859-1";
     private List<String> baseNames;
@@ -24,9 +25,10 @@ public class PropertyLoader {
     private PropertyLocation propertyLocation;
 
     @Autowired
-    public PropertyLoader(PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader) {
+    public PropertyLoader(PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader, PropertyLoaderFactory propertyLoaderFactory) {
         this.propertyFileNameHelper = propertyFileNameHelper;
         this.propertyFileReader = propertyFileReader;
+        this.propertyLoaderFactory = propertyLoaderFactory;
     }
 
     public PropertyLoader withEncoding(String propertyFileEncoding) {
@@ -85,14 +87,16 @@ public class PropertyLoader {
 
     public Properties loadProperties(){
 
+        Properties loadedProperties = propertyLoaderFactory.getEmptyProperties();
         for (String fileName : propertyFileNameHelper.getFileNames(baseNames, propertySuffix.getSuffixes(), fileExtension))
         {
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
             {
-                propertyFileReader.read(fileName, propertyFileEncoding, opener);
+                Properties newProperties = propertyFileReader.read(fileName, propertyFileEncoding, opener);
+                loadedProperties.putAll(newProperties);
             }
         }
-        return propertyFileReader.getProperties();
+        return loadedProperties;
     }
 
 }

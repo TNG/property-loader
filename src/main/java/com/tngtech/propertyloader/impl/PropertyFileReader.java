@@ -13,20 +13,16 @@ import java.util.Properties;
 public class PropertyFileReader {
 
     private final PropertyLoaderFactory propertyLoaderFactory;
-    private Properties loadedProperties;
 
     @Autowired
     public PropertyFileReader(PropertyLoaderFactory propertyLoaderFactory) {
         this.propertyLoaderFactory = propertyLoaderFactory;
-        loadedProperties =  propertyLoaderFactory.getEmptyProperties();
     }
 
-    public Properties getProperties(){
-        return loadedProperties;
-    }
 
-    public void read(String fileName, String encoding, PropertyLoaderOpener opener)
+    public Properties read(String fileName, String encoding, PropertyLoaderOpener opener)
     {
+        Properties loadedProperties =  propertyLoaderFactory.getEmptyProperties();
         try{
             InputStream stream = opener.open(fileName);
             if(stream != null){
@@ -37,5 +33,6 @@ public class PropertyFileReader {
         catch(IOException e){
            throw new PropertyFileReaderException(String.format("error reading properties from stream created from '%s' with encoding '%s' in opener '%s'", fileName, encoding, opener.toString()), e);
         }
+        return loadedProperties;
     }
 }
