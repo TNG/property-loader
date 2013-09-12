@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-class IncludeProcessing implements PropertyLoaderFilter {
+class IncludeFilter implements PropertyLoaderFilter {
     private static final String INCLUDE_KEY = "%%include%%";
     private PropertyLoader propertyLoader;
 
-    IncludeProcessing(PropertyLoader propertyLoader) {
+    IncludeFilter(PropertyLoader propertyLoader) {
         this.propertyLoader = propertyLoader;
     }
 
