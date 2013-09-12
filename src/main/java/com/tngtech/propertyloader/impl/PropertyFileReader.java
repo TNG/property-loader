@@ -1,6 +1,7 @@
 package com.tngtech.propertyloader.impl;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -11,8 +12,14 @@ import java.util.Properties;
 @Component
 public class PropertyFileReader {
 
-    private PropertyLoaderFactory propertyLoaderFactory = new PropertyLoaderFactory();
-    private Properties loadedProperties = propertyLoaderFactory.getEmptyProperties();
+    private final PropertyLoaderFactory propertyLoaderFactory;
+    private Properties loadedProperties;
+
+    @Autowired
+    public PropertyFileReader(PropertyLoaderFactory propertyLoaderFactory) {
+        this.propertyLoaderFactory = propertyLoaderFactory;
+        loadedProperties =  propertyLoaderFactory.getEmptyProperties();
+    }
 
     public Properties getProperties(){
         return loadedProperties;
@@ -28,7 +35,7 @@ public class PropertyFileReader {
             }
         }
         catch(IOException e){
-
+           throw new PropertyFileReaderException(String.format("error reading properties from stream created from '%s' with encoding '%s' in opener '%s'", fileName, encoding, opener.toString()), e);
         }
     }
 }

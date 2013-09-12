@@ -14,7 +14,6 @@ import java.util.Properties;
 @Component
 public class PropertyLoader {
 
-    private final PropertyLoaderFactory propertyLoaderFactory;
     private final PropertyFileNameHelper propertyFileNameHelper;
     private final PropertyFileReader propertyFileReader;
 
@@ -25,8 +24,7 @@ public class PropertyLoader {
     private PropertyLocation propertyLocation;
 
     @Autowired
-    public PropertyLoader(PropertyLoaderFactory propertyLoaderFactory, PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader) {
-        this.propertyLoaderFactory = propertyLoaderFactory;
+    public PropertyLoader(PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader) {
         this.propertyFileNameHelper = propertyFileNameHelper;
         this.propertyFileReader = propertyFileReader;
     }

@@ -2,6 +2,7 @@ package com.tngtech.propertyloader;
 
 import com.google.common.collect.Lists;
 import com.tngtech.propertyloader.impl.*;
+import com.tngtech.propertyloader.impl.helpers.HostsHelper;
 import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -26,6 +27,8 @@ public class PropertyLoaderTest{
     private PropertyFileNameHelper propertyFileNameHelper;
     @Mock
     private PropertyFileReader propertyFileReader;
+    @Mock
+    private HostsHelper hostsHelper;
 
     @Mock
     private Properties properties;
@@ -38,7 +41,7 @@ public class PropertyLoaderTest{
 
     @Before
     public void setUp(){
-        propertyLoader = new PropertyLoader(propertyLoaderFactory, propertyFileNameHelper, propertyFileReader);
+        propertyLoader = new PropertyLoader(propertyFileNameHelper, propertyFileReader);
     }
 
     /*@org.junit.Test
@@ -59,7 +62,7 @@ public class PropertyLoaderTest{
     @org.junit.Test
     public void testPropertySuffixAddUserName()
     {
-        PropertySuffix propertySuffix = new PropertySuffix();
+        PropertySuffix propertySuffix = new PropertySuffix(hostsHelper);
         String userName =  System.getProperty("user.name");
         assertEquals(propertySuffix, propertySuffix.addUserName());
         assertTrue(propertySuffix.getSuffixes().contains(userName));

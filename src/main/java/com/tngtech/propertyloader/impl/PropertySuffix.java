@@ -2,13 +2,25 @@ package com.tngtech.propertyloader.impl;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.tngtech.propertyloader.impl.helpers.HostsHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
 
+@Component
 public class PropertySuffix {
+
+    private final HostsHelper hostsHelper;
+
     private List<String> suffixes = Lists.newArrayList();
+
+    @Autowired
+    public PropertySuffix(HostsHelper hostsHelper) {
+        this.hostsHelper = hostsHelper;
+    }
 
     public PropertySuffix addUserName()
     {
@@ -18,15 +30,7 @@ public class PropertySuffix {
 
     public PropertySuffix addHostNames()
     {
-        Set<String> hostSet = Sets.newHashSet();
-
-        for (InetAddress host : getHosts()) {
-            hostSet.add(host.getHostName());
-        }
-
-        List<String> hostNames = Lists.newArrayList(hostSet);
-        Collections.sort(hostNames);
-        suffixes.addAll(hostNames);
+        suffixes.addAll(hostsHelper.getHostNames());
         return this;
     }
 
@@ -36,7 +40,10 @@ public class PropertySuffix {
         return this;
     }
 
-
+    public PropertySuffix addSuffixList(List<String> suffixes) {
+        suffixes.addAll(suffixes);
+        return this;
+    }
 
     public List<String> getSuffixes()
     {
@@ -52,23 +59,5 @@ public class PropertySuffix {
     }
 
 
-    private InetAddress[] getHosts() {
-        InetAddress in;
 
-        try {
-            in = InetAddress.getLocalHost();
-        } catch (UnknownHostException uE) {
-            return new InetAddress[0];
-        }
-
-        try {
-            return InetAddress.getAllByName(in.getHostName());
-        } catch (UnknownHostException uE) {
-            return new InetAddress[]{in};
-        }
-    }
-
-    public void setSuffixes(List<String> suffixes) {
-        this.suffixes = suffixes;
-    }
 }

@@ -12,6 +12,7 @@ public class ClassLoaderOpener implements PropertyLoaderOpener {
     }
 
     public InputStream open(String filename) {
+
         return classLoader.getResourceAsStream(filename);
     }
 

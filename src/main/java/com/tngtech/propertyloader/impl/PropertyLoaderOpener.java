@@ -14,8 +14,8 @@ public interface PropertyLoaderOpener {
     /**
      * Attempt to find and open some property file.
      *
-     * @param filename A relative filename (using '/' as directory suparator on all platforms)
+     * @param filename A relative filename (using '/' as directory separator on all platforms)
      * @return An input stream reading from that file, or null if the file could not be found
      */
-    InputStream open(String filename) throws IOException;
+    InputStream open(String filename);
 }
