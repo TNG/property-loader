@@ -6,6 +6,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class ConfigBuilder<T> {
@@ -17,6 +18,7 @@ public class ConfigBuilder<T> {
     private Method[] methods;
     private Properties properties = new Properties();
     private LinkedHashMap<Field,String> fields;
+    private LinkedHashMap<String,String> commandLineArgs = new LinkedHashMap<>();
 
     public ConfigBuilder(AnnotationHelper annotationHelper) {
         this.annotationHelper = annotationHelper;
@@ -43,7 +45,18 @@ public class ConfigBuilder<T> {
         T config = null;
         try
         {
+            for(Map.Entry<Field,String> fieldEntry: fields.entrySet()){
+                Field field = fieldEntry.getKey();
+                Annotation[] fieldAnnotations = field.getDeclaredAnnotations();
+                fieldEntry.setValue(annotationHelper.loadStringFromAnnotations(fieldAnnotations, commandLineArgs, properties));
+            }
             config = configClass.newInstance();
+
+            for(Map.Entry<Field,String> fieldEntry: fields.entrySet()){
+                Field field = fieldEntry.getKey();
+                field.setAccessible(true);
+                field.set(config, fieldEntry.getValue());
+            }
             return config;
         }
         catch (InstantiationException e) {}
