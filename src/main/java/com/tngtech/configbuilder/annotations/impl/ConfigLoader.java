@@ -1,11 +1,10 @@
 package com.tngtech.configbuilder.annotations.impl;
 
 
-import com.tngtech.configbuilder.annotations.ErrorMessageFile;
-import com.tngtech.configbuilder.annotations.PropertiesFile;
+import com.tngtech.configbuilder.annotations.*;
 import com.tngtech.propertyloader.PropertyLoader;
 
-import java.lang.annotation.Annotation;
+import java.util.Map;
 import java.util.Properties;
 
 public class ConfigLoader {
@@ -16,21 +15,31 @@ public class ConfigLoader {
         this.propertyLoader = propertyLoader;
     }
 
-    public Properties loadPropertiesFromAnnotation(Annotation annotation){
+    public Properties loadPropertiesFromAnnotation(PropertiesFile propertiesFile){
 
-        String fileName = "", fileExtension = "";
-
-        if(annotation.annotationType() == PropertiesFile.class){
-            PropertiesFile propertiesFile = (PropertiesFile) annotation;
-            fileName = propertiesFile.value();
-            fileExtension = propertiesFile.fileExtension();
-        }
-        else if(annotation.annotationType() == ErrorMessageFile.class){
-            ErrorMessageFile propertiesFile = (ErrorMessageFile) annotation;
-            fileName = propertiesFile.value();
-            fileExtension = propertiesFile.fileExtension();
-        }
+        String fileName = propertiesFile.value();
+        String fileExtension = propertiesFile.fileExtension();
         Properties properties = propertyLoader.loadProperties(fileName,fileExtension);
         return properties;
+    }
+
+    public Properties loadPropertiesFromAnnotation(ErrorMessageFile errorMessageFile){
+
+        String fileName = errorMessageFile.value();
+        String fileExtension = errorMessageFile.fileExtension();
+        Properties properties = propertyLoader.loadProperties(fileName,fileExtension);
+        return properties;
+    }
+
+    public String loadStringFromAnnotation(DefaultValue defaultValue){
+        return defaultValue.value();
+    }
+
+    public String loadStringFromAnnotation(PropertyValue propertyValue, Properties properties){
+        return properties.getProperty(propertyValue.value());
+    }
+
+    public String loadStringFromAnnotation(CommandLineValue commandLineValue, Map<String,String> commandLineArgs){
+        return commandLineArgs.get(commandLineValue.value());
     }
 }

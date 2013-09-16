@@ -2,18 +2,22 @@ package com.tngtech.configbuilder;
 
 import com.tngtech.configbuilder.annotations.ErrorMessageFile;
 import com.tngtech.configbuilder.annotations.PropertiesFile;
+import com.tngtech.configbuilder.annotations.impl.AnnotationHelper;
 import com.tngtech.configbuilder.annotations.impl.ConfigLoader;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -23,14 +27,17 @@ public class ConfigBuilderTest {
     private ConfigBuilder<Config> configBuilder;
     private Properties properties;
 
-    @Mock
-    private ConfigLoader configLoader;
 
+    @Mock
+    private AnnotationHelper annotationHelper;
 
     @Before
     public void setUp(){
-        configBuilder = new ConfigBuilder<>(configLoader);
+        configBuilder = new ConfigBuilder<>(annotationHelper);
         properties = new Properties();
+
+        when(annotationHelper.loadPropertiesFromAnnotations(Matchers.any(Annotation[].class))).thenReturn(properties);
+        when(annotationHelper.loadPropertiesFromAnnotations(Matchers.any(Annotation[].class))).thenReturn(properties);
     }
 
     @Test
@@ -64,8 +71,8 @@ public class ConfigBuilderTest {
     public void testThatForClassLoadsProperties(){
 
         configBuilder.forClass(Config.class);
-        //when(configLoader.loadPropertiesFromAnnotations(configBuilder.getAnnotations())).thenReturn(properties);
-        //verify(configLoader).loadPropertiesFromAnnotations(configBuilder.getAnnotations());
+
+        verify(annotationHelper).loadPropertiesFromAnnotations(Matchers.any(Annotation[].class));
         assertEquals(properties, configBuilder.getProperties());
     }
 

@@ -1,6 +1,6 @@
 package com.tngtech.configbuilder;
 
-import com.tngtech.configbuilder.annotations.impl.ConfigLoader;
+import com.tngtech.configbuilder.annotations.impl.AnnotationHelper;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -10,16 +10,16 @@ import java.util.Properties;
 
 public class ConfigBuilder<T> {
 
-    private ConfigLoader configLoader;
+    private AnnotationHelper annotationHelper;
 
     private Class<T> configClass;
     private Annotation[] annotations;
     private Method[] methods;
-    private Properties properties;
+    private Properties properties = new Properties();
     private LinkedHashMap<Field,String> fields;
 
-    public ConfigBuilder(ConfigLoader configLoader) {
-        this.configLoader = configLoader;
+    public ConfigBuilder(AnnotationHelper annotationHelper) {
+        this.annotationHelper = annotationHelper;
     }
 
     public Class<T> getConfigClass(){
@@ -60,7 +60,8 @@ public class ConfigBuilder<T> {
             fields.put(field,"");
         }
         this.methods = configClass.getDeclaredMethods();
-        //this.properties = configLoader.loadPropertiesFromAnnotations(annotations);
+        this.properties = annotationHelper.loadPropertiesFromAnnotations(annotations);
+
         return this;
     }
 

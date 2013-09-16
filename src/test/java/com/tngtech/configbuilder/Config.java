@@ -9,9 +9,9 @@ import com.tngtech.configbuilder.annotations.PropertiesFile;
 public class Config {
 
     @DefaultValue("user")
-    private String value;
+    private String userName;
 
     public String getValue(){
-        return value;
+        return userName;
     }
 }
