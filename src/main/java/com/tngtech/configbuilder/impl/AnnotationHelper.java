@@ -19,17 +19,15 @@ public class AnnotationHelper {
         return configLoader;
     }
 
-    public Properties loadPropertiesFromAnnotations(Annotation[] annotations){
+    public Properties loadPropertiesFromAnnotation(Annotation annotation){
 
-        for(Annotation annotation : annotations){
-            if(annotation.annotationType() == PropertiesFile.class){
-                PropertiesFile propertiesFile = (PropertiesFile) annotation;
-                return configLoader.loadPropertiesFromAnnotation(propertiesFile);
-            }
-            else if(annotation.annotationType() == ErrorMessageFile.class){
-                ErrorMessageFile errorMessageFile = (ErrorMessageFile) annotation;
-                return configLoader.loadPropertiesFromAnnotation(errorMessageFile);
-            }
+        if(annotation.annotationType() == PropertiesFile.class){
+            PropertiesFile propertiesFile = (PropertiesFile) annotation;
+            return configLoader.loadPropertiesFromAnnotation(propertiesFile);
+        }
+        else if(annotation.annotationType() == ErrorMessageFile.class){
+            ErrorMessageFile errorMessageFile = (ErrorMessageFile) annotation;
+            return configLoader.loadPropertiesFromAnnotation(errorMessageFile);
         }
         return new Properties();
     }

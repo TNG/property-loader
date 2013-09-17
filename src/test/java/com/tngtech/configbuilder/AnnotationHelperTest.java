@@ -34,7 +34,7 @@ public class AnnotationHelperTest {
     }
 
     @Test
-    public void testThatLoadPropertiesFromAnnotationsCallsCorrectMethods(){
+    public void testThatLoadPropertiesFromAnnotationCallsCorrectMethods(){
         Annotation[] annotations = Config.class.getDeclaredAnnotations();
 
         Properties properties = new Properties();
@@ -45,7 +45,7 @@ public class AnnotationHelperTest {
         when(configLoader.loadPropertiesFromAnnotation(Matchers.any(ErrorMessageFile.class))).thenReturn(errors);
 
         for(Annotation annotation : annotations){
-            Properties newProperties = annotationHelper.loadPropertiesFromAnnotations(new Annotation[]{annotation});
+            Properties newProperties = annotationHelper.loadPropertiesFromAnnotation(annotation);
             if(annotation.annotationType() == PropertiesFile.class){
                 verify(configLoader).loadPropertiesFromAnnotation(Matchers.any(PropertiesFile.class));
                 assertEquals(properties,newProperties);

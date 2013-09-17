@@ -16,15 +16,14 @@ import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConfigBuilderTest {
 
     private ConfigBuilder<Config> configBuilder;
     private Properties properties;
+    private Properties errors;
 
 
     @Mock
@@ -35,8 +34,7 @@ public class ConfigBuilderTest {
         configBuilder = new ConfigBuilder<>(annotationHelper);
         properties = new Properties();
 
-        when(annotationHelper.loadPropertiesFromAnnotations(Matchers.any(Annotation[].class))).thenReturn(properties);
-        when(annotationHelper.loadPropertiesFromAnnotations(Matchers.any(Annotation[].class))).thenReturn(properties);
+        when(annotationHelper.loadPropertiesFromAnnotation(Matchers.any(Annotation.class))).thenReturn(properties);
     }
 
     @Test
@@ -66,20 +64,11 @@ public class ConfigBuilderTest {
 
 
     @Test
-    public void testThatForClassGetsOnlyAnnotationsOnClassInRightOrder(){
-        configBuilder.forClass(Config.class);
-        assertEquals(PropertiesFile.class, configBuilder.getAnnotations()[0].annotationType());
-        assertEquals(ErrorMessageFile.class, configBuilder.getAnnotations()[1].annotationType());
-        assertTrue(2 == configBuilder.getAnnotations().length);
-    }
-
-
-    @Test
     public void testThatForClassLoadsProperties(){
 
         configBuilder.forClass(Config.class);
 
-        verify(annotationHelper).loadPropertiesFromAnnotations(Matchers.any(Annotation[].class));
+        verify(annotationHelper, times(2)).loadPropertiesFromAnnotation(Matchers.any(Annotation.class));
         assertEquals(properties, configBuilder.getProperties());
     }
 

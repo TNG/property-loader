@@ -1,11 +1,14 @@
 package com.tngtech.configbuilder;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.tngtech.configbuilder.annotations.*;
 import com.tngtech.configbuilder.impl.AnnotationHelper;
+import com.tngtech.configbuilder.impl.CollectionProvider;
 import org.apache.commons.cli.*;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -16,9 +19,8 @@ public class ConfigBuilder<T> {
     private AnnotationHelper annotationHelper;
 
     private Class<T> configClass;
-    private Annotation[] annotations;
-    private Method[] methods;
     private Properties properties = new Properties();
+    private Properties errors = new Properties();
     private LinkedHashMap<Field,String> fields;
     private CommandLine commandLineArgs;
     private Class[] annotationOrder = {CommandLineValue.class, PropertyValue.class, DefaultValue.class};
@@ -35,11 +37,12 @@ public class ConfigBuilder<T> {
         return this.fields;
     }
 
-    public Annotation[] getAnnotations(){
-        return this.annotations;
-    }
+
     public Properties getProperties(){
         return this.properties;
+    }
+    public Properties getErrorMessages() {
+        return errors;
     }
     public CommandLine getCommandLineArgs(){
         return this.commandLineArgs;
@@ -51,12 +54,13 @@ public class ConfigBuilder<T> {
         T config = null;
         try
         {
-            for(Map.Entry<Field,String> fieldEntry: fields.entrySet()){
-                Field field = fieldEntry.getKey();
-                //Annotation[] fieldAnnotations = field.getDeclaredAnnotations();
-                //fieldEntry.setValue(annotationHelper.loadStringFromAnnotation(fieldAnnotations, commandLineArgs, properties));
+            config = configClass.newInstance();
 
+            for(Map.Entry<Field,String> fieldEntry: fields.entrySet()){
+
+                Field field = fieldEntry.getKey();
                 List<Class> fieldAnnotationOrder = Lists.newArrayList(annotationOrder);
+
                 if(field.isAnnotationPresent(LoadingOrder.class)){
                     fieldAnnotationOrder = Lists.newArrayList(field.getAnnotation(LoadingOrder.class).value());
                 }
@@ -70,20 +74,16 @@ public class ConfigBuilder<T> {
                         }
                     }
                 }
-                if(field.isAnnotationPresent(ValueProvider.class)){
-
-                }
-
-
-            }
-            config = configClass.newInstance();
-
-            for(Map.Entry<Field,String> fieldEntry: fields.entrySet()){
-                Field field = fieldEntry.getKey();
                 field.setAccessible(true);
-                if(field.isAnnotationPresent(ValueProvider.class)){
-                    Class provider = field.getAnnotation(ValueProvider.class).value();
+                if(field.isAnnotationPresent(ValueProvider.class) && fieldEntry.getValue() != null){
+                    ValueProvider vP = field.getAnnotation(ValueProvider.class);
 
+                    Class clazz = vP.value();
+                    Constructor<T> ctor = clazz.getConstructor(configClass);
+                    T tt = ctor.newInstance(config);
+                    CollectionProvider cP = (CollectionProvider)tt;
+                    Collection coll = cP.getValues(fieldEntry.getValue());
+                    field.set(config, coll);
 
                 }
                 else if(field.getType() == String.class){
@@ -93,11 +93,11 @@ public class ConfigBuilder<T> {
                     //exception
                 }
                 //if(field.isAnnotationPresent(JS303.class)){ ... }
-
-
             }
             return config;
         }
+        catch (InvocationTargetException e) {}
+        catch (NoSuchMethodException e) {}
         catch (InstantiationException e) {}
         catch (IllegalAccessException e) {}
         return config;
@@ -106,13 +106,20 @@ public class ConfigBuilder<T> {
     public ConfigBuilder<T> forClass(Class<T> configClass){
 
         this.configClass = configClass;
-        this.annotations = configClass.getDeclaredAnnotations();
-        this.fields = new LinkedHashMap<>();
+        this.fields = Maps.newLinkedHashMap();
         for(Field field : configClass.getDeclaredFields()){
             fields.put(field,null);
         }
-        this.methods = configClass.getDeclaredMethods();
-        this.properties = annotationHelper.loadPropertiesFromAnnotations(annotations);
+        if(configClass.isAnnotationPresent(PropertiesFile.class)){
+            this.properties = annotationHelper.loadPropertiesFromAnnotation(configClass.getAnnotation(PropertiesFile.class));
+        }
+        if(configClass.isAnnotationPresent(ErrorMessageFile.class)){
+            this.errors = annotationHelper.loadPropertiesFromAnnotation(configClass.getAnnotation(ErrorMessageFile.class));
+        }
+        if(configClass.isAnnotationPresent(LoadingOrder.class)){
+            this.annotationOrder = configClass.getAnnotation(LoadingOrder.class).value();
+        }
+
 
         return this;
     }
@@ -133,6 +140,5 @@ public class ConfigBuilder<T> {
         } catch (ParseException e) {}
         return this;
     }
-
 
 }
