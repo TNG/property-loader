@@ -7,4 +7,6 @@ import java.lang.annotation.RetentionPolicy;
 public @interface CommandLineValue {
     String value() default "";
     String description() default "";
+    String longOpt() default "";
+    boolean required() default false;
 }

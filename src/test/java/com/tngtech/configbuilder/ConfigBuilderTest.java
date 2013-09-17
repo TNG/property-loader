@@ -4,6 +4,7 @@ import com.tngtech.configbuilder.annotations.ErrorMessageFile;
 import com.tngtech.configbuilder.annotations.PropertiesFile;
 import com.tngtech.configbuilder.annotations.impl.AnnotationHelper;
 import com.tngtech.configbuilder.annotations.impl.ConfigLoader;
+import org.apache.commons.cli.Option;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +39,14 @@ public class ConfigBuilderTest {
 
         when(annotationHelper.loadPropertiesFromAnnotations(Matchers.any(Annotation[].class))).thenReturn(properties);
         when(annotationHelper.loadPropertiesFromAnnotations(Matchers.any(Annotation[].class))).thenReturn(properties);
+    }
+
+    @Test
+    public void testWithCommandLineArguments(){
+        String[] args = new String[]{"-u", "Mueller"};
+        configBuilder.forClass(Config.class).withCommandLineArgs(args);
+
+        assertEquals("Mueller",configBuilder.getCommandLineArgs().getOptionValue("u"));
     }
 
     @Test

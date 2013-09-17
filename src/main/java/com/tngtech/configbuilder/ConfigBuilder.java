@@ -41,6 +41,9 @@ public class ConfigBuilder<T> {
     public Properties getProperties(){
         return this.properties;
     }
+    public CommandLine getCommandLineArgs(){
+        return this.commandLineArgs;
+    }
 
 
    public T build(){
