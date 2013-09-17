@@ -1,18 +1,16 @@
 package com.tngtech.configbuilder;
 
 import com.tngtech.configbuilder.annotations.*;
-import com.tngtech.configbuilder.annotations.impl.ConfigLoader;
+import com.tngtech.configbuilder.impl.ConfigLoader;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.lang.annotation.Annotation;
-import java.util.LinkedHashMap;
 import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;

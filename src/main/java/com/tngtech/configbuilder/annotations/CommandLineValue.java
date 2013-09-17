@@ -5,8 +5,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CommandLineValue {
-    String value() default "";
+    String value();
     String description() default "";
-    String longOpt() default "";
     boolean required() default false;
 }

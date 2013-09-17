@@ -2,9 +2,7 @@ package com.tngtech.configbuilder;
 
 import com.tngtech.configbuilder.annotations.ErrorMessageFile;
 import com.tngtech.configbuilder.annotations.PropertiesFile;
-import com.tngtech.configbuilder.annotations.impl.AnnotationHelper;
-import com.tngtech.configbuilder.annotations.impl.ConfigLoader;
-import org.apache.commons.cli.Option;
+import com.tngtech.configbuilder.impl.AnnotationHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

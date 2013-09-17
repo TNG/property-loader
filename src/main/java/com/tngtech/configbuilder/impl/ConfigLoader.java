@@ -1,11 +1,10 @@
-package com.tngtech.configbuilder.annotations.impl;
+package com.tngtech.configbuilder.impl;
 
 
 import com.tngtech.configbuilder.annotations.*;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.CommandLine;
 
-import java.util.Map;
 import java.util.Properties;
 
 public class ConfigLoader {

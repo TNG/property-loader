@@ -2,12 +2,9 @@ package com.tngtech.configbuilder;
 
 
 import com.tngtech.configbuilder.annotations.*;
-import com.tngtech.configbuilder.annotations.impl.AnnotationHelper;
-import com.tngtech.configbuilder.annotations.impl.ConfigLoader;
+import com.tngtech.configbuilder.impl.AnnotationHelper;
+import com.tngtech.configbuilder.impl.ConfigLoader;
 import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.GnuParser;
-import org.apache.commons.cli.Options;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.lang.annotation.Annotation;
-import java.util.LinkedHashMap;
 import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
@@ -66,7 +62,7 @@ public class AnnotationHelperTest {
 
 
     @Test
-    public void testThatLoadStringFromAnnotationsCallsCorrectMethods(){
+    public void testThatLoadStringFromAnnotationCallsCorrectMethods(){
         try{
             Annotation[] annotations = Config.class.getDeclaredField("userName").getDeclaredAnnotations();
 
@@ -81,7 +77,7 @@ public class AnnotationHelperTest {
             when(configLoader.loadStringFromAnnotation(Matchers.any(CommandLineValue.class), Matchers.any(CommandLine.class))).thenReturn("Mueller");
 
             for(Annotation annotation : annotations){
-                String result = annotationHelper.loadStringFromAnnotations(new Annotation[]{annotation}, commandLineArgs, properties);
+                String result = annotationHelper.loadStringFromAnnotation(annotation, commandLineArgs, properties);
                 if(annotation.annotationType() == DefaultValue.class){
                     verify(configLoader).loadStringFromAnnotation(Matchers.any(DefaultValue.class));
                     assertEquals("user",result);

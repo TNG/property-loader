@@ -5,6 +5,6 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PropertiesFile{
-    String value() default "";
+    String value();
     String fileExtension() default "properties";
 }

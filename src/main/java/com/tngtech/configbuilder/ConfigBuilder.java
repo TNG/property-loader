@@ -1,16 +1,15 @@
 package com.tngtech.configbuilder;
 
-import com.tngtech.configbuilder.annotations.CommandLineValue;
-import com.tngtech.configbuilder.annotations.ValueProvider;
-import com.tngtech.configbuilder.annotations.impl.AnnotationHelper;
+import com.google.common.collect.Lists;
+import com.tngtech.configbuilder.annotations.*;
+import com.tngtech.configbuilder.impl.AnnotationHelper;
 import org.apache.commons.cli.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class ConfigBuilder<T> {
 
@@ -22,6 +21,7 @@ public class ConfigBuilder<T> {
     private Properties properties = new Properties();
     private LinkedHashMap<Field,String> fields;
     private CommandLine commandLineArgs;
+    private Class[] annotationOrder = {CommandLineValue.class, PropertyValue.class, DefaultValue.class};
 
     public ConfigBuilder(AnnotationHelper annotationHelper) {
         this.annotationHelper = annotationHelper;
@@ -53,8 +53,28 @@ public class ConfigBuilder<T> {
         {
             for(Map.Entry<Field,String> fieldEntry: fields.entrySet()){
                 Field field = fieldEntry.getKey();
-                Annotation[] fieldAnnotations = field.getDeclaredAnnotations();
-                fieldEntry.setValue(annotationHelper.loadStringFromAnnotations(fieldAnnotations, commandLineArgs, properties));
+                //Annotation[] fieldAnnotations = field.getDeclaredAnnotations();
+                //fieldEntry.setValue(annotationHelper.loadStringFromAnnotation(fieldAnnotations, commandLineArgs, properties));
+
+                List<Class> fieldAnnotationOrder = Lists.newArrayList(annotationOrder);
+                if(field.isAnnotationPresent(LoadingOrder.class)){
+                    fieldAnnotationOrder = Lists.newArrayList(field.getAnnotation(LoadingOrder.class).value());
+                }
+                for(Class clazz : fieldAnnotationOrder){
+                    if(field.isAnnotationPresent(clazz)){
+                        Annotation ann = field.getAnnotation(clazz);
+                        String value = annotationHelper.loadStringFromAnnotation(ann, commandLineArgs, properties);
+                        if(value != null){
+                            fieldEntry.setValue(value);
+                            break;
+                        }
+                    }
+                }
+                if(field.isAnnotationPresent(ValueProvider.class)){
+
+                }
+
+
             }
             config = configClass.newInstance();
 
@@ -62,6 +82,8 @@ public class ConfigBuilder<T> {
                 Field field = fieldEntry.getKey();
                 field.setAccessible(true);
                 if(field.isAnnotationPresent(ValueProvider.class)){
+                    Class provider = field.getAnnotation(ValueProvider.class).value();
+
 
                 }
                 else if(field.getType() == String.class){

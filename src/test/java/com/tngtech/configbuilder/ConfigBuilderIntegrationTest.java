@@ -1,8 +1,8 @@
 package com.tngtech.configbuilder;
 
 
-import com.tngtech.configbuilder.annotations.impl.AnnotationHelper;
-import com.tngtech.configbuilder.annotations.impl.ConfigLoader;
+import com.tngtech.configbuilder.impl.AnnotationHelper;
+import com.tngtech.configbuilder.impl.ConfigLoader;
 import com.tngtech.propertyloader.PropertyLoader;
 import com.tngtech.propertyloader.context.Context;
 import com.tngtech.propertyloader.impl.PropertyLoaderFactory;
