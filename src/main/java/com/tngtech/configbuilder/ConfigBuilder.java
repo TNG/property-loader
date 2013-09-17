@@ -20,7 +20,7 @@ public class ConfigBuilder<T> {
     private Class<T> configClass;
     private Properties properties = new Properties();
     private Properties errors = new Properties();
-    private LinkedHashMap<Field,String> fields;
+    private List<Field> fields;
     private CommandLine commandLineArgs;
     private Class[] annotationOrder = {CommandLineValue.class, PropertyValue.class, DefaultValue.class};
 
@@ -32,7 +32,7 @@ public class ConfigBuilder<T> {
         return this.configClass;
     }
 
-    public LinkedHashMap<Field,String> getFields(){
+    public List<Field> getFields(){
         return this.fields;
     }
 
@@ -54,29 +54,9 @@ public class ConfigBuilder<T> {
         try
         {
             config = configClass.newInstance();
-
-            for(Map.Entry<Field,String> fieldEntry: fields.entrySet()){
-
-                Field field = fieldEntry.getKey();
-                String fieldString = getFieldString(field, commandLineArgs, properties);
-                field.setAccessible(true);
-                if(field.isAnnotationPresent(ValueProvider.class) && fieldString != null){
-                    ValueProvider vP = field.getAnnotation(ValueProvider.class);
-
-                    Object obj = getFieldValue(vP.value(), config, fieldString);
-                    field.set(config, obj);
-                }
-                else if(field.getType() == String.class){
-                    field.set(config, fieldString);
-                }
-                else{
-                    //exception
-                }
-
-            }
+            config = setFields(config);
             return config;
         }
-
         catch (InstantiationException e) {}
         catch (IllegalAccessException e) {}
         return config;
@@ -85,10 +65,7 @@ public class ConfigBuilder<T> {
     public ConfigBuilder<T> forClass(Class<T> configClass){
 
         this.configClass = configClass;
-        this.fields = Maps.newLinkedHashMap();
-        for(Field field : configClass.getDeclaredFields()){
-            fields.put(field,null);
-        }
+        this.fields = Lists.newArrayList(configClass.getDeclaredFields());
         if(configClass.isAnnotationPresent(PropertiesFile.class)){
             this.properties = annotationHelper.loadPropertiesFromAnnotation(configClass.getAnnotation(PropertiesFile.class));
         }
@@ -106,7 +83,7 @@ public class ConfigBuilder<T> {
     public ConfigBuilder<T> withCommandLineArgs(String[] args){
 
         Options options = new Options();
-        for(Field field : fields.keySet()){
+        for(Field field : fields){
             if(field.isAnnotationPresent(CommandLineValue.class)){
                 CommandLineValue commandLineValue = field.getAnnotation(CommandLineValue.class);
                 options.addOption(commandLineValue.value(), true, commandLineValue.description());
@@ -118,6 +95,28 @@ public class ConfigBuilder<T> {
             this.commandLineArgs = parser.parse(options, args);
         } catch (ParseException e) {}
         return this;
+    }
+
+    public T setFields(T instanceOfConfigClass) throws IllegalAccessException{
+
+        for(Field field: fields){
+
+            String fieldString = getFieldString(field, commandLineArgs, properties);
+            field.setAccessible(true);
+            if(field.isAnnotationPresent(ValueProvider.class) && fieldString != null){
+                ValueProvider vP = field.getAnnotation(ValueProvider.class);
+
+                Object obj = getFieldValue(vP.value(), instanceOfConfigClass, fieldString);
+                field.set(instanceOfConfigClass, obj);
+            }
+            else if(field.getType() == String.class){
+                field.set(instanceOfConfigClass, fieldString);
+            }
+            else{
+                //exception
+            }
+        }
+        return instanceOfConfigClass;
     }
 
     private String getFieldString(Field field, CommandLine commandLineArgs, Properties properties){
