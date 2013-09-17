@@ -1,6 +1,9 @@
 package com.tngtech.configbuilder;
 
+import com.tngtech.configbuilder.annotations.CommandLineValue;
+import com.tngtech.configbuilder.annotations.ValueProvider;
 import com.tngtech.configbuilder.annotations.impl.AnnotationHelper;
+import org.apache.commons.cli.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -18,7 +21,7 @@ public class ConfigBuilder<T> {
     private Method[] methods;
     private Properties properties = new Properties();
     private LinkedHashMap<Field,String> fields;
-    private LinkedHashMap<String,String> commandLineArgs = new LinkedHashMap<>();
+    private CommandLine commandLineArgs;
 
     public ConfigBuilder(AnnotationHelper annotationHelper) {
         this.annotationHelper = annotationHelper;
@@ -55,7 +58,18 @@ public class ConfigBuilder<T> {
             for(Map.Entry<Field,String> fieldEntry: fields.entrySet()){
                 Field field = fieldEntry.getKey();
                 field.setAccessible(true);
-                field.set(config, fieldEntry.getValue());
+                if(field.isAnnotationPresent(ValueProvider.class)){
+
+                }
+                else if(field.getType() == String.class){
+                    field.set(config, fieldEntry.getValue());
+                }
+                else{
+                    //exception
+                }
+                //if(field.isAnnotationPresent(JS303.class)){ ... }
+
+
             }
             return config;
         }
@@ -70,11 +84,28 @@ public class ConfigBuilder<T> {
         this.annotations = configClass.getDeclaredAnnotations();
         this.fields = new LinkedHashMap<>();
         for(Field field : configClass.getDeclaredFields()){
-            fields.put(field,"");
+            fields.put(field,null);
         }
         this.methods = configClass.getDeclaredMethods();
         this.properties = annotationHelper.loadPropertiesFromAnnotations(annotations);
 
+        return this;
+    }
+
+    public ConfigBuilder<T> withCommandLineArgs(String[] args){
+
+        Options options = new Options();
+        for(Field field : fields.keySet()){
+            if(field.isAnnotationPresent(CommandLineValue.class)){
+                CommandLineValue commandLineValue = field.getAnnotation(CommandLineValue.class);
+                options.addOption(commandLineValue.value(), true, commandLineValue.description());
+            }
+        }
+
+        CommandLineParser parser = new GnuParser();
+        try {
+            this.commandLineArgs = parser.parse(options, args);
+        } catch (ParseException e) {}
         return this;
     }
 

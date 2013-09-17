@@ -4,7 +4,16 @@ package com.tngtech.configbuilder;
 import com.tngtech.configbuilder.annotations.impl.AnnotationHelper;
 import com.tngtech.configbuilder.annotations.impl.ConfigLoader;
 import com.tngtech.propertyloader.PropertyLoader;
+import com.tngtech.propertyloader.context.Context;
+import com.tngtech.propertyloader.impl.PropertyLoaderFactory;
+import com.tngtech.propertyloader.impl.PropertyLocation;
+import com.tngtech.propertyloader.impl.PropertySuffix;
+import com.tngtech.propertyloader.impl.helpers.HostsHelper;
 import org.junit.Before;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.util.ArrayList;
 
 public class ConfigBuilderIntegrationTest {
 
@@ -15,6 +24,16 @@ public class ConfigBuilderIntegrationTest {
 
     @Before
     public void setUp(){
+
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Context.class);
+        propertyLoader = applicationContext.getBean(PropertyLoader.class);
+        propertyLoader.withExtension("properties");
+        propertyLoader.withBaseNames(new ArrayList<String>());
+        PropertyLocation propertyLocation = new PropertyLocation(new PropertyLoaderFactory());
+        propertyLoader.searchLocations(propertyLocation.atDefaultLocations());
+        PropertySuffix propertySuffix = new PropertySuffix(new HostsHelper());
+        propertyLoader.searchSuffixes(propertySuffix.addDefaultConfig());
+
         configLoader = new ConfigLoader(propertyLoader);
         annotationHelper = new AnnotationHelper(configLoader);
         configBuilder = new ConfigBuilder<>(annotationHelper);
@@ -22,8 +41,11 @@ public class ConfigBuilderIntegrationTest {
 
     @org.junit.Test
     public void TestConfigBuilder(){
-        Config c = configBuilder.forClass(Config.class).build();
+        String[] args = new String[]{"-u", "Mueller"};
+        Config c = configBuilder.forClass(Config.class).withCommandLineArgs(args).build();
         System.out.println(c.getValue());
+        System.out.println(c.getHelloWorld());
+        System.out.println(c.getSurName());
     }
 
 }

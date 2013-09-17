@@ -3,6 +3,7 @@ package com.tngtech.configbuilder.annotations.impl;
 
 import com.tngtech.configbuilder.annotations.*;
 import com.tngtech.propertyloader.PropertyLoader;
+import org.apache.commons.cli.CommandLine;
 
 import java.util.Map;
 import java.util.Properties;
@@ -39,7 +40,7 @@ public class ConfigLoader {
         return properties.getProperty(propertyValue.value());
     }
 
-    public String loadStringFromAnnotation(CommandLineValue commandLineValue, Map<String,String> commandLineArgs){
-        return commandLineArgs.get(commandLineValue.value());
+    public String loadStringFromAnnotation(CommandLineValue commandLineValue, CommandLine commandLineArgs){
+        return commandLineArgs.getOptionValue(commandLineValue.value());
     }
 }

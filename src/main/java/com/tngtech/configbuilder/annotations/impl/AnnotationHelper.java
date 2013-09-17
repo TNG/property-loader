@@ -2,6 +2,7 @@ package com.tngtech.configbuilder.annotations.impl;
 
 
 import com.tngtech.configbuilder.annotations.*;
+import org.apache.commons.cli.CommandLine;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
@@ -30,21 +31,30 @@ public class AnnotationHelper {
         return new Properties();
     }
 
-    public String loadStringFromAnnotations(Annotation[] annotations, Map<String,String> commandLineArgs, Properties properties){
+    public String loadStringFromAnnotations(Annotation[] annotations, CommandLine commandLineArgs, Properties properties){
 
 
         for(Annotation annotation : annotations){
             if(annotation.annotationType() == DefaultValue.class){
                 DefaultValue defaultValue = (DefaultValue) annotation;
-                return configLoader.loadStringFromAnnotation(defaultValue);
+                String result = configLoader.loadStringFromAnnotation(defaultValue);
+                return result;
             }
             else if(annotation.annotationType() == PropertyValue.class){
                 PropertyValue propertyValue = (PropertyValue) annotation;
-                return configLoader.loadStringFromAnnotation(propertyValue, properties);
+                String result = configLoader.loadStringFromAnnotation(propertyValue, properties);
+                if(result != null){
+                    return result;
+                }
+                else continue; //WARN??LOGGING??EXCEPTION??
             }
             else if(annotation.annotationType() == CommandLineValue.class){
                 CommandLineValue commandLineValue = (CommandLineValue) annotation;
-                return configLoader.loadStringFromAnnotation(commandLineValue, commandLineArgs);
+                String result = configLoader.loadStringFromAnnotation(commandLineValue, commandLineArgs);
+                if(result != null){
+                    return result;
+                }
+                else continue; //WARN??LOGGING??EXCEPTION??
             }
         }
         return null;
