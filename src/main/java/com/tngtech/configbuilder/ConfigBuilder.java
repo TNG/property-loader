@@ -1,8 +1,8 @@
 package com.tngtech.configbuilder;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.tngtech.configbuilder.annotations.*;
+import com.tngtech.configbuilder.impl.AnnotationHandler;
 import com.tngtech.configbuilder.impl.AnnotationHelper;
 import com.tngtech.configbuilder.impl.FieldValueProvider;
 import org.apache.commons.cli.*;
@@ -36,13 +36,10 @@ public class ConfigBuilder<T> {
         return this.fields;
     }
 
-
     public Properties getProperties(){
         return this.properties;
     }
-    public Properties getErrorMessages() {
-        return errors;
-    }
+
     public CommandLine getCommandLineArgs(){
         return this.commandLineArgs;
     }
@@ -97,7 +94,7 @@ public class ConfigBuilder<T> {
         return this;
     }
 
-    public T setFields(T instanceOfConfigClass) throws IllegalAccessException{
+    private T setFields(T instanceOfConfigClass) throws InstantiationException, IllegalAccessException{
 
         for(Field field: fields){
 
@@ -119,7 +116,7 @@ public class ConfigBuilder<T> {
         return instanceOfConfigClass;
     }
 
-    private String getFieldString(Field field, CommandLine commandLineArgs, Properties properties){
+    private String getFieldString(Field field, CommandLine commandLineArgs, Properties properties) throws InstantiationException, IllegalAccessException{
 
         List<Class> fieldAnnotationOrder = Lists.newArrayList(annotationOrder);
         String value = null;
@@ -129,7 +126,16 @@ public class ConfigBuilder<T> {
         for(Class clazz : fieldAnnotationOrder){
             if(field.isAnnotationPresent(clazz)){
                 Annotation ann = field.getAnnotation(clazz);
-                value = annotationHelper.loadStringFromAnnotation(ann, commandLineArgs, properties);
+
+                StringFindingAnnotationHandler stringFindingAnnotationHandler = ann.annotationType().getAnnotation(StringFindingAnnotationHandler.class);
+                Class annotationHandler = stringFindingAnnotationHandler.value();
+                AnnotationHandler instanceOfAnnotationHandler = (AnnotationHandler)annotationHandler.newInstance();
+                instanceOfAnnotationHandler.setProperties(properties);
+                instanceOfAnnotationHandler.setCommandLineArgs(commandLineArgs);
+                value = instanceOfAnnotationHandler.getString(ann);
+
+                //value = annotationHelper.loadStringFromAnnotation(ann, commandLineArgs, properties);
+
                 if(value != null){
                     break;
                 }
@@ -154,5 +160,4 @@ public class ConfigBuilder<T> {
         catch (IllegalAccessException e) {}
         return obj;
     }
-
 }
