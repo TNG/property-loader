@@ -4,14 +4,13 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.tngtech.configbuilder.annotations.*;
 import com.tngtech.configbuilder.impl.AnnotationHelper;
-import com.tngtech.configbuilder.impl.CollectionProvider;
+import com.tngtech.configbuilder.impl.FieldValueProvider;
 import org.apache.commons.cli.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.*;
 
 public class ConfigBuilder<T> {
@@ -59,45 +58,25 @@ public class ConfigBuilder<T> {
             for(Map.Entry<Field,String> fieldEntry: fields.entrySet()){
 
                 Field field = fieldEntry.getKey();
-                List<Class> fieldAnnotationOrder = Lists.newArrayList(annotationOrder);
-
-                if(field.isAnnotationPresent(LoadingOrder.class)){
-                    fieldAnnotationOrder = Lists.newArrayList(field.getAnnotation(LoadingOrder.class).value());
-                }
-                for(Class clazz : fieldAnnotationOrder){
-                    if(field.isAnnotationPresent(clazz)){
-                        Annotation ann = field.getAnnotation(clazz);
-                        String value = annotationHelper.loadStringFromAnnotation(ann, commandLineArgs, properties);
-                        if(value != null){
-                            fieldEntry.setValue(value);
-                            break;
-                        }
-                    }
-                }
+                String fieldString = getFieldString(field, commandLineArgs, properties);
                 field.setAccessible(true);
-                if(field.isAnnotationPresent(ValueProvider.class) && fieldEntry.getValue() != null){
+                if(field.isAnnotationPresent(ValueProvider.class) && fieldString != null){
                     ValueProvider vP = field.getAnnotation(ValueProvider.class);
 
-                    Class clazz = vP.value();
-                    Constructor<T> ctor = clazz.getConstructor(configClass);
-                    T tt = ctor.newInstance(config);
-                    CollectionProvider cP = (CollectionProvider)tt;
-                    Collection coll = cP.getValues(fieldEntry.getValue());
-                    field.set(config, coll);
-
+                    Object obj = getFieldValue(vP.value(), config, fieldString);
+                    field.set(config, obj);
                 }
                 else if(field.getType() == String.class){
-                    field.set(config, fieldEntry.getValue());
+                    field.set(config, fieldString);
                 }
                 else{
                     //exception
                 }
-                //if(field.isAnnotationPresent(JS303.class)){ ... }
+
             }
             return config;
         }
-        catch (InvocationTargetException e) {}
-        catch (NoSuchMethodException e) {}
+
         catch (InstantiationException e) {}
         catch (IllegalAccessException e) {}
         return config;
@@ -139,6 +118,42 @@ public class ConfigBuilder<T> {
             this.commandLineArgs = parser.parse(options, args);
         } catch (ParseException e) {}
         return this;
+    }
+
+    private String getFieldString(Field field, CommandLine commandLineArgs, Properties properties){
+
+        List<Class> fieldAnnotationOrder = Lists.newArrayList(annotationOrder);
+        String value = null;
+        if(field.isAnnotationPresent(LoadingOrder.class)){
+            fieldAnnotationOrder = Lists.newArrayList(field.getAnnotation(LoadingOrder.class).value());
+        }
+        for(Class clazz : fieldAnnotationOrder){
+            if(field.isAnnotationPresent(clazz)){
+                Annotation ann = field.getAnnotation(clazz);
+                value = annotationHelper.loadStringFromAnnotation(ann, commandLineArgs, properties);
+                if(value != null){
+                    break;
+                }
+            }
+        }
+        return value;
+    }
+
+    private Object getFieldValue(Class innerClass, Object instanceOfOuterClass, String fieldString){
+        Object obj = null;
+
+        try{
+            Constructor<T> tConstructor = innerClass.getConstructor(instanceOfOuterClass.getClass());
+            T instanceOfInnerClass = tConstructor.newInstance(instanceOfOuterClass);
+            FieldValueProvider cP = (FieldValueProvider)instanceOfInnerClass;
+            obj = cP.getValue(fieldString);
+            return obj;
+        }
+        catch (InvocationTargetException e) {}
+        catch (NoSuchMethodException e) {}
+        catch (InstantiationException e) {}
+        catch (IllegalAccessException e) {}
+        return obj;
     }
 
 }

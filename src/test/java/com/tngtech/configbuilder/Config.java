@@ -2,18 +2,17 @@ package com.tngtech.configbuilder;
 
 import com.google.common.collect.Lists;
 import com.tngtech.configbuilder.annotations.*;
-import com.tngtech.configbuilder.impl.CollectionProvider;
+import com.tngtech.configbuilder.impl.FieldValueProvider;
 
 import java.util.Collection;
-import java.util.List;
 
 @PropertiesFile("demoapp-configuration")
 @ErrorMessageFile("errors")
 public class Config {
 
-    public class PidFixFactory implements CollectionProvider<String> {
+    public class PidFixFactory implements FieldValueProvider<Collection<String>> {
 
-        public Collection<String> getValues(String optionValue) {
+        public Collection<String> getValue(String optionValue) {
             Collection<String> coll = Lists.newArrayList();
             coll.add(optionValue + " success");
             return coll;
