@@ -1,13 +1,12 @@
 package com.tngtech.propertyloader;
 
+import com.google.common.collect.Lists;
+import com.tngtech.propertyloader.context.Context;
 import com.tngtech.propertyloader.impl.*;
 import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
 import java.util.List;
 import java.util.Properties;
 
@@ -19,16 +18,26 @@ public class PropertyLoader {
     private final PropertyLoaderFactory propertyLoaderFactory;
 
     private String propertyFileEncoding = "ISO-8859-1";
-    private List<String> baseNames;
+    private List<String> baseNames = Lists.newArrayList();
     private String fileExtension = "properties";
     private PropertySuffix propertySuffix;
     private PropertyLocation propertyLocation;
 
     @Autowired
-    public PropertyLoader(PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader, PropertyLoaderFactory propertyLoaderFactory) {
+    public PropertyLoader(PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader, PropertyLoaderFactory propertyLoaderFactory, PropertySuffix propertySuffix, PropertyLocation propertyLocation) {
         this.propertyFileNameHelper = propertyFileNameHelper;
         this.propertyFileReader = propertyFileReader;
         this.propertyLoaderFactory = propertyLoaderFactory;
+        this.propertySuffix = propertySuffix;
+        this.propertyLocation = propertyLocation;
+    }
+
+    public PropertyLoader(){
+        this(Context.getBean(PropertyFileNameHelper.class),
+                Context.getBean(PropertyFileReader.class),
+                Context.getBean(PropertyLoaderFactory.class),
+                Context.getBean(PropertySuffix.class),
+                Context.getBean(PropertyLocation.class));
     }
 
     public PropertyLoader withEncoding(String propertyFileEncoding) {
@@ -44,7 +53,7 @@ public class PropertyLoader {
         this.propertySuffix = propertySuffix;
     }
 
-    public PropertyLocation getOpeners() {
+    public PropertyLocation getLocations() {
         return propertyLocation;
     }
 
@@ -98,6 +107,5 @@ public class PropertyLoader {
         }
         return loadedProperties;
     }
-
 }
 

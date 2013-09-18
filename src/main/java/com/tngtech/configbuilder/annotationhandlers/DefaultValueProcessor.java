@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.lang.annotation.Annotation;
 
 @Component
-public class DefaultValueHandler implements AnnotationValueExtractor {
+public class DefaultValueProcessor implements AnnotationValueExtractor {
     @Override
     public String getValue(Annotation annotation, ConfigBuilderContext context) {
         DefaultValue defaultValue = (DefaultValue) annotation;

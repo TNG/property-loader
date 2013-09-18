@@ -1,5 +1,6 @@
 package com.tngtech.configbuilder;
 
+import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.Options;
@@ -13,5 +14,9 @@ public class MiscFactory {
 
     public Options createOptions() {
         return new Options();
+    }
+
+    public PropertyLoader createPropertyLoader() {
+        return new PropertyLoader();
     }
 }

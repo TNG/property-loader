@@ -1,8 +1,9 @@
 package com.tngtech.configbuilder;
 
 import com.tngtech.configbuilder.annotationhandlers.AnnotationProcessor;
-import com.tngtech.configbuilder.impl.AnnotationHelper;
+import com.tngtech.configbuilder.annotations.PropertiesFile;
 import com.tngtech.configbuilder.impl.ConfigBuilderContext;
+import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.Options;
@@ -14,7 +15,6 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Properties;
 
@@ -39,15 +39,16 @@ public class ConfigBuilderTest {
     private MiscFactory miscFactory;
 
     @Mock
-    private AnnotationHelper annotationHelper;
+    private PropertyLoader propertyLoader;
+
 
 
     @Before
     public void setUp(){
-        configBuilder = new ConfigBuilder<>(annotationProcessor, builderContext, miscFactory, annotationHelper);
+        configBuilder = new ConfigBuilder<>(annotationProcessor, builderContext, miscFactory);
         properties = new Properties();
 
-        when(annotationHelper.loadPropertiesFromAnnotation(Matchers.any(Annotation.class))).thenReturn(properties);
+        when(annotationProcessor.loadProperties(Matchers.any(PropertiesFile.class))).thenReturn(properties);
     }
 
     @Test
@@ -93,7 +94,7 @@ public class ConfigBuilderTest {
 
         configBuilder.forClass(Config.class);
 
-        verify(annotationHelper, times(2)).loadPropertiesFromAnnotation(Matchers.any(Annotation.class));
+        verify(annotationProcessor, times(2)).loadProperties(Matchers.any(PropertiesFile.class));
         verify(builderContext).setProperties(properties);
     }
 

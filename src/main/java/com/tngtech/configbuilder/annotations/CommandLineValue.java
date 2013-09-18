@@ -1,11 +1,11 @@
 package com.tngtech.configbuilder.annotations;
 
-import com.tngtech.configbuilder.annotationhandlers.CommandLineValueHandler;
+import com.tngtech.configbuilder.annotationhandlers.CommandLineValueProcessor;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-@ValueExtractor(CommandLineValueHandler.class)
+@ValueExtractor(CommandLineValueProcessor.class)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CommandLineValue {
     String value();

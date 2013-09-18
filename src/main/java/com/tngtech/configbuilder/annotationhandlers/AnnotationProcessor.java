@@ -1,6 +1,7 @@
 package com.tngtech.configbuilder.annotationhandlers;
 
 import com.google.common.collect.Maps;
+import com.tngtech.configbuilder.annotations.PropertiesFile;
 import com.tngtech.configbuilder.annotations.ValueProvider;
 import com.tngtech.configbuilder.impl.ConfigBuilderContext;
 import com.tngtech.configbuilder.validators.annotation.AnnotationValidatorAbstract;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.lang.annotation.Annotation;
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Properties;
 
 @Component
 public class AnnotationProcessor {
@@ -23,11 +25,14 @@ public class AnnotationProcessor {
 
     private final ValueProviderTransformer valueProviderTransformer;
 
+    private final AnnotationPropertiesExtractor annotationPropertiesExtractor;
+
     private final ConfigBuilderContext context;
 
     @Autowired
-    public AnnotationProcessor(ValueProviderTransformer valueProviderTransformer, ConfigBuilderContext context) {
+    public AnnotationProcessor(ValueProviderTransformer valueProviderTransformer, AnnotationPropertiesExtractor annotationPropertiesExtractor, ConfigBuilderContext context) {
         this.valueProviderTransformer = valueProviderTransformer;
+        this.annotationPropertiesExtractor = annotationPropertiesExtractor;
         this.context = context;
 
         annotationValidatorMap = Maps.newHashMap();
@@ -72,5 +77,9 @@ public class AnnotationProcessor {
         if (validatorMap.containsKey(annotationType)) {
             validatorMap.get(annotationType).validate(value);
         }
+    }
+
+    public Properties loadProperties(PropertiesFile propertiesFile) {
+        return annotationPropertiesExtractor.getProperties(propertiesFile, context);
     }
 }

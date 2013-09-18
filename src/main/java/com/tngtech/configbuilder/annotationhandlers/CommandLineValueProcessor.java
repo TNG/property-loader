@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.lang.annotation.Annotation;
 
 @Component
-public class CommandLineValueHandler implements AnnotationValueExtractor {
+public class CommandLineValueProcessor implements AnnotationValueExtractor {
 
     @Override
     public String getValue(Annotation annotation, ConfigBuilderContext context) {

@@ -1,5 +1,6 @@
 package com.tngtech.configbuilder.impl;
 
+import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.CommandLine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ public class ConfigBuilderContext {
 
     protected Properties properties;
     protected CommandLine commandLineArgs;
+    public PropertyLoader propertyLoader;
 
     public ConfigBuilderContext() {
         properties = new Properties();
@@ -25,11 +27,19 @@ public class ConfigBuilderContext {
         return properties;
     }
 
+    public PropertyLoader getPropertyLoader() {
+        return propertyLoader;
+    }
+
     public void setProperties(Properties properties) {
         this.properties = properties;
     }
 
     public void setCommandLineArgs(CommandLine commandLineArgs) {
         this.commandLineArgs = commandLineArgs;
+    }
+
+    public void setPropertyLoader(PropertyLoader propertyLoader) {
+        this.propertyLoader = propertyLoader;
     }
 }

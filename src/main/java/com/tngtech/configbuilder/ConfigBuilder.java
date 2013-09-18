@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.tngtech.configbuilder.annotationhandlers.AnnotationProcessor;
 import com.tngtech.configbuilder.annotations.*;
 import com.tngtech.configbuilder.context.Context;
-import com.tngtech.configbuilder.impl.AnnotationHelper;
 import com.tngtech.configbuilder.impl.ConfigBuilderContext;
 import org.apache.commons.cli.*;
 
@@ -19,23 +18,20 @@ public class ConfigBuilder<T> {
 
     private final AnnotationProcessor annotationProcessor;
     private final ConfigBuilderContext builderContext;
-    private AnnotationHelper annotationHelper;
 
     private Class<T> configClass;
-    private Properties errors = new Properties();
     private List<Field> fields;
     private Class[] annotationOrder = {CommandLineValue.class, PropertyValue.class, DefaultValue.class};
     private MiscFactory miscFactory;
 
-    public ConfigBuilder(AnnotationProcessor annotationProcessor, ConfigBuilderContext builderContext, MiscFactory miscFactory, AnnotationHelper annotationHelper) {
+    public ConfigBuilder(AnnotationProcessor annotationProcessor, ConfigBuilderContext builderContext, MiscFactory miscFactory) {
         this.annotationProcessor = annotationProcessor;
         this.builderContext = builderContext;
         this.miscFactory = miscFactory;
-        this.annotationHelper = annotationHelper;
     }
 
-    public ConfigBuilder(AnnotationHelper annotationHelper) {
-        this(Context.getBean(AnnotationProcessor.class), Context.getBean(ConfigBuilderContext.class), Context.getBean(MiscFactory.class), annotationHelper);
+    public ConfigBuilder() {
+        this(Context.getBean(AnnotationProcessor.class), Context.getBean(ConfigBuilderContext.class), Context.getBean(MiscFactory.class));
     }
 
     public Class<T> getConfigClass() {
@@ -60,11 +56,12 @@ public class ConfigBuilder<T> {
 
         this.configClass = configClass;
         this.fields = Lists.newArrayList(configClass.getDeclaredFields());
+        builderContext.setPropertyLoader(miscFactory.createPropertyLoader());
+        builderContext.getPropertyLoader().getLocations().atDefaultLocations();
+        builderContext.getPropertyLoader().getSuffixes().addDefaultConfig();
         if (configClass.isAnnotationPresent(PropertiesFile.class)) {
-            builderContext.setProperties(annotationHelper.loadPropertiesFromAnnotation(configClass.getAnnotation(PropertiesFile.class)));
-        }
-        if (configClass.isAnnotationPresent(ErrorMessageFile.class)) {
-            this.errors = annotationHelper.loadPropertiesFromAnnotation(configClass.getAnnotation(ErrorMessageFile.class));
+            PropertiesFile propertiesFile = configClass.getAnnotation(PropertiesFile.class);
+            builderContext.setProperties(annotationProcessor.loadProperties(propertiesFile));
         }
         if (configClass.isAnnotationPresent(LoadingOrder.class)) {
             this.annotationOrder = configClass.getAnnotation(LoadingOrder.class).value();
@@ -161,7 +158,7 @@ public class ConfigBuilder<T> {
     }
 
     private void verifyCorrectTargetType(Field field, Object fieldValue) {
-        if (!field.getType().isAssignableFrom(fieldValue.getClass())) {
+        if (fieldValue != null && !field.getType().isAssignableFrom(fieldValue.getClass())) {
             throw new ConfigBuilderException(String.format("cannot set field '%s' of type %s to object of type %s", field.getName(), field.getType().getName(), fieldValue.getClass().getName()));
         }
     }
