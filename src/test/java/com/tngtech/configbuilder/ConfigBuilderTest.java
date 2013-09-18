@@ -1,7 +1,5 @@
 package com.tngtech.configbuilder;
 
-import com.tngtech.configbuilder.annotations.ErrorMessageFile;
-import com.tngtech.configbuilder.annotations.PropertiesFile;
 import com.tngtech.configbuilder.impl.AnnotationHelper;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +22,6 @@ public class ConfigBuilderTest {
     private ConfigBuilder<Config> configBuilder;
     private Properties properties;
     private Properties errors;
-
 
     @Mock
     private AnnotationHelper annotationHelper;

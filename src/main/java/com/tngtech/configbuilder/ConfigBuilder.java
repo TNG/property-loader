@@ -47,16 +47,16 @@ public class ConfigBuilder<T> {
 
    public T build(){
 
-        T config = null;
+        T instanceOfConfigClass = null;
         try
         {
-            config = configClass.newInstance();
-            config = setFields(config);
-            return config;
+            instanceOfConfigClass = configClass.newInstance();
+            instanceOfConfigClass = setFields(instanceOfConfigClass);
+            return instanceOfConfigClass;
         }
         catch (InstantiationException e) {}
         catch (IllegalAccessException e) {}
-        return config;
+        return instanceOfConfigClass;
     }
 
     public ConfigBuilder<T> forClass(Class<T> configClass){
@@ -98,16 +98,15 @@ public class ConfigBuilder<T> {
 
         for(Field field: fields){
 
-            String fieldString = getFieldString(field, commandLineArgs, properties);
+            String fieldConfiguringString = getFieldConfiguringString(field, commandLineArgs, properties);
             field.setAccessible(true);
-            if(field.isAnnotationPresent(ValueProvider.class) && fieldString != null){
-                ValueProvider vP = field.getAnnotation(ValueProvider.class);
-
-                Object obj = getFieldValue(vP.value(), instanceOfConfigClass, fieldString);
-                field.set(instanceOfConfigClass, obj);
+            if(field.isAnnotationPresent(ValueProvider.class) && fieldConfiguringString != null){
+                ValueProvider valueProvider = field.getAnnotation(ValueProvider.class);
+                Object fieldValue = getFieldValue(valueProvider.value(), instanceOfConfigClass, fieldConfiguringString);
+                field.set(instanceOfConfigClass, fieldValue);
             }
             else if(field.getType() == String.class){
-                field.set(instanceOfConfigClass, fieldString);
+                field.set(instanceOfConfigClass, fieldConfiguringString);
             }
             else{
                 //exception
@@ -116,48 +115,47 @@ public class ConfigBuilder<T> {
         return instanceOfConfigClass;
     }
 
-    private String getFieldString(Field field, CommandLine commandLineArgs, Properties properties) throws InstantiationException, IllegalAccessException{
+    private String getFieldConfiguringString(Field field, CommandLine commandLineArgs, Properties properties) throws InstantiationException, IllegalAccessException{
 
         List<Class> fieldAnnotationOrder = Lists.newArrayList(annotationOrder);
-        String value = null;
+        String fieldConfiguringString = null;
         if(field.isAnnotationPresent(LoadingOrder.class)){
             fieldAnnotationOrder = Lists.newArrayList(field.getAnnotation(LoadingOrder.class).value());
         }
         for(Class clazz : fieldAnnotationOrder){
             if(field.isAnnotationPresent(clazz)){
-                Annotation ann = field.getAnnotation(clazz);
-
-                StringFindingAnnotationHandler stringFindingAnnotationHandler = ann.annotationType().getAnnotation(StringFindingAnnotationHandler.class);
-                Class annotationHandler = stringFindingAnnotationHandler.value();
-                AnnotationHandler instanceOfAnnotationHandler = (AnnotationHandler)annotationHandler.newInstance();
+                Annotation annotation = field.getAnnotation(clazz);
+                StringFindingAnnotationHandler stringFindingAnnotationHandler = annotation.annotationType().getAnnotation(StringFindingAnnotationHandler.class);
+                Class annotationHandlerClass = stringFindingAnnotationHandler.value();
+                AnnotationHandler instanceOfAnnotationHandler = (AnnotationHandler)annotationHandlerClass.newInstance();
                 instanceOfAnnotationHandler.setProperties(properties);
                 instanceOfAnnotationHandler.setCommandLineArgs(commandLineArgs);
-                value = instanceOfAnnotationHandler.getString(ann);
+                fieldConfiguringString = instanceOfAnnotationHandler.getString(annotation);
 
                 //value = annotationHelper.loadStringFromAnnotation(ann, commandLineArgs, properties);
 
-                if(value != null){
+                if(fieldConfiguringString != null){
                     break;
                 }
             }
         }
-        return value;
+        return fieldConfiguringString;
     }
 
     private Object getFieldValue(Class innerClass, Object instanceOfOuterClass, String fieldString){
-        Object obj = null;
+        Object fieldValue = null;
 
         try{
             Constructor<T> tConstructor = innerClass.getConstructor(instanceOfOuterClass.getClass());
             T instanceOfInnerClass = tConstructor.newInstance(instanceOfOuterClass);
             FieldValueProvider cP = (FieldValueProvider)instanceOfInnerClass;
-            obj = cP.getValue(fieldString);
-            return obj;
+            fieldValue = cP.getValue(fieldString);
+            return fieldValue;
         }
         catch (InvocationTargetException e) {}
         catch (NoSuchMethodException e) {}
         catch (InstantiationException e) {}
         catch (IllegalAccessException e) {}
-        return obj;
+        return fieldValue;
     }
 }
