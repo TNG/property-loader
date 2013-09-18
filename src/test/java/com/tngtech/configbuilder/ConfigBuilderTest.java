@@ -4,6 +4,8 @@ import com.tngtech.configbuilder.annotationhandlers.AnnotationProcessor;
 import com.tngtech.configbuilder.annotations.PropertiesFile;
 import com.tngtech.configbuilder.impl.ConfigBuilderContext;
 import com.tngtech.propertyloader.PropertyLoader;
+import com.tngtech.propertyloader.impl.PropertyLocation;
+import com.tngtech.propertyloader.impl.PropertySuffix;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.Options;
@@ -27,7 +29,6 @@ public class ConfigBuilderTest {
 
     private ConfigBuilder<Config> configBuilder;
     private Properties properties;
-    private Properties errors;
 
     @Mock
     private AnnotationProcessor annotationProcessor;
@@ -41,6 +42,12 @@ public class ConfigBuilderTest {
     @Mock
     private PropertyLoader propertyLoader;
 
+    @Mock
+    private PropertySuffix propertySuffix;
+
+    @Mock
+    private PropertyLocation propertyLocation;
+
 
 
     @Before
@@ -48,6 +55,12 @@ public class ConfigBuilderTest {
         configBuilder = new ConfigBuilder<>(annotationProcessor, builderContext, miscFactory);
         properties = new Properties();
 
+        when(builderContext.getPropertyLoader()).thenReturn(propertyLoader);
+        when(miscFactory.createPropertyLoader()).thenReturn(propertyLoader);
+        when(propertyLoader.getSuffixes()).thenReturn(propertySuffix);
+        when(propertyLoader.getLocations()).thenReturn(propertyLocation);
+        when(propertyLocation.atDefaultLocations()).thenReturn(propertyLocation);
+        when(propertySuffix.addDefaultConfig()).thenReturn(propertySuffix);
         when(annotationProcessor.loadProperties(Matchers.any(PropertiesFile.class))).thenReturn(properties);
     }
 
@@ -94,7 +107,7 @@ public class ConfigBuilderTest {
 
         configBuilder.forClass(Config.class);
 
-        verify(annotationProcessor, times(2)).loadProperties(Matchers.any(PropertiesFile.class));
+        verify(annotationProcessor).loadProperties(Matchers.any(PropertiesFile.class));
         verify(builderContext).setProperties(properties);
     }
 
