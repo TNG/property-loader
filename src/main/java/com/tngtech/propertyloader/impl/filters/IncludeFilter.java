@@ -27,6 +27,7 @@ public class IncludeFilter implements PropertyLoaderFilter {
             for (String include : includes) {
                 Properties includedProperties = propertyLoader.loadProperties(include, propertyLoader.getExtension());
                 includes.addAll(collectIncludes(includedProperties));
+                properties.putAll(includedProperties);
             }
         }
     }

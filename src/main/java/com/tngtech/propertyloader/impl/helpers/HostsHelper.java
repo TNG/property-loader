@@ -14,11 +14,11 @@ import java.util.Set;
 @Component
 public class HostsHelper {
 
-    public List<String> getHostNames(){
+    public List<String> getLocalHostNames(){
 
         Set<String> hostSet = Sets.newHashSet();
 
-        for (InetAddress host : getHosts()) {
+        for (InetAddress host : getLocalHosts()) {
             hostSet.add(host.getHostName());
         }
 
@@ -28,7 +28,7 @@ public class HostsHelper {
         return hostNames;
     }
 
-    private InetAddress[] getHosts() {
+    private InetAddress[] getLocalHosts() {
         InetAddress in;
 
         try {

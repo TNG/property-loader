@@ -8,9 +8,7 @@ import com.tngtech.configbuilder.impl.FieldValueProvider;
 import org.apache.commons.cli.*;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.*;
 import java.util.*;
 
 public class ConfigBuilder<T> {
@@ -146,15 +144,16 @@ public class ConfigBuilder<T> {
         Object fieldValue = null;
 
         try{
-            Constructor<T> tConstructor = innerClass.getConstructor(instanceOfOuterClass.getClass());
+            //T falsch
+            /*Constructor<T> tConstructor = innerClass.getConstructor(instanceOfOuterClass.getClass());
             T instanceOfInnerClass = tConstructor.newInstance(instanceOfOuterClass);
-            FieldValueProvider cP = (FieldValueProvider)instanceOfInnerClass;
-            fieldValue = cP.getValue(fieldString);
+            FieldValueProvider cP = (FieldValueProvider)instanceOfInnerClass;*/
+            Method method = innerClass.getMethod("getValue", String.class);
+            fieldValue = method.invoke(null,fieldString);
             return fieldValue;
         }
         catch (InvocationTargetException e) {}
         catch (NoSuchMethodException e) {}
-        catch (InstantiationException e) {}
         catch (IllegalAccessException e) {}
         return fieldValue;
     }

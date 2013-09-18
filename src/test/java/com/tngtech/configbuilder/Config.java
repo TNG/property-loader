@@ -10,7 +10,7 @@ import java.util.Collection;
 @ErrorMessageFile("errors")
 public class Config {
 
-    public class PidFixFactory implements FieldValueProvider<Collection<String>> {
+    public static class PidFixFactory implements FieldValueProvider<Collection<String>> {
 
         public Collection<String> getValue(String optionValue) {
             Collection<String> coll = Lists.newArrayList();

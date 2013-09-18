@@ -1,13 +1,10 @@
 package com.tngtech.propertyloader.impl;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.tngtech.propertyloader.impl.helpers.HostsHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.*;
 
 @Component
@@ -30,7 +27,7 @@ public class PropertySuffix {
 
     public PropertySuffix addHostNames()
     {
-        suffixes.addAll(hostsHelper.getHostNames());
+        suffixes.addAll(hostsHelper.getLocalHostNames());
         return this;
     }
 

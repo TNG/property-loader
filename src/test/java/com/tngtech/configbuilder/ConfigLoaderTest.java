@@ -1,5 +1,8 @@
 package com.tngtech.configbuilder;
 
+import com.tngtech.configbuilder.annotationhandlers.CommandLineValueHandler;
+import com.tngtech.configbuilder.annotationhandlers.DefaultValueHandler;
+import com.tngtech.configbuilder.annotationhandlers.PropertyValueHandler;
 import com.tngtech.configbuilder.annotations.*;
 import com.tngtech.configbuilder.impl.ConfigLoader;
 import com.tngtech.propertyloader.PropertyLoader;
@@ -84,7 +87,55 @@ public class ConfigLoaderTest {
 
         }
         catch (NoSuchFieldException e){}
-
-
     }
+
+    @Test
+    public void testThatCommandLineValueHandlerLoadsStringFromAnnotation(){
+        try{
+            CommandLineValue commandLineValue = Config.class.getDeclaredField("surName").getAnnotation(CommandLineValue.class);
+
+            String[] args = new String[]{"-u", "Mueller"};
+            Options options = new Options();
+            options.addOption("u", true, "surName");
+            CommandLineParser parser = new GnuParser();
+            try {
+                CommandLine commandLineArgs = parser.parse( options, args);
+                CommandLineValueHandler commandLineValueHandler = new CommandLineValueHandler();
+                commandLineValueHandler.setCommandLineArgs(commandLineArgs);
+                String result =  commandLineValueHandler.getString(commandLineValue);
+                assertEquals("Mueller", result);
+
+            } catch (ParseException e) {}
+
+
+        }
+        catch (NoSuchFieldException e){}
+    }
+
+    @Test
+    public void testThatPropertyValueHandlerLoadsStringFromAnnotation(){
+        try{
+            PropertyValue propertyValue = Config.class.getDeclaredField("helloWorld").getAnnotation(PropertyValue.class);
+            Properties properties = new Properties();
+            PropertyValueHandler propertyValueHandler = new PropertyValueHandler();
+            propertyValueHandler.setProperties(properties);
+            properties.put("a","HelloWorld");
+            String result =  propertyValueHandler.getString(propertyValue);
+            assertEquals("HelloWorld",result);
+        }
+        catch (NoSuchFieldException e){}
+    }
+
+    @Test
+    public void testThatDefaultValueHandlerLoadsStringFromAnnotation(){
+        try{
+            DefaultValue defaultValue = Config.class.getDeclaredField("userName").getAnnotation(DefaultValue.class);
+            DefaultValueHandler defaultValueHandler = new DefaultValueHandler();
+            String result =  defaultValueHandler.getString(defaultValue);
+            assertEquals("user",result);
+        }
+        catch (NoSuchFieldException e){}
+    }
+
+
 }

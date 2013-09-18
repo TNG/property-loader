@@ -15,16 +15,12 @@ public class FilesystemOpener implements PropertyLoaderOpener {
     }
 
     public FilesystemOpener(String prefix) {
-        if (! prefix.endsWith("/")) {
-            prefix = prefix + "/";
-        }
-        this.prefix = prefix;
+        this.prefix = prefix.replace("/", File.separator);
     }
 
     public InputStream open(String fileName){
-        fileName = prefix + fileName;
-        String osFilename = fileName.replace("/", File.separator);
-        File file = new File(osFilename);
+
+        File file = new File(prefix, fileName);
         if (file.exists()) {
             try {
                 return new FileInputStream(file);
@@ -38,7 +34,7 @@ public class FilesystemOpener implements PropertyLoaderOpener {
 
     @Override
     public String toString() {
-        if (prefix == "") {
+        if (prefix.equals("")) {
             return "current directory";
         } else {
             return "directory " + prefix;
