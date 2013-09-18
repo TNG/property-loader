@@ -1,4 +1,4 @@
-package com.tngtech.configbuilder.annotations;
+package com.tngtech.configbuilder.annotations.config;
 
 import com.tngtech.configbuilder.annotationhandlers.AnnotationValueExtractor;
 
