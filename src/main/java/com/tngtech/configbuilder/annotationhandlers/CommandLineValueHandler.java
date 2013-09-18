@@ -2,13 +2,19 @@ package com.tngtech.configbuilder.annotationhandlers;
 
 
 import com.tngtech.configbuilder.annotations.CommandLineValue;
-import com.tngtech.configbuilder.impl.AnnotationHandler;
+import com.tngtech.configbuilder.impl.ConfigBuilderContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 
-public class CommandLineValueHandler extends AnnotationHandler {
-    public String getString(Annotation annotation){
-        CommandLineValue commandLineValue = (CommandLineValue)annotation;
-        return commandLineArgs.getOptionValue(commandLineValue.value());
+@Component
+public class CommandLineValueHandler implements AnnotationValueExtractor {
+
+    @Override
+    public String getValue(Annotation annotation, ConfigBuilderContext context) {
+        CommandLineValue commandLineValue = (CommandLineValue) annotation;
+        return context.getCommandLineArgs().getOptionValue(commandLineValue.value());
     }
+
 }

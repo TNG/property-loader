@@ -2,7 +2,7 @@ package com.tngtech.configbuilder;
 
 import com.google.common.collect.Lists;
 import com.tngtech.configbuilder.annotations.*;
-import com.tngtech.configbuilder.impl.FieldValueProvider;
+import com.tngtech.configbuilder.interfaces.FieldValueProvider;
 
 import java.util.Collection;
 

@@ -4,6 +4,7 @@ import com.tngtech.configbuilder.annotationhandlers.CommandLineValueHandler;
 import com.tngtech.configbuilder.annotationhandlers.DefaultValueHandler;
 import com.tngtech.configbuilder.annotationhandlers.PropertyValueHandler;
 import com.tngtech.configbuilder.annotations.*;
+import com.tngtech.configbuilder.impl.ConfigBuilderContext;
 import com.tngtech.configbuilder.impl.ConfigLoader;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.*;
@@ -27,6 +28,9 @@ public class ConfigLoaderTest {
     private ConfigLoader configLoader;
     private Properties properties;
     private Properties errors;
+
+    @Mock
+    private ConfigBuilderContext context;
 
     @Mock
     private PropertyLoader propertyLoader;
@@ -101,8 +105,8 @@ public class ConfigLoaderTest {
             try {
                 CommandLine commandLineArgs = parser.parse( options, args);
                 CommandLineValueHandler commandLineValueHandler = new CommandLineValueHandler();
-                commandLineValueHandler.setCommandLineArgs(commandLineArgs);
-                String result =  commandLineValueHandler.getString(commandLineValue);
+                when(context.getCommandLineArgs()).thenReturn(commandLineArgs);
+                String result =  commandLineValueHandler.getValue(commandLineValue, context);
                 assertEquals("Mueller", result);
 
             } catch (ParseException e) {}
@@ -118,9 +122,9 @@ public class ConfigLoaderTest {
             PropertyValue propertyValue = Config.class.getDeclaredField("helloWorld").getAnnotation(PropertyValue.class);
             Properties properties = new Properties();
             PropertyValueHandler propertyValueHandler = new PropertyValueHandler();
-            propertyValueHandler.setProperties(properties);
+            when(context.getProperties()).thenReturn(properties);
             properties.put("a","HelloWorld");
-            String result =  propertyValueHandler.getString(propertyValue);
+            String result =  propertyValueHandler.getValue(propertyValue, context);
             assertEquals("HelloWorld",result);
         }
         catch (NoSuchFieldException e){}
@@ -131,7 +135,7 @@ public class ConfigLoaderTest {
         try{
             DefaultValue defaultValue = Config.class.getDeclaredField("userName").getAnnotation(DefaultValue.class);
             DefaultValueHandler defaultValueHandler = new DefaultValueHandler();
-            String result =  defaultValueHandler.getString(defaultValue);
+            String result =  defaultValueHandler.getValue(defaultValue, context);
             assertEquals("user",result);
         }
         catch (NoSuchFieldException e){}

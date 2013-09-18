@@ -1,6 +1,12 @@
 package com.tngtech.configbuilder;
 
+import com.tngtech.configbuilder.annotationhandlers.AnnotationProcessor;
 import com.tngtech.configbuilder.impl.AnnotationHelper;
+import com.tngtech.configbuilder.impl.ConfigBuilderContext;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,22 +30,44 @@ public class ConfigBuilderTest {
     private Properties errors;
 
     @Mock
+    private AnnotationProcessor annotationProcessor;
+
+    @Mock
+    private ConfigBuilderContext builderContext;
+
+    @Mock
+    private MiscFactory miscFactory;
+
+    @Mock
     private AnnotationHelper annotationHelper;
+
 
     @Before
     public void setUp(){
-        configBuilder = new ConfigBuilder<>(annotationHelper);
+        configBuilder = new ConfigBuilder<>(annotationProcessor, builderContext, miscFactory, annotationHelper);
         properties = new Properties();
 
         when(annotationHelper.loadPropertiesFromAnnotation(Matchers.any(Annotation.class))).thenReturn(properties);
     }
 
     @Test
-    public void testWithCommandLineArguments(){
+    public void testWithCommandLineArguments() throws ParseException {
         String[] args = new String[]{"-u", "Mueller"};
+
+        Options options = mock(Options.class);
+        when(miscFactory.createOptions()).thenReturn(options);
+
+        CommandLineParser parser = mock(CommandLineParser.class);
+        when(miscFactory.createCommandLineParser()).thenReturn(parser);
+
+        CommandLine commandLine = mock(CommandLine.class);
+        when(parser.parse(options, args)).thenReturn(commandLine);
+
         configBuilder.forClass(Config.class).withCommandLineArgs(args);
 
-        assertEquals("Mueller",configBuilder.getCommandLineArgs().getOptionValue("u"));
+        verify(options).addOption("u", true, "");
+        verify(options).addOption("p", true, "");
+        verify(builderContext).setCommandLineArgs(commandLine);
     }
 
     @Test
@@ -66,12 +94,7 @@ public class ConfigBuilderTest {
         configBuilder.forClass(Config.class);
 
         verify(annotationHelper, times(2)).loadPropertiesFromAnnotation(Matchers.any(Annotation.class));
-        assertEquals(properties, configBuilder.getProperties());
+        verify(builderContext).setProperties(properties);
     }
 
-
-    @Test
-    public void testThatBuildReturnsAnInstanceOfConfigClass(){
-        assertEquals(configBuilder.forClass(Config.class).build().getClass(), Config.class);
-    }
 }

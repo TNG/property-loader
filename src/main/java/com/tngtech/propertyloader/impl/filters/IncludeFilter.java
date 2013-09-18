@@ -1,6 +1,8 @@
 package com.tngtech.propertyloader.impl.filters;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.tngtech.propertyloader.PropertyLoader;
 import com.tngtech.propertyloader.impl.PropertyLoaderFilter;
 
