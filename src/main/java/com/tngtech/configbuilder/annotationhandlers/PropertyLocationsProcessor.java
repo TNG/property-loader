@@ -3,9 +3,11 @@ package com.tngtech.configbuilder.annotationhandlers;
 
 import com.tngtech.configbuilder.annotations.PropertyLocations;
 import com.tngtech.configbuilder.impl.ConfigBuilderContext;
+import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 
+@Component
 public class PropertyLocationsProcessor implements AnnotationPropertyLoaderConfiguration {
     public void configurePropertyLoader(Annotation annotation, ConfigBuilderContext context){
         PropertyLocations propertyLocations = (PropertyLocations)annotation;

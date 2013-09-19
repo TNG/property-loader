@@ -1,12 +1,10 @@
 package com.tngtech.propertyloader.impl;
 
 import com.google.common.collect.Lists;
-import com.tngtech.propertyloader.impl.openers.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -35,17 +33,17 @@ public class PropertyLocation {
     }
 
     public PropertyLocation atCurrentDirectory(){
-        openers.add(propertyLoaderFactory.getFilesystemOpener());
+        openers.add(propertyLoaderFactory.getURLFileOpener());
         return this;
     }
 
     public PropertyLocation atHomeDirectory(){
-        openers.add(propertyLoaderFactory.getFilesystemOpener(System.getProperty("user.home")));
+        openers.add(propertyLoaderFactory.getURLFileOpener(System.getProperty("user.home")));
         return this;
     }
 
     public PropertyLocation atDirectory(String directory){
-        openers.add(propertyLoaderFactory.getFilesystemOpener(directory));
+        openers.add(propertyLoaderFactory.getURLFileOpener(directory));
         return this;
     }
 
@@ -65,7 +63,7 @@ public class PropertyLocation {
     }
 
     public PropertyLocation atBaseURL(URL url){
-        openers.add(propertyLoaderFactory.getWebOpener(url));
+        openers.add(propertyLoaderFactory.getURLFileOpener(url));
         return this;
     }
 

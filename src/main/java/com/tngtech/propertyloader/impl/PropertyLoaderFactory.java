@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Properties;
 
 @Component
@@ -20,28 +21,28 @@ public class PropertyLoaderFactory {
         return new InputStreamReader(stream, encoding);
     }
 
-    public FilesystemOpener getFilesystemOpener(){
-        return new FilesystemOpener();
+    public URLFileOpener getURLFileOpener(){
+        return new URLFileOpener();
     }
 
-    public FilesystemOpener getFilesystemOpener(String directory){
-        return new FilesystemOpener(directory);
+    public URLFileOpener getURLFileOpener(String directory){
+        return new URLFileOpener(directory);
     }
 
     public ContextClassLoaderOpener getContextClassLoaderOpener(){
         return new ContextClassLoaderOpener();
     }
 
-    public RelativeToClass getRelativeToClass(Class<?> tClass){
-        return new RelativeToClass(tClass);
+    public RelativeToClassOpener getRelativeToClass(Class<?> tClass){
+        return new RelativeToClassOpener(tClass);
     }
 
     public ClassLoaderOpener getClassLoaderOpener(ClassLoader classLoader){
         return new ClassLoaderOpener(classLoader);
     }
 
-    public WebOpener getWebOpener(URL url){
-        return new WebOpener(url);
+    public URLFileOpener getURLFileOpener(URL url){
+        return new URLFileOpener(url);
     }
 
 }

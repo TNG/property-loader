@@ -14,8 +14,7 @@ public class AnnotationPropertiesExtractor {
     Properties getProperties(Annotation annotation, ConfigBuilderContext context){
         PropertiesFile propertiesFile = (PropertiesFile)annotation;
         String fileName = propertiesFile.value();
-        String fileExtension = propertiesFile.fileExtension();
-        Properties properties = context.getPropertyLoader().loadProperties(fileName, fileExtension);
+        Properties properties = context.getPropertyLoader().loadProperties(fileName);
         return properties;
     }
 }

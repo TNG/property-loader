@@ -2,8 +2,10 @@ package com.tngtech.configbuilder.context;
 
 import com.google.common.collect.ImmutableMap;
 import com.tngtech.configbuilder.annotationhandlers.AnnotationProcessor;
+import com.tngtech.configbuilder.annotationhandlers.AnnotationPropertyLoaderConfiguration;
 import com.tngtech.configbuilder.annotationhandlers.AnnotationValueExtractor;
 import com.tngtech.configbuilder.annotations.config.AnnotationValidator;
+import com.tngtech.configbuilder.annotations.config.PropertyLoaderConfigurator;
 import com.tngtech.configbuilder.annotations.config.ValueExtractor;
 import com.tngtech.configbuilder.annotations.config.ValueValidator;
 import com.tngtech.configbuilder.validators.annotation.AnnotationValidatorAbstract;
@@ -36,6 +38,7 @@ public class AnnotationProcessorSetup implements ApplicationListener<ContextRefr
     {
         AnnotationProcessor annotationProcessor = context.getBean(AnnotationProcessor.class);
 
+        annotationProcessor.addToPropertyConfiguratorMap(getMapFor(PropertyLoaderConfigurator.class, AnnotationPropertyLoaderConfiguration.class));
         annotationProcessor.addToAnnotationValidatorMap(getMapFor(AnnotationValidator.class, AnnotationValidatorAbstract.class));
         annotationProcessor.addToValueProvidingAnnotationMap(getMapFor(ValueExtractor.class, AnnotationValueExtractor.class));
         annotationProcessor.addToValueValidatorMap(getMapFor(ValueValidator.class, ValueValidatorAbstract.class));

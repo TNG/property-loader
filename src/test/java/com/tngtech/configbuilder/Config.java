@@ -3,9 +3,13 @@ package com.tngtech.configbuilder;
 import com.google.common.collect.Lists;
 import com.tngtech.configbuilder.annotations.*;
 import com.tngtech.configbuilder.interfaces.FieldValueProvider;
+import com.tngtech.propertyloader.PropertyLoader;
 
 import java.util.Collection;
 
+@PropertyExtension("testproperties")
+@PropertySuffixes(suffixes = {"test"})
+@PropertyLocations(resourcesforclasses = {PropertyLoader.class})
 @PropertiesFile("demoapp-configuration")
 @ErrorMessageFile("errors")
 public class Config {

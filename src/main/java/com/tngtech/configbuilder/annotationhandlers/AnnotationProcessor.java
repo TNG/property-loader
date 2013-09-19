@@ -17,6 +17,8 @@ import java.util.Properties;
 @Component
 public class AnnotationProcessor {
 
+    private final Map<Class<? extends Annotation>, AnnotationPropertyLoaderConfiguration> propertyConfiguratorMap;
+
     private final Map<Class<? extends Annotation>, AnnotationValidatorAbstract> annotationValidatorMap;
 
     private final Map<Class<? extends Annotation>, AnnotationValueExtractor> valueExtractorMap;
@@ -35,11 +37,15 @@ public class AnnotationProcessor {
         this.annotationPropertiesExtractor = annotationPropertiesExtractor;
         this.context = context;
 
+        propertyConfiguratorMap = Maps.newHashMap();
         annotationValidatorMap = Maps.newHashMap();
         valueExtractorMap = Maps.newHashMap();
         validatorMap = Maps.newHashMap();
     }
 
+    public void addToPropertyConfiguratorMap(Map<Class<? extends Annotation>, ? extends AnnotationPropertyLoaderConfiguration> propertyConfiguratorMap) {
+        this.propertyConfiguratorMap.putAll(propertyConfiguratorMap);
+    }
 
     public void addToValueProvidingAnnotationMap(Map<Class<? extends Annotation>, ? extends AnnotationValueExtractor> valueExtractorMap) {
         this.valueExtractorMap.putAll(valueExtractorMap);
@@ -51,6 +57,14 @@ public class AnnotationProcessor {
 
     public void addToAnnotationValidatorMap(Map<Class<? extends Annotation>, ? extends AnnotationValidatorAbstract> annotationValidatorMap) {
         this.annotationValidatorMap.putAll(annotationValidatorMap);
+    }
+
+    public void configurePropertyLoader(Annotation annotation, ConfigBuilderContext context) {
+        Class<? extends Annotation> annotationType = annotation.annotationType();
+
+        if (propertyConfiguratorMap.containsKey(annotationType)) {
+            propertyConfiguratorMap.get(annotationType).configurePropertyLoader(annotation, context);
+        }
     }
 
     public void validateAnnotation(Annotation annotation) {

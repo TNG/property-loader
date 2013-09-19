@@ -6,7 +6,12 @@ import com.tngtech.configbuilder.annotations.*;
 import com.tngtech.configbuilder.context.Context;
 import com.tngtech.configbuilder.impl.ConfigBuilderContext;
 import org.apache.commons.cli.*;
+import org.apache.log4j.Logger;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.util.*;
@@ -15,6 +20,8 @@ import static org.reflections.ReflectionUtils.getAllFields;
 import static org.reflections.ReflectionUtils.withAnnotation;
 
 public class ConfigBuilder<T> {
+
+    private final static Logger log = Logger.getLogger(ConfigBuilder.class);
 
     private final AnnotationProcessor annotationProcessor;
     private final ConfigBuilderContext builderContext;
@@ -57,8 +64,27 @@ public class ConfigBuilder<T> {
         this.configClass = configClass;
         this.fields = Lists.newArrayList(configClass.getDeclaredFields());
         builderContext.setPropertyLoader(miscFactory.createPropertyLoader());
-        builderContext.getPropertyLoader().getLocations().atDefaultLocations();
-        builderContext.getPropertyLoader().getSuffixes().addDefaultConfig();
+
+        if (configClass.isAnnotationPresent(PropertyLocations.class)) {
+            PropertyLocations propertyLocations = configClass.getAnnotation(PropertyLocations.class);
+            annotationProcessor.configurePropertyLoader(propertyLocations, builderContext);
+        }
+        else{
+            builderContext.getPropertyLoader().getLocations().atDefaultLocations();
+        }
+        if (configClass.isAnnotationPresent(PropertySuffixes.class)) {
+            PropertySuffixes propertySuffixes = configClass.getAnnotation(PropertySuffixes.class);
+            annotationProcessor.configurePropertyLoader(propertySuffixes, builderContext);
+        }
+        else {
+            builderContext.getPropertyLoader().getSuffixes().addDefaultConfig();
+        }
+        if (configClass.isAnnotationPresent(PropertyExtension.class)) {
+            PropertyExtension propertyExtension = configClass.getAnnotation(PropertyExtension.class);
+            annotationProcessor.configurePropertyLoader(propertyExtension, builderContext);
+        }
+
+
         if (configClass.isAnnotationPresent(PropertiesFile.class)) {
             PropertiesFile propertiesFile = configClass.getAnnotation(PropertiesFile.class);
             builderContext.setProperties(annotationProcessor.loadProperties(propertiesFile));
@@ -84,6 +110,15 @@ public class ConfigBuilder<T> {
         } catch (ParseException e) {
         }
         return this;
+    }
+
+    private void validate(T instanceOfConfigClass) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<T>> constraintViolations = validator.validate(instanceOfConfigClass);
+        for(ConstraintViolation constraintViolation : constraintViolations){
+            log.info(constraintViolation.getMessage());
+        }
     }
 
     private T setFields(T instanceOfConfigClass) throws InstantiationException, IllegalAccessException {

@@ -79,6 +79,11 @@ public class PropertyLoader {
         baseNames.add(baseName);
     }
 
+    public Properties loadProperties(String baseName) {
+        addBaseName(baseName);
+        return loadProperties();
+    }
+
     public Properties loadProperties(String baseName, String extension) {
         addBaseName(baseName);
         fileExtension = extension;
