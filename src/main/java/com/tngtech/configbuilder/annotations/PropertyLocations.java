@@ -1,5 +1,6 @@
 package com.tngtech.configbuilder.annotations;
 
 public @interface PropertyLocations {
-    public String[] value();
+    public String[] directories();
+    public Class[] resourcesforclasses();
 }

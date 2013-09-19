@@ -8,10 +8,13 @@ import java.lang.annotation.Annotation;
 
 public class PropertySuffixProcessor implements AnnotationPropertyLoaderConfiguration{
     public void configurePropertyLoader(Annotation annotation, ConfigBuilderContext context){
-        PropertySuffixes propertyLocations = (PropertySuffixes)annotation;
-        String[] suffixes = propertyLocations.value();
+        PropertySuffixes propertySuffixes = (PropertySuffixes)annotation;
+        String[] suffixes = propertySuffixes.suffixes();
         for(String suffix : suffixes){
             context.getPropertyLoader().getSuffixes().addString(suffix);
+        }
+        if(propertySuffixes.hostnames()){
+            context.getPropertyLoader().getSuffixes().addHostNames();
         }
     }
 }
