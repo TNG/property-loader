@@ -15,7 +15,7 @@ public class URLFileOpener implements PropertyLoaderOpener {
         try {
             this.url = new File("").toURI().toURL();
         } catch (MalformedURLException e) {
-            throw new OpenerException(String.format("error while getting URL from path '%s'", ""), e);
+            throw new OpenerException(String.format("this should not happen: error while forming URL from path '%s'", ""), e);
         }
     }
 
@@ -27,7 +27,7 @@ public class URLFileOpener implements PropertyLoaderOpener {
         try {
             this.url = new File(address.replace("/", File.separator)).toURI().toURL();
         } catch (MalformedURLException e) {
-            throw new OpenerException(String.format("error while getting URL from path '%s'", address), e);
+            throw new OpenerException(String.format("this should not happen: error while forming URL from path '%s'", address), e);
         }
     }
 
@@ -38,7 +38,7 @@ public class URLFileOpener implements PropertyLoaderOpener {
             return urlToFile.openStream();
         }
         catch (MalformedURLException e) {
-            throw new OpenerException(String.format("error while getting URL"), e);
+            throw new OpenerException(String.format("error while forming new URL from URL %s and filename %s", url.getPath(), fileName), e);
         }catch (IOException e) {
             return null;
         }
@@ -46,10 +46,6 @@ public class URLFileOpener implements PropertyLoaderOpener {
 
     @Override
     public String toString() {
-        if (url.toString().equals("")) {
-            return "current directory";
-        } else {
-            return "in path " + url.getPath();
-        }
+        return "in path " + url.getPath();
     }
 }

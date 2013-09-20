@@ -16,7 +16,7 @@ public class RelativeToClassOpenerTest {
     }
 
     @Test
-    public void testRelativeToClassOpener() throws IOException{
+    public void testThatRelativeToClassOpener_Opens_From_Root() throws IOException{
         RelativeToClassOpener relativeToClassOpener = new RelativeToClassOpener(PropertyLoader.class);
         Properties loadedProperties =  new Properties();
         InputStream stream = relativeToClassOpener.open("/abc.def.properties");
@@ -27,7 +27,13 @@ public class RelativeToClassOpenerTest {
         }
         assertTrue(loadedProperties.containsKey("abc"));
 
-        stream = relativeToClassOpener.open("xyz.def.properties");
+    }
+
+    @Test
+    public void testRelativeToClassOpener_Opens_From_Path_Relative_To_Class() throws IOException{
+        RelativeToClassOpener relativeToClassOpener = new RelativeToClassOpener(PropertyLoader.class);
+        Properties loadedProperties =  new Properties();
+        InputStream stream = relativeToClassOpener.open("xyz.def.properties");
         if(stream != null){
             Reader reader = new InputStreamReader(stream, "ISO-8859-1");
             loadedProperties.load(reader);

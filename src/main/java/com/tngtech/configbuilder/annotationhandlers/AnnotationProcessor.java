@@ -7,6 +7,7 @@ import com.tngtech.configbuilder.impl.ConfigBuilderContext;
 import com.tngtech.configbuilder.validators.annotation.AnnotationValidatorAbstract;
 import com.tngtech.configbuilder.validators.value.ValueValidatorAbstract;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;

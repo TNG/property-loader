@@ -3,11 +3,13 @@ package com.tngtech.configbuilder.impl;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.CommandLine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
 @Component
+@Scope("prototype")
 public class ConfigBuilderContext {
 
     protected Properties properties;

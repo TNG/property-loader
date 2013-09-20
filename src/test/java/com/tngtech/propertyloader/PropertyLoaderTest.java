@@ -6,6 +6,7 @@ import com.tngtech.propertyloader.impl.helpers.HostsHelper;
 import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -37,7 +38,9 @@ public class PropertyLoaderTest{
     @Mock
     private PropertyLocation propertyLocation;
     @Mock
-    private PropertyLoaderOpener propertyLoaderOpener;
+    private PropertyLoaderOpener propertyLoaderOpener1;
+    @Mock
+    private PropertyLoaderOpener propertyLoaderOpener2;
 
     @Before
     public void setUp(){
@@ -45,37 +48,24 @@ public class PropertyLoaderTest{
     }
 
     @org.junit.Test
-    public void testPropertySuffixAddUserName()
-    {
-        PropertySuffix propertySuffix = new PropertySuffix(hostsHelper);
-        String userName =  System.getProperty("user.name");
-        assertEquals(propertySuffix, propertySuffix.addUserName());
-        assertTrue(propertySuffix.getSuffixes().contains(userName));
-    }
-
-   @org.junit.Test
-    public void testGetFileNames()
-    {
-        PropertyFileNameHelper propertyFileNameHelper = new PropertyFileNameHelper();
-        List<String> baseNames = new ArrayList<String>();
-        baseNames.add("baseName1");
-        baseNames.add("baseName2");
-        List<String> suffixes = Lists.newArrayList("suffix");
-        assertTrue(propertyFileNameHelper.getFileNames(baseNames, suffixes, "fileExtension").contains("baseName1" + "." + "suffix" + "." + "fileExtension"));
-        assertTrue(propertyFileNameHelper.getFileNames(baseNames, suffixes, "fileExtension").contains("baseName2" + "." + "suffix" + "." + "fileExtension"));
-    }
-
-
-
-    @org.junit.Test
     public void testLoadProperties()
     {
         when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);
-        List<String> fileNames = Lists.newArrayList("file1", "file2");
-        ArrayList<String> suffixes = Lists.newArrayList("suffix1", "suffix2");
+        List<String> fileNames = Lists.newArrayList("file1.properties", "file2.properties");
+        ArrayList<String> suffixes = Lists.newArrayList();
         when(propertySuffix.getSuffixes()).thenReturn(suffixes);
-        when(propertyFileNameHelper.getFileNames(Lists.<String>newArrayList(),suffixes,"fileExtension")).thenReturn(fileNames);
-        when(propertyLocation.getOpeners()).thenReturn(Lists.<PropertyLoaderOpener>newArrayList(propertyLoaderOpener));
+        when(propertyFileNameHelper.getFileNames(Matchers.anyCollection(),Matchers.anyCollection(),Matchers.anyString())).thenReturn(fileNames);
+        when(propertyLocation.getOpeners()).thenReturn(Lists.<PropertyLoaderOpener>newArrayList(propertyLoaderOpener1,propertyLoaderOpener2));
+        when(propertyFileReader.read(Matchers.anyString(),Matchers.anyString(),Matchers.any(PropertyLoaderOpener.class))).thenReturn(properties);
+
+        propertyLoader.loadProperties();
+
+        verify(propertyFileReader).read("file1.properties","ISO-8859-1",propertyLoaderOpener1);
+        verify(propertyFileReader).read("file2.properties","ISO-8859-1",propertyLoaderOpener1);
+        verify(propertyFileReader).read("file1.properties","ISO-8859-1",propertyLoaderOpener2);
+        verify(propertyFileReader).read("file2.properties","ISO-8859-1",propertyLoaderOpener2);
+        verify(properties, times(4)).putAll(properties);
+
     }
 
 }

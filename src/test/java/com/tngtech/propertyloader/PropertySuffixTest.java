@@ -29,38 +29,51 @@ public class PropertySuffixTest {
     @Before
     public void SetUp() {
         list = Lists.newArrayList(testAddLocalHostNamesAndAddSuffixList);
-        propertySuffix = new PropertySuffix((hostshelper));
-
         when(hostshelper.getLocalHostNames()).thenReturn(list);
     }
 
     @Test
     public void testAddUserName() {
+        propertySuffix = new PropertySuffix((hostshelper));
+        propertySuffix.addString("testThatAddMethodDoesNotClearList");
         assertEquals(propertySuffix, propertySuffix.addUserName());
         assertTrue(propertySuffix.getSuffixes().contains(System.getProperty("user.name")));
+        assertTrue(propertySuffix.getSuffixes().contains("testThatAddMethodDoesNotClearList"));
     }
 
     @Test
     public void testAddLocalHostNames() {
+        propertySuffix = new PropertySuffix((hostshelper));
+        propertySuffix.addString("testThatAddMethodDoesNotClearList");
         assertEquals(propertySuffix, propertySuffix.addLocalHostNames());
         assertTrue(propertySuffix.getSuffixes().contains("testAddLocalHostNames"));
+        assertTrue(propertySuffix.getSuffixes().contains("testThatAddMethodDoesNotClearList"));
     }
     @Test
     public void testAddString() {
+        propertySuffix = new PropertySuffix((hostshelper));
+        propertySuffix.addString("testThatAddMethodDoesNotClearList");
         assertEquals(propertySuffix, propertySuffix.addString("testAddString"));
         assertTrue(propertySuffix.getSuffixes().contains("testAddString"));
+        assertTrue(propertySuffix.getSuffixes().contains("testThatAddMethodDoesNotClearList"));
     }
     @Test
     public void testAddSuffixList() {
+        propertySuffix = new PropertySuffix((hostshelper));
+        propertySuffix.addString("testThatAddMethodDoesNotClearList");
         assertEquals(propertySuffix, propertySuffix.addSuffixList(list));
         assertTrue(propertySuffix.getSuffixes().contains("testAddSuffixList"));
+        assertTrue(propertySuffix.getSuffixes().contains("testThatAddMethodDoesNotClearList"));
     }
     @Test
     public void testAddDefaultConfig() {
+        propertySuffix = new PropertySuffix((hostshelper));
+        propertySuffix.addString("testThatAddMethodDoesNotClearList");
         assertEquals(propertySuffix, propertySuffix.addDefaultConfig());
         assertTrue(propertySuffix.getSuffixes().contains("testAddLocalHostNames"));
         assertTrue(propertySuffix.getSuffixes().contains(System.getProperty("user.name")));
         assertTrue(propertySuffix.getSuffixes().contains("override"));
+        assertTrue(propertySuffix.getSuffixes().contains("testThatAddMethodDoesNotClearList"));
     }
 
 

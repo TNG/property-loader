@@ -79,17 +79,27 @@ public class PropertyLoader {
         return this;
     }
 
-    public void addBaseName(String baseName) {
-        baseNames.add(baseName);
+    public PropertyLoader withDefaultConfig(List<String> baseNames) {
+        this.propertyLocation = Context.getBean(PropertyLocation.class).atDefaultLocations();
+        this.propertySuffix = Context.getBean(PropertySuffix.class).addDefaultConfig();
+        return this;
     }
 
     public Properties loadProperties(String baseName) {
-        addBaseName(baseName);
+        this.baseNames.add(baseName);
+        return loadProperties();
+    }
+
+    public Properties loadProperties(String[] baseNames) {
+        for(String baseName : baseNames)
+        {
+            this.baseNames.add(baseName);
+        }
         return loadProperties();
     }
 
     public Properties loadProperties(String baseName, String extension) {
-        addBaseName(baseName);
+        this.baseNames.add(baseName);
         fileExtension = extension;
         return loadProperties();
     }
@@ -97,7 +107,7 @@ public class PropertyLoader {
     public Properties loadProperties(String[] baseNames, String extension) {
         for(String baseName : baseNames)
         {
-            addBaseName(baseName);
+            this.baseNames.add(baseName);
         }
         fileExtension = extension;
         return loadProperties();
@@ -110,7 +120,7 @@ public class PropertyLoader {
         {
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
             {
-                log.info(String.format("attempting to read file %s with encoding %s in %s", fileName, propertyFileEncoding, opener.toString()));
+                log.debug(String.format("attempting to read file %s with encoding %s in %s", fileName, propertyFileEncoding, opener.toString()));
                 Properties newProperties = propertyFileReader.read(fileName, propertyFileEncoding, opener);
                 loadedProperties.putAll(newProperties);
             }

@@ -1,6 +1,7 @@
 package com.tngtech.propertyloader.impl;
 
 import com.tngtech.propertyloader.impl.openers.*;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;

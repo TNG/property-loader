@@ -2,12 +2,14 @@ package com.tngtech.propertyloader.impl;
 
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.util.List;
 
 @Component
+@Scope("prototype")
 public class PropertyLocation {
 
     private final PropertyLoaderFactory propertyLoaderFactory;

@@ -4,6 +4,7 @@ package com.tngtech.configbuilder.annotationhandlers;
 import com.tngtech.configbuilder.annotations.CommandLineValue;
 import com.tngtech.configbuilder.impl.ConfigBuilderContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;

@@ -3,6 +3,7 @@ package com.tngtech.propertyloader.impl;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.io.Reader;
 import java.util.Properties;
 
 @Component
+@Scope("prototype")
 public class PropertyFileReader {
 
     private final static Logger log = Logger.getLogger(PropertyFileReader.class);
@@ -29,11 +31,12 @@ public class PropertyFileReader {
         try{
             InputStream stream = opener.open(fileName);
             if(stream != null){
+                log.info(String.format("file %s found for reading %s with encoding %s", fileName, opener.toString(), encoding));
                 Reader reader = propertyLoaderFactory.getInputStreamReader(stream, encoding);
                 loadedProperties.load(reader);
             }
             else{
-                log.info(String.format("file %s not found %s", fileName, opener.toString()));
+                log.debug(String.format("file %s not found %s", fileName, opener.toString()));
             }
         }
         catch(IOException e){

@@ -3,6 +3,7 @@ package com.tngtech.propertyloader.impl.helpers;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.net.InetAddress;
