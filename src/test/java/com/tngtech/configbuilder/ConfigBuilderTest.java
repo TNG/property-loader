@@ -61,7 +61,7 @@ public class ConfigBuilderTest {
         when(propertyLoader.getLocations()).thenReturn(propertyLocation);
         when(propertyLocation.atDefaultLocations()).thenReturn(propertyLocation);
         when(propertySuffix.addDefaultConfig()).thenReturn(propertySuffix);
-        when(annotationProcessor.loadProperties(Matchers.any(PropertiesFile.class))).thenReturn(properties);
+        when(annotationProcessor.loadProperties(Matchers.any(PropertiesFile.class), Matchers.any(ConfigBuilderContext.class))).thenReturn(properties);
     }
 
     @Test
@@ -107,7 +107,7 @@ public class ConfigBuilderTest {
 
         configBuilder.forClass(Config.class);
 
-        verify(annotationProcessor).loadProperties(Matchers.any(PropertiesFile.class));
+        verify(annotationProcessor).loadProperties(Matchers.any(PropertiesFile.class), Matchers.any(ConfigBuilderContext.class));
         verify(builderContext).setProperties(properties);
     }
 

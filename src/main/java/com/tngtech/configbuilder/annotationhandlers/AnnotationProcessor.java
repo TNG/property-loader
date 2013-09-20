@@ -30,13 +30,10 @@ public class AnnotationProcessor {
 
     private final AnnotationPropertiesExtractor annotationPropertiesExtractor;
 
-    private final ConfigBuilderContext context;
-
     @Autowired
-    public AnnotationProcessor(ValueProviderTransformer valueProviderTransformer, AnnotationPropertiesExtractor annotationPropertiesExtractor, ConfigBuilderContext context) {
+    public AnnotationProcessor(ValueProviderTransformer valueProviderTransformer, AnnotationPropertiesExtractor annotationPropertiesExtractor) {
         this.valueProviderTransformer = valueProviderTransformer;
         this.annotationPropertiesExtractor = annotationPropertiesExtractor;
-        this.context = context;
 
         propertyConfiguratorMap = Maps.newHashMap();
         annotationValidatorMap = Maps.newHashMap();
@@ -76,7 +73,7 @@ public class AnnotationProcessor {
         }
     }
 
-    public String extractValue(Annotation annotation) {
+    public String extractValue(Annotation annotation, ConfigBuilderContext context) {
         Class<? extends Annotation> annotationType = annotation.annotationType();
 
         return valueExtractorMap.containsKey(annotationType) ? valueExtractorMap.get(annotationType).getValue(annotation, context) : null;
@@ -94,7 +91,7 @@ public class AnnotationProcessor {
         }
     }
 
-    public Properties loadProperties(PropertiesFile propertiesFile) {
+    public Properties loadProperties(PropertiesFile propertiesFile, ConfigBuilderContext context) {
         return annotationPropertiesExtractor.getProperties(propertiesFile, context);
     }
 }

@@ -54,7 +54,7 @@ public class ConfigBuilder<T> {
         try {
             T instanceOfConfigClass = configClass.newInstance();
             instanceOfConfigClass = setFields(instanceOfConfigClass);
-            validate(instanceOfConfigClass);
+            //validate(instanceOfConfigClass);
             return instanceOfConfigClass;
         } catch (InstantiationException | IllegalAccessException e) {
             throw new ConfigBuilderException(e);
@@ -87,7 +87,7 @@ public class ConfigBuilder<T> {
         }
         if (configClass.isAnnotationPresent(PropertiesFile.class)) {
             PropertiesFile propertiesFile = configClass.getAnnotation(PropertiesFile.class);
-            builderContext.setProperties(annotationProcessor.loadProperties(propertiesFile));
+            builderContext.setProperties(annotationProcessor.loadProperties(propertiesFile, builderContext));
         }
         if (configClass.isAnnotationPresent(LoadingOrder.class)) {
             this.annotationOrder = configClass.getAnnotation(LoadingOrder.class).value();
@@ -176,7 +176,7 @@ public class ConfigBuilder<T> {
             if (field.isAnnotationPresent(annotationClass)) {
                 Annotation annotation = field.getAnnotation(annotationClass);
 
-                value = annotationProcessor.extractValue(annotation);
+                value = annotationProcessor.extractValue(annotation, builderContext);
 
                 if (value != null) {
                     break;
