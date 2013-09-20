@@ -1,7 +1,6 @@
 package com.tngtech.configbuilder;
 
 import com.tngtech.configbuilder.annotationhandlers.AnnotationProcessor;
-import com.tngtech.configbuilder.annotations.PropertiesFile;
 import com.tngtech.configbuilder.impl.ConfigBuilderContext;
 import com.tngtech.propertyloader.PropertyLoader;
 import com.tngtech.propertyloader.impl.PropertyLocation;
@@ -13,7 +12,6 @@ import org.apache.commons.cli.ParseException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 

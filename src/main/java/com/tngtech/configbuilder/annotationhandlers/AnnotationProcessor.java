@@ -1,7 +1,6 @@
 package com.tngtech.configbuilder.annotationhandlers;
 
 import com.google.common.collect.Maps;
-import com.tngtech.configbuilder.annotations.PropertiesFile;
 import com.tngtech.configbuilder.annotations.ValueProvider;
 import com.tngtech.configbuilder.impl.ConfigBuilderContext;
 import com.tngtech.configbuilder.validators.annotation.AnnotationValidatorAbstract;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
-import java.util.Properties;
 
 @Component
 public class AnnotationProcessor {
@@ -24,7 +22,7 @@ public class AnnotationProcessor {
     private final ValueProviderTransformer valueProviderTransformer;
 
     @Autowired
-    public AnnotationProcessor(ValueProviderTransformer valueProviderTransformer, AnnotationPropertiesExtractor annotationPropertiesExtractor) {
+    public AnnotationProcessor(ValueProviderTransformer valueProviderTransformer) {
         this.valueProviderTransformer = valueProviderTransformer;
 
         propertyConfiguratorMap = Maps.newHashMap();

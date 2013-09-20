@@ -10,7 +10,7 @@ import java.util.Collection;
 @PropertyExtension("testproperties")
 @PropertySuffixes(suffixes = {"test"})
 @PropertyLocations(resourcesforclasses = {PropertyLoader.class})
-@PropertiesFile("demoapp-configuration")
+@PropertiesFiles("demoapp-configuration")
 @ErrorMessageFile("errors")
 public class Config {
 
