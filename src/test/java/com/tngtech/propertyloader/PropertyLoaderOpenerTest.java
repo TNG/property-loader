@@ -23,7 +23,9 @@ public class PropertyLoaderOpenerTest {
 
     @Test
     public void testThatURLFileOpenerLoadsFromURl() throws IOException{
-        URL url = new File("/home/matthias/Projects/property-loader-rewrite/src/test/resources/").toURI().toURL();
+
+        URL urls = this.getClass().getResource("/abc.def.properties");
+        URL url = new File(urls.getPath()).toURI().toURL();
         URLFileOpener urlFileOpener = new URLFileOpener(url);
         Properties loadedProperties =  new Properties();
         InputStream stream = urlFileOpener.open("abc.def.properties");
@@ -36,7 +38,8 @@ public class PropertyLoaderOpenerTest {
     }
     @Test
     public void testThatURLFileOpenerLoadsFromPathString() throws IOException{
-        String path = "/home/matthias/Projects/property-loader-rewrite/src/test/resources/";
+        URL urls = this.getClass().getResource("/abc.def.properties");
+        String path = urls.getPath();
         URLFileOpener urlFileOpener = new URLFileOpener(path);
         Properties loadedProperties =  new Properties();
         InputStream stream = urlFileOpener.open("abc.def.properties");
@@ -84,7 +87,7 @@ public class PropertyLoaderOpenerTest {
 
     @Test
     public void testClassLoaderOpenerForURLClassLoader() throws IOException{
-        URL[] urls = {new File("/home/matthias/Projects/property-loader-rewrite/src/test/resources/sefshgejkf").toURI().toURL()};
+        URL[] urls = {new File("").toURI().toURL()};
         ClassLoader classLoader = new URLClassLoader(urls);
         ClassLoaderOpener classLoaderOpener = new ClassLoaderOpener(classLoader);
         Properties loadedProperties =  new Properties();

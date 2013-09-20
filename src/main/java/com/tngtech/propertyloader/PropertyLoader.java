@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import com.tngtech.propertyloader.context.Context;
 import com.tngtech.propertyloader.impl.*;
 import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,8 @@ import java.util.Properties;
 
 @Component
 public class PropertyLoader {
+
+    private final static Logger log = Logger.getLogger(PropertyLoader.class);
 
     private final PropertyFileNameHelper propertyFileNameHelper;
     private final PropertyFileReader propertyFileReader;
@@ -106,6 +110,7 @@ public class PropertyLoader {
         {
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
             {
+                log.info(String.format("attempting to read file %s with encoding %s in %s", fileName, propertyFileEncoding, opener.toString()));
                 Properties newProperties = propertyFileReader.read(fileName, propertyFileEncoding, opener);
                 loadedProperties.putAll(newProperties);
             }

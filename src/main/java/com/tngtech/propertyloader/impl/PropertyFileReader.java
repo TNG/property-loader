@@ -31,7 +31,7 @@ public class PropertyFileReader {
             }
         }
         catch(IOException e){
-           throw new PropertyFileReaderException(String.format("error reading properties from stream created from '%s' with encoding '%s' in opener '%s'", fileName, encoding, opener.toString()), e);
+            throw new PropertyFileReaderException(String.format("error reading properties from stream created from '%s' with encoding '%s' in opener '%s'", fileName, encoding, opener.toString()), e);
         }
         return loadedProperties;
     }

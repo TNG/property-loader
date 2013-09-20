@@ -44,10 +44,10 @@ public class URLFileOpener implements PropertyLoaderOpener {
 
     @Override
     public String toString() {
-        if (url.equals("")) {
+        if (url.toString().equals("")) {
             return "current directory";
         } else {
-            return "directory " + url;
+            return "path " + url.toString();
         }
     }
 }

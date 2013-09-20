@@ -7,6 +7,7 @@ import com.tngtech.configbuilder.context.Context;
 import com.tngtech.configbuilder.impl.ConfigBuilderContext;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -117,7 +118,7 @@ public class ConfigBuilder<T> {
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(instanceOfConfigClass);
         for(ConstraintViolation constraintViolation : constraintViolations){
-            log.info(constraintViolation.getMessage());
+            log.warn(constraintViolation.getMessage());
         }
     }
 
