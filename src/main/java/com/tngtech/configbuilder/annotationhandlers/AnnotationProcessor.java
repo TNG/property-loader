@@ -5,13 +5,10 @@ import com.tngtech.configbuilder.annotations.PropertiesFile;
 import com.tngtech.configbuilder.annotations.ValueProvider;
 import com.tngtech.configbuilder.impl.ConfigBuilderContext;
 import com.tngtech.configbuilder.validators.annotation.AnnotationValidatorAbstract;
-import com.tngtech.configbuilder.validators.value.ValueValidatorAbstract;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
-import java.util.EnumMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -24,21 +21,15 @@ public class AnnotationProcessor {
 
     private final Map<Class<? extends Annotation>, AnnotationValueExtractor> valueExtractorMap;
 
-    private final Map<Class<? extends Annotation>, ValueValidatorAbstract> validatorMap;
-
     private final ValueProviderTransformer valueProviderTransformer;
-
-    private final AnnotationPropertiesExtractor annotationPropertiesExtractor;
 
     @Autowired
     public AnnotationProcessor(ValueProviderTransformer valueProviderTransformer, AnnotationPropertiesExtractor annotationPropertiesExtractor) {
         this.valueProviderTransformer = valueProviderTransformer;
-        this.annotationPropertiesExtractor = annotationPropertiesExtractor;
 
         propertyConfiguratorMap = Maps.newHashMap();
         annotationValidatorMap = Maps.newHashMap();
         valueExtractorMap = Maps.newHashMap();
-        validatorMap = Maps.newHashMap();
     }
 
     public void addToPropertyConfiguratorMap(Map<Class<? extends Annotation>, ? extends AnnotationPropertyLoaderConfiguration> propertyConfiguratorMap) {
@@ -47,10 +38,6 @@ public class AnnotationProcessor {
 
     public void addToValueProvidingAnnotationMap(Map<Class<? extends Annotation>, ? extends AnnotationValueExtractor> valueExtractorMap) {
         this.valueExtractorMap.putAll(valueExtractorMap);
-    }
-
-    public void addToValueValidatorMap(Map<Class<? extends Annotation>, ? extends ValueValidatorAbstract> validatorMap) {
-        this.validatorMap.putAll(validatorMap);
     }
 
     public void addToAnnotationValidatorMap(Map<Class<? extends Annotation>, ? extends AnnotationValidatorAbstract> annotationValidatorMap) {
@@ -83,15 +70,4 @@ public class AnnotationProcessor {
         return valueProviderTransformer.transformValue(value, valueProvider);
     }
 
-    public void validateValue(Annotation annotation, String value) {
-        Class<? extends Annotation> annotationType = annotation.annotationType();
-
-        if (validatorMap.containsKey(annotationType)) {
-            validatorMap.get(annotationType).validate(value);
-        }
-    }
-
-    public Properties loadProperties(PropertiesFile propertiesFile, ConfigBuilderContext context) {
-        return annotationPropertiesExtractor.getProperties(propertiesFile, context);
-    }
 }

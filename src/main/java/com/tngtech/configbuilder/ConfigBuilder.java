@@ -3,11 +3,11 @@ package com.tngtech.configbuilder;
 import com.google.common.collect.Lists;
 import com.tngtech.configbuilder.annotationhandlers.AnnotationProcessor;
 import com.tngtech.configbuilder.annotations.*;
+import com.tngtech.configbuilder.annotations.config.PropertyLoaderConfigurator;
 import com.tngtech.configbuilder.context.Context;
 import com.tngtech.configbuilder.impl.ConfigBuilderContext;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -54,7 +54,7 @@ public class ConfigBuilder<T> {
         try {
             T instanceOfConfigClass = configClass.newInstance();
             instanceOfConfigClass = setFields(instanceOfConfigClass);
-            //validate(instanceOfConfigClass);
+            validate(instanceOfConfigClass);
             return instanceOfConfigClass;
         } catch (InstantiationException | IllegalAccessException e) {
             throw new ConfigBuilderException(e);
@@ -65,30 +65,18 @@ public class ConfigBuilder<T> {
 
         this.configClass = configClass;
         this.fields = Lists.newArrayList(configClass.getDeclaredFields());
-        builderContext.setPropertyLoader(miscFactory.createPropertyLoader());
+        builderContext.setPropertyLoader(miscFactory.createPropertyLoader().withDefaultConfig());
 
-        if (configClass.isAnnotationPresent(PropertyLocations.class)) {
-            PropertyLocations propertyLocations = configClass.getAnnotation(PropertyLocations.class);
-            annotationProcessor.configurePropertyLoader(propertyLocations, builderContext);
+        Annotation[] annotations = configClass.getAnnotations();
+        for (Annotation annotation : annotations) {
+            Annotation propertyLoaderConfigAnnotation = annotation.annotationType().getAnnotation(PropertyLoaderConfigurator.class);
+            if (propertyLoaderConfigAnnotation != null) {
+                annotationProcessor.configurePropertyLoader(annotation, builderContext);
+            }
         }
-        else{
-            builderContext.getPropertyLoader().getLocations().atDefaultLocations();
-        }
-        if (configClass.isAnnotationPresent(PropertySuffixes.class)) {
-            PropertySuffixes propertySuffixes = configClass.getAnnotation(PropertySuffixes.class);
-            annotationProcessor.configurePropertyLoader(propertySuffixes, builderContext);
-        }
-        else {
-            builderContext.getPropertyLoader().getSuffixes().addDefaultConfig();
-        }
-        if (configClass.isAnnotationPresent(PropertyExtension.class)) {
-            PropertyExtension propertyExtension = configClass.getAnnotation(PropertyExtension.class);
-            annotationProcessor.configurePropertyLoader(propertyExtension, builderContext);
-        }
-        if (configClass.isAnnotationPresent(PropertiesFile.class)) {
-            PropertiesFile propertiesFile = configClass.getAnnotation(PropertiesFile.class);
-            builderContext.setProperties(annotationProcessor.loadProperties(propertiesFile, builderContext));
-        }
+
+        builderContext.setProperties(builderContext.getPropertyLoader().loadProperties());
+
         if (configClass.isAnnotationPresent(LoadingOrder.class)) {
             this.annotationOrder = configClass.getAnnotation(LoadingOrder.class).value();
         }
@@ -129,8 +117,6 @@ public class ConfigBuilder<T> {
             validateAnnotations(declaredAnnotations);
 
             String value = extractValue(field);
-
-            validateValue(annotationProcessor, declaredAnnotations, value);
 
             Object fieldValue = getTransformedFieldValueIfApplicable(field, value);
 
@@ -184,12 +170,6 @@ public class ConfigBuilder<T> {
             }
         }
         return value;
-    }
-
-    private void validateValue(AnnotationProcessor annotationProcessor, Annotation[] annotations, String value) {
-        for (Annotation annotation : annotations) {
-            annotationProcessor.validateValue(annotation, value);
-        }
     }
 
     private void verifyCorrectTargetType(Field field, Object fieldValue) {

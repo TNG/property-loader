@@ -49,6 +49,10 @@ public class PropertyLocation {
         return this;
     }
 
+    public void clear() {
+        openers.clear();
+    }
+
     public PropertyLocation atContextClassPath(){
         openers.add(propertyLoaderFactory.getContextClassLoaderOpener());
         return this;
@@ -68,5 +72,6 @@ public class PropertyLocation {
         openers.add(propertyLoaderFactory.getURLFileOpener(url));
         return this;
     }
+
 
 }

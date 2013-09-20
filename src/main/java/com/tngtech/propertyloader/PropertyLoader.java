@@ -79,7 +79,7 @@ public class PropertyLoader {
         return this;
     }
 
-    public PropertyLoader withDefaultConfig(List<String> baseNames) {
+    public PropertyLoader withDefaultConfig() {
         this.propertyLocation = Context.getBean(PropertyLocation.class).atDefaultLocations();
         this.propertySuffix = Context.getBean(PropertySuffix.class).addDefaultConfig();
         return this;

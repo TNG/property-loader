@@ -11,6 +11,7 @@ import java.lang.annotation.Annotation;
 public class PropertyLocationsProcessor implements AnnotationPropertyLoaderConfiguration {
     public void configurePropertyLoader(Annotation annotation, ConfigBuilderContext context){
         PropertyLocations propertyLocations = (PropertyLocations)annotation;
+        context.getPropertyLoader().getLocations().clear();
         String[] locations = propertyLocations.directories();
         for(String location : locations){
             context.getPropertyLoader().getLocations().atDirectory(location);

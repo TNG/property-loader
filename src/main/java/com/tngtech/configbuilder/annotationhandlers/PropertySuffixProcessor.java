@@ -11,6 +11,7 @@ import java.lang.annotation.Annotation;
 public class PropertySuffixProcessor implements AnnotationPropertyLoaderConfiguration{
     public void configurePropertyLoader(Annotation annotation, ConfigBuilderContext context){
         PropertySuffixes propertySuffixes = (PropertySuffixes)annotation;
+        context.getPropertyLoader().getSuffixes().clear();
         String[] suffixes = propertySuffixes.suffixes();
         for(String suffix : suffixes){
             context.getPropertyLoader().getSuffixes().addString(suffix);

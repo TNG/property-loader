@@ -7,14 +7,11 @@ import com.tngtech.configbuilder.annotationhandlers.AnnotationValueExtractor;
 import com.tngtech.configbuilder.annotations.config.AnnotationValidator;
 import com.tngtech.configbuilder.annotations.config.PropertyLoaderConfigurator;
 import com.tngtech.configbuilder.annotations.config.ValueExtractor;
-import com.tngtech.configbuilder.annotations.config.ValueValidator;
 import com.tngtech.configbuilder.validators.annotation.AnnotationValidatorAbstract;
-import com.tngtech.configbuilder.validators.value.ValueValidatorAbstract;
 import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Scope;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
@@ -42,7 +39,6 @@ public class AnnotationProcessorSetup implements ApplicationListener<ContextRefr
         annotationProcessor.addToPropertyConfiguratorMap(getMapFor(PropertyLoaderConfigurator.class, AnnotationPropertyLoaderConfiguration.class));
         annotationProcessor.addToAnnotationValidatorMap(getMapFor(AnnotationValidator.class, AnnotationValidatorAbstract.class));
         annotationProcessor.addToValueProvidingAnnotationMap(getMapFor(ValueExtractor.class, AnnotationValueExtractor.class));
-        annotationProcessor.addToValueValidatorMap(getMapFor(ValueValidator.class, ValueValidatorAbstract.class));
     }
 
     private <K extends Annotation, V> Map<Class<? extends K>, ? extends V> getMapFor(Class<? extends Annotation> annotationClass, Class<V> objectClass)
