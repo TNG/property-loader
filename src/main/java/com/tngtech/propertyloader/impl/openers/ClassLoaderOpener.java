@@ -21,6 +21,6 @@ public class ClassLoaderOpener implements PropertyLoaderOpener {
 
     @Override
     public String toString() {
-        return "classloader " + classLoader;
+        return "by classloader " + classLoader;
     }
 }

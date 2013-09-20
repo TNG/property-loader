@@ -1,6 +1,7 @@
 package com.tngtech.propertyloader.impl;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,8 @@ import java.util.Properties;
 
 @Component
 public class PropertyFileReader {
+
+    private final static Logger log = Logger.getLogger(PropertyFileReader.class);
 
     private final PropertyLoaderFactory propertyLoaderFactory;
 
@@ -28,6 +31,9 @@ public class PropertyFileReader {
             if(stream != null){
                 Reader reader = propertyLoaderFactory.getInputStreamReader(stream, encoding);
                 loadedProperties.load(reader);
+            }
+            else{
+                log.info(String.format("file %s not found %s", fileName, opener.toString()));
             }
         }
         catch(IOException e){

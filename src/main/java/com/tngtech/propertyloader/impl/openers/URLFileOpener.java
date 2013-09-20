@@ -5,8 +5,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
+import org.apache.log4j.Logger;
 
 public class URLFileOpener implements PropertyLoaderOpener {
+
     private URL url;
 
     public URLFileOpener() {
@@ -32,8 +34,8 @@ public class URLFileOpener implements PropertyLoaderOpener {
     public InputStream open(String fileName){
 
         try {
-            url = new URL(url, fileName);
-            return url.openStream();
+            URL urlToFile = new URL(url, fileName);
+            return urlToFile.openStream();
         }
         catch (MalformedURLException e) {
             throw new OpenerException(String.format("error while getting URL"), e);
@@ -47,7 +49,7 @@ public class URLFileOpener implements PropertyLoaderOpener {
         if (url.toString().equals("")) {
             return "current directory";
         } else {
-            return "path " + url.toString();
+            return "in path " + url.getPath();
         }
     }
 }

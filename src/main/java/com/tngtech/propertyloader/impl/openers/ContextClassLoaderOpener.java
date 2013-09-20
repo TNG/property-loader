@@ -12,6 +12,6 @@ public class ContextClassLoaderOpener implements PropertyLoaderOpener {
 
     @Override
     public String toString() {
-        return "classpath";
+        return "in classpath";
     }
 }

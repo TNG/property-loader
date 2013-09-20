@@ -3,8 +3,10 @@ package com.tngtech.propertyloader.impl.openers;
 import java.io.InputStream;
 
 import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
+import org.apache.log4j.Logger;
 
 public class RelativeToClassOpener implements PropertyLoaderOpener {
+
     private final Class<?> reference;
 
     public RelativeToClassOpener(Class<?> reference) {
@@ -17,6 +19,6 @@ public class RelativeToClassOpener implements PropertyLoaderOpener {
 
     @Override
     public String toString() {
-        return "near " + reference;
+        return "near class " + reference;
     }
 }
