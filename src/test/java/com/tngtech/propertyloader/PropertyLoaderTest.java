@@ -44,21 +44,6 @@ public class PropertyLoaderTest{
         propertyLoader = new PropertyLoader(propertyFileNameHelper, propertyFileReader, propertyLoaderFactory, propertySuffix, propertyLocation);
     }
 
-    /*@org.junit.Test
-    public void testLoadPropertiesWithString()
-    {
-        propertyLoader.withBaseNames(new ArrayList<String>());
-        String baseName = "baseName";
-        String fileExtension = "fileExtension";
-        Properties properties = mock(Properties.class);
-        doReturn(properties).when(propertyLoader).loadProperties();
-        assertEquals(properties, propertyLoader.loadProperties(baseName, fileExtension));
-        verify(propertyLoader).addBaseName(baseName);
-        verify(propertyLoader).loadProperties();
-        assertEquals(propertyLoader.getExtension(), fileExtension);
-        assertTrue(propertyLoader.)
-    }*/
-
     @org.junit.Test
     public void testPropertySuffixAddUserName()
     {

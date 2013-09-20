@@ -21,24 +21,24 @@ public class PropertySuffix {
 
     public PropertySuffix addUserName()
     {
-        suffixes.add(System.getProperty("user.name"));
+        this.suffixes.add(System.getProperty("user.name"));
         return this;
     }
 
-    public PropertySuffix addHostNames()
+    public PropertySuffix addLocalHostNames()
     {
-        suffixes.addAll(hostsHelper.getLocalHostNames());
+        this.suffixes.addAll(hostsHelper.getLocalHostNames());
         return this;
     }
 
     public PropertySuffix addString(String suffix)
     {
-        suffixes.add(suffix);
+        this.suffixes.add(suffix);
         return this;
     }
 
     public PropertySuffix addSuffixList(List<String> suffixes) {
-        suffixes.addAll(suffixes);
+        this.suffixes.addAll(suffixes);
         return this;
     }
 
@@ -50,7 +50,7 @@ public class PropertySuffix {
     public PropertySuffix addDefaultConfig() {
 
         addUserName();
-        addHostNames();
+        addLocalHostNames();
         addString("override");
         return this;
     }

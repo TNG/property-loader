@@ -16,7 +16,7 @@ public class PropertySuffixProcessor implements AnnotationPropertyLoaderConfigur
             context.getPropertyLoader().getSuffixes().addString(suffix);
         }
         if(propertySuffixes.hostnames()){
-            context.getPropertyLoader().getSuffixes().addHostNames();
+            context.getPropertyLoader().getSuffixes().addLocalHostNames();
         }
     }
 }
