@@ -1,11 +1,10 @@
 package com.tngtech.configbuilder;
 
 import com.google.common.collect.Lists;
-import com.tngtech.configbuilder.annotationhandlers.AnnotationProcessor;
+import com.tngtech.configbuilder.annotationprocessors.AnnotationProcessor;
 import com.tngtech.configbuilder.annotations.*;
 import com.tngtech.configbuilder.annotations.config.PropertyLoaderConfigurator;
 import com.tngtech.configbuilder.context.Context;
-import com.tngtech.configbuilder.impl.ConfigBuilderContext;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Logger;
 

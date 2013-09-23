@@ -1,4 +1,4 @@
-package com.tngtech.configbuilder.annotationhandlers;
+package com.tngtech.configbuilder.annotationprocessors.implementations;
 
 import com.tngtech.configbuilder.ConfigBuilderException;
 import com.tngtech.configbuilder.annotations.ValueProvider;

@@ -1,6 +1,6 @@
-package com.tngtech.configbuilder.annotationhandlers;
+package com.tngtech.configbuilder.annotationprocessors.interfaces;
 
-import com.tngtech.configbuilder.impl.ConfigBuilderContext;
+import com.tngtech.configbuilder.ConfigBuilderContext;
 
 import java.lang.annotation.Annotation;
 

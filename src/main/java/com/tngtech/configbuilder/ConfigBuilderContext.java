@@ -1,4 +1,4 @@
-package com.tngtech.configbuilder.impl;
+package com.tngtech.configbuilder;
 
 import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.CommandLine;

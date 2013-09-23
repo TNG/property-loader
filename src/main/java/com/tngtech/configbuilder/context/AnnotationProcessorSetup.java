@@ -1,13 +1,13 @@
 package com.tngtech.configbuilder.context;
 
 import com.google.common.collect.ImmutableMap;
-import com.tngtech.configbuilder.annotationhandlers.AnnotationProcessor;
-import com.tngtech.configbuilder.annotationhandlers.AnnotationPropertyLoaderConfiguration;
-import com.tngtech.configbuilder.annotationhandlers.AnnotationValueExtractor;
+import com.tngtech.configbuilder.annotationprocessors.AnnotationProcessor;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.AnnotationPropertyLoaderConfiguration;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.AnnotationValueExtractor;
 import com.tngtech.configbuilder.annotations.config.AnnotationValidator;
 import com.tngtech.configbuilder.annotations.config.PropertyLoaderConfigurator;
 import com.tngtech.configbuilder.annotations.config.ValueExtractor;
-import com.tngtech.configbuilder.validators.annotation.AnnotationValidatorAbstract;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.AnnotationValidatorAbstract;
 import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

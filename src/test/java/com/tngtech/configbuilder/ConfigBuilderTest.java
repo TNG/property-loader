@@ -1,7 +1,6 @@
 package com.tngtech.configbuilder;
 
-import com.tngtech.configbuilder.annotationhandlers.AnnotationProcessor;
-import com.tngtech.configbuilder.impl.ConfigBuilderContext;
+import com.tngtech.configbuilder.annotationprocessors.AnnotationProcessor;
 import com.tngtech.propertyloader.PropertyLoader;
 import com.tngtech.propertyloader.impl.PropertyLocation;
 import com.tngtech.propertyloader.impl.PropertySuffix;

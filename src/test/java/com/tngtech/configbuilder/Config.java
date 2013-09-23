@@ -8,8 +8,8 @@ import com.tngtech.propertyloader.PropertyLoader;
 import java.util.Collection;
 
 @PropertyExtension("testproperties")
-@PropertySuffixes(suffixes = {"test"})
-@PropertyLocations(resourcesforclasses = {PropertyLoader.class})
+@PropertySuffixes(extraSuffixes = {"test"})
+@PropertyLocations(resourcesForClasses = {PropertyLoader.class})
 @PropertiesFiles("demoapp-configuration")
 @ErrorMessageFile("errors")
 public class Config {

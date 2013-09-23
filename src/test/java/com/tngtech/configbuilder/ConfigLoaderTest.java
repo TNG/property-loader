@@ -1,10 +1,9 @@
 package com.tngtech.configbuilder;
 
-import com.tngtech.configbuilder.annotationhandlers.CommandLineValueProcessor;
-import com.tngtech.configbuilder.annotationhandlers.DefaultValueProcessor;
-import com.tngtech.configbuilder.annotationhandlers.PropertyValueProcessor;
+import com.tngtech.configbuilder.annotationprocessors.implementations.CommandLineValueProcessor;
+import com.tngtech.configbuilder.annotationprocessors.implementations.DefaultValueProcessor;
+import com.tngtech.configbuilder.annotationprocessors.implementations.PropertyValueProcessor;
 import com.tngtech.configbuilder.annotations.*;
-import com.tngtech.configbuilder.impl.ConfigBuilderContext;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.*;
 import org.junit.Before;
@@ -87,6 +86,4 @@ public class ConfigLoaderTest {
         }
         catch (NoSuchFieldException e){}
     }
-
-
 }

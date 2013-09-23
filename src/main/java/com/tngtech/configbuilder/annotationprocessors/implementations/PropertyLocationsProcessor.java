@@ -1,8 +1,9 @@
-package com.tngtech.configbuilder.annotationhandlers;
+package com.tngtech.configbuilder.annotationprocessors.implementations;
 
 
+import com.tngtech.configbuilder.annotationprocessors.interfaces.AnnotationPropertyLoaderConfiguration;
 import com.tngtech.configbuilder.annotations.PropertyLocations;
-import com.tngtech.configbuilder.impl.ConfigBuilderContext;
+import com.tngtech.configbuilder.ConfigBuilderContext;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -16,7 +17,7 @@ public class PropertyLocationsProcessor implements AnnotationPropertyLoaderConfi
         for(String location : locations){
             context.getPropertyLoader().getLocations().atDirectory(location);
         }
-        Class[] classes = propertyLocations.resourcesforclasses();
+        Class[] classes = propertyLocations.resourcesForClasses();
         for(Class clazz : classes){
             context.getPropertyLoader().getLocations().atRelativeToClass(clazz);
         }

@@ -1,7 +1,8 @@
-package com.tngtech.configbuilder.annotationhandlers;
+package com.tngtech.configbuilder.annotationprocessors.implementations;
 
+import com.tngtech.configbuilder.annotationprocessors.interfaces.AnnotationValueExtractor;
 import com.tngtech.configbuilder.annotations.PropertyValue;
-import com.tngtech.configbuilder.impl.ConfigBuilderContext;
+import com.tngtech.configbuilder.ConfigBuilderContext;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;

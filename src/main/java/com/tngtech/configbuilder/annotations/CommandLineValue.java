@@ -1,6 +1,6 @@
 package com.tngtech.configbuilder.annotations;
 
-import com.tngtech.configbuilder.annotationhandlers.CommandLineValueProcessor;
+import com.tngtech.configbuilder.annotationprocessors.implementations.CommandLineValueProcessor;
 import com.tngtech.configbuilder.annotations.config.ValueExtractor;
 
 import java.lang.annotation.Retention;

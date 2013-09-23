@@ -1,6 +1,6 @@
 package com.tngtech.configbuilder.annotations;
 
-import com.tngtech.configbuilder.annotationhandlers.PropertiesFilesProcessor;
+import com.tngtech.configbuilder.annotationprocessors.implementations.PropertiesFilesProcessor;
 import com.tngtech.configbuilder.annotations.config.PropertyLoaderConfigurator;
 
 import java.lang.annotation.Retention;

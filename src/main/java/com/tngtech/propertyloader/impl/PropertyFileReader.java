@@ -44,4 +44,22 @@ public class PropertyFileReader {
         }
         return loadedProperties;
     }
+
+    public Properties readFromXML(String fileName, PropertyLoaderOpener opener) {
+        Properties loadedProperties =  propertyLoaderFactory.getEmptyProperties();
+        try{
+            InputStream stream = opener.open(fileName);
+            if(stream != null){
+                log.info(String.format("file %s found for reading %s", fileName, opener.toString()));
+                loadedProperties.loadFromXML(stream);
+            }
+            else{
+                log.debug(String.format("file %s not found %s", fileName, opener.toString()));
+            }
+        }
+        catch(IOException e){
+            throw new PropertyFileReaderException(String.format("error reading properties from stream created from '%s' in opener '%s'", fileName, opener.toString()), e);
+        }
+        return loadedProperties;
+    }
 }

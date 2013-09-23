@@ -1,9 +1,12 @@
-package com.tngtech.configbuilder.annotationhandlers;
+package com.tngtech.configbuilder.annotationprocessors;
 
 import com.google.common.collect.Maps;
+import com.tngtech.configbuilder.annotationprocessors.implementations.ValueProviderTransformer;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.AnnotationPropertyLoaderConfiguration;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.AnnotationValidatorAbstract;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.AnnotationValueExtractor;
 import com.tngtech.configbuilder.annotations.ValueProvider;
-import com.tngtech.configbuilder.impl.ConfigBuilderContext;
-import com.tngtech.configbuilder.validators.annotation.AnnotationValidatorAbstract;
+import com.tngtech.configbuilder.ConfigBuilderContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

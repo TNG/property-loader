@@ -120,8 +120,16 @@ public class PropertyLoader {
         {
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
             {
-                log.debug(String.format("attempting to read file %s with encoding %s in %s", fileName, propertyFileEncoding, opener.toString()));
-                Properties newProperties = propertyFileReader.read(fileName, propertyFileEncoding, opener);
+                Properties newProperties;
+                if(fileExtension.equalsIgnoreCase("xml")){
+                    log.debug(String.format("attempting to read xml file %s %s", fileName, opener.toString()));
+                    newProperties = propertyFileReader.readFromXML(fileName, opener);
+                }
+                else {
+                    log.debug(String.format("attempting to read properties file %s with encoding %s %s", fileName, propertyFileEncoding, opener.toString()));
+                    newProperties = propertyFileReader.read(fileName, propertyFileEncoding, opener);
+                }
+
                 loadedProperties.putAll(newProperties);
             }
         }

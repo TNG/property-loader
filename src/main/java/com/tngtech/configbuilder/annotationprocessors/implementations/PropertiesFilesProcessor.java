@@ -1,9 +1,10 @@
-package com.tngtech.configbuilder.annotationhandlers;
+package com.tngtech.configbuilder.annotationprocessors.implementations;
 
 
 import com.google.common.collect.Lists;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.AnnotationPropertyLoaderConfiguration;
 import com.tngtech.configbuilder.annotations.PropertiesFiles;
-import com.tngtech.configbuilder.impl.ConfigBuilderContext;
+import com.tngtech.configbuilder.ConfigBuilderContext;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
