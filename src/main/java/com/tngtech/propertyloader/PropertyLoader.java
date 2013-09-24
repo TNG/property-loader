@@ -26,6 +26,7 @@ public class PropertyLoader {
     private String fileExtension = "properties";
     private PropertySuffix propertySuffix;
     private PropertyLocation propertyLocation;
+    private List<PropertyLoaderFilter>  propertyLoaderFilters = Lists.newArrayList();
 
     @Autowired
     public PropertyLoader(PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader, PropertyLoaderFactory propertyLoaderFactory, PropertySuffix propertySuffix, PropertyLocation propertyLocation) {
@@ -87,6 +88,7 @@ public class PropertyLoader {
     public PropertyLoader withDefaultConfig() {
         this.propertyLocation = Context.getBean(PropertyLocation.class).atDefaultLocations();
         this.propertySuffix = Context.getBean(PropertySuffix.class).addDefaultConfig();
+        this.propertyLoaderFilters.add(propertyLoaderFactory.getVariableResolvingFilter());
         return this;
     }
 
@@ -130,12 +132,18 @@ public class PropertyLoader {
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
             {
                 Properties newProperties = tryToReadPropertiesFromFile(fileName, opener);
-                Properties includedProperties = loadProperties(collectIncludesAndRemoveKey(newProperties));
+                newProperties.putAll(loadProperties(collectIncludesAndRemoveKey(newProperties)));
                 loadedProperties.putAll(newProperties);
-                loadedProperties.putAll(includedProperties);
             }
         }
+        filterProperties(loadedProperties);
         return loadedProperties;
+    }
+
+    private void filterProperties(Properties loadedProperties) {
+        for(PropertyLoaderFilter filter : propertyLoaderFilters) {
+            filter.filter(loadedProperties);
+        }
     }
 
     private Properties tryToReadPropertiesFromFile(String fileName, PropertyLoaderOpener opener) {

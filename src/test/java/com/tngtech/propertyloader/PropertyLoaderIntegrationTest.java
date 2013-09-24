@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -30,7 +31,6 @@ public class PropertyLoaderIntegrationTest {
         assertTrue(properties.containsKey("a"));
         assertTrue(properties.containsKey("umlauts"));
         assertTrue(properties.containsKey("abc"));
-        assertTrue(properties.containsKey("variableTest"));
 
         properties.list(System.out);
     }
@@ -71,5 +71,21 @@ public class PropertyLoaderIntegrationTest {
         assertFalse(properties.containsKey("a"));
         assertTrue(properties.containsKey("umlauts"));
         assertFalse(properties.containsKey("abc"));
+    }
+
+    @org.junit.Test
+    public void testLoadingWithDefaultConfig()
+    {
+        String[] args = {"demoapp-configuration",
+        };
+
+        PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
+        Properties properties = propertyLoader.loadProperties(args, "properties");
+
+        assertEquals("Hello, World!", properties.getProperty("b"));
+        assertEquals("yes", properties.getProperty("xxx"));
+        assertEquals("prod-blub", properties.getProperty("testInclude.prod"));
+
+        properties.list(System.out);
     }
 }

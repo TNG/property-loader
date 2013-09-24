@@ -1,25 +1,13 @@
 package com.tngtech.propertyloader.impl.filters;
 
-import com.tngtech.propertyloader.impl.PropertyLoaderFilter;
-
-import java.util.Map;
 import java.util.Properties;
 
-public class VariableResolvingFilter implements PropertyLoaderFilter {
+public class VariableResolvingFilter extends ValueModifyingFilter {
     private static final String VARIABLE_PREFIX = "${";
     private static final String VARIABLE_SUFFIX = "}";
 
     @Override
-    public void filter(Properties properties) {
-        for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-
-            String value = entry.getValue().toString();
-            String newValue = resolveVariables(value, properties);
-            entry.setValue(newValue);
-        }
-    }
-
-    private String resolveVariables(String value, Properties properties) {
+    protected String filterValue(String key, String value, Properties properties) {
         if (! value.contains(VARIABLE_PREFIX)) {
             return value;
         }
@@ -38,7 +26,7 @@ public class VariableResolvingFilter implements PropertyLoaderFilter {
         String replacedValue = prefix + replacement + suffix;
 
         // In case this is a "${deeply${nested}}${variable}", look for something to resolve again
-        return resolveVariables(replacedValue, properties);
+        return filterValue(key, replacedValue, properties);
     }
 
     private String findReplacement(String variableName, Properties properties) {

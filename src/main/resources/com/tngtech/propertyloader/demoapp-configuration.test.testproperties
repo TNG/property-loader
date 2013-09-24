@@ -24,7 +24,7 @@ testInclude     = ${testInclude.${environment}}
 
 #undefined=${undefined}
 
-%%include%%toBeIncluded
+$include = toBeIncluded
 
 xxx=${definedInIncluded}
 

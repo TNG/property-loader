@@ -1,5 +1,6 @@
 package com.tngtech.propertyloader.impl;
 
+import com.tngtech.propertyloader.impl.filters.VariableResolvingFilter;
 import com.tngtech.propertyloader.impl.openers.*;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -44,6 +45,10 @@ public class PropertyLoaderFactory {
 
     public URLFileOpener getURLFileOpener(URL url){
         return new URLFileOpener(url);
+    }
+
+    public PropertyLoaderFilter getVariableResolvingFilter(){
+        return new VariableResolvingFilter();
     }
 
 }

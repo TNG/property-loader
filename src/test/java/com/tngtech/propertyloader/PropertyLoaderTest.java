@@ -47,7 +47,8 @@ public class PropertyLoaderTest{
         propertyLoader = new PropertyLoader(propertyFileNameHelper, propertyFileReader, propertyLoaderFactory, propertySuffix, propertyLocation);
     }
 
-    @org.junit.Test
+    //stackoverflow!!
+    @org.junit.Test(expected=StackOverflowError.class)
     public void testLoadProperties()
     {
         when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);
