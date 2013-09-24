@@ -75,8 +75,8 @@ public class ConfigBuilderTest {
 
         configBuilder.forClass(Config.class).withCommandLineArgs(args);
 
-        verify(options).addOption("u", true, "");
-        verify(options).addOption("p", true, "");
+        verify(options).addOption("u", "user", true, "");
+        verify(options).addOption("p", "pidFixFactory", true, "");
         verify(builderContext).setCommandLineArgs(commandLine);
     }
 
