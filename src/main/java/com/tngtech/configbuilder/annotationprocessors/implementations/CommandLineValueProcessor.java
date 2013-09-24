@@ -14,7 +14,7 @@ public class CommandLineValueProcessor implements AnnotationValueExtractor {
     @Override
     public String getValue(Annotation annotation, ConfigBuilderContext context) {
         CommandLineValue commandLineValue = (CommandLineValue) annotation;
-        return context.getCommandLineArgs().getOptionValue(commandLineValue.value());
+        return context.getCommandLineArgs().getOptionValue(commandLineValue.shortOpt());
     }
 
 }

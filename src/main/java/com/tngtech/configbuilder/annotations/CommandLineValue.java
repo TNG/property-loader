@@ -9,7 +9,8 @@ import java.lang.annotation.RetentionPolicy;
 @ValueExtractor(CommandLineValueProcessor.class)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CommandLineValue {
-    String value();
+    String shortOpt();
+    String longOpt();
     String description() default "";
     boolean required() default false;
 }

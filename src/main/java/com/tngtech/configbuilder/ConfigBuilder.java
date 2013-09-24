@@ -88,7 +88,7 @@ public class ConfigBuilder<T> {
         Options options = miscFactory.createOptions();
         for (Field field : getAllFields(configClass, withAnnotation(CommandLineValue.class))) {
                 CommandLineValue commandLineValue = field.getAnnotation(CommandLineValue.class);
-                options.addOption(commandLineValue.value(), true, commandLineValue.description());
+                options.addOption(commandLineValue.shortOpt(), commandLineValue.longOpt(), true, commandLineValue.description());
         }
 
         CommandLineParser parser = miscFactory.createCommandLineParser();

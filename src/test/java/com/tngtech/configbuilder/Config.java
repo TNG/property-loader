@@ -29,10 +29,10 @@ public class Config {
     @PropertyValue("a")
     private String helloWorld;
 
-    @CommandLineValue("u")
+    @CommandLineValue(shortOpt = "u", longOpt = "user")
     private String surName;
 
-    @CommandLineValue("p")
+    @CommandLineValue(shortOpt = "p", longOpt = "pidFixFactory")
     @ValueProvider(PidFixFactory.class)
     private Collection<String> pidFixes;
 

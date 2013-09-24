@@ -6,7 +6,7 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class EnvironmentResolvingFilter extends ValueModifyingFilter {
+public class EnvironmentResolvingFilter extends ValueModifyingFilter {
 
     private final static Logger log = Logger.getLogger(WarnOnSurroundingWhitespace.class);
 

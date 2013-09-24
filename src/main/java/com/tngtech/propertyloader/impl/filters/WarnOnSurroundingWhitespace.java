@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 
 import java.util.Properties;
 
-class WarnOnSurroundingWhitespace extends ValueModifyingFilter {
+public class WarnOnSurroundingWhitespace extends ValueModifyingFilter {
 
     private final static Logger log = Logger.getLogger(WarnOnSurroundingWhitespace.class);
 

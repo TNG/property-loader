@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 
 import java.util.Properties;
 
-class ThrowIfPropertyHasToBeDefined extends ValueModifyingFilter {
+public class ThrowIfPropertyHasToBeDefined extends ValueModifyingFilter {
 
     private final static Logger log = Logger.getLogger(WarnOnSurroundingWhitespace.class);
 

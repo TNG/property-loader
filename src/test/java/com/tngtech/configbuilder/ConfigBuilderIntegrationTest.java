@@ -18,7 +18,7 @@ public class ConfigBuilderIntegrationTest {
 
     @org.junit.Test
     public void TestConfigBuilder(){
-        String[] args = new String[]{"-u", "Mueller", "-p", "PIDs fixed with"};
+        String[] args = new String[]{"-u", "Mueller", "--pidFixFactory", "PIDs fixed with"};
         Config c = configBuilder.forClass(Config.class).withCommandLineArgs(args).build();
         System.out.println(c.getValue());
         System.out.println(c.getHelloWorld());

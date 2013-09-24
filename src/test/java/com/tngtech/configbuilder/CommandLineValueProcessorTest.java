@@ -27,7 +27,7 @@ public class CommandLineValueProcessorTest {
         CommandLineValueProcessor commandLineValueProcessor = new CommandLineValueProcessor();
 
         when(context.getCommandLineArgs()).thenReturn(commandLine);
-        when(commandLineValue.value()).thenReturn("value");
+        when(commandLineValue.shortOpt()).thenReturn("value");
         when(commandLine.getOptionValue("value")).thenReturn("passed");
         assertEquals("passed", commandLineValueProcessor.getValue(commandLineValue, context));
     }
