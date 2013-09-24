@@ -30,6 +30,9 @@ public class PropertyLoaderIntegrationTest {
         assertTrue(properties.containsKey("a"));
         assertTrue(properties.containsKey("umlauts"));
         assertTrue(properties.containsKey("abc"));
+        assertTrue(properties.containsKey("variableTest"));
+
+        properties.list(System.out);
     }
 
     @org.junit.Test

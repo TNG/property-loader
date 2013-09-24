@@ -79,6 +79,11 @@ public class PropertyLoader {
         return this;
     }
 
+    public PropertyLoader addBaseNames(List<String> baseNames) {
+        this.baseNames.addAll(baseNames);
+        return this;
+    }
+
     public PropertyLoader withDefaultConfig() {
         this.propertyLocation = Context.getBean(PropertyLocation.class).atDefaultLocations();
         this.propertySuffix = Context.getBean(PropertySuffix.class).addDefaultConfig();
@@ -86,11 +91,13 @@ public class PropertyLoader {
     }
 
     public Properties loadProperties(String baseName) {
+        this.baseNames.clear();
         this.baseNames.add(baseName);
         return loadProperties();
     }
 
     public Properties loadProperties(String[] baseNames) {
+        this.baseNames.clear();
         for(String baseName : baseNames)
         {
             this.baseNames.add(baseName);
@@ -99,12 +106,14 @@ public class PropertyLoader {
     }
 
     public Properties loadProperties(String baseName, String extension) {
+        this.baseNames.clear();
         this.baseNames.add(baseName);
         fileExtension = extension;
         return loadProperties();
     }
 
     public Properties loadProperties(String[] baseNames, String extension) {
+        this.baseNames.clear();
         for(String baseName : baseNames)
         {
             this.baseNames.add(baseName);
@@ -120,20 +129,35 @@ public class PropertyLoader {
         {
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
             {
-                Properties newProperties;
-                if(fileExtension.equalsIgnoreCase("xml")){
-                    log.debug(String.format("attempting to read xml file %s %s", fileName, opener.toString()));
-                    newProperties = propertyFileReader.readFromXML(fileName, opener);
-                }
-                else {
-                    log.debug(String.format("attempting to read properties file %s with encoding %s %s", fileName, propertyFileEncoding, opener.toString()));
-                    newProperties = propertyFileReader.read(fileName, propertyFileEncoding, opener);
-                }
-
+                Properties newProperties = tryToReadPropertiesFromFile(fileName, opener);
+                Properties includedProperties = loadProperties(collectIncludesAndRemoveKey(newProperties));
                 loadedProperties.putAll(newProperties);
+                loadedProperties.putAll(includedProperties);
             }
         }
         return loadedProperties;
+    }
+
+    private Properties tryToReadPropertiesFromFile(String fileName, PropertyLoaderOpener opener) {
+        Properties newProperties;
+        if(fileExtension.equalsIgnoreCase("xml")){
+            log.debug(String.format("attempting to read xml file %s %s", fileName, opener.toString()));
+            newProperties = propertyFileReader.readFromXML(fileName, opener);
+        }
+        else {
+            log.debug(String.format("attempting to read properties file %s with encoding %s %s", fileName, propertyFileEncoding, opener.toString()));
+            newProperties = propertyFileReader.read(fileName, propertyFileEncoding, opener);
+        }
+        return newProperties;
+    }
+
+    private String[] collectIncludesAndRemoveKey(Properties properties) {
+        String[] includes = new String[]{};
+        if(properties.containsKey("$include")) {
+            includes = properties.getProperty("$include").split(",");
+            properties.remove("$include");
+        }
+        return includes;
     }
 }
 
