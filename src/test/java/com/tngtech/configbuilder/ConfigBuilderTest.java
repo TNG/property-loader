@@ -4,13 +4,11 @@ import com.tngtech.configbuilder.annotationprocessors.AnnotationProcessor;
 import com.tngtech.propertyloader.PropertyLoader;
 import com.tngtech.propertyloader.impl.PropertyLocation;
 import com.tngtech.propertyloader.impl.PropertySuffix;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -60,6 +58,7 @@ public class ConfigBuilderTest {
         when(propertySuffix.addDefaultConfig()).thenReturn(propertySuffix);
     }
 
+    //calls to static methods on OptionBuilder
     @Test
     public void testWithCommandLineArguments() throws ParseException {
         String[] args = new String[]{"-u", "Mueller"};
@@ -75,8 +74,7 @@ public class ConfigBuilderTest {
 
         configBuilder.forClass(Config.class).withCommandLineArgs(args);
 
-        verify(options).addOption("u", "user", true, "");
-        verify(options).addOption("p", "pidFixFactory", true, "");
+        verify(options,times(2)).addOption(Matchers.any(Option.class));
         verify(builderContext).setCommandLineArgs(commandLine);
     }
 

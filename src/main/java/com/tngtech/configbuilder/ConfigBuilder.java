@@ -88,7 +88,12 @@ public class ConfigBuilder<T> {
         Options options = miscFactory.createOptions();
         for (Field field : getAllFields(configClass, withAnnotation(CommandLineValue.class))) {
                 CommandLineValue commandLineValue = field.getAnnotation(CommandLineValue.class);
-                options.addOption(commandLineValue.shortOpt(), commandLineValue.longOpt(), true, commandLineValue.description());
+                Option option = OptionBuilder.withLongOpt(commandLineValue.longOpt())
+                                            .hasArg()
+                                            .isRequired(commandLineValue.required())
+                                            .withDescription(commandLineValue.description())
+                                            .create(commandLineValue.shortOpt());
+                options.addOption(option);
         }
 
         CommandLineParser parser = miscFactory.createCommandLineParser();
@@ -147,11 +152,10 @@ public class ConfigBuilder<T> {
     }
 
     private List<Class> getOrderedValueAnnotations(Field field) {
-        List<Class> fieldAnnotationOrder = Lists.newArrayList(annotationOrder);
         if (field.isAnnotationPresent(LoadingOrder.class)) {
-            fieldAnnotationOrder = Lists.newArrayList(field.getAnnotation(LoadingOrder.class).value());
+            return Lists.newArrayList(field.getAnnotation(LoadingOrder.class).value());
         }
-        return fieldAnnotationOrder;
+        else return Lists.newArrayList(annotationOrder);
     }
 
     private String extractValue(Field field) {
