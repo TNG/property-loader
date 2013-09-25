@@ -138,7 +138,7 @@ public class PropertyLoader {
         {
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
             {
-                Properties newProperties = propertyFileReader.tryToReadPropertiesFromFile(fileName, fileExtension, propertyFileEncoding, opener);
+                Properties newProperties = propertyFileReader.tryToReadPropertiesFromFile(fileName, propertyFileEncoding, opener);
                 Properties includedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(collectIncludesAndRemoveKey(newProperties)));
                 newProperties.putAll(includedProperties);
                 loadedProperties.putAll(newProperties);

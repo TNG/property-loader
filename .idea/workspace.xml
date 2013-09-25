@@ -10,12 +10,12 @@
     </list>
     <ignored path="property-loader-rewrite.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380099197960" ignored="false" />
+    <file path="/Dummy.txt" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380104075976" ignored="false" />
     <file path="/PropertyLoader.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380099951294" ignored="false" />
     <file path="/PropertyLoaderFactory.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380016047461" ignored="false" />
     <file path="/PropertyLoaderIntegrationTest.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380016568010" ignored="false" />
     <file path="/demoapp-configuration.properties" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380016406807" ignored="false" />
-    <file path="/PropertyFileReader.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380103798219" ignored="false" />
+    <file path="/PropertyFileReader.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380104400648" ignored="false" />
     <file path="/VariableResolvingFilter.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380022530458" ignored="false" />
     <file path="/toBeIncluded.properties" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380018157493" ignored="false" />
     <file path="/PropertyLoaderTest.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380103610491" ignored="false" />
@@ -112,25 +112,25 @@
       <file leaf-file-name="PropertyLoader.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="29" selection-start="623" selection-end="623" vertical-scroll-proportion="0.0">
+            <state line="140" column="72" selection-start="5286" selection-end="5286" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PropertyFileReaderTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PropertyFileReaderTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyFileReaderTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="46" selection-start="1602" selection-end="1602" vertical-scroll-proportion="0.68325794">
+            <state line="49" column="102" selection-start="1658" selection-end="1658" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PropertyLoaderTest.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="PropertyLoaderTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="31" selection-start="2056" selection-end="2056" vertical-scroll-proportion="0.0">
+            <state line="52" column="19" selection-start="1626" selection-end="1626" vertical-scroll-proportion="0.3846154">
               <folding />
             </state>
           </provider>
@@ -148,7 +148,16 @@
       <file leaf-file-name="PropertyFileReader.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyFileReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="32" selection-start="1026" selection-end="1026" vertical-scroll-proportion="0.0">
+            <state line="28" column="22" selection-start="867" selection-end="867" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="String.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar:///opt/jdk1.7.0_25/src.zip!/java/lang/String.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2522" column="18" selection-start="100498" selection-end="100498" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -192,17 +201,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PropertyFilter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyFilter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="20" selection-start="987" selection-end="987" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindManager">
@@ -233,10 +231,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertySuffix.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyFilter.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderIntegrationTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyFileReaderTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyFileReader.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyFileReaderTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" />
       </list>
     </option>
   </component>
@@ -380,40 +378,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="propertyloader" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="property-loader-rewrite" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="property-loader-rewrite" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tngtech" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="propertyloader" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="impl" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -752,7 +716,11 @@
       <created>1380099200223</created>
       <updated>1380099200223</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="propertyfilereader refactoring">
+      <created>1380104079348</created>
+      <updated>1380104079348</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -823,7 +791,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="propertyloader refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="propertyfilereader refactoring" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -842,6 +810,7 @@
     <MESSAGE value="apache cli changes" />
     <MESSAGE value="tests fixed" />
     <MESSAGE value="propertyloader refactoring" />
+    <MESSAGE value="propertyfilereader refactoring" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -851,13 +820,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/RelativeToClassOpener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="34" selection-start="186" selection-end="207" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/openers/ClassLoaderOpener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="30" selection-start="166" selection-end="183" vertical-scroll-proportion="0.0">
@@ -939,30 +901,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java">
+    <entry file="jar:///opt/jdk1.7.0_25/src.zip!/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="31" selection-start="2056" selection-end="2056" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="29" selection-start="623" selection-end="623" vertical-scroll-proportion="0.0">
+        <state line="2522" column="18" selection-start="100498" selection-end="100498" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyFileReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="32" selection-start="1026" selection-end="1026" vertical-scroll-proportion="0.0">
+        <state line="28" column="22" selection-start="867" selection-end="867" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="140" column="72" selection-start="5286" selection-end="5286" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyFileReaderTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="46" selection-start="1602" selection-end="1602" vertical-scroll-proportion="0.68325794">
+        <state line="49" column="102" selection-start="1658" selection-end="1658" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="19" selection-start="1626" selection-end="1626" vertical-scroll-proportion="0.3846154">
           <folding />
         </state>
       </provider>

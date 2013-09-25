@@ -26,7 +26,7 @@ public class PropertyFileReader {
         this.propertyLoaderFactory = propertyLoaderFactory;
     }
 
-    public Properties tryToReadPropertiesFromFile(String fileName, String fileExtension, String propertyFileEncoding, PropertyLoaderOpener opener) {
+    public Properties tryToReadPropertiesFromFile(String fileName, String propertyFileEncoding, PropertyLoaderOpener opener) {
         Properties newProperties;
 
         InputStream stream = opener.open(fileName);
@@ -37,7 +37,7 @@ public class PropertyFileReader {
         }
         else{
             log.info(String.format("file %s found for reading %s with encoding %s", fileName, opener.toString(), propertyFileEncoding));
-            if(fileExtension.equalsIgnoreCase("xml")){
+            if(fileName.toLowerCase().endsWith("xml")){
                 log.debug(String.format("attempting to find and read xml file %s %s", fileName, opener.toString()));
                 try{
                     newProperties = readFromXML(stream);
