@@ -27,7 +27,29 @@ public class PropertyFilter {
     }
 
     public PropertyFilter withDefaultFilters() {
+        return this.withVariableResolvingFilter()
+                .withEnvironmentResolvingFilter()
+                .withWarnIfPropertyHasToBeDefined()
+                .withWarnOnSurroundingWhitespace();
+    }
+
+    public PropertyFilter withVariableResolvingFilter() {
         filters.add(propertyLoaderFactory.getVariableResolvingFilter());
+        return this;
+    }
+
+    public PropertyFilter withEnvironmentResolvingFilter() {
+        filters.add(propertyLoaderFactory.getEnvironmentResolvingFilter());
+        return this;
+    }
+
+    public PropertyFilter withWarnIfPropertyHasToBeDefined() {
+        filters.add(propertyLoaderFactory.getWarnIfPropertyHasToBeDefined());
+        return this;
+    }
+
+    public PropertyFilter withWarnOnSurroundingWhitespace() {
+        filters.add(propertyLoaderFactory.getWarnOnSurroundingWhitespace());
         return this;
     }
 
