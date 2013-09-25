@@ -85,4 +85,15 @@ public class PropertyLoaderIntegrationTest {
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
         propertyLoader.load(args);
     }
+
+    @org.junit.Test
+    public void testLoadingWithDefaultConfig_Does_Pop_FileNameStack()
+    {
+        String[] args = {"testForDoubleIncludes1"};
+
+        PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
+        Properties properties = propertyLoader.load(args);
+
+        assertTrue(properties.containsKey("definedInIncluded"));
+    }
 }
