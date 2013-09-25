@@ -2,8 +2,8 @@ package com.tngtech.configbuilder;
 
 import com.tngtech.configbuilder.annotationprocessors.AnnotationProcessor;
 import com.tngtech.propertyloader.PropertyLoader;
-import com.tngtech.propertyloader.impl.PropertyLocation;
-import com.tngtech.propertyloader.impl.PropertySuffix;
+import com.tngtech.propertyloader.impl.DefaultPropertyLocation;
+import com.tngtech.propertyloader.impl.DefaultPropertySuffix;
 import org.apache.commons.cli.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,10 +38,10 @@ public class ConfigBuilderTest {
     private PropertyLoader propertyLoader;
 
     @Mock
-    private PropertySuffix propertySuffix;
+    private DefaultPropertySuffix propertySuffix;
 
     @Mock
-    private PropertyLocation propertyLocation;
+    private DefaultPropertyLocation propertyLocation;
 
 
 
@@ -55,7 +55,7 @@ public class ConfigBuilderTest {
         when(propertyLoader.getSuffixes()).thenReturn(propertySuffix);
         when(propertyLoader.getLocations()).thenReturn(propertyLocation);
         when(propertyLocation.atDefaultLocations()).thenReturn(propertyLocation);
-        when(propertySuffix.addDefaultConfig()).thenReturn(propertySuffix);
+        when(propertySuffix.addDefaultSuffixes()).thenReturn(propertySuffix);
     }
 
     //calls to static methods on OptionBuilder

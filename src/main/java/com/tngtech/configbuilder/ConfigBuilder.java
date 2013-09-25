@@ -68,8 +68,7 @@ public class ConfigBuilder<T> {
 
         Annotation[] annotations = configClass.getAnnotations();
         for (Annotation annotation : annotations) {
-            Annotation propertyLoaderConfigAnnotation = annotation.annotationType().getAnnotation(PropertyLoaderConfigurator.class);
-            if (propertyLoaderConfigAnnotation != null) {
+            if (annotation.annotationType().getAnnotation(PropertyLoaderConfigurator.class) != null) {
                 annotationProcessor.configurePropertyLoader(annotation, builderContext);
             }
         }
@@ -88,6 +87,7 @@ public class ConfigBuilder<T> {
         Options options = miscFactory.createOptions();
         for (Field field : getAllFields(configClass, withAnnotation(CommandLineValue.class))) {
                 CommandLineValue commandLineValue = field.getAnnotation(CommandLineValue.class);
+                @SuppressWarnings("AccessStaticViaInstance")
                 Option option = OptionBuilder.withLongOpt(commandLineValue.longOpt())
                                             .hasArg()
                                             .isRequired(commandLineValue.required())

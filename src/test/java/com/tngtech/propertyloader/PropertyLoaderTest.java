@@ -1,6 +1,7 @@
 package com.tngtech.propertyloader;
 
 import com.google.common.collect.Lists;
+import com.tngtech.propertyloader.exception.PropertyLoaderException;
 import com.tngtech.propertyloader.impl.*;
 import com.tngtech.propertyloader.impl.helpers.HostsHelper;
 import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
@@ -35,15 +36,15 @@ public class PropertyLoaderTest{
     @Mock
     private Properties properties;
     @Mock
-    private PropertySuffix propertySuffix;
+    private DefaultPropertySuffix propertySuffix;
     @Mock
-    private PropertyLocation propertyLocation;
+    private DefaultPropertyLocation propertyLocation;
     @Mock
     private PropertyLoaderOpener propertyLoaderOpener1;
     @Mock
     private PropertyLoaderOpener propertyLoaderOpener2;
     @Mock
-    private PropertyFilter propertyLoaderFilters;
+    private DefaultPropertyFilter propertyLoaderFilters;
 
     @Before
     public void setUp(){
@@ -51,7 +52,7 @@ public class PropertyLoaderTest{
     }
 
     //stackoverflow
-    @org.junit.Test(expected=StackOverflowError.class)
+    @org.junit.Test(expected=PropertyLoaderException.class)
     public void testLoadProperties()
     {
         when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);

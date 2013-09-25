@@ -1,0 +1,12 @@
+package com.tngtech.propertyloader.impl.interfaces;
+
+
+import java.util.List;
+
+public interface PropertySuffix<T> {
+    public T addUserName();
+    public T addLocalHostNames();
+    public T addString(String suffix);
+    public T addSuffixList(List<String> suffixes);
+    public T addDefaultSuffixes();
+}

@@ -3,7 +3,7 @@ package com.tngtech.configbuilder;
 import com.tngtech.configbuilder.annotationprocessors.implementations.PropertyLocationsProcessor;
 import com.tngtech.configbuilder.annotations.PropertyLocations;
 import com.tngtech.propertyloader.PropertyLoader;
-import com.tngtech.propertyloader.impl.PropertyLocation;
+import com.tngtech.propertyloader.impl.DefaultPropertyLocation;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -21,7 +21,7 @@ public class PropertyLocationsProcessorTest {
     @Mock
     private PropertyLocations propertyLocations;
     @Mock
-    PropertyLocation propertyLocation;
+    DefaultPropertyLocation propertyLocation;
     @Mock
     PropertyLoader propertyLoader;
 

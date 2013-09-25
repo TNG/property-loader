@@ -1,6 +1,7 @@
 package com.tngtech.propertyloader.impl;
 
 import com.google.common.collect.Lists;
+import com.tngtech.propertyloader.impl.interfaces.PropertyFilter;
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -10,14 +11,14 @@ import java.util.List;
 
 @Component
 @Scope("prototype")
-public class PropertyFilter {
+public class DefaultPropertyFilter implements PropertyFilter<DefaultPropertyFilter> {
 
     private final PropertyLoaderFactory propertyLoaderFactory;
 
     private List<PropertyLoaderFilter> filters = Lists.newArrayList();
 
     @Autowired
-    public PropertyFilter(PropertyLoaderFactory propertyLoaderFactory){
+    public DefaultPropertyFilter(PropertyLoaderFactory propertyLoaderFactory){
 
         this.propertyLoaderFactory = propertyLoaderFactory;
     }
@@ -26,34 +27,34 @@ public class PropertyFilter {
         return filters;
     }
 
-    public PropertyFilter withDefaultFilters() {
+    public DefaultPropertyFilter withDefaultFilters() {
         return this.withVariableResolvingFilter()
                 .withEnvironmentResolvingFilter()
                 .withWarnIfPropertyHasToBeDefined()
                 .withWarnOnSurroundingWhitespace();
     }
 
-    public PropertyFilter withVariableResolvingFilter() {
+    public DefaultPropertyFilter withVariableResolvingFilter() {
         filters.add(propertyLoaderFactory.getVariableResolvingFilter());
         return this;
     }
 
-    public PropertyFilter withEnvironmentResolvingFilter() {
+    public DefaultPropertyFilter withEnvironmentResolvingFilter() {
         filters.add(propertyLoaderFactory.getEnvironmentResolvingFilter());
         return this;
     }
 
-    public PropertyFilter withWarnIfPropertyHasToBeDefined() {
+    public DefaultPropertyFilter withWarnIfPropertyHasToBeDefined() {
         filters.add(propertyLoaderFactory.getWarnIfPropertyHasToBeDefined());
         return this;
     }
 
-    public PropertyFilter withWarnOnSurroundingWhitespace() {
+    public DefaultPropertyFilter withWarnOnSurroundingWhitespace() {
         filters.add(propertyLoaderFactory.getWarnOnSurroundingWhitespace());
         return this;
     }
 
-    public PropertyFilter clear() {
+    public DefaultPropertyFilter clear() {
         filters.clear();
         return this;
     }

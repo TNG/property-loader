@@ -24,9 +24,9 @@ public class PropertyLoaderIntegrationTest {
 
         PropertyLoader propertyLoader = new PropertyLoader().withExtension("properties").withBaseNames(new ArrayList<String>());
         propertyLoader.getLocations().atDefaultLocations();
-        propertyLoader.getSuffixes().addDefaultConfig();
+        propertyLoader.getSuffixes().addDefaultSuffixes();
         propertyLoader.getFilters().withDefaultFilters();
-        Properties properties = propertyLoader.load(args, "properties");
+        Properties properties = propertyLoader.load(args);
         assertTrue(properties.containsKey("a"));
         assertTrue(properties.containsKey("umlauts"));
         assertTrue(properties.containsKey("abc"));
@@ -42,9 +42,9 @@ public class PropertyLoaderIntegrationTest {
 
         PropertyLoader propertyLoader = new PropertyLoader().withExtension("properties").withBaseNames(new ArrayList<String>());
         propertyLoader.getLocations().atContextClassPath();
-        propertyLoader.getSuffixes().addDefaultConfig();
+        propertyLoader.getSuffixes().addDefaultSuffixes();
         propertyLoader.getFilters().withDefaultFilters();
-        Properties properties = propertyLoader.load(args, "properties");
+        Properties properties = propertyLoader.load(args);
         assertTrue(properties.containsKey("a"));
         assertTrue(properties.containsKey("umlauts"));
         assertFalse(properties.containsKey("abc"));
@@ -60,9 +60,9 @@ public class PropertyLoaderIntegrationTest {
 
         PropertyLoader propertyLoader = new PropertyLoader().withExtension("properties").withBaseNames(new ArrayList<String>());
         propertyLoader.getLocations().atCurrentDirectory();
-        propertyLoader.getSuffixes().addDefaultConfig();
+        propertyLoader.getSuffixes().addDefaultSuffixes();
         propertyLoader.getFilters().withDefaultFilters();
-        Properties properties = propertyLoader.load(args, "properties");
+        Properties properties = propertyLoader.load(args);
         assertFalse(properties.containsKey("a"));
         assertTrue(properties.containsKey("umlauts"));
         assertFalse(properties.containsKey("abc"));
@@ -74,7 +74,7 @@ public class PropertyLoaderIntegrationTest {
         String[] args = {"demoapp-configuration"};
 
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
-        Properties properties = propertyLoader.load(args, "properties");
+        Properties properties = propertyLoader.load(args);
 
         assertEquals("Hello, World!", properties.getProperty("b"));
         assertEquals("yes", properties.getProperty("xxx"));
