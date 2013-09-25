@@ -92,7 +92,7 @@ public class DefaultPropertyLocationContainerTest {
 
     @Test
     public void testFromClassLoader(){
-        assertEquals(propertyLocation, propertyLocation.fromClassLoader(this.getClass().getClassLoader()));
+        assertEquals(propertyLocation, propertyLocation.atClassLoader(this.getClass().getClassLoader()));
         assertTrue(propertyLocation.getOpeners().contains(classLoaderOpener));
     }
 

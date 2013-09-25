@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Matchers;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.File;
@@ -162,8 +161,8 @@ public class PropertyLoaderTest {
 
     @Test
     public void testFromClassLoader() throws Exception {
-        assertEquals(propertyLoader, propertyLoader.fromClassLoader(this.getClass().getClassLoader()));
-        verify(propertyLocation).fromClassLoader(this.getClass().getClassLoader());
+        assertEquals(propertyLoader, propertyLoader.atClassLoader(this.getClass().getClassLoader()));
+        verify(propertyLocation).atClassLoader(this.getClass().getClassLoader());
     }
 
     @Test

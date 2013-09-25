@@ -132,8 +132,8 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
         return this;
     }
 
-    public PropertyLoader fromClassLoader(ClassLoader classLoader){
-        propertyLocation.fromClassLoader(classLoader);
+    public PropertyLoader atClassLoader(ClassLoader classLoader){
+        propertyLocation.atClassLoader(classLoader);
         return this;
     }
 

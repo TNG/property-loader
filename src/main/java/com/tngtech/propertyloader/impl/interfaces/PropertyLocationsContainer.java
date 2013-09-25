@@ -10,6 +10,6 @@ public interface PropertyLocationsContainer<T> {
     public T atDirectory(String directory);
     public T atContextClassPath();
     public T atRelativeToClass(Class<?> reference);
-    public T fromClassLoader(ClassLoader classLoader);
+    public T atClassLoader(ClassLoader classLoader);
     public T atBaseURL(URL url);
 }

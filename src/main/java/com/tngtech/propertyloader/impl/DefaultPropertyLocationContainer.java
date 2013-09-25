@@ -63,7 +63,7 @@ public class DefaultPropertyLocationContainer implements PropertyLocationsContai
         return this;
     }
 
-    public DefaultPropertyLocationContainer fromClassLoader(ClassLoader classLoader){
+    public DefaultPropertyLocationContainer atClassLoader(ClassLoader classLoader){
         openers.add(propertyLoaderFactory.getClassLoaderOpener(classLoader));
         return this;
     }
