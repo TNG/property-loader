@@ -3,13 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="7c537d49-3233-4681-ae62-769821164f78" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/configbuilder/ConfigBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/configbuilder/ConfigBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/ConfigBuilderTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/ConfigBuilderTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderIntegrationTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderIntegrationTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="property-loader-rewrite.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380023983306" ignored="false" />
-    <file path="/PropertyLoader.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380019450879" ignored="false" />
+    <file path="/Dummy.txt" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380091311369" ignored="false" />
+    <file path="/PropertyLoader.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380092618741" ignored="false" />
     <file path="/PropertyLoaderFactory.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380016047461" ignored="false" />
     <file path="/PropertyLoaderIntegrationTest.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380016568010" ignored="false" />
     <file path="/demoapp-configuration.properties" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380016406807" ignored="false" />
@@ -103,10 +106,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PropertyLoader.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PropertyLoader.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="134" column="132" selection-start="4803" selection-end="4803" vertical-scroll-proportion="0.2736602">
+            <state line="139" column="5" selection-start="5309" selection-end="5309" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PropertyLoaderIntegrationTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderIntegrationTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="13" selection-start="263" selection-end="263" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PropertyLoaderTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="21" column="13" selection-start="665" selection-end="665" vertical-scroll-proportion="0.074257426">
               <folding />
             </state>
           </provider>
@@ -116,9 +137,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/configbuilder/ConfigBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="2" column="7" selection-start="43" selection-end="43" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -144,7 +163,7 @@
       <file leaf-file-name="AnnotationProcessorSetup.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/configbuilder/context/AnnotationProcessorSetup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="37" selection-start="2960" selection-end="2984" vertical-scroll-proportion="0.0">
+            <state line="63" column="36" selection-start="2960" selection-end="2984" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -162,16 +181,7 @@
       <file leaf-file-name="ConfigBuilderTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/ConfigBuilderTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="45" selection-start="2101" selection-end="2101" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MiscFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/configbuilder/MiscFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="19" selection-start="471" selection-end="471" vertical-scroll-proportion="0.0">
+            <state line="67" column="0" selection-start="2101" selection-end="2101" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -181,15 +191,6 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/configbuilder/annotations/CommandLineValue.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="14" column="12" selection-start="515" selection-end="515" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Config.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/Config.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="42" selection-start="1212" selection-end="1212" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -213,7 +214,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyLoaderFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/filters/ValueModifyingFilter.java" />
@@ -229,14 +229,15 @@
         <option value="$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/ConfigBuilderIntegrationTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tngtech/configbuilder/ConfigBuilder.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/ConfigBuilderTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="64" />
+    <option name="x" value="1984" />
     <option name="y" value="-4" />
     <option name="width" value="1857" />
-    <option name="height" value="1085" />
+    <option name="height" value="1205" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -264,7 +265,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -299,6 +299,62 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="property-loader-rewrite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="new-property-loader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tngtech" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="propertyloader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="property-loader-rewrite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="new-property-loader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tngtech" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -378,20 +434,24 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Project" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="project.structure.proportion" value="0.0" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.lastSelected" value="appearance" />
+    <property name="options.lastSelected" value="editor" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
@@ -401,57 +461,7 @@
       <recent name="$PROJECT_DIR$/src/main/resources/com/tngtech/propertyloader" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in property-loader-rewrite">
-    <configuration default="false" name="ConfigBuilderIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <module name="property-loader-rewrite" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.tngtech.configbuilder" />
-      <option name="MAIN_CLASS_NAME" value="com.tngtech.configbuilder.ConfigBuilderIntegrationTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="ConfigBuilderIntegrationTest.TestConfigBuilder" type="JUnit" factoryName="JUnit" temporary="true">
-      <module name="property-loader-rewrite" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.tngtech.configbuilder" />
-      <option name="MAIN_CLASS_NAME" value="com.tngtech.configbuilder.ConfigBuilderIntegrationTest" />
-      <option name="METHOD_NAME" value="TestConfigBuilder" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.com.tngtech.propertyloader in property-loader-rewrite">
     <configuration default="false" name="All in property-loader-rewrite" type="JUnit" factoryName="JUnit" temporary="true">
       <module name="property-loader-rewrite" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -518,6 +528,50 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
+    <configuration default="false" name="PropertyLoaderIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="property-loader-rewrite" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.tngtech.propertyloader" />
+      <option name="MAIN_CLASS_NAME" value="com.tngtech.propertyloader.PropertyLoaderIntegrationTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="com.tngtech.propertyloader in property-loader-rewrite" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="property-loader-rewrite" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.tngtech.propertyloader" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -530,6 +584,19 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -557,19 +624,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -607,19 +661,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.ConfigBuilderIntegrationTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.ConfigBuilderIntegrationTest.TestConfigBuilder" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.All in property-loader-rewrite" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.ConfigBuilderTest.testWithCommandLineArguments" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.ConfigBuilderTest" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.All in property-loader-rewrite" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.ConfigBuilderTest.testWithCommandLineArguments" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.ConfigBuilderTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.com.tngtech.propertyloader in property-loader-rewrite" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.All in property-loader-rewrite" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ConfigBuilderTest.testWithCommandLineArguments" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.ConfigBuilderTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.ConfigBuilderIntegrationTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.ConfigBuilderIntegrationTest.TestConfigBuilder" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.com.tngtech.propertyloader in property-loader-rewrite" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.All in property-loader-rewrite" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ConfigBuilderTest.testWithCommandLineArguments" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.ConfigBuilderTest" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -671,31 +725,35 @@
       <created>1380023984227</created>
       <updated>1380023984227</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="tests fixed">
+      <created>1380027206104</created>
+      <updated>1380027206104</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-4" width="1857" height="1085" extended-state="6" />
+    <frame x="1984" y="-4" width="1857" height="1205" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3991462" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32923368" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.249309" sideWeight="0.67129135" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32870865" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.249309" sideWeight="0.6717124" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3282876" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -769,41 +827,19 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/filters/ThrowIfPropertyHasToBeDefined.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="7" selection-start="120" selection-end="120" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/filters/VariableResolvingFilter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="7" selection-start="80" selection-end="87" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/filters/VariableResolvingFilterException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="134" selection-end="134" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="5" column="13" selection-start="134" selection-end="134" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/filters/WarnOnSurroundingWhitespace.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="7" selection-start="120" selection-end="120" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="6" column="7" selection-start="120" selection-end="120" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/filters/ValueModifyingFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="67" selection-start="232" selection-end="232" vertical-scroll-proportion="0.20618556">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="8" column="67" selection-start="232" selection-end="232" vertical-scroll-proportion="0.20618556" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/configbuilder/MiscFactory.java">
@@ -815,7 +851,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/Config.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="42" selection-start="1212" selection-end="1212" vertical-scroll-proportion="0.0">
+        <state line="39" column="24" selection-start="1212" selection-end="1212" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -850,21 +886,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/configbuilder/context/AnnotationProcessorSetup.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="37" selection-start="2960" selection-end="2984" vertical-scroll-proportion="0.0">
+        <state line="63" column="36" selection-start="2960" selection-end="2984" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/org/junit/internal/requests/FilterRequest.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="548" selection-end="548" vertical-scroll-proportion="0.32315978">
-          <folding />
-        </state>
+        <state line="13" column="0" selection-start="548" selection-end="548" vertical-scroll-proportion="0.32315978" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/ConfigBuilderTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="45" selection-start="2101" selection-end="2101" vertical-scroll-proportion="0.0">
+        <state line="67" column="0" selection-start="2101" selection-end="2101" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -872,19 +906,119 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/configbuilder/ConfigBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="7" selection-start="43" selection-end="43" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="132" selection-start="4803" selection-end="4803" vertical-scroll-proportion="0.2736602">
+        <state line="139" column="5" selection-start="5309" selection-end="5309" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderIntegrationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="13" selection-start="263" selection-end="263" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="13" selection-start="665" selection-end="665" vertical-scroll-proportion="0.074257426">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>property-loader-rewrite</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: aopalliance:aopalliance:1.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 

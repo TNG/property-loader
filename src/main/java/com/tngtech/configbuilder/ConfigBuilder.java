@@ -74,7 +74,7 @@ public class ConfigBuilder<T> {
             }
         }
 
-        builderContext.setProperties(builderContext.getPropertyLoader().loadProperties());
+        builderContext.setProperties(builderContext.getPropertyLoader().load());
 
         if (configClass.isAnnotationPresent(LoadingOrder.class)) {
             this.annotationOrder = configClass.getAnnotation(LoadingOrder.class).value();

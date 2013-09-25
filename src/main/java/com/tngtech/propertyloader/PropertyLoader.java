@@ -5,7 +5,6 @@ import com.tngtech.propertyloader.context.Context;
 import com.tngtech.propertyloader.impl.*;
 import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -92,58 +91,52 @@ public class PropertyLoader {
         return this;
     }
 
-    public Properties loadProperties(String baseName) {
-        this.baseNames.clear();
-        this.baseNames.add(baseName);
-        return loadProperties();
+    public Properties load(String baseName) {
+        Properties loadedProperties = loadPropertiesFromFiles(Lists.newArrayList(baseName));
+        filterProperties(loadedProperties);
+        return loadedProperties;
     }
 
-    public Properties loadProperties(String[] baseNames) {
-        this.baseNames.clear();
-        for(String baseName : baseNames)
-        {
-            this.baseNames.add(baseName);
-        }
-        return loadProperties();
+    public Properties load(String[] baseNames) {
+        Properties loadedProperties = loadPropertiesFromFiles(Lists.newArrayList(baseNames));
+        filterProperties(loadedProperties);
+        return loadedProperties;
     }
 
-    public Properties loadProperties(String baseName, String extension) {
-        this.baseNames.clear();
-        this.baseNames.add(baseName);
-        fileExtension = extension;
-        return loadProperties();
+    public Properties load(String baseName, String extension) {
+        this.fileExtension = extension;
+        Properties loadedProperties = loadPropertiesFromFiles(Lists.newArrayList(baseName));
+        filterProperties(loadedProperties);
+        return loadedProperties;
     }
 
-    public Properties loadProperties(String[] baseNames, String extension) {
-        this.baseNames.clear();
-        for(String baseName : baseNames)
-        {
-            this.baseNames.add(baseName);
-        }
-        fileExtension = extension;
-        return loadProperties();
+    public Properties load(String[] baseNames, String extension) {
+        this.fileExtension = extension;
+        Properties loadedProperties = loadPropertiesFromFiles(Lists.newArrayList(baseNames));
+        filterProperties(loadedProperties);
+        return loadedProperties;
     }
 
-    public Properties loadProperties(){
+    public Properties load(){
 
+        Properties loadedProperties = loadPropertiesFromFiles(this.baseNames);
+        filterProperties(loadedProperties);
+        return loadedProperties;
+    }
+
+    private Properties loadPropertiesFromFiles(List<String> baseNames) {
         Properties loadedProperties = propertyLoaderFactory.getEmptyProperties();
         for (String fileName : propertyFileNameHelper.getFileNames(baseNames, propertySuffix.getSuffixes(), fileExtension))
         {
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
             {
                 Properties newProperties = tryToReadPropertiesFromFile(fileName, opener);
-                newProperties.putAll(loadProperties(collectIncludesAndRemoveKey(newProperties)));
+                Properties includedProperties = loadPropertiesFromFiles(Lists.newArrayList(collectIncludesAndRemoveKey(newProperties)));
+                newProperties.putAll(includedProperties);
                 loadedProperties.putAll(newProperties);
             }
         }
-        filterProperties(loadedProperties);
         return loadedProperties;
-    }
-
-    private void filterProperties(Properties loadedProperties) {
-        for(PropertyLoaderFilter filter : propertyLoaderFilters) {
-            filter.filter(loadedProperties);
-        }
     }
 
     private Properties tryToReadPropertiesFromFile(String fileName, PropertyLoaderOpener opener) {
@@ -166,6 +159,12 @@ public class PropertyLoader {
             properties.remove("$include");
         }
         return includes;
+    }
+
+    private void filterProperties(Properties loadedProperties) {
+        for(PropertyLoaderFilter filter : propertyLoaderFilters) {
+            filter.filter(loadedProperties);
+        }
     }
 }
 

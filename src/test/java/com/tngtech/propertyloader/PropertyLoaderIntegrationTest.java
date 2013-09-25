@@ -27,7 +27,7 @@ public class PropertyLoaderIntegrationTest {
         propertyLoader.withBaseNames(new ArrayList<String>());
         propertyLoader.getLocations().atDefaultLocations();
         propertyLoader.getSuffixes().addDefaultConfig();
-        Properties properties = propertyLoader.loadProperties(args, "properties");
+        Properties properties = propertyLoader.load(args, "properties");
         assertTrue(properties.containsKey("a"));
         assertTrue(properties.containsKey("umlauts"));
         assertTrue(properties.containsKey("abc"));
@@ -48,7 +48,7 @@ public class PropertyLoaderIntegrationTest {
         propertyLoader.withBaseNames(new ArrayList<String>());
         propertyLoader.getLocations().atContextClassPath();
         propertyLoader.getSuffixes().addDefaultConfig();
-        Properties properties = propertyLoader.loadProperties(args, "properties");
+        Properties properties = propertyLoader.load(args, "properties");
         assertTrue(properties.containsKey("a"));
         assertTrue(properties.containsKey("umlauts"));
         assertFalse(properties.containsKey("abc"));
@@ -67,7 +67,7 @@ public class PropertyLoaderIntegrationTest {
         propertyLoader.withBaseNames(new ArrayList<String>());
         propertyLoader.getLocations().atCurrentDirectory();
         propertyLoader.getSuffixes().addDefaultConfig();
-        Properties properties = propertyLoader.loadProperties(args, "properties");
+        Properties properties = propertyLoader.load(args, "properties");
         assertFalse(properties.containsKey("a"));
         assertTrue(properties.containsKey("umlauts"));
         assertFalse(properties.containsKey("abc"));
@@ -80,7 +80,7 @@ public class PropertyLoaderIntegrationTest {
         };
 
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
-        Properties properties = propertyLoader.loadProperties(args, "properties");
+        Properties properties = propertyLoader.load(args, "properties");
 
         assertEquals("Hello, World!", properties.getProperty("b"));
         assertEquals("yes", properties.getProperty("xxx"));

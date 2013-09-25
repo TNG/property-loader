@@ -59,7 +59,7 @@ public class PropertyLoaderTest{
         when(propertyLocation.getOpeners()).thenReturn(Lists.<PropertyLoaderOpener>newArrayList(propertyLoaderOpener1,propertyLoaderOpener2));
         when(propertyFileReader.read(Matchers.anyString(),Matchers.anyString(),Matchers.any(PropertyLoaderOpener.class))).thenReturn(properties);
 
-        propertyLoader.loadProperties();
+        propertyLoader.load();
 
         verify(propertyFileReader).read("file1.properties","ISO-8859-1",propertyLoaderOpener1);
         verify(propertyFileReader).read("file2.properties","ISO-8859-1",propertyLoaderOpener1);
