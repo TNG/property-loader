@@ -16,8 +16,6 @@ import java.util.Properties;
 @Component
 public class PropertyLoader {
 
-    private static final Logger log = Logger.getLogger(PropertyLoader.class);
-
     private static final String INCLUDE_KEY = "$include";
 
     private final PropertyFileNameHelper propertyFileNameHelper;
@@ -55,20 +53,24 @@ public class PropertyLoader {
         return this;
     }
 
-    public PropertySuffix getSuffixes() {
-        return propertySuffix;
-    }
-
-    public void searchSuffixes(PropertySuffix propertySuffix) {
-        this.propertySuffix = propertySuffix;
-    }
-
     public PropertyLocation getLocations() {
         return propertyLocation;
     }
 
-    public void searchLocations(PropertyLocation propertyLocation) {
+    public PropertySuffix getSuffixes() {
+        return propertySuffix;
+    }
+
+    public void withSuffixes(PropertySuffix propertySuffix) {
+        this.propertySuffix = propertySuffix;
+    }
+
+    public void withLocations(PropertyLocation propertyLocation) {
         this.propertyLocation = propertyLocation;
+    }
+
+    public void withFilters(PropertyFilter propertyFilter) {
+        this.propertyLoaderFilters = propertyFilter;
     }
 
     public String getExtension() {
@@ -98,64 +100,51 @@ public class PropertyLoader {
     }
 
     public Properties load(String baseName) {
-        Properties loadedProperties = loadPropertiesFromFiles(Lists.newArrayList(baseName));
+        Properties loadedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(baseName));
         filterProperties(loadedProperties);
         return loadedProperties;
     }
 
     public Properties load(String[] baseNames) {
-        Properties loadedProperties = loadPropertiesFromFiles(Lists.newArrayList(baseNames));
+        Properties loadedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(baseNames));
         filterProperties(loadedProperties);
         return loadedProperties;
     }
 
     public Properties load(String baseName, String extension) {
         this.fileExtension = extension;
-        Properties loadedProperties = loadPropertiesFromFiles(Lists.newArrayList(baseName));
+        Properties loadedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(baseName));
         filterProperties(loadedProperties);
         return loadedProperties;
     }
 
     public Properties load(String[] baseNames, String extension) {
         this.fileExtension = extension;
-        Properties loadedProperties = loadPropertiesFromFiles(Lists.newArrayList(baseNames));
+        Properties loadedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(baseNames));
         filterProperties(loadedProperties);
         return loadedProperties;
     }
 
     public Properties load(){
 
-        Properties loadedProperties = loadPropertiesFromFiles(this.baseNames);
+        Properties loadedProperties = loadPropertiesFromBaseNameList(this.baseNames);
         filterProperties(loadedProperties);
         return loadedProperties;
     }
 
-    private Properties loadPropertiesFromFiles(List<String> baseNames) {
+    private Properties loadPropertiesFromBaseNameList(List<String> baseNames) {
         Properties loadedProperties = propertyLoaderFactory.getEmptyProperties();
         for (String fileName : propertyFileNameHelper.getFileNames(baseNames, propertySuffix.getSuffixes(), fileExtension))
         {
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
             {
-                Properties newProperties = tryToReadPropertiesFromFile(fileName, opener);
-                Properties includedProperties = loadPropertiesFromFiles(Lists.newArrayList(collectIncludesAndRemoveKey(newProperties)));
+                Properties newProperties = propertyFileReader.tryToReadPropertiesFromFile(fileName, fileExtension, propertyFileEncoding, opener);
+                Properties includedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(collectIncludesAndRemoveKey(newProperties)));
                 newProperties.putAll(includedProperties);
                 loadedProperties.putAll(newProperties);
             }
         }
         return loadedProperties;
-    }
-
-    private Properties tryToReadPropertiesFromFile(String fileName, PropertyLoaderOpener opener) {
-        Properties newProperties;
-        if(fileExtension.equalsIgnoreCase("xml")){
-            log.debug(String.format("attempting to find and read xml file %s %s", fileName, opener.toString()));
-            newProperties = propertyFileReader.readFromXML(fileName, opener);
-        }
-        else {
-            log.debug(String.format("attempting to find and read properties file %s with encoding %s %s", fileName, propertyFileEncoding, opener.toString()));
-            newProperties = propertyFileReader.read(fileName, propertyFileEncoding, opener);
-        }
-        return newProperties;
     }
 
     private String[] collectIncludesAndRemoveKey(Properties properties) {

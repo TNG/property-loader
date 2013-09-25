@@ -60,14 +60,14 @@ public class PropertyLoaderTest{
         when(propertySuffix.getSuffixes()).thenReturn(suffixes);
         when(propertyFileNameHelper.getFileNames(Matchers.anyCollection(),Matchers.anyCollection(),Matchers.anyString())).thenReturn(fileNames);
         when(propertyLocation.getOpeners()).thenReturn(Lists.<PropertyLoaderOpener>newArrayList(propertyLoaderOpener1,propertyLoaderOpener2));
-        when(propertyFileReader.read(Matchers.anyString(),Matchers.anyString(),Matchers.any(PropertyLoaderOpener.class))).thenReturn(properties);
+        when(propertyFileReader.tryToReadPropertiesFromFile(Matchers.anyString(),Matchers.anyString(),Matchers.anyString(),Matchers.any(PropertyLoaderOpener.class))).thenReturn(properties);
 
         propertyLoader.load();
 
-        verify(propertyFileReader).read("file1.properties","ISO-8859-1",propertyLoaderOpener1);
-        verify(propertyFileReader).read("file2.properties","ISO-8859-1",propertyLoaderOpener1);
-        verify(propertyFileReader).read("file1.properties","ISO-8859-1",propertyLoaderOpener2);
-        verify(propertyFileReader).read("file2.properties","ISO-8859-1",propertyLoaderOpener2);
+        verify(propertyFileReader).tryToReadPropertiesFromFile("file1.properties","properties","ISO-8859-1",propertyLoaderOpener1);
+        verify(propertyFileReader).tryToReadPropertiesFromFile("file2.properties","properties","ISO-8859-1",propertyLoaderOpener1);
+        verify(propertyFileReader).tryToReadPropertiesFromFile("file1.properties","properties","ISO-8859-1",propertyLoaderOpener2);
+        verify(propertyFileReader).tryToReadPropertiesFromFile("file2.properties","properties","ISO-8859-1",propertyLoaderOpener2);
         verify(properties, times(4)).putAll(properties);
 
     }
