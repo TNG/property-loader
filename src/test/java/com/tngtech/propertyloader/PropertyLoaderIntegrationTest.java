@@ -3,7 +3,6 @@ package com.tngtech.propertyloader;
 import com.tngtech.propertyloader.exception.PropertyLoaderException;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
