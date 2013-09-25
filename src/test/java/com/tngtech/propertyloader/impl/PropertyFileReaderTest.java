@@ -39,14 +39,14 @@ public class PropertyFileReaderTest {
     public void testTryToReadPropertiesFromFile() throws Exception {
         PropertyFileReader reader = new PropertyFileReader(propertyLoaderFactory);
 
-        when(propertyLoaderOpener.open("demoapp-configuration.properties")).thenReturn(stream);
+        when(propertyLoaderOpener.open("testForIncludesAndVariableResolving.properties")).thenReturn(stream);
         when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);
         when(propertyLoaderFactory.getInputStreamReader(stream,"ISO-8859-1")).thenReturn(inputStreamReader);
         doNothing().when(properties).load(inputStreamReader);
 
-        assertEquals(properties, reader.tryToReadPropertiesFromFile("demoapp-configuration.properties", "ISO-8859-1", propertyLoaderOpener));
+        assertEquals(properties, reader.tryToReadPropertiesFromFile("testForIncludesAndVariableResolving.properties", "ISO-8859-1", propertyLoaderOpener));
 
-        verify(propertyLoaderOpener).open("demoapp-configuration.properties");
+        verify(propertyLoaderOpener).open("testForIncludesAndVariableResolving.properties");
         verify(propertyLoaderFactory).getEmptyProperties();
         verify(propertyLoaderFactory).getInputStreamReader(stream, "ISO-8859-1");
         verify(properties).load(inputStreamReader);
