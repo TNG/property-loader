@@ -41,10 +41,12 @@ public class PropertyLoaderTest{
     private PropertyLoaderOpener propertyLoaderOpener1;
     @Mock
     private PropertyLoaderOpener propertyLoaderOpener2;
+    @Mock
+    private PropertyFilter propertyLoaderFilters;
 
     @Before
     public void setUp(){
-        propertyLoader = new PropertyLoader(propertyFileNameHelper, propertyFileReader, propertyLoaderFactory, propertySuffix, propertyLocation);
+        propertyLoader = new PropertyLoader(propertyFileNameHelper, propertyFileReader, propertyLoaderFactory, propertySuffix, propertyLocation, propertyLoaderFilters);
     }
 
     //stackoverflow!!

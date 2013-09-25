@@ -14,7 +14,9 @@ import java.util.Properties;
 @Component
 public class PropertyLoader {
 
-    private final static Logger log = Logger.getLogger(PropertyLoader.class);
+    private static final Logger log = Logger.getLogger(PropertyLoader.class);
+
+    private static final String INCLUDE_KEY = "$include";
 
     private final PropertyFileNameHelper propertyFileNameHelper;
     private final PropertyFileReader propertyFileReader;
@@ -25,15 +27,16 @@ public class PropertyLoader {
     private String fileExtension = "properties";
     private PropertySuffix propertySuffix;
     private PropertyLocation propertyLocation;
-    private List<PropertyLoaderFilter>  propertyLoaderFilters = Lists.newArrayList();
+    private PropertyFilter  propertyLoaderFilters;
 
     @Autowired
-    public PropertyLoader(PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader, PropertyLoaderFactory propertyLoaderFactory, PropertySuffix propertySuffix, PropertyLocation propertyLocation) {
+    public PropertyLoader(PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader, PropertyLoaderFactory propertyLoaderFactory, PropertySuffix propertySuffix, PropertyLocation propertyLocation, PropertyFilter propertyLoaderFilters) {
         this.propertyFileNameHelper = propertyFileNameHelper;
         this.propertyFileReader = propertyFileReader;
         this.propertyLoaderFactory = propertyLoaderFactory;
         this.propertySuffix = propertySuffix;
         this.propertyLocation = propertyLocation;
+        this.propertyLoaderFilters = propertyLoaderFilters;
     }
 
     public PropertyLoader(){
@@ -41,7 +44,8 @@ public class PropertyLoader {
                 Context.getBean(PropertyFileReader.class),
                 Context.getBean(PropertyLoaderFactory.class),
                 Context.getBean(PropertySuffix.class),
-                Context.getBean(PropertyLocation.class));
+                Context.getBean(PropertyLocation.class),
+                Context.getBean(PropertyFilter.class));
     }
 
     public PropertyLoader withEncoding(String propertyFileEncoding) {
@@ -87,7 +91,7 @@ public class PropertyLoader {
     public PropertyLoader withDefaultConfig() {
         this.propertyLocation = Context.getBean(PropertyLocation.class).atDefaultLocations();
         this.propertySuffix = Context.getBean(PropertySuffix.class).addDefaultConfig();
-        this.propertyLoaderFilters.add(propertyLoaderFactory.getVariableResolvingFilter());
+        this.propertyLoaderFilters = Context.getBean(PropertyFilter.class).withDefaultFilters();
         return this;
     }
 
@@ -142,11 +146,11 @@ public class PropertyLoader {
     private Properties tryToReadPropertiesFromFile(String fileName, PropertyLoaderOpener opener) {
         Properties newProperties;
         if(fileExtension.equalsIgnoreCase("xml")){
-            log.debug(String.format("attempting to read xml file %s %s", fileName, opener.toString()));
+            log.debug(String.format("attempting to find and read xml file %s %s", fileName, opener.toString()));
             newProperties = propertyFileReader.readFromXML(fileName, opener);
         }
         else {
-            log.debug(String.format("attempting to read properties file %s with encoding %s %s", fileName, propertyFileEncoding, opener.toString()));
+            log.debug(String.format("attempting to find and read properties file %s with encoding %s %s", fileName, propertyFileEncoding, opener.toString()));
             newProperties = propertyFileReader.read(fileName, propertyFileEncoding, opener);
         }
         return newProperties;
@@ -154,15 +158,15 @@ public class PropertyLoader {
 
     private String[] collectIncludesAndRemoveKey(Properties properties) {
         String[] includes = new String[]{};
-        if(properties.containsKey("$include")) {
-            includes = properties.getProperty("$include").split(",");
-            properties.remove("$include");
+        if(properties.containsKey(INCLUDE_KEY)) {
+            includes = properties.getProperty(INCLUDE_KEY).split(",");
+            properties.remove(INCLUDE_KEY);
         }
         return includes;
     }
 
     private void filterProperties(Properties loadedProperties) {
-        for(PropertyLoaderFilter filter : propertyLoaderFilters) {
+        for(PropertyLoaderFilter filter : propertyLoaderFilters.getFilters()) {
             filter.filter(loadedProperties);
         }
     }
