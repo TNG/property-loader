@@ -1,8 +1,5 @@
-package com.tngtech.propertyloader;
+package com.tngtech.propertyloader.impl;
 
-
-import com.tngtech.propertyloader.impl.PropertyFileReader;
-import com.tngtech.propertyloader.impl.PropertyLoaderFactory;
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +7,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
@@ -35,11 +31,12 @@ public class PropertyFileReaderTest {
     Properties properties;
 
     @Before
-    public void setUp(){
+    public void setUp() throws Exception {
+
     }
 
     @Test
-    public void testPropertyFileReader() throws IOException {
+    public void testTryToReadPropertiesFromFile() throws Exception {
         PropertyFileReader reader = new PropertyFileReader(propertyLoaderFactory);
 
         when(propertyLoaderOpener.open("demoapp-configuration.properties")).thenReturn(stream);

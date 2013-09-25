@@ -1,8 +1,7 @@
-package com.tngtech.propertyloader;
-
+package com.tngtech.propertyloader.impl.helpers;
 
 import com.google.common.collect.Lists;
-import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -16,6 +15,11 @@ public class PropertyFileNameHelperTest {
     private String[] suffixes = {"suffix1", "suffix2"};
     List<String> baseNameList = Lists.newArrayList(baseNames);
     List<String> suffixList = Lists.newArrayList(suffixes);
+
+    @Before
+    public void setUp() throws Exception {
+
+    }
 
     @Test
     public void testGetFileNames() {

@@ -196,7 +196,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
     }
 
     public Properties load(String baseName) {
-        fileNameStack = new Stack<>();
+        fileNameStack = propertyLoaderFactory.getEmptyFileNameStack();
 
         Properties loadedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(baseName));
         filterProperties(loadedProperties);
@@ -204,7 +204,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
     }
 
     public Properties load(String[] baseNames) {
-        fileNameStack = new Stack<>();
+        fileNameStack = propertyLoaderFactory.getEmptyFileNameStack();
 
         Properties loadedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(baseNames));
         filterProperties(loadedProperties);
@@ -212,7 +212,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
     }
 
     public Properties load() {
-        fileNameStack = new Stack<>();
+        fileNameStack = propertyLoaderFactory.getEmptyFileNameStack();
 
         Properties loadedProperties = loadPropertiesFromBaseNameList(this.baseNames);
         filterProperties(loadedProperties);

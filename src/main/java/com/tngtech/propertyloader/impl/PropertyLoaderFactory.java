@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Properties;
+import java.util.Stack;
 
 @Component
 public class PropertyLoaderFactory {
@@ -65,4 +66,7 @@ public class PropertyLoaderFactory {
         return new WarnOnSurroundingWhitespace();
     }
 
+    public Stack<String> getEmptyFileNameStack() {
+        return new Stack<>();
+    }
 }

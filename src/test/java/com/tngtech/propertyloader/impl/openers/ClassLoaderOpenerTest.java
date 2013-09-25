@@ -1,7 +1,6 @@
-package com.tngtech.propertyloader;
+package com.tngtech.propertyloader.impl.openers;
 
-
-import com.tngtech.propertyloader.impl.openers.ClassLoaderOpener;
+import com.tngtech.propertyloader.PropertyLoader;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,14 +12,13 @@ import java.util.Properties;
 import static org.junit.Assert.assertTrue;
 
 public class ClassLoaderOpenerTest {
-
     @Before
-    public void setUp(){
+    public void setUp() throws Exception {
+
     }
 
-
     @Test
-    public void testClassLoaderOpener() throws IOException{
+    public void testClassLoaderOpener() throws IOException {
         ClassLoaderOpener classLoaderOpener = new ClassLoaderOpener(PropertyLoader.class.getClassLoader());
         Properties loadedProperties =  new Properties();
         InputStream stream = classLoaderOpener.open("abc.def.properties");
@@ -47,5 +45,8 @@ public class ClassLoaderOpenerTest {
         assertTrue(loadedProperties.containsKey("abc"));
     }
 
+    @Test
+    public void testToString() throws Exception {
 
+    }
 }

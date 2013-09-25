@@ -1,23 +1,24 @@
-package com.tngtech.propertyloader;
+package com.tngtech.propertyloader.impl.openers;
 
-import com.tngtech.propertyloader.impl.openers.ContextClassLoaderOpener;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Properties;
 
 import static org.junit.Assert.assertTrue;
 
 public class ContextClassLoaderOpenerTest {
-
     @Before
-    public void setUp(){
+    public void setUp() throws Exception {
+
     }
 
-
     @Test
-    public void testContextClassLoaderOpener() throws IOException{
+    public void testContextClassLoaderOpener() throws IOException {
         ContextClassLoaderOpener contextClassLoaderOpener = new ContextClassLoaderOpener();
         Properties loadedProperties =  new Properties();
         InputStream stream = contextClassLoaderOpener.open("abc.def.properties");
@@ -29,4 +30,8 @@ public class ContextClassLoaderOpenerTest {
         assertTrue(loadedProperties.containsKey("abc"));
     }
 
+    @Test
+    public void testToString() throws Exception {
+
+    }
 }

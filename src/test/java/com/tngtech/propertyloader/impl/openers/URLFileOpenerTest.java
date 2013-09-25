@@ -1,7 +1,5 @@
-package com.tngtech.propertyloader;
+package com.tngtech.propertyloader.impl.openers;
 
-import com.tngtech.propertyloader.impl.openers.OpenerException;
-import com.tngtech.propertyloader.impl.openers.URLFileOpener;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,13 +10,13 @@ import java.util.Properties;
 import static org.junit.Assert.assertTrue;
 
 public class URLFileOpenerTest {
-
     @Before
-    public void setUp(){
+    public void setUp() throws Exception {
+
     }
 
     @Test
-    public void testThatURLFileOpenerLoadsFromURl() throws IOException{
+    public void testThatURLFileOpenerLoadsFromURl() throws IOException {
 
         URL urls = this.getClass().getResource("/abc.def.properties");
         URL url = new File(urls.getPath().replace("abc.def.properties", "")).toURI().toURL();
@@ -72,4 +70,8 @@ public class URLFileOpenerTest {
         assertTrue(urlFileOpener.toString().replace("in path ","").equals(path));
     }
 
+    @Test
+    public void testToString() throws Exception {
+
+    }
 }

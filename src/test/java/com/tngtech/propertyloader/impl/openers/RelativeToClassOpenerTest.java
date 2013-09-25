@@ -1,22 +1,25 @@
-package com.tngtech.propertyloader;
+package com.tngtech.propertyloader.impl.openers;
 
-import com.tngtech.propertyloader.impl.openers.RelativeToClassOpener;
+import com.tngtech.propertyloader.PropertyLoader;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Properties;
 
 import static org.junit.Assert.assertTrue;
 
 public class RelativeToClassOpenerTest {
-
     @Before
-    public void setUp(){
+    public void setUp() throws Exception {
+
     }
 
     @Test
-    public void testThatRelativeToClassOpener_Opens_From_Root() throws IOException{
+    public void testThatRelativeToClassOpener_Opens_From_Root() throws IOException {
         RelativeToClassOpener relativeToClassOpener = new RelativeToClassOpener(PropertyLoader.class);
         Properties loadedProperties =  new Properties();
         InputStream stream = relativeToClassOpener.open("/abc.def.properties");
@@ -42,4 +45,8 @@ public class RelativeToClassOpenerTest {
         assertTrue(loadedProperties.containsKey("xyz"));
     }
 
+    @Test
+    public void testToString() throws Exception {
+
+    }
 }

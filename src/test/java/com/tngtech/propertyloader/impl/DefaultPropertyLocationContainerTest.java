@@ -1,8 +1,5 @@
-package com.tngtech.propertyloader;
+package com.tngtech.propertyloader.impl;
 
-
-import com.tngtech.propertyloader.impl.DefaultPropertyLocationContainer;
-import com.tngtech.propertyloader.impl.PropertyLoaderFactory;
 import com.tngtech.propertyloader.impl.openers.ClassLoaderOpener;
 import com.tngtech.propertyloader.impl.openers.ContextClassLoaderOpener;
 import com.tngtech.propertyloader.impl.openers.RelativeToClassOpener;
@@ -22,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PropertyLocationTest {
+public class DefaultPropertyLocationContainerTest {
 
     private DefaultPropertyLocationContainer propertyLocation;
 
@@ -54,15 +51,31 @@ public class PropertyLocationTest {
     }
 
     @Test
+    public void testGetOpeners() throws Exception {
+
+    }
+
+    @Test
+    public void testAtDefaultLocations() throws Exception {
+
+    }
+
+    @Test
     public void testAtCurrentDirectory(){
         assertEquals(propertyLocation, propertyLocation.atDefaultLocations());
         assertTrue(propertyLocation.getOpeners().contains(urlFileOpener));
-     }
+    }
+
 
     @Test
     public void testAtHomeDirectory(){
         assertEquals(propertyLocation, propertyLocation.atHomeDirectory());
         assertTrue(propertyLocation.getOpeners().contains(urlFileOpener));
+    }
+
+    @Test
+    public void testAtDirectory() throws Exception {
+
     }
 
     @Test
@@ -87,5 +100,10 @@ public class PropertyLocationTest {
     public void testAtBaseURL(){
         assertEquals(propertyLocation, propertyLocation.atBaseURL(url));
         assertTrue(propertyLocation.getOpeners().contains(urlFileOpener));
+    }
+
+    @Test
+    public void testClear() throws Exception {
+
     }
 }
