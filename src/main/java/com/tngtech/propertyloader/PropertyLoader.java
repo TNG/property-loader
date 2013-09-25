@@ -60,6 +60,9 @@ public class PropertyLoader {
     public PropertySuffix getSuffixes() {
         return propertySuffix;
     }
+    public PropertyFilter getFilters() {
+        return propertyLoaderFilters;
+    }
 
     public void withSuffixes(PropertySuffix propertySuffix) {
         this.propertySuffix = propertySuffix;

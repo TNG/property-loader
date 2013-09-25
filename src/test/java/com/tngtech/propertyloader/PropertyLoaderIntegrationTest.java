@@ -22,11 +22,10 @@ public class PropertyLoaderIntegrationTest {
                 abcdefWithFullPath
         };
 
-        PropertyLoader propertyLoader = new PropertyLoader();
-        propertyLoader.withExtension("properties");
-        propertyLoader.withBaseNames(new ArrayList<String>());
+        PropertyLoader propertyLoader = new PropertyLoader().withExtension("properties").withBaseNames(new ArrayList<String>());
         propertyLoader.getLocations().atDefaultLocations();
         propertyLoader.getSuffixes().addDefaultConfig();
+        propertyLoader.getFilters().withDefaultFilters();
         Properties properties = propertyLoader.load(args, "properties");
         assertTrue(properties.containsKey("a"));
         assertTrue(properties.containsKey("umlauts"));
@@ -41,11 +40,10 @@ public class PropertyLoaderIntegrationTest {
                 "/abc.def",
         };
 
-        PropertyLoader propertyLoader = new PropertyLoader();
-        propertyLoader.withExtension("properties");
-        propertyLoader.withBaseNames(new ArrayList<String>());
+        PropertyLoader propertyLoader = new PropertyLoader().withExtension("properties").withBaseNames(new ArrayList<String>());
         propertyLoader.getLocations().atContextClassPath();
         propertyLoader.getSuffixes().addDefaultConfig();
+        propertyLoader.getFilters().withDefaultFilters();
         Properties properties = propertyLoader.load(args, "properties");
         assertTrue(properties.containsKey("a"));
         assertTrue(properties.containsKey("umlauts"));
@@ -60,11 +58,10 @@ public class PropertyLoaderIntegrationTest {
                 "/src/test/resources/abc.def",
         };
 
-        PropertyLoader propertyLoader = new PropertyLoader();
-        propertyLoader.withExtension("properties");
-        propertyLoader.withBaseNames(new ArrayList<String>());
+        PropertyLoader propertyLoader = new PropertyLoader().withExtension("properties").withBaseNames(new ArrayList<String>());
         propertyLoader.getLocations().atCurrentDirectory();
         propertyLoader.getSuffixes().addDefaultConfig();
+        propertyLoader.getFilters().withDefaultFilters();
         Properties properties = propertyLoader.load(args, "properties");
         assertFalse(properties.containsKey("a"));
         assertTrue(properties.containsKey("umlauts"));
