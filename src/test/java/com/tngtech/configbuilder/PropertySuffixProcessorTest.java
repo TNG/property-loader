@@ -3,7 +3,7 @@ package com.tngtech.configbuilder;
 import com.tngtech.configbuilder.annotationprocessors.implementations.PropertySuffixProcessor;
 import com.tngtech.configbuilder.annotations.PropertySuffixes;
 import com.tngtech.propertyloader.PropertyLoader;
-import com.tngtech.propertyloader.impl.DefaultPropertySuffix;
+import com.tngtech.propertyloader.impl.DefaultPropertySuffixContainer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -21,7 +21,7 @@ public class PropertySuffixProcessorTest {
     @Mock
     private PropertySuffixes propertySuffixes;
     @Mock
-    DefaultPropertySuffix propertySuffix;
+    DefaultPropertySuffixContainer propertySuffix;
     @Mock
     PropertyLoader propertyLoader;
 

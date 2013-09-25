@@ -16,7 +16,7 @@ import java.util.Properties;
 import java.util.Stack;
 
 @Component
-public class PropertyLoader implements PropertyLocations<PropertyLoader>, PropertySuffix<PropertyLoader>, PropertyFilter<PropertyLoader> {
+public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader>, PropertySuffixContainer<PropertyLoader>, PropertyFilterContainer<PropertyLoader> {
 
     private static final String INCLUDE_KEY = "$include";
 
@@ -27,13 +27,13 @@ public class PropertyLoader implements PropertyLocations<PropertyLoader>, Proper
     private String propertyFileEncoding = "ISO-8859-1";
     private List<String> baseNames = Lists.newArrayList();
     private String fileExtension = "properties";
-    private DefaultPropertySuffix propertySuffix;
-    private DefaultPropertyLocation propertyLocation;
-    private DefaultPropertyFilter propertyLoaderFilters;
+    private DefaultPropertySuffixContainer propertySuffix;
+    private DefaultPropertyLocationContainer propertyLocation;
+    private DefaultPropertyFilterContainer propertyLoaderFilters;
     private Stack<String> fileNameStack;
 
     @Autowired
-    public PropertyLoader(PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader, PropertyLoaderFactory propertyLoaderFactory, DefaultPropertySuffix propertySuffix, DefaultPropertyLocation propertyLocation, DefaultPropertyFilter propertyLoaderFilters) {
+    public PropertyLoader(PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader, PropertyLoaderFactory propertyLoaderFactory, DefaultPropertySuffixContainer propertySuffix, DefaultPropertyLocationContainer propertyLocation, DefaultPropertyFilterContainer propertyLoaderFilters) {
         this.propertyFileNameHelper = propertyFileNameHelper;
         this.propertyFileReader = propertyFileReader;
         this.propertyLoaderFactory = propertyLoaderFactory;
@@ -46,9 +46,9 @@ public class PropertyLoader implements PropertyLocations<PropertyLoader>, Proper
         this(Context.getBean(PropertyFileNameHelper.class),
                 Context.getBean(PropertyFileReader.class),
                 Context.getBean(PropertyLoaderFactory.class),
-                Context.getBean(DefaultPropertySuffix.class),
-                Context.getBean(DefaultPropertyLocation.class),
-                Context.getBean(DefaultPropertyFilter.class));
+                Context.getBean(DefaultPropertySuffixContainer.class),
+                Context.getBean(DefaultPropertyLocationContainer.class),
+                Context.getBean(DefaultPropertyFilterContainer.class));
     }
 
     public PropertyLoader withEncoding(String propertyFileEncoding) {
@@ -56,14 +56,14 @@ public class PropertyLoader implements PropertyLocations<PropertyLoader>, Proper
         return this;
     }
 
-    public DefaultPropertyLocation getLocations() {
+    public DefaultPropertyLocationContainer getLocations() {
         return propertyLocation;
     }
 
-    public DefaultPropertySuffix getSuffixes() {
+    public DefaultPropertySuffixContainer getSuffixes() {
         return propertySuffix;
     }
-    public DefaultPropertyFilter getFilters() {
+    public DefaultPropertyFilterContainer getFilters() {
         return propertyLoaderFilters;
     }
 
@@ -71,15 +71,15 @@ public class PropertyLoader implements PropertyLocations<PropertyLoader>, Proper
         return fileExtension;
     }
 
-    public void withSuffixes(DefaultPropertySuffix propertySuffix) {
+    public void withSuffixes(DefaultPropertySuffixContainer propertySuffix) {
         this.propertySuffix = propertySuffix;
     }
 
-    public void withLocations(DefaultPropertyLocation propertyLocation) {
+    public void withLocations(DefaultPropertyLocationContainer propertyLocation) {
         this.propertyLocation = propertyLocation;
     }
 
-    public void withFilters(DefaultPropertyFilter propertyFilter) {
+    public void withFilters(DefaultPropertyFilterContainer propertyFilter) {
         this.propertyLoaderFilters = propertyFilter;
     }
 

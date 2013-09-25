@@ -3,7 +3,7 @@ package com.tngtech.propertyloader.impl.interfaces;
 
 import java.net.URL;
 
-public interface PropertyLocations<T> {
+public interface PropertyLocationsContainer<T> {
     public T atDefaultLocations();
     public T atCurrentDirectory();
     public T atHomeDirectory();

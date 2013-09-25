@@ -2,27 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c537d49-3233-4681-ae62-769821164f78" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertyFilter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertyLocations.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertySuffix.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyFilter.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertyFilter.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertyLocation.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertyLocation.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/PropertySuffix.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertySuffix.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/configbuilder/ConfigBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/configbuilder/ConfigBuilder.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertySuffixContainer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertyFilterContainer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertyFilter.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertyFilterContainer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertyLocation.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertyLocationContainer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertyLocations.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertyLocationsContainer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertySuffix.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertySuffixContainer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/ConfigBuilderTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/ConfigBuilderTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" afterPath="$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderIntegrationTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderIntegrationTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLocationTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLocationTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/PropertyLocationsProcessorTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/PropertyLocationsProcessorTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/PropertySuffixProcessorTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/PropertySuffixProcessorTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertySuffixTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertySuffixTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/resources/toBeIncluded.properties" afterPath="$PROJECT_DIR$/src/test/resources/toBeIncluded.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="property-loader-rewrite.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380105702810" ignored="false" />
+    <file path="/Dummy.txt" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380110174992" ignored="false" />
     <file path="/PropertyLoader.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380109956257" ignored="false" />
     <file path="/PropertyLoaderFactory.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380016047461" ignored="false" />
     <file path="/PropertyLoaderIntegrationTest.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380109987774" ignored="false" />
@@ -143,7 +140,7 @@
       <file leaf-file-name="PropertyLoader.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="263" column="5" selection-start="9031" selection-end="9031" vertical-scroll-proportion="0.0">
+            <state line="263" column="5" selection-start="9193" selection-end="9193" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -163,7 +160,7 @@
       <file leaf-file-name="PropertyLoaderTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="0" selection-start="3151" selection-end="3151" vertical-scroll-proportion="0.8613861">
+            <state line="76" column="0" selection-start="3178" selection-end="3178" vertical-scroll-proportion="0.8613861">
               <folding />
             </state>
           </provider>
@@ -181,17 +178,19 @@
       <file leaf-file-name="PropertySuffixTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertySuffixTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="70" selection-start="3029" selection-end="3029" vertical-scroll-proportion="0.0">
+            <state line="71" column="70" selection-start="3092" selection-end="3092" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultPropertySuffix.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertySuffix.java">
+      <file leaf-file-name="DefaultPropertySuffixContainer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertySuffixContainer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="0" selection-start="1539" selection-end="1539" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="59" column="0" selection-start="1629" selection-end="1629" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -199,25 +198,25 @@
       <file leaf-file-name="ConfigBuilderTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/ConfigBuilderTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="38" selection-start="1369" selection-end="1369" vertical-scroll-proportion="0.0">
+            <state line="50" column="38" selection-start="1405" selection-end="1405" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PropertyFilter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertyFilter.java">
+      <file leaf-file-name="PropertyFilterContainer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertyFilterContainer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="4" selection-start="270" selection-end="270" vertical-scroll-proportion="0.0">
+            <state line="8" column="4" selection-start="279" selection-end="279" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultPropertyFilter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertyFilter.java">
+      <file leaf-file-name="DefaultPropertyFilterContainer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertyFilterContainer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="0" selection-start="910" selection-end="1959" vertical-scroll-proportion="0.0">
+            <state line="29" column="0" selection-start="955" selection-end="2058" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -449,6 +448,44 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="property-loader-rewrite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="property-loader-rewrite" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tngtech" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="propertyloader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="interfaces" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -822,7 +859,11 @@
       <created>1380105704465</created>
       <updated>1380105704465</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="interfaces">
+      <created>1380110176954</created>
+      <updated>1380110176954</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -894,7 +935,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="propertyloader filter" />
+    <option name="LAST_COMMIT_MESSAGE" value="interfaces" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -914,6 +955,7 @@
     <MESSAGE value="propertyloader refactoring" />
     <MESSAGE value="propertyfilereader refactoring" />
     <MESSAGE value="propertyloader filter" />
+    <MESSAGE value="interfaces" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -944,44 +986,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertyLocation.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertyLocationContainer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="73" column="5" selection-start="951" selection-end="2276" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertyLocations.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertyLocationsContainer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="34" selection-start="150" selection-end="150" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertySuffix.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertySuffixContainer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="0" selection-start="304" selection-end="304" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertySuffix.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="0" selection-start="1539" selection-end="1539" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/configbuilder/ConfigBuilderTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="38" selection-start="1369" selection-end="1369" vertical-scroll-proportion="0.0">
+        <state line="50" column="38" selection-start="1405" selection-end="1405" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertyFilter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/interfaces/PropertyFilterContainer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="4" selection-start="270" selection-end="270" vertical-scroll-proportion="0.0">
+        <state line="8" column="4" selection-start="279" selection-end="279" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -993,9 +1028,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertyFilter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertyFilterContainer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="910" selection-end="1959" vertical-scroll-proportion="0.0">
+        <state line="29" column="0" selection-start="955" selection-end="2058" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1004,7 +1039,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/PropertyLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="263" column="5" selection-start="9031" selection-end="9031" vertical-scroll-proportion="0.0">
+        <state line="263" column="5" selection-start="9193" selection-end="9193" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1013,7 +1048,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertySuffixTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="70" selection-start="3029" selection-end="3029" vertical-scroll-proportion="0.0">
+        <state line="71" column="70" selection-start="3092" selection-end="3092" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1032,9 +1067,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tngtech/propertyloader/impl/DefaultPropertySuffixContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="0" selection-start="1629" selection-end="1629" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="0" selection-start="3151" selection-end="3151" vertical-scroll-proportion="0.8613861">
+        <state line="76" column="0" selection-start="3178" selection-end="3178" vertical-scroll-proportion="0.8613861">
           <folding />
         </state>
       </provider>

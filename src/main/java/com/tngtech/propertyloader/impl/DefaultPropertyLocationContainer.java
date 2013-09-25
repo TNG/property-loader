@@ -2,7 +2,7 @@ package com.tngtech.propertyloader.impl;
 
 import com.google.common.collect.Lists;
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
-import com.tngtech.propertyloader.impl.interfaces.PropertyLocations;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLocationsContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -12,12 +12,12 @@ import java.util.List;
 
 @Component
 @Scope("prototype")
-public class DefaultPropertyLocation implements PropertyLocations<DefaultPropertyLocation> {
+public class DefaultPropertyLocationContainer implements PropertyLocationsContainer<DefaultPropertyLocationContainer> {
 
     private final PropertyLoaderFactory propertyLoaderFactory;
 
     @Autowired
-    public DefaultPropertyLocation(PropertyLoaderFactory propertyLoaderFactory){
+    public DefaultPropertyLocationContainer(PropertyLoaderFactory propertyLoaderFactory){
 
         this.propertyLoaderFactory = propertyLoaderFactory;
     }
@@ -29,7 +29,7 @@ public class DefaultPropertyLocation implements PropertyLocations<DefaultPropert
         return openers;
     }
 
-    public DefaultPropertyLocation atDefaultLocations(){
+    public DefaultPropertyLocationContainer atDefaultLocations(){
 
         atCurrentDirectory();
         atContextClassPath();
@@ -37,43 +37,43 @@ public class DefaultPropertyLocation implements PropertyLocations<DefaultPropert
         return this;
     }
 
-    public DefaultPropertyLocation atCurrentDirectory(){
+    public DefaultPropertyLocationContainer atCurrentDirectory(){
         openers.add(propertyLoaderFactory.getURLFileOpener());
         return this;
     }
 
-    public DefaultPropertyLocation atHomeDirectory(){
+    public DefaultPropertyLocationContainer atHomeDirectory(){
         openers.add(propertyLoaderFactory.getURLFileOpener(System.getProperty("user.home")));
         return this;
     }
 
-    public DefaultPropertyLocation atDirectory(String directory){
+    public DefaultPropertyLocationContainer atDirectory(String directory){
         openers.add(propertyLoaderFactory.getURLFileOpener(directory));
         return this;
     }
 
 
-    public DefaultPropertyLocation atContextClassPath(){
+    public DefaultPropertyLocationContainer atContextClassPath(){
         openers.add(propertyLoaderFactory.getContextClassLoaderOpener());
         return this;
     }
 
-    public DefaultPropertyLocation atRelativeToClass(Class<?> reference){
+    public DefaultPropertyLocationContainer atRelativeToClass(Class<?> reference){
         openers.add(propertyLoaderFactory.getRelativeToClass(reference));
         return this;
     }
 
-    public DefaultPropertyLocation fromClassLoader(ClassLoader classLoader){
+    public DefaultPropertyLocationContainer fromClassLoader(ClassLoader classLoader){
         openers.add(propertyLoaderFactory.getClassLoaderOpener(classLoader));
         return this;
     }
 
-    public DefaultPropertyLocation atBaseURL(URL url){
+    public DefaultPropertyLocationContainer atBaseURL(URL url){
         openers.add(propertyLoaderFactory.getURLFileOpener(url));
         return this;
     }
 
-    public DefaultPropertyLocation clear() {
+    public DefaultPropertyLocationContainer clear() {
         openers.clear();
         return this;
     }

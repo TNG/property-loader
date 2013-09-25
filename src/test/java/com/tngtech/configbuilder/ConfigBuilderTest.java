@@ -2,8 +2,8 @@ package com.tngtech.configbuilder;
 
 import com.tngtech.configbuilder.annotationprocessors.AnnotationProcessor;
 import com.tngtech.propertyloader.PropertyLoader;
-import com.tngtech.propertyloader.impl.DefaultPropertyLocation;
-import com.tngtech.propertyloader.impl.DefaultPropertySuffix;
+import com.tngtech.propertyloader.impl.DefaultPropertyLocationContainer;
+import com.tngtech.propertyloader.impl.DefaultPropertySuffixContainer;
 import org.apache.commons.cli.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,10 +38,10 @@ public class ConfigBuilderTest {
     private PropertyLoader propertyLoader;
 
     @Mock
-    private DefaultPropertySuffix propertySuffix;
+    private DefaultPropertySuffixContainer propertySuffix;
 
     @Mock
-    private DefaultPropertyLocation propertyLocation;
+    private DefaultPropertyLocationContainer propertyLocation;
 
 
 

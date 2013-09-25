@@ -36,15 +36,15 @@ public class PropertyLoaderTest{
     @Mock
     private Properties properties;
     @Mock
-    private DefaultPropertySuffix propertySuffix;
+    private DefaultPropertySuffixContainer propertySuffix;
     @Mock
-    private DefaultPropertyLocation propertyLocation;
+    private DefaultPropertyLocationContainer propertyLocation;
     @Mock
     private PropertyLoaderOpener propertyLoaderOpener1;
     @Mock
     private PropertyLoaderOpener propertyLoaderOpener2;
     @Mock
-    private DefaultPropertyFilter propertyLoaderFilters;
+    private DefaultPropertyFilterContainer propertyLoaderFilters;
 
     @Before
     public void setUp(){
