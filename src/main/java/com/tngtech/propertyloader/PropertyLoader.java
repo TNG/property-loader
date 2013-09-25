@@ -223,7 +223,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
         Properties loadedProperties = propertyLoaderFactory.getEmptyProperties();
         for (String fileName : propertyFileNameHelper.getFileNames(baseNames, propertySuffix.getSuffixes(), fileExtension))
         {
-            checkForRecursionInIncludes(fileName);
+            throwIfRecursionInIncludes(fileName);
 
             fileNameStack.push(fileName);
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
@@ -238,7 +238,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
         return loadedProperties;
     }
 
-    private void checkForRecursionInIncludes(String fileName) {
+    private void throwIfRecursionInIncludes(String fileName) {
         if (fileNameStack.contains(fileName)) {
             StringBuilder sb = new StringBuilder();
             sb.append("property file include recursion: ");
@@ -267,6 +267,5 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
             filter.filter(loadedProperties);
         }
     }
-
 }
 

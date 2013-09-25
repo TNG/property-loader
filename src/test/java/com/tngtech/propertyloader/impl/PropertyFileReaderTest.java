@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
@@ -36,19 +37,35 @@ public class PropertyFileReaderTest {
     }
 
     @Test
-    public void testTryToReadPropertiesFromFile() throws Exception {
+    public void testTryToReadProperties_From_Properties_File() throws Exception {
         PropertyFileReader reader = new PropertyFileReader(propertyLoaderFactory);
 
-        when(propertyLoaderOpener.open("testForIncludesAndVariableResolving.properties")).thenReturn(stream);
+        when(propertyLoaderOpener.open("test.properties")).thenReturn(stream);
         when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);
         when(propertyLoaderFactory.getInputStreamReader(stream,"ISO-8859-1")).thenReturn(inputStreamReader);
         doNothing().when(properties).load(inputStreamReader);
 
-        assertEquals(properties, reader.tryToReadPropertiesFromFile("testForIncludesAndVariableResolving.properties", "ISO-8859-1", propertyLoaderOpener));
+        assertEquals(properties, reader.tryToReadPropertiesFromFile("test.properties", "ISO-8859-1", propertyLoaderOpener));
 
-        verify(propertyLoaderOpener).open("testForIncludesAndVariableResolving.properties");
+        verify(propertyLoaderOpener).open("test.properties");
         verify(propertyLoaderFactory).getEmptyProperties();
         verify(propertyLoaderFactory).getInputStreamReader(stream, "ISO-8859-1");
         verify(properties).load(inputStreamReader);
+    }
+
+    @Test
+    public void testTryToReadProperties_From_XML_File() throws Exception {
+        PropertyFileReader reader = new PropertyFileReader(propertyLoaderFactory);
+
+        when(propertyLoaderOpener.open("test.xMl")).thenReturn(stream);
+        when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);
+
+        doNothing().when(properties).loadFromXML(stream);
+
+        assertEquals(properties, reader.tryToReadPropertiesFromFile("test.xMl", "ISO-8859-1", propertyLoaderOpener));
+
+        verify(propertyLoaderOpener).open("test.xMl");
+        verify(propertyLoaderFactory).getEmptyProperties();
+        verify(properties).loadFromXML(stream);
     }
 }

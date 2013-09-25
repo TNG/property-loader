@@ -3,6 +3,9 @@ package com.tngtech.propertyloader.impl.openers;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,12 +14,21 @@ import java.io.Reader;
 import java.util.Properties;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
 
+@RunWith(MockitoJUnitRunner.class)
 public class RelativeToClassOpenerTest {
+
     @Before
     public void setUp() throws Exception {
 
     }
+
+    @Test
+    public void testOpen() throws IOException {
+
+    }
+
 
     @Test
     public void testThatRelativeToClassOpener_Opens_From_Root() throws IOException {

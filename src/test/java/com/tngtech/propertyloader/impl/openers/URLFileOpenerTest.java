@@ -16,7 +16,7 @@ public class URLFileOpenerTest {
     }
 
     @Test
-    public void testThatURLFileOpenerLoadsFromURl() throws IOException {
+    public void testThatURLFileOpenerLoadsFromURL() throws IOException {
 
         URL urls = this.getClass().getResource("/abc.def.properties");
         URL url = new File(urls.getPath().replace("abc.def.properties", "")).toURI().toURL();
