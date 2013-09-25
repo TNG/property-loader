@@ -75,8 +75,6 @@ public class PropertyLoaderIntegrationTest {
         assertEquals("Hello, World!", properties.getProperty("b")); //b is variable a
         assertEquals("yes", properties.getProperty("xxx")); //xxx is defined in toBeIncluded
         assertEquals("prod-blub", properties.getProperty("testInclude.prod")); //has to be defined, otherwise filter warns
-
-        properties.list(System.out);
     }
 
     @org.junit.Test(expected=PropertyLoaderException.class)
@@ -85,8 +83,6 @@ public class PropertyLoaderIntegrationTest {
         String[] args = {"testForRecursiveIncludes1"};
 
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
-        Properties properties = propertyLoader.load(args);
-
-        properties.list(System.out);
+        propertyLoader.load(args);
     }
 }
