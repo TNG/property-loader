@@ -1,10 +1,9 @@
 package com.tngtech.propertyloader;
 
 
-import com.tngtech.propertyloader.context.Context;
 import com.tngtech.propertyloader.impl.PropertyFileReader;
 import com.tngtech.propertyloader.impl.PropertyLoaderFactory;
-import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

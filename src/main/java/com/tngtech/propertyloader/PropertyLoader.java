@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import com.tngtech.propertyloader.context.Context;
 import com.tngtech.propertyloader.impl.*;
 import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderFilter;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

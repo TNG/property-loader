@@ -1,4 +1,4 @@
-package com.tngtech.propertyloader.impl;
+package com.tngtech.propertyloader.impl.interfaces;
 
 import java.io.IOException;
 import java.io.InputStream;

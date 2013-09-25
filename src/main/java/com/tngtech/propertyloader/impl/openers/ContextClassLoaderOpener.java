@@ -1,6 +1,6 @@
 package com.tngtech.propertyloader.impl.openers;
 
-import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 
 import java.io.InputStream;
 

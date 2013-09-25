@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.tngtech.propertyloader.impl.*;
 import com.tngtech.propertyloader.impl.helpers.HostsHelper;
 import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.Matchers;

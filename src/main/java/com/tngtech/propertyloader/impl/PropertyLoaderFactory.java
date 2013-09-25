@@ -1,15 +1,14 @@
 package com.tngtech.propertyloader.impl;
 
 import com.tngtech.propertyloader.impl.filters.VariableResolvingFilter;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderFilter;
 import com.tngtech.propertyloader.impl.openers.*;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.Properties;
 
 @Component

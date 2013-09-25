@@ -4,8 +4,7 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
-import org.apache.log4j.Logger;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 
 public class URLFileOpener implements PropertyLoaderOpener {
 

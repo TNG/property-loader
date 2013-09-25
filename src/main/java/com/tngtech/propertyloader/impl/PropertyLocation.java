@@ -1,6 +1,7 @@
 package com.tngtech.propertyloader.impl;
 
 import com.google.common.collect.Lists;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

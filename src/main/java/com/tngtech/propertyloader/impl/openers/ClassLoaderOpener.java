@@ -1,12 +1,9 @@
 package com.tngtech.propertyloader.impl.openers;
 
 
-import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 
-import java.io.File;
 import java.io.InputStream;
-import java.net.URL;
-import java.net.URLClassLoader;
 
 public class ClassLoaderOpener implements PropertyLoaderOpener {
     private final ClassLoader classLoader;

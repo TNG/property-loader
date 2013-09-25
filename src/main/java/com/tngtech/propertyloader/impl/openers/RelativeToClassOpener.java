@@ -2,8 +2,7 @@ package com.tngtech.propertyloader.impl.openers;
 
 import java.io.InputStream;
 
-import com.tngtech.propertyloader.impl.PropertyLoaderOpener;
-import org.apache.log4j.Logger;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 
 public class RelativeToClassOpener implements PropertyLoaderOpener {
 

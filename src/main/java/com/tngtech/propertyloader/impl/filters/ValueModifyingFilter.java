@@ -1,7 +1,7 @@
 package com.tngtech.propertyloader.impl.filters;
 
 
-import com.tngtech.propertyloader.impl.PropertyLoaderFilter;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderFilter;
 
 import java.util.Map;
 import java.util.Properties;
