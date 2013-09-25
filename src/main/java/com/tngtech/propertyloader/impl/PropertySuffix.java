@@ -57,8 +57,9 @@ public class PropertySuffix {
         return this;
     }
 
-    public void clear() {
+    public PropertySuffix clear() {
         suffixes.clear();
+        return this;
     }
 
 

@@ -28,6 +28,7 @@ public class PropertyLocation {
     }
 
     public PropertyLocation atDefaultLocations(){
+
         atCurrentDirectory();
         atContextClassPath();
         atHomeDirectory();
@@ -49,8 +50,9 @@ public class PropertyLocation {
         return this;
     }
 
-    public void clear() {
+    public PropertyLocation clear() {
         openers.clear();
+        return this;
     }
 
     public PropertyLocation atContextClassPath(){

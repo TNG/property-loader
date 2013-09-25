@@ -89,9 +89,9 @@ public class PropertyLoader {
     }
 
     public PropertyLoader withDefaultConfig() {
-        this.propertyLocation = Context.getBean(PropertyLocation.class).atDefaultLocations();
-        this.propertySuffix = Context.getBean(PropertySuffix.class).addDefaultConfig();
-        this.propertyLoaderFilters = Context.getBean(PropertyFilter.class).withDefaultFilters();
+        this.propertyLocation.clear().atDefaultLocations();
+        this.propertySuffix.clear().addDefaultConfig();
+        this.propertyLoaderFilters.clear().withDefaultFilters();
         return this;
     }
 

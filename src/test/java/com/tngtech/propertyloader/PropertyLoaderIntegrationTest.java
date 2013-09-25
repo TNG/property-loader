@@ -31,8 +31,6 @@ public class PropertyLoaderIntegrationTest {
         assertTrue(properties.containsKey("a"));
         assertTrue(properties.containsKey("umlauts"));
         assertTrue(properties.containsKey("abc"));
-
-        properties.list(System.out);
     }
 
     @org.junit.Test
@@ -76,8 +74,7 @@ public class PropertyLoaderIntegrationTest {
     @org.junit.Test
     public void testLoadingWithDefaultConfig()
     {
-        String[] args = {"demoapp-configuration",
-        };
+        String[] args = {"demoapp-configuration"};
 
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
         Properties properties = propertyLoader.load(args, "properties");

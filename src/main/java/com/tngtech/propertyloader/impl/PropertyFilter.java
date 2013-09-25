@@ -29,4 +29,9 @@ public class PropertyFilter {
         filters.add(propertyLoaderFactory.getVariableResolvingFilter());
         return this;
     }
+
+    public PropertyFilter clear() {
+        filters.clear();
+        return this;
+    }
 }
