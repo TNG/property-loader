@@ -100,74 +100,6 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
         return this;
     }
 
-    public Properties load(String baseName) {
-        fileNameStack = new Stack<>();
-
-        Properties loadedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(baseName));
-        filterProperties(loadedProperties);
-        return loadedProperties;
-    }
-
-    public Properties load(String[] baseNames) {
-        fileNameStack = new Stack<>();
-
-        Properties loadedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(baseNames));
-        filterProperties(loadedProperties);
-        return loadedProperties;
-    }
-
-    public Properties load() {
-        fileNameStack = new Stack<>();
-
-        Properties loadedProperties = loadPropertiesFromBaseNameList(this.baseNames);
-        filterProperties(loadedProperties);
-        return loadedProperties;
-    }
-
-    private Properties loadPropertiesFromBaseNameList(List<String> baseNames) {
-        Properties loadedProperties = propertyLoaderFactory.getEmptyProperties();
-        for (String fileName : propertyFileNameHelper.getFileNames(baseNames, propertySuffix.getSuffixes(), fileExtension))
-        {
-            if (fileNameStack.contains(fileName)) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("property file include recursion: ");
-                Enumeration<String> elements = fileNameStack.elements();
-                while (elements.hasMoreElements()) {
-                    String currentFileName = elements.nextElement();
-                    sb.append(currentFileName);
-                    sb.append(" -> ");
-                }
-                sb.append(fileName);
-                throw new PropertyLoaderException(sb.toString());
-            }
-
-            fileNameStack.push(fileName);
-            for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
-            {
-                Properties newProperties = propertyFileReader.tryToReadPropertiesFromFile(fileName, propertyFileEncoding, opener);
-                Properties includedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(collectIncludesAndRemoveKey(newProperties)));
-                newProperties.putAll(includedProperties);
-                loadedProperties.putAll(newProperties);
-            }
-            fileNameStack.pop();
-        }
-        return loadedProperties;
-    }
-
-    private String[] collectIncludesAndRemoveKey(Properties properties) {
-        String[] includes = new String[]{};
-        if(properties.containsKey(INCLUDE_KEY)) {
-            includes = properties.getProperty(INCLUDE_KEY).split(",");
-            properties.remove(INCLUDE_KEY);
-        }
-        return includes;
-    }
-
-    private void filterProperties(Properties loadedProperties) {
-        for(PropertyLoaderFilter filter : propertyLoaderFilters.getFilters()) {
-            filter.filter(loadedProperties);
-        }
-    }
 
     public PropertyLoader atDefaultLocations(){
         propertyLocation.atDefaultLocations();
@@ -262,5 +194,79 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
         propertyLoaderFilters.withWarnOnSurroundingWhitespace();
         return this;
     }
+
+    public Properties load(String baseName) {
+        fileNameStack = new Stack<>();
+
+        Properties loadedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(baseName));
+        filterProperties(loadedProperties);
+        return loadedProperties;
+    }
+
+    public Properties load(String[] baseNames) {
+        fileNameStack = new Stack<>();
+
+        Properties loadedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(baseNames));
+        filterProperties(loadedProperties);
+        return loadedProperties;
+    }
+
+    public Properties load() {
+        fileNameStack = new Stack<>();
+
+        Properties loadedProperties = loadPropertiesFromBaseNameList(this.baseNames);
+        filterProperties(loadedProperties);
+        return loadedProperties;
+    }
+
+    private Properties loadPropertiesFromBaseNameList(List<String> baseNames) {
+        Properties loadedProperties = propertyLoaderFactory.getEmptyProperties();
+        for (String fileName : propertyFileNameHelper.getFileNames(baseNames, propertySuffix.getSuffixes(), fileExtension))
+        {
+            checkForRecursionInIncludes(fileName);
+
+            fileNameStack.push(fileName);
+            for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
+            {
+                Properties newProperties = propertyFileReader.tryToReadPropertiesFromFile(fileName, propertyFileEncoding, opener);
+                Properties includedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(collectIncludesAndRemoveKey(newProperties)));
+                newProperties.putAll(includedProperties);
+                loadedProperties.putAll(newProperties);
+            }
+            fileNameStack.pop();
+        }
+        return loadedProperties;
+    }
+
+    private void checkForRecursionInIncludes(String fileName) {
+        if (fileNameStack.contains(fileName)) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("property file include recursion: ");
+            Enumeration<String> elements = fileNameStack.elements();
+            while (elements.hasMoreElements()) {
+                String currentFileName = elements.nextElement();
+                sb.append(currentFileName);
+                sb.append(" -> ");
+            }
+            sb.append(fileName);
+            throw new PropertyLoaderException(sb.toString());
+        }
+    }
+
+    private String[] collectIncludesAndRemoveKey(Properties properties) {
+        String[] includes = new String[]{};
+        if(properties.containsKey(INCLUDE_KEY)) {
+            includes = properties.getProperty(INCLUDE_KEY).split(",");
+            properties.remove(INCLUDE_KEY);
+        }
+        return includes;
+    }
+
+    private void filterProperties(Properties loadedProperties) {
+        for(PropertyLoaderFilter filter : propertyLoaderFilters.getFilters()) {
+            filter.filter(loadedProperties);
+        }
+    }
+
 }
 
