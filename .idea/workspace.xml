@@ -2,23 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c537d49-3233-4681-ae62-769821164f78" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/testForRecursiveIncludes1.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/testForRecursiveIncludes2.properties" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/resources/demoapp-configuration-second.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/resources/dummy.properties" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/resources/decryptiontest.properties" afterPath="$PROJECT_DIR$/src/test/resources/testDecryption.properties" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/resources/demoapp-configuration.properties" afterPath="$PROJECT_DIR$/src/test/resources/testForIncludesAndVariableResolving.properties" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/resources/umlauts.properties" afterPath="$PROJECT_DIR$/src/test/resources/testUmlauts.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/impl/PropertyFileReaderTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/impl/PropertyFileReaderTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderIntegrationTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderIntegrationTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="property-loader-rewrite.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380117002147" ignored="false" />
+    <file path="/Dummy.txt" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380118549364" ignored="false" />
     <file path="/PropertyLoader.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380116759411" ignored="false" />
     <file path="/PropertyLoaderFactory.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380114039814" ignored="false" />
-    <file path="/PropertyLoaderIntegrationTest.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380118530713" ignored="false" />
+    <file path="/PropertyLoaderIntegrationTest.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380118951121" ignored="false" />
     <file path="/demoapp-configuration.properties" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380016406807" ignored="false" />
     <file path="/PropertyFileReader.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380104400648" ignored="false" />
     <file path="/VariableResolvingFilter.java" changelist="7c537d49-3233-4681-ae62-769821164f78" time="1380022530458" ignored="false" />
@@ -137,7 +129,7 @@
       <file leaf-file-name="PropertyLoaderIntegrationTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderIntegrationTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="97" selection-start="2229" selection-end="2229" vertical-scroll-proportion="0.75113124">
+            <state line="88" column="58" selection-start="3633" selection-end="3633" vertical-scroll-proportion="0.75113124">
               <folding />
             </state>
           </provider>
@@ -497,73 +489,7 @@
       <recent name="$PROJECT_DIR$/src/main/resources/com/tngtech/propertyloader" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PropertyLoaderIntegrationTest.testLoadingWithDefaultConfig_Throws_Exception_On_Recursive_Includes">
-    <configuration default="false" name="DefaultPropertyLocationContainerTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <module name="property-loader-rewrite" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.tngtech.propertyloader.impl" />
-      <option name="MAIN_CLASS_NAME" value="com.tngtech.propertyloader.impl.DefaultPropertyLocationContainerTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="com.tngtech.propertyloader in property-loader-rewrite" type="JUnit" factoryName="JUnit" temporary="true">
-      <module name="property-loader-rewrite" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.tngtech.propertyloader" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="All in property-loader-rewrite" type="JUnit" factoryName="JUnit" temporary="true">
-      <module name="property-loader-rewrite" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.PropertyLoaderIntegrationTest.testLoadingFromCurrentDirectoryOnly">
     <configuration default="false" name="PropertyLoaderIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true">
       <module name="property-loader-rewrite" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -593,6 +519,72 @@
       <option name="PACKAGE_NAME" value="com.tngtech.propertyloader" />
       <option name="MAIN_CLASS_NAME" value="com.tngtech.propertyloader.PropertyLoaderIntegrationTest" />
       <option name="METHOD_NAME" value="testLoadingWithDefaultConfig_Throws_Exception_On_Recursive_Includes" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="PropertyLoaderIntegrationTest.testLoadingFromDefaultLocationsOrFullPath" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="property-loader-rewrite" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.tngtech.propertyloader" />
+      <option name="MAIN_CLASS_NAME" value="com.tngtech.propertyloader.PropertyLoaderIntegrationTest" />
+      <option name="METHOD_NAME" value="testLoadingFromDefaultLocationsOrFullPath" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="PropertyLoaderIntegrationTest.testLoadingFromContextClassLoaderOnly" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="property-loader-rewrite" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.tngtech.propertyloader" />
+      <option name="MAIN_CLASS_NAME" value="com.tngtech.propertyloader.PropertyLoaderIntegrationTest" />
+      <option name="METHOD_NAME" value="testLoadingFromContextClassLoaderOnly" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="PropertyLoaderIntegrationTest.testLoadingFromCurrentDirectoryOnly" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="property-loader-rewrite" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.tngtech.propertyloader" />
+      <option name="MAIN_CLASS_NAME" value="com.tngtech.propertyloader.PropertyLoaderIntegrationTest" />
+      <option name="METHOD_NAME" value="testLoadingFromCurrentDirectoryOnly" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -697,19 +689,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.DefaultPropertyLocationContainerTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.com.tngtech.propertyloader in property-loader-rewrite" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.All in property-loader-rewrite" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest.testLoadingWithDefaultConfig_Throws_Exception_On_Recursive_Includes" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest.testLoadingWithDefaultConfig_Throws_Exception_On_Recursive_Includes" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest.testLoadingFromDefaultLocationsOrFullPath" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest.testLoadingFromContextClassLoaderOnly" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest.testLoadingFromCurrentDirectoryOnly" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest.testLoadingWithDefaultConfig_Throws_Exception_On_Recursive_Includes" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.All in property-loader-rewrite" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.com.tngtech.propertyloader in property-loader-rewrite" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.DefaultPropertyLocationContainerTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest.testLoadingFromCurrentDirectoryOnly" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest.testLoadingFromContextClassLoaderOnly" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest.testLoadingFromDefaultLocationsOrFullPath" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest.testLoadingWithDefaultConfig_Throws_Exception_On_Recursive_Includes" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.PropertyLoaderIntegrationTest" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -817,7 +809,11 @@
       <created>1380117004924</created>
       <updated>1380117004924</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="reorganized propertyloader tests in packages">
+      <created>1380118551468</created>
+      <updated>1380118551468</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -839,7 +835,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.249309" sideWeight="0.6717124" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3282876" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3282876" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32923368" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -999,13 +995,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/resources/testForIncludesAndVariableResolving.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/resources/toBeIncluded.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -1027,9 +1016,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/resources/testForIncludesAndVariableResolving.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/tngtech/propertyloader/PropertyLoaderIntegrationTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="97" selection-start="2229" selection-end="2229" vertical-scroll-proportion="0.75113124">
+        <state line="88" column="58" selection-start="3633" selection-end="3633" vertical-scroll-proportion="0.75113124">
           <folding />
         </state>
       </provider>

@@ -26,16 +26,15 @@ public class PropertyLoaderIntegrationTest {
 
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
         Properties properties = propertyLoader.load(args);
-        assertTrue(properties.containsKey("definedInIncluded"));
-        assertTrue(properties.containsKey("umlauts"));
-        assertTrue(properties.containsKey("abc"));
+        assertTrue(properties.containsKey("definedInIncluded")); //loaded from context classpath
+        assertTrue(properties.containsKey("umlauts"));  //loaded from relative to current directory (no leading /)
+        assertTrue(properties.containsKey("abc"));  //loaded with all FileOpeners because of correct full path (leading /)
     }
 
     @org.junit.Test
     public void testLoadingFromContextClassLoaderOnly()
     {
         String[] args = {"toBeIncluded",
-                "testUmlauts",
                 "/abc.def",
         };
 
@@ -44,9 +43,8 @@ public class PropertyLoaderIntegrationTest {
                 .addDefaultSuffixes()
                 .withDefaultFilters();
         Properties properties = propertyLoader.load(args);
-        assertTrue(properties.containsKey("definedInIncluded"));
-        assertTrue(properties.containsKey("umlauts"));
-        assertFalse(properties.containsKey("abc"));
+        assertTrue(properties.containsKey("definedInIncluded")); //is loaded from context classpath
+        assertFalse(properties.containsKey("abc")); //not found by classpath opener because of leading slash
     }
 
     @org.junit.Test
@@ -64,7 +62,7 @@ public class PropertyLoaderIntegrationTest {
         Properties properties = propertyLoader.load(args);
         assertFalse(properties.containsKey("definedInIncluded")); //no loading from classpath etc
         assertTrue(properties.containsKey("umlauts")); //correct path relative to current directory
-        assertFalse(properties.containsKey("abc")); //filename with full path is not loaded
+        assertFalse(properties.containsKey("abc")); //not found because of leading slash but not a correct path
     }
 
     @org.junit.Test
@@ -75,9 +73,9 @@ public class PropertyLoaderIntegrationTest {
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
         Properties properties = propertyLoader.load(args);
 
-        assertEquals("Hello, World!", properties.getProperty("b"));
-        assertEquals("yes", properties.getProperty("xxx"));
-        assertEquals("prod-blub", properties.getProperty("testInclude.prod"));
+        assertEquals("Hello, World!", properties.getProperty("b")); //b is variable a
+        assertEquals("yes", properties.getProperty("xxx")); //xxx is defined in toBeIncluded
+        assertEquals("prod-blub", properties.getProperty("testInclude.prod")); //has to be defined, otherwise filter warns
 
         properties.list(System.out);
     }
@@ -89,10 +87,6 @@ public class PropertyLoaderIntegrationTest {
 
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
         Properties properties = propertyLoader.load(args);
-
-        assertEquals("Hello, World!", properties.getProperty("b"));
-        assertEquals("yes", properties.getProperty("xxx"));
-        assertEquals("prod-blub", properties.getProperty("testInclude.prod"));
 
         properties.list(System.out);
     }
