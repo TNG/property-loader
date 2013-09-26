@@ -8,7 +8,6 @@ import org.omg.CosNaming.NamingContextPackage.NotEmpty;
 
 import java.util.Collection;
 
-@PropertyValue("sdddd")
 @PropertyExtension("testproperties")
 @PropertySuffixes(extraSuffixes = {"test"})
 @PropertyLocations(resourcesForClasses = {PropertyLoader.class})

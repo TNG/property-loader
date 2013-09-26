@@ -3,6 +3,7 @@ package com.tngtech.configbuilder;
 import com.google.common.collect.Lists;
 import com.tngtech.configbuilder.annotations.*;
 import com.tngtech.configbuilder.context.Context;
+import com.tngtech.configbuilder.interfaces.AnnotationProcessor;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Logger;
 
@@ -64,11 +65,11 @@ public class ConfigBuilder<T> {
 
         Annotation[] annotations = configClass.getAnnotations();
         for (Annotation annotation : annotations) {
-            Class<?> processor = null;
+            Class<? extends AnnotationProcessor<Annotation,ConfigBuilderContext,ConfigBuilderContext>> processor = null;
             try {
                 processor = (Class)annotation.annotationType().getMethod("processor").invoke(annotation);
-                processor.getMethod("configurePropertyLoader",Annotation.class,ConfigBuilderContext.class).invoke(processor.newInstance(),annotation,builderContext);
-                //processor.newInstance().configurePropertyLoader(annotation, builderContext);
+                //processor.getMethod("configurePropertyLoader",Annotation.class,ConfigBuilderContext.class).invoke(processor.newInstance(),annotation,builderContext);
+                processor.newInstance().process(annotation, builderContext);
             }
             catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             }
@@ -142,11 +143,11 @@ public class ConfigBuilder<T> {
         if (field.isAnnotationPresent(ValueProvider.class))
         {
             ValueProvider valueProvider = field.getAnnotation(ValueProvider.class);
-            Class<?> processor = null;
+            Class<? extends AnnotationProcessor<Annotation,String,Object>> processor = null;
             try {
                 processor = (Class)valueProvider.annotationType().getDeclaredMethod("processor").invoke(valueProvider);
-                fieldValue = processor.getMethod("transformValue",String.class,ValueProvider.class).invoke(processor.newInstance(),value,valueProvider);
-                //fieldValue = processor.newInstance().transformValue(value, valueProvider);
+                //fieldValue = processor.getMethod("transformValue",String.class,ValueProvider.class).invoke(processor.newInstance(),value,valueProvider);
+                fieldValue = processor.newInstance().process(valueProvider, value);
             }
             catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
 
@@ -176,11 +177,11 @@ public class ConfigBuilder<T> {
             if (field.isAnnotationPresent(annotationClass)) {
                 Annotation annotation = field.getAnnotation(annotationClass);
 
-                Class<?> processor = null;
+                Class<? extends AnnotationProcessor<Annotation,ConfigBuilderContext,String>> processor = null;
                 try {
                     processor = (Class)annotation.annotationType().getMethod("processor").invoke(annotation);
-                    value = (String)processor.getMethod("getValue",Annotation.class,ConfigBuilderContext.class).invoke(processor.newInstance(),annotation,builderContext);
-                    //value = processor.newInstance().getValue(annotation, builderContext);
+                    //value = (String)processor.getMethod("getValue",Annotation.class,ConfigBuilderContext.class).invoke(processor.newInstance(), annotation, builderContext);
+                    value = processor.newInstance().process(annotation, builderContext);
                 }
                 catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {}
 

@@ -1,13 +1,14 @@
 package com.tngtech.configbuilder.annotations;
 
 import com.tngtech.configbuilder.annotationprocessors.ValueProviderTransformer;
+import com.tngtech.configbuilder.interfaces.AnnotationProcessor;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.*;
 
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValueProvider {
     public Class value();
 
-    Class<?> processor() default ValueProviderTransformer.class;
+    Class<? extends AnnotationProcessor<ValueProvider,String,Object>> processor() default ValueProviderTransformer.class;
 }

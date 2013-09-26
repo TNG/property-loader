@@ -1,13 +1,15 @@
 package com.tngtech.configbuilder.annotations;
 
+import com.tngtech.configbuilder.ConfigBuilderContext;
 import com.tngtech.configbuilder.annotationprocessors.PropertyValueProcessor;
+import com.tngtech.configbuilder.interfaces.AnnotationProcessor;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.*;
 
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PropertyValue{
     String value();
 
-    Class<?> processor() default PropertyValueProcessor.class;
+    Class<? extends AnnotationProcessor<PropertyValue,ConfigBuilderContext,String>> processor() default PropertyValueProcessor.class;
 }
