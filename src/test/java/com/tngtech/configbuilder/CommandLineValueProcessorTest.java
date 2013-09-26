@@ -1,6 +1,6 @@
 package com.tngtech.configbuilder;
 
-import com.tngtech.configbuilder.annotationprocessors.implementations.CommandLineValueProcessor;
+import com.tngtech.configbuilder.annotationprocessors.CommandLineValueProcessor;
 import com.tngtech.configbuilder.annotations.CommandLineValue;
 import org.apache.commons.cli.CommandLine;
 import org.junit.Test;

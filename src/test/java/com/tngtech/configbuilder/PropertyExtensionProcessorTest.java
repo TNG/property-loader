@@ -1,6 +1,6 @@
 package com.tngtech.configbuilder;
 
-import com.tngtech.configbuilder.annotationprocessors.implementations.PropertyExtensionProcessor;
+import com.tngtech.configbuilder.annotationprocessors.PropertyExtensionProcessor;
 import com.tngtech.configbuilder.annotations.PropertyExtension;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.junit.Test;

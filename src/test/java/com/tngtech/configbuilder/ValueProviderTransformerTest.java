@@ -1,6 +1,6 @@
 package com.tngtech.configbuilder;
 
-import com.tngtech.configbuilder.annotationprocessors.implementations.ValueProviderTransformer;
+import com.tngtech.configbuilder.annotationprocessors.ValueProviderTransformer;
 import com.tngtech.configbuilder.annotations.ValueProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;

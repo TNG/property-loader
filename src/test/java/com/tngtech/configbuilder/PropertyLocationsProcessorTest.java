@@ -1,6 +1,6 @@
 package com.tngtech.configbuilder;
 
-import com.tngtech.configbuilder.annotationprocessors.implementations.PropertyLocationsProcessor;
+import com.tngtech.configbuilder.annotationprocessors.PropertyLocationsProcessor;
 import com.tngtech.configbuilder.annotations.PropertyLocations;
 import com.tngtech.propertyloader.PropertyLoader;
 import com.tngtech.propertyloader.impl.DefaultPropertyLocationContainer;

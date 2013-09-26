@@ -1,8 +1,8 @@
 package com.tngtech.configbuilder;
 
-import com.tngtech.configbuilder.annotationprocessors.implementations.CommandLineValueProcessor;
-import com.tngtech.configbuilder.annotationprocessors.implementations.DefaultValueProcessor;
-import com.tngtech.configbuilder.annotationprocessors.implementations.PropertyValueProcessor;
+import com.tngtech.configbuilder.annotationprocessors.CommandLineValueProcessor;
+import com.tngtech.configbuilder.annotationprocessors.DefaultValueProcessor;
+import com.tngtech.configbuilder.annotationprocessors.PropertyValueProcessor;
 import com.tngtech.configbuilder.annotations.*;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.*;

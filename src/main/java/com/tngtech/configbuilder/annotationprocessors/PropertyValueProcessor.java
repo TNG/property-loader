@@ -1,4 +1,4 @@
-package com.tngtech.configbuilder.annotationprocessors.implementations;
+package com.tngtech.configbuilder.annotationprocessors;
 
 import com.tngtech.configbuilder.annotations.PropertyValue;
 import com.tngtech.configbuilder.ConfigBuilderContext;

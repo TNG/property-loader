@@ -1,6 +1,6 @@
 package com.tngtech.configbuilder.annotations;
 
-import com.tngtech.configbuilder.annotationprocessors.implementations.PropertyExtensionProcessor;
+import com.tngtech.configbuilder.annotationprocessors.PropertyExtensionProcessor;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
