@@ -3,8 +3,6 @@ package com.tngtech.configbuilder.annotationprocessors;
 
 import com.tngtech.configbuilder.annotations.PropertyLocations;
 import com.tngtech.configbuilder.ConfigBuilderContext;
-import com.tngtech.configbuilder.annotations.PropertySuffixes;
-import com.tngtech.configbuilder.annotations.PropertyValue;
 import com.tngtech.configbuilder.interfaces.AnnotationProcessor;
 import org.springframework.stereotype.Component;
 

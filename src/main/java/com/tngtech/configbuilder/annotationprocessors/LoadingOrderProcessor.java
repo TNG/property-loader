@@ -1,14 +1,11 @@
 package com.tngtech.configbuilder.annotationprocessors;
 
-import com.google.common.collect.Lists;
 import com.tngtech.configbuilder.ConfigBuilderContext;
-import com.tngtech.configbuilder.annotations.ErrorMessageFile;
 import com.tngtech.configbuilder.annotations.LoadingOrder;
 import com.tngtech.configbuilder.interfaces.AnnotationProcessor;
+import org.springframework.stereotype.Component;
 
-import java.lang.annotation.Annotation;
-
-
+@Component
 public class LoadingOrderProcessor implements AnnotationProcessor<LoadingOrder,ConfigBuilderContext,ConfigBuilderContext> {
 
     public ConfigBuilderContext process(LoadingOrder annotation, ConfigBuilderContext context) {

@@ -1,8 +1,6 @@
 package com.tngtech.configbuilder.annotationprocessors;
 
-import com.tngtech.configbuilder.ConfigBuilderContext;
 import com.tngtech.configbuilder.ConfigBuilderException;
-import com.tngtech.configbuilder.annotations.PropertyValue;
 import com.tngtech.configbuilder.annotations.ValueProvider;
 import com.tngtech.configbuilder.interfaces.AnnotationProcessor;
 import org.springframework.stereotype.Component;

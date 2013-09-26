@@ -4,8 +4,6 @@ package com.tngtech.configbuilder.annotationprocessors;
 import com.google.common.collect.Lists;
 import com.tngtech.configbuilder.annotations.PropertiesFiles;
 import com.tngtech.configbuilder.ConfigBuilderContext;
-import com.tngtech.configbuilder.annotations.PropertyExtension;
-import com.tngtech.configbuilder.annotations.PropertyValue;
 import com.tngtech.configbuilder.interfaces.AnnotationProcessor;
 import org.springframework.stereotype.Component;
 
