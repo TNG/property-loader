@@ -1,6 +1,5 @@
 package com.tngtech.configbuilder;
 
-import com.tngtech.configbuilder.annotationprocessors.AnnotationProcessor;
 import com.tngtech.propertyloader.PropertyLoader;
 import com.tngtech.propertyloader.impl.DefaultPropertyLocationContainer;
 import com.tngtech.propertyloader.impl.DefaultPropertySuffixContainer;
@@ -25,8 +24,6 @@ public class ConfigBuilderTest {
     private ConfigBuilder<Config> configBuilder;
     private Properties properties;
 
-    @Mock
-    private AnnotationProcessor annotationProcessor;
 
     @Mock
     private ConfigBuilderContext builderContext;
@@ -47,7 +44,7 @@ public class ConfigBuilderTest {
 
     @Before
     public void setUp(){
-        configBuilder = new ConfigBuilder<>(annotationProcessor, builderContext, miscFactory);
+        configBuilder = new ConfigBuilder<>(builderContext, miscFactory);
         properties = new Properties();
 
         when(builderContext.getPropertyLoader()).thenReturn(propertyLoader);

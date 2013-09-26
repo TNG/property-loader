@@ -1,9 +1,7 @@
 package com.tngtech.configbuilder;
 
 import com.google.common.collect.Lists;
-import com.tngtech.configbuilder.annotationprocessors.AnnotationProcessor;
 import com.tngtech.configbuilder.annotations.*;
-import com.tngtech.configbuilder.annotations.config.PropertyLoaderConfigurator;
 import com.tngtech.configbuilder.context.Context;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Logger;
@@ -23,7 +21,6 @@ public class ConfigBuilder<T> {
 
     private final static Logger log = Logger.getLogger(ConfigBuilder.class);
 
-    private final AnnotationProcessor annotationProcessor;
     private final ConfigBuilderContext builderContext;
 
     private Class<T> configClass;
@@ -31,14 +28,13 @@ public class ConfigBuilder<T> {
     private Class[] annotationOrder = {CommandLineValue.class, PropertyValue.class, DefaultValue.class};
     private MiscFactory miscFactory;
 
-    public ConfigBuilder(AnnotationProcessor annotationProcessor, ConfigBuilderContext builderContext, MiscFactory miscFactory) {
-        this.annotationProcessor = annotationProcessor;
+    public ConfigBuilder(ConfigBuilderContext builderContext, MiscFactory miscFactory) {
         this.builderContext = builderContext;
         this.miscFactory = miscFactory;
     }
 
     public ConfigBuilder() {
-        this(Context.getBean(AnnotationProcessor.class), Context.getBean(ConfigBuilderContext.class), Context.getBean(MiscFactory.class));
+        this(Context.getBean(ConfigBuilderContext.class), Context.getBean(MiscFactory.class));
     }
 
     public Class<T> getConfigClass() {
@@ -68,10 +64,17 @@ public class ConfigBuilder<T> {
 
         Annotation[] annotations = configClass.getAnnotations();
         for (Annotation annotation : annotations) {
-            if (annotation.annotationType().getAnnotation(PropertyLoaderConfigurator.class) != null) {
-                annotationProcessor.configurePropertyLoader(annotation, builderContext);
+            Class<?> processor = null;
+            try {
+                processor = (Class)annotation.annotationType().getMethod("processor").invoke(annotation);
+                processor.getMethod("configurePropertyLoader",Annotation.class,ConfigBuilderContext.class).invoke(processor.newInstance(),annotation,builderContext);
+                //processor.newInstance().configurePropertyLoader(annotation, builderContext);
+            }
+            catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             }
         }
+
+
 
         builderContext.setProperties(builderContext.getPropertyLoader().load());
 
@@ -139,7 +142,15 @@ public class ConfigBuilder<T> {
         if (field.isAnnotationPresent(ValueProvider.class))
         {
             ValueProvider valueProvider = field.getAnnotation(ValueProvider.class);
-            fieldValue = annotationProcessor.transformValue(value, valueProvider);
+            Class<?> processor = null;
+            try {
+                processor = (Class)valueProvider.annotationType().getDeclaredMethod("processor").invoke(valueProvider);
+                fieldValue = processor.getMethod("transformValue",String.class,ValueProvider.class).invoke(processor.newInstance(),value,valueProvider);
+                //fieldValue = processor.newInstance().transformValue(value, valueProvider);
+            }
+            catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+
+            }
         }
 
         return fieldValue;
@@ -147,7 +158,7 @@ public class ConfigBuilder<T> {
 
     private void validateAnnotations(Annotation[] declaredAnnotations) {
         for (Annotation annotation : declaredAnnotations) {
-            annotationProcessor.validateAnnotation(annotation);
+
         }
     }
 
@@ -165,7 +176,13 @@ public class ConfigBuilder<T> {
             if (field.isAnnotationPresent(annotationClass)) {
                 Annotation annotation = field.getAnnotation(annotationClass);
 
-                value = annotationProcessor.extractValue(annotation, builderContext);
+                Class<?> processor = null;
+                try {
+                    processor = (Class)annotation.annotationType().getMethod("processor").invoke(annotation);
+                    value = (String)processor.getMethod("getValue",Annotation.class,ConfigBuilderContext.class).invoke(processor.newInstance(),annotation,builderContext);
+                    //value = processor.newInstance().getValue(annotation, builderContext);
+                }
+                catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {}
 
                 if (value != null) {
                     break;

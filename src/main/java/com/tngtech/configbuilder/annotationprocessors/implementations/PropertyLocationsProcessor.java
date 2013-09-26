@@ -1,7 +1,6 @@
 package com.tngtech.configbuilder.annotationprocessors.implementations;
 
 
-import com.tngtech.configbuilder.annotationprocessors.interfaces.AnnotationPropertyLoaderConfiguration;
 import com.tngtech.configbuilder.annotations.PropertyLocations;
 import com.tngtech.configbuilder.ConfigBuilderContext;
 import org.springframework.stereotype.Component;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.lang.annotation.Annotation;
 
 @Component
-public class PropertyLocationsProcessor implements AnnotationPropertyLoaderConfiguration {
+public class PropertyLocationsProcessor {
     public void configurePropertyLoader(Annotation annotation, ConfigBuilderContext context){
         PropertyLocations propertyLocations = (PropertyLocations)annotation;
         context.getPropertyLoader().getLocations().clear();

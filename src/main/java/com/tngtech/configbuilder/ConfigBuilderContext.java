@@ -14,7 +14,8 @@ public class ConfigBuilderContext {
 
     protected Properties properties;
     protected CommandLine commandLineArgs;
-    public PropertyLoader propertyLoader;
+    protected PropertyLoader propertyLoader;
+
 
     public ConfigBuilderContext() {
         properties = new Properties();
