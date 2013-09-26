@@ -1,5 +1,8 @@
 package com.tngtech.configbuilder;
 
+import com.tngtech.configbuilder.annotations.CommandLineValue;
+import com.tngtech.configbuilder.annotations.DefaultValue;
+import com.tngtech.configbuilder.annotations.PropertyValue;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.CommandLine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ public class ConfigBuilderContext {
     protected Properties properties;
     protected CommandLine commandLineArgs;
     protected PropertyLoader propertyLoader;
+    protected Class[] annotationOrder = {CommandLineValue.class, PropertyValue.class, DefaultValue.class};
 
 
     public ConfigBuilderContext() {
@@ -44,5 +48,9 @@ public class ConfigBuilderContext {
 
     public void setPropertyLoader(PropertyLoader propertyLoader) {
         this.propertyLoader = propertyLoader;
+    }
+
+    public void setAnnotationOrder(Class[] annotationOrder) {
+        this.annotationOrder = annotationOrder;
     }
 }

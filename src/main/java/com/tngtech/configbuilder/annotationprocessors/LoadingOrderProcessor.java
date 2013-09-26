@@ -9,9 +9,10 @@ import com.tngtech.configbuilder.interfaces.AnnotationProcessor;
 import java.lang.annotation.Annotation;
 
 
-public class LoadingOrderProcessor implements AnnotationProcessor<LoadingOrder,ConfigBuilderContext,Class[]> {
+public class LoadingOrderProcessor implements AnnotationProcessor<LoadingOrder,ConfigBuilderContext,ConfigBuilderContext> {
 
-    public Class[] process(LoadingOrder annotation, ConfigBuilderContext context) {
-        return annotation.value();
+    public ConfigBuilderContext process(LoadingOrder annotation, ConfigBuilderContext context) {
+        context.setAnnotationOrder(annotation.value());
+        return context;
     }
 }

@@ -1,6 +1,7 @@
 package com.tngtech.configbuilder;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.tngtech.configbuilder.annotations.*;
 import com.tngtech.configbuilder.context.Context;
 import com.tngtech.configbuilder.interfaces.AnnotationProcessor;
@@ -25,8 +26,8 @@ public class ConfigBuilder<T> {
     private final ConfigBuilderContext builderContext;
 
     private Class<T> configClass;
-    private List<Field> fields;
-    private Class[] annotationOrder = {CommandLineValue.class, PropertyValue.class, DefaultValue.class};
+    private Map<Field,List<Annotation>> fieldConfig;
+
     private MiscFactory miscFactory;
 
     public ConfigBuilder(ConfigBuilderContext builderContext, MiscFactory miscFactory) {
@@ -42,8 +43,8 @@ public class ConfigBuilder<T> {
         return this.configClass;
     }
 
-    public List<Field> getFields() {
-        return this.fields;
+    public Map<Field,List<Annotation>> getFields() {
+        return fieldConfig;
     }
 
     public T build() {
@@ -60,30 +61,40 @@ public class ConfigBuilder<T> {
     public ConfigBuilder<T> forClass(Class<T> configClass) {
 
         this.configClass = configClass;
-        this.fields = Lists.newArrayList(configClass.getDeclaredFields());
-        builderContext.setPropertyLoader(miscFactory.createPropertyLoader().withDefaultConfig());
+        this.fieldConfig = Maps.newLinkedHashMap();
 
-        Annotation[] annotations = configClass.getAnnotations();
-        for (Annotation annotation : annotations) {
+        fillFieldMap();
+        fillBuilderContext();
+
+        return this;
+    }
+
+    private void fillBuilderContext() {
+        builderContext.setPropertyLoader(miscFactory.createPropertyLoader().withDefaultConfig());
+        for (Annotation annotation : configClass.getAnnotations()) {
             Class<? extends AnnotationProcessor<Annotation,ConfigBuilderContext,ConfigBuilderContext>> processor = null;
             try {
                 processor = (Class)annotation.annotationType().getMethod("processor").invoke(annotation);
-                //processor.getMethod("configurePropertyLoader",Annotation.class,ConfigBuilderContext.class).invoke(processor.newInstance(),annotation,builderContext);
                 processor.newInstance().process(annotation, builderContext);
             }
             catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+
             }
         }
-
-
-
         builderContext.setProperties(builderContext.getPropertyLoader().load());
+    }
 
-        if (configClass.isAnnotationPresent(LoadingOrder.class)) {
-            this.annotationOrder = configClass.getAnnotation(LoadingOrder.class).value();
+    private void fillFieldMap() {
+        for(Field field : configClass.getDeclaredFields()) {
+            List<Annotation> fieldAnnotations = Lists.newArrayList();
+            Class<? extends Annotation>[] annotationOrderOfField = field.isAnnotationPresent(LoadingOrder.class) ? field.getAnnotation(LoadingOrder.class).value() : builderContext.annotationOrder;
+            for(Class<? extends Annotation> annotationClass : annotationOrderOfField){
+                if(field.isAnnotationPresent(annotationClass)){
+                    fieldAnnotations.add(field.getAnnotation(annotationClass));
+                }
+            }
+            fieldConfig.put(field,fieldAnnotations);
         }
-
-        return this;
     }
 
     public ConfigBuilder<T> withCommandLineArgs(String[] args) {
@@ -108,79 +119,31 @@ public class ConfigBuilder<T> {
         return this;
     }
 
-    private void validate(T instanceOfConfigClass) {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-        Set<ConstraintViolation<T>> constraintViolations = validator.validate(instanceOfConfigClass);
-        for(ConstraintViolation constraintViolation : constraintViolations){
-            log.warn(constraintViolation.getMessage());
-        }
-    }
-
-    private T setFields(T instanceOfConfigClass) throws InstantiationException, IllegalAccessException {
-
-
-        for (Field field : fields) {
-            Annotation[] declaredAnnotations = field.getDeclaredAnnotations();
-            validateAnnotations(declaredAnnotations);
-
-            String value = extractValue(field);
-
-            Object fieldValue = getTransformedFieldValueIfApplicable(field, value);
-
-            verifyCorrectTargetType(field, fieldValue);
-
-            field.setAccessible(true);
-            field.set(instanceOfConfigClass, fieldValue);
+    private T setFields(T instanceOfConfigClass) throws IllegalAccessException {
+        for (Map.Entry<Field,List<Annotation>> fieldListEntry : fieldConfig.entrySet()) {
+            validateAnnotations(fieldListEntry);
+            String value = extractValue(fieldListEntry);
+            Object fieldValue = getTransformedFieldValueIfApplicable(fieldListEntry.getKey(), value);
+            verifyCorrectTargetType(fieldListEntry.getKey(), fieldValue);
+            fieldListEntry.getKey().setAccessible(true);
+            fieldListEntry.getKey().set(instanceOfConfigClass, fieldValue);
         }
 
         return instanceOfConfigClass;
-     }
-
-    private Object getTransformedFieldValueIfApplicable(Field field, String value) {
-        Object fieldValue = value;
-
-        if (field.isAnnotationPresent(ValueProvider.class))
-        {
-            ValueProvider valueProvider = field.getAnnotation(ValueProvider.class);
-            Class<? extends AnnotationProcessor<Annotation,String,Object>> processor = null;
-            try {
-                processor = (Class)valueProvider.annotationType().getDeclaredMethod("processor").invoke(valueProvider);
-                //fieldValue = processor.getMethod("transformValue",String.class,ValueProvider.class).invoke(processor.newInstance(),value,valueProvider);
-                fieldValue = processor.newInstance().process(valueProvider, value);
-            }
-            catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-
-            }
-        }
-
-        return fieldValue;
     }
 
-    private void validateAnnotations(Annotation[] declaredAnnotations) {
-        for (Annotation annotation : declaredAnnotations) {
+    private void validateAnnotations(Map.Entry<Field,List<Annotation>> fieldListEntry) {
 
-        }
     }
 
-    private List<Class> getOrderedValueAnnotations(Field field) {
-        if (field.isAnnotationPresent(LoadingOrder.class)) {
-            return Lists.newArrayList(field.getAnnotation(LoadingOrder.class).value());
-        }
-        else return Lists.newArrayList(annotationOrder);
-    }
-
-    private String extractValue(Field field) {
+    private String extractValue(Map.Entry<Field,List<Annotation>> fieldListEntry) {
         String value = null;
 
-        for (Class annotationClass : getOrderedValueAnnotations(field)) {
-            if (field.isAnnotationPresent(annotationClass)) {
-                Annotation annotation = field.getAnnotation(annotationClass);
+        for (Annotation annotation : fieldListEntry.getValue()) {
 
                 Class<? extends AnnotationProcessor<Annotation,ConfigBuilderContext,String>> processor = null;
                 try {
                     processor = (Class)annotation.annotationType().getMethod("processor").invoke(annotation);
-                    //value = (String)processor.getMethod("getValue",Annotation.class,ConfigBuilderContext.class).invoke(processor.newInstance(), annotation, builderContext);
                     value = processor.newInstance().process(annotation, builderContext);
                 }
                 catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {}
@@ -188,9 +151,28 @@ public class ConfigBuilder<T> {
                 if (value != null) {
                     break;
                 }
-            }
+
         }
         return value;
+    }
+
+    private Object getTransformedFieldValueIfApplicable(Field field, String value) {
+        Object fieldValue = value;
+
+        if (field.isAnnotationPresent(ValueProvider.class))
+        {
+            ValueProvider valueProvider = field.getAnnotation(ValueProvider.class);
+            Class<? extends AnnotationProcessor<ValueProvider,String,Object>> processor = null;
+            try {
+                processor = valueProvider.processor();
+                fieldValue = processor.newInstance().process(valueProvider, value);
+            }
+            catch (InstantiationException | IllegalAccessException e) {
+
+            }
+        }
+
+        return fieldValue;
     }
 
     private void verifyCorrectTargetType(Field field, Object fieldValue) {
@@ -199,4 +181,12 @@ public class ConfigBuilder<T> {
         }
     }
 
+    private void validate(T instanceOfConfigClass) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<T>> constraintViolations = validator.validate(instanceOfConfigClass);
+        for(ConstraintViolation constraintViolation : constraintViolations){
+            log.warn(constraintViolation.getMessage());
+        }
+    }
 }

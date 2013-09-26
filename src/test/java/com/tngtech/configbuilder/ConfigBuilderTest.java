@@ -88,7 +88,7 @@ public class ConfigBuilderTest {
         configBuilder.forClass(Config.class);
         for(Field field : configFields)
         {
-            assertTrue(configBuilder.getFields().contains(field));
+            assertTrue(configBuilder.getFields().containsKey(field));
         }
     }
 

@@ -6,6 +6,7 @@ import com.tngtech.configbuilder.interfaces.AnnotationProcessor;
 
 import java.lang.annotation.*;
 
+@ProcessedBy(PropertyValueProcessor.class)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PropertyValue{
