@@ -17,8 +17,6 @@ import static org.mockito.Mockito.when;
 public class PropertyLocationsProcessorTest {
 
     @Mock
-    private BuilderConfiguration context;
-    @Mock
     private PropertyLocations propertyLocations;
     @Mock
     DefaultPropertyLocationContainer propertyLocation;
@@ -33,12 +31,11 @@ public class PropertyLocationsProcessorTest {
         String[] dirs = new String[]{"dir1","dir2"};
         Class[] classes = new Class[]{this.getClass(), Object.class};
 
-        when(context.getPropertyLoader()).thenReturn(propertyLoader);
         when(propertyLoader.getLocations()).thenReturn(propertyLocation);
         when(propertyLocations.directories()).thenReturn(dirs);
         when(propertyLocations.resourcesForClasses()).thenReturn(classes);
 
-        propertyLocationsProcessor.updateBuilderConfiguration(propertyLocations, context);
+        propertyLocationsProcessor.configurePropertyLoader(propertyLocations, propertyLoader);
 
         verify(propertyLocation).clear();
         verify(propertyLocation).atDirectory("dir1");

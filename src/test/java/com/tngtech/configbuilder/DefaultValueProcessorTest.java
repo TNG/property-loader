@@ -14,7 +14,7 @@ import static org.mockito.Mockito.when;
 public class DefaultValueProcessorTest {
 
     @Mock
-    private ResultConfiguration resultConfiguration;
+    private BuilderConfiguration builderConfiguration;
     @Mock
     private DefaultValue defaultValue;
 
@@ -24,6 +24,6 @@ public class DefaultValueProcessorTest {
         DefaultValueProcessor defaultValueProcessor = new DefaultValueProcessor();
 
         when(defaultValue.value()).thenReturn("value");
-        assertEquals("value", defaultValueProcessor.getValue(defaultValue, resultConfiguration));
+        assertEquals("value", defaultValueProcessor.getValue(defaultValue, builderConfiguration));
     }
 }

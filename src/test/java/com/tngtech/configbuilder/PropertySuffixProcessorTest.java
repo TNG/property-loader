@@ -17,8 +17,6 @@ import static org.mockito.Mockito.when;
 public class PropertySuffixProcessorTest {
 
     @Mock
-    private BuilderConfiguration context;
-    @Mock
     private PropertySuffixes propertySuffixes;
     @Mock
     DefaultPropertySuffixContainer propertySuffix;
@@ -32,12 +30,11 @@ public class PropertySuffixProcessorTest {
 
         String[] suffixes = new String[]{"suffix1","suffix2"};
 
-        when(context.getPropertyLoader()).thenReturn(propertyLoader);
         when(propertyLoader.getSuffixes()).thenReturn(propertySuffix);
         when(propertySuffixes.extraSuffixes()).thenReturn(suffixes);
         when(propertySuffixes.hostNames()).thenReturn(true);
 
-        propertySuffixProcessor.updateBuilderConfiguration(propertySuffixes,context);
+        propertySuffixProcessor.configurePropertyLoader(propertySuffixes, propertyLoader);
 
         verify(propertySuffix).clear();
         verify(propertySuffix).addString("suffix1");

@@ -11,7 +11,6 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.lang.reflect.Field;
 import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
@@ -26,9 +25,15 @@ public class ConfigBuilderTest {
 
 
     @Mock
-    private BuilderConfiguration builderContext;
+    private BuilderConfiguration builderConfiguration;
     @Mock
-    private ResultConfiguration resultConfiguration;
+    private AnnotationUtils annotationUtils;
+    @Mock
+    private CommandLineHelper commandLineHelper;
+    @Mock
+    private JSRValidator jsrValidator;
+    @Mock
+    private FieldSetter fieldSetter;
 
 
     @Mock
@@ -47,10 +52,9 @@ public class ConfigBuilderTest {
 
     @Before
     public void setUp(){
-        configBuilder = new ConfigBuilder<>(builderContext, resultConfiguration, miscFactory);
+        configBuilder = new ConfigBuilder<>(Config.class, builderConfiguration, annotationUtils, commandLineHelper, jsrValidator, fieldSetter, miscFactory);
         properties = new Properties();
 
-        when(builderContext.getPropertyLoader()).thenReturn(propertyLoader);
         when(miscFactory.createPropertyLoader()).thenReturn(propertyLoader);
         when(propertyLoader.getSuffixes()).thenReturn(propertySuffix);
         when(propertyLoader.getLocations()).thenReturn(propertyLocation);
@@ -72,34 +76,10 @@ public class ConfigBuilderTest {
         CommandLine commandLine = mock(CommandLine.class);
         when(parser.parse(options, args)).thenReturn(commandLine);
 
-        configBuilder.forClass(Config.class).withCommandLineArgs(args);
+        configBuilder.withCommandLineArgs(args);
 
         verify(options,times(2)).addOption(Matchers.any(Option.class));
-        verify(resultConfiguration).setCommandLineArgs(commandLine);
-    }
-
-    @Test
-    public void testThatForClassSetsClassToConfigBuilderAndReturnsConfigBuilder(){
-        assertEquals(configBuilder, configBuilder.forClass(Config.class));
-        assertEquals(configBuilder.getConfigClass(), Config.class);
-    }
-
-
-    @Test
-    public void testThatForClassGetsFields(){
-        Field[] configFields = Config.class.getDeclaredFields();
-        configBuilder.forClass(Config.class);
-        for(Field field : configFields)
-        {
-            assertTrue(configBuilder.getFieldMap().containsKey(field));
-        }
-    }
-
-
-    @Test
-    public void testThatForClassLoadsProperties(){
-
-
+        verify(builderConfiguration).setCommandLineArgs(commandLine);
     }
 
 }

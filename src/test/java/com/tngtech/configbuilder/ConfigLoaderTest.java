@@ -26,7 +26,7 @@ public class ConfigLoaderTest {
     private Properties errors;
 
     @Mock
-    private ResultConfiguration resultConfiguration;
+    private BuilderConfiguration builderConfiguration;
 
     @Mock
     private PropertyLoader propertyLoader;
@@ -51,8 +51,8 @@ public class ConfigLoaderTest {
             try {
                 CommandLine commandLineArgs = parser.parse( options, args);
                 CommandLineValueProcessor commandLineValueProcessor = new CommandLineValueProcessor();
-                when(resultConfiguration.getCommandLineArgs()).thenReturn(commandLineArgs);
-                String result =  commandLineValueProcessor.getValue(commandLineValue, resultConfiguration);
+                when(builderConfiguration.getCommandLineArgs()).thenReturn(commandLineArgs);
+                String result =  commandLineValueProcessor.getValue(commandLineValue, builderConfiguration);
                 assertEquals("Mueller", result);
 
             } catch (ParseException e) {}
@@ -68,9 +68,9 @@ public class ConfigLoaderTest {
             PropertyValue propertyValue = Config.class.getDeclaredField("helloWorld").getAnnotation(PropertyValue.class);
             Properties properties = new Properties();
             PropertyValueProcessor propertyValueProcessor = new PropertyValueProcessor();
-            when(resultConfiguration.getProperties()).thenReturn(properties);
+            when(builderConfiguration.getProperties()).thenReturn(properties);
             properties.put("a","HelloWorld");
-            String result =  propertyValueProcessor.getValue(propertyValue, resultConfiguration);
+            String result =  propertyValueProcessor.getValue(propertyValue, builderConfiguration);
             assertEquals("HelloWorld",result);
         }
         catch (NoSuchFieldException e){}
@@ -81,7 +81,7 @@ public class ConfigLoaderTest {
         try{
             DefaultValue defaultValue = Config.class.getDeclaredField("userName").getAnnotation(DefaultValue.class);
             DefaultValueProcessor defaultValueProcessor = new DefaultValueProcessor();
-            String result =  defaultValueProcessor.getValue(defaultValue, resultConfiguration);
+            String result =  defaultValueProcessor.getValue(defaultValue, builderConfiguration);
             assertEquals("user",result);
         }
         catch (NoSuchFieldException e){}

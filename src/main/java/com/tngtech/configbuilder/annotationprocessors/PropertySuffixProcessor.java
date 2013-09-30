@@ -1,9 +1,9 @@
 package com.tngtech.configbuilder.annotationprocessors;
 
 
-import com.tngtech.configbuilder.BuilderConfiguration;
 import com.tngtech.configbuilder.annotations.PropertySuffixes;
 import com.tngtech.configbuilder.annotationprocessors.interfaces.BuilderConfigurationProcessor;
+import com.tngtech.propertyloader.PropertyLoader;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -11,14 +11,14 @@ import java.lang.annotation.Annotation;
 @Component
 public class PropertySuffixProcessor implements BuilderConfigurationProcessor {
 
-    public void updateBuilderConfiguration(Annotation annotation, BuilderConfiguration context) {
-        context.getPropertyLoader().getSuffixes().clear();
+    public void configurePropertyLoader(Annotation annotation, PropertyLoader propertyLoader) {
+        propertyLoader.getSuffixes().clear();
         String[] suffixes = ((PropertySuffixes)annotation).extraSuffixes();
         for(String suffix : suffixes){
-            context.getPropertyLoader().getSuffixes().addString(suffix);
+            propertyLoader.getSuffixes().addString(suffix);
         }
         if(((PropertySuffixes)annotation).hostNames()){
-            context.getPropertyLoader().getSuffixes().addLocalHostNames();
+            propertyLoader.getSuffixes().addLocalHostNames();
         }
     }
 }

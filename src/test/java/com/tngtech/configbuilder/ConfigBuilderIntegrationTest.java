@@ -13,13 +13,13 @@ public class ConfigBuilderIntegrationTest {
     @Before
     public void setUp(){
 
-        configBuilder = new ConfigBuilder<>();
+        configBuilder = new ConfigBuilder<>(Config.class);
     }
 
     @org.junit.Test
     public void TestConfigBuilder(){
         String[] args = new String[]{"-u", "Mueller", "--pidFixFactory", "PIDs fixed with"};
-        Config c = configBuilder.forClass(Config.class).withCommandLineArgs(args).build();
+        Config c = configBuilder.withCommandLineArgs(args).build();
         System.out.println(c.getValue());
         System.out.println(c.getHelloWorld());
         System.out.println(c.getSurName());
