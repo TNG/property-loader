@@ -1,5 +1,6 @@
-package com.tngtech.configbuilder;
+package com.tngtech.configbuilder.impl;
 
+import com.tngtech.configbuilder.ConfigBuilderException;
 import com.tngtech.configbuilder.annotations.CommandLineValue;
 import org.apache.commons.cli.*;
 import org.springframework.beans.factory.annotation.Autowired;

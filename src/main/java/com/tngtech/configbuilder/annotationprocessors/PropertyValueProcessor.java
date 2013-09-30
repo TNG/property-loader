@@ -1,6 +1,6 @@
 package com.tngtech.configbuilder.annotationprocessors;
 
-import com.tngtech.configbuilder.BuilderConfiguration;
+import com.tngtech.configbuilder.impl.BuilderConfiguration;
 import com.tngtech.configbuilder.annotationprocessors.interfaces.ValueExtractorProcessor;
 import com.tngtech.configbuilder.annotations.PropertyValue;
 import org.springframework.stereotype.Component;

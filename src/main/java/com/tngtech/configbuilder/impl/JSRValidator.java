@@ -1,6 +1,7 @@
-package com.tngtech.configbuilder;
+package com.tngtech.configbuilder.impl;
 
 
+import com.tngtech.configbuilder.ConfigBuilder;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 

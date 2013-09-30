@@ -1,9 +1,9 @@
-package com.tngtech.configbuilder;
+package com.tngtech.configbuilder.impl;
 
+import com.tngtech.configbuilder.ConfigBuilderException;
 import com.tngtech.configbuilder.annotationprocessors.interfaces.ValueExtractorProcessor;
 import com.tngtech.configbuilder.annotationprocessors.interfaces.ValueTransformerProcessor;
 import com.tngtech.configbuilder.annotations.LoadingOrder;
-import com.tngtech.configbuilder.annotations.ValueTransformer;
 import com.tngtech.configbuilder.annotations.metaannotations.ValueExtractorAnnotation;
 import com.tngtech.configbuilder.annotations.metaannotations.ValueTransformerAnnotation;
 import com.tngtech.configbuilder.context.Context;

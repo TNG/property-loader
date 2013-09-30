@@ -2,6 +2,7 @@ package com.tngtech.configbuilder;
 
 import com.tngtech.configbuilder.annotationprocessors.CommandLineValueProcessor;
 import com.tngtech.configbuilder.annotations.CommandLineValue;
+import com.tngtech.configbuilder.impl.BuilderConfiguration;
 import org.apache.commons.cli.CommandLine;
 import org.junit.Test;
 import org.junit.runner.RunWith;

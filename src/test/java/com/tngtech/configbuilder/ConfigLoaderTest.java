@@ -4,6 +4,7 @@ import com.tngtech.configbuilder.annotationprocessors.CommandLineValueProcessor;
 import com.tngtech.configbuilder.annotationprocessors.DefaultValueProcessor;
 import com.tngtech.configbuilder.annotationprocessors.PropertyValueProcessor;
 import com.tngtech.configbuilder.annotations.*;
+import com.tngtech.configbuilder.impl.BuilderConfiguration;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.*;
 import org.junit.Before;

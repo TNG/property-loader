@@ -1,4 +1,4 @@
-package com.tngtech.configbuilder;
+package com.tngtech.configbuilder.impl;
 
 import com.tngtech.configbuilder.annotations.CommandLineValue;
 import com.tngtech.configbuilder.annotations.DefaultValue;

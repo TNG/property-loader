@@ -1,7 +1,7 @@
 package com.tngtech.configbuilder.annotationprocessors.interfaces;
 
 
-import com.tngtech.configbuilder.BuilderConfiguration;
+import com.tngtech.configbuilder.impl.BuilderConfiguration;
 
 import java.lang.annotation.Annotation;
 

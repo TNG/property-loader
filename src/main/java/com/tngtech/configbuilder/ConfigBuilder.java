@@ -4,6 +4,7 @@ import com.tngtech.configbuilder.annotations.LoadingOrder;
 import com.tngtech.configbuilder.annotations.metaannotations.PropertyLoaderConfigurationAnnotation;
 import com.tngtech.configbuilder.context.Context;
 import com.tngtech.configbuilder.annotationprocessors.interfaces.BuilderConfigurationProcessor;
+import com.tngtech.configbuilder.impl.*;
 import com.tngtech.propertyloader.PropertyLoader;
 
 import java.lang.annotation.Annotation;

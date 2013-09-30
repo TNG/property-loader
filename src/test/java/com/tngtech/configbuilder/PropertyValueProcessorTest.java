@@ -2,6 +2,7 @@ package com.tngtech.configbuilder;
 
 import com.tngtech.configbuilder.annotationprocessors.PropertyValueProcessor;
 import com.tngtech.configbuilder.annotations.PropertyValue;
+import com.tngtech.configbuilder.impl.BuilderConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
