@@ -148,9 +148,7 @@ public class ConfigBuilder<T> {
 
             }
 
-            if (value != null) {
-                break;
-            }
+            if (value != null) break;
         }
         return value;
     }
@@ -162,13 +160,8 @@ public class ConfigBuilder<T> {
         {
             ValueProvider valueProvider = field.getAnnotation(ValueProvider.class);
             Class<? extends AnnotationProcessor<ValueProvider,String,Object>> processor;
-            try {
-                processor = valueProvider.processor();
-                fieldValue = processor.newInstance().process(valueProvider, value);
-            }
-            catch (InstantiationException | IllegalAccessException e) {
-
-            }
+            processor = valueProvider.processor();
+            fieldValue = Context.getBean(processor).process(valueProvider, value);
         }
 
         return fieldValue;
