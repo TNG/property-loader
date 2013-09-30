@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class PropertySuffixProcessorTest {
 
     @Mock
-    private ConfigBuilderContext context;
+    private BuilderConfiguration context;
     @Mock
     private PropertySuffixes propertySuffixes;
     @Mock
@@ -37,7 +37,7 @@ public class PropertySuffixProcessorTest {
         when(propertySuffixes.extraSuffixes()).thenReturn(suffixes);
         when(propertySuffixes.hostNames()).thenReturn(true);
 
-        propertySuffixProcessor.configurePropertyLoader(propertySuffixes,context);
+        propertySuffixProcessor.updateBuilderConfiguration(propertySuffixes,context);
 
         verify(propertySuffix).clear();
         verify(propertySuffix).addString("suffix1");

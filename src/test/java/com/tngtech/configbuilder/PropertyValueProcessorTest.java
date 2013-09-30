@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 public class PropertyValueProcessorTest {
 
     @Mock
-    private ConfigBuilderContext context;
+    private ResultConfiguration resultConfiguration;
     @Mock
     private Properties properties;
     @Mock
@@ -27,9 +27,9 @@ public class PropertyValueProcessorTest {
 
         PropertyValueProcessor propertyValueProcessor = new PropertyValueProcessor();
 
-        when(context.getProperties()).thenReturn(properties);
+        when(resultConfiguration.getProperties()).thenReturn(properties);
         when(propertyValue.value()).thenReturn("test");
         when(properties.getProperty("test")).thenReturn("passed");
-        assertEquals("passed", propertyValueProcessor.getValue(propertyValue,context));
+        assertEquals("passed", propertyValueProcessor.getValue(propertyValue, resultConfiguration));
     }
 }

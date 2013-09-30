@@ -5,7 +5,6 @@ import com.tngtech.configbuilder.annotations.DefaultValue;
 import com.tngtech.configbuilder.annotations.PropertyValue;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.CommandLine;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -13,15 +12,12 @@ import java.util.Properties;
 
 @Component
 @Scope("prototype")
-public class ConfigBuilderContext {
+public class ResultConfiguration {
 
-    protected Properties properties;
-    protected CommandLine commandLineArgs;
-    protected PropertyLoader propertyLoader;
-    protected Class[] annotationOrder = {CommandLineValue.class, PropertyValue.class, DefaultValue.class};
+    private Properties properties;
+    private CommandLine commandLineArgs;
 
-
-    public ConfigBuilderContext() {
+    public ResultConfiguration() {
         properties = new Properties();
         commandLineArgs = null;
     }
@@ -34,10 +30,6 @@ public class ConfigBuilderContext {
         return properties;
     }
 
-    public PropertyLoader getPropertyLoader() {
-        return propertyLoader;
-    }
-
     public void setProperties(Properties properties) {
         this.properties = properties;
     }
@@ -46,11 +38,4 @@ public class ConfigBuilderContext {
         this.commandLineArgs = commandLineArgs;
     }
 
-    public void setPropertyLoader(PropertyLoader propertyLoader) {
-        this.propertyLoader = propertyLoader;
-    }
-
-    public void setAnnotationOrder(Class[] annotationOrder) {
-        this.annotationOrder = annotationOrder;
-    }
 }

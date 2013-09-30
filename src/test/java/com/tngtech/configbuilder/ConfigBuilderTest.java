@@ -26,7 +26,10 @@ public class ConfigBuilderTest {
 
 
     @Mock
-    private ConfigBuilderContext builderContext;
+    private BuilderConfiguration builderContext;
+    @Mock
+    private ResultConfiguration resultConfiguration;
+
 
     @Mock
     private MiscFactory miscFactory;
@@ -44,7 +47,7 @@ public class ConfigBuilderTest {
 
     @Before
     public void setUp(){
-        configBuilder = new ConfigBuilder<>(builderContext, miscFactory);
+        configBuilder = new ConfigBuilder<>(builderContext, resultConfiguration, miscFactory);
         properties = new Properties();
 
         when(builderContext.getPropertyLoader()).thenReturn(propertyLoader);
@@ -72,7 +75,7 @@ public class ConfigBuilderTest {
         configBuilder.forClass(Config.class).withCommandLineArgs(args);
 
         verify(options,times(2)).addOption(Matchers.any(Option.class));
-        verify(builderContext).setCommandLineArgs(commandLine);
+        verify(resultConfiguration).setCommandLineArgs(commandLine);
     }
 
     @Test

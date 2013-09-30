@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 public class CommandLineValueProcessorTest {
 
     @Mock
-    private ConfigBuilderContext context;
+    private ResultConfiguration resultConfiguration;
     @Mock
     private CommandLine commandLine;
     @Mock
@@ -26,9 +26,9 @@ public class CommandLineValueProcessorTest {
 
         CommandLineValueProcessor commandLineValueProcessor = new CommandLineValueProcessor();
 
-        when(context.getCommandLineArgs()).thenReturn(commandLine);
+        when(resultConfiguration.getCommandLineArgs()).thenReturn(commandLine);
         when(commandLineValue.shortOpt()).thenReturn("value");
         when(commandLine.getOptionValue("value")).thenReturn("passed");
-        assertEquals("passed", commandLineValueProcessor.getValue(commandLineValue, context));
+        assertEquals("passed", commandLineValueProcessor.getValue(commandLineValue, resultConfiguration));
     }
 }

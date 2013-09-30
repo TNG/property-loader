@@ -20,6 +20,6 @@ public class DecryptingFilter extends ValueModifyingFilter {
             throw new DecryptingFilterException("Decryption failed: Password not found in properties");
         }
 
-        return new Obfuscator(password,"ISO-8859-1").decrypt(encryptedValue);
+        return new Obfuscator(password).decrypt(encryptedValue);
     }
 }

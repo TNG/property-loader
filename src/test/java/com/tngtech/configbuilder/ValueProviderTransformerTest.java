@@ -1,7 +1,7 @@
 package com.tngtech.configbuilder;
 
 import com.tngtech.configbuilder.annotationprocessors.ValueProviderTransformer;
-import com.tngtech.configbuilder.annotations.ValueProvider;
+import com.tngtech.configbuilder.annotations.ValueTransformer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -23,16 +23,16 @@ public class ValueProviderTransformerTest {
     }
 
     @Mock
-    private ValueProvider valueProvider;
+    private ValueTransformer valueTransformer;
 
     @Test
     public void testValueProviderTransformer() throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException{
 
         ValueProviderTransformer valueProviderTransformer = new ValueProviderTransformer();
 
-        when(valueProvider.value()).thenReturn(ValueProviderTestClass.class);
+        when(valueTransformer.value()).thenReturn(ValueProviderTestClass.class);
 
-        assertEquals("testString", valueProviderTransformer.transformValue("fieldString", valueProvider));
+        assertEquals("testString", valueProviderTransformer.transformString(valueTransformer,"fieldString"));
 
     }
 }

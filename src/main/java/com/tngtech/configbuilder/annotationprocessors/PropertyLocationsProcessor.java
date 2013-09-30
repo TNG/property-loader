@@ -1,37 +1,23 @@
 package com.tngtech.configbuilder.annotationprocessors;
 
 
+import com.tngtech.configbuilder.BuilderConfiguration;
 import com.tngtech.configbuilder.annotations.PropertyLocations;
-import com.tngtech.configbuilder.ConfigBuilderContext;
-import com.tngtech.configbuilder.interfaces.AnnotationProcessor;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.BuilderConfigurationProcessor;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 
 @Component
-public class PropertyLocationsProcessor implements AnnotationProcessor<PropertyLocations, ConfigBuilderContext, ConfigBuilderContext> {
+public class PropertyLocationsProcessor implements BuilderConfigurationProcessor {
 
-    public ConfigBuilderContext process(PropertyLocations annotation, ConfigBuilderContext context) {
+    public void updateBuilderConfiguration(Annotation annotation, BuilderConfiguration context) {
         context.getPropertyLoader().getLocations().clear();
-        String[] locations = annotation.directories();
+        String[] locations = ((PropertyLocations)annotation).directories();
         for(String location : locations){
             context.getPropertyLoader().getLocations().atDirectory(location);
         }
-        Class[] classes = annotation.resourcesForClasses();
-        for(Class clazz : classes){
-            context.getPropertyLoader().getLocations().atRelativeToClass(clazz);
-        }
-        return context;
-    }
-
-    public void configurePropertyLoader(Annotation annotation, ConfigBuilderContext context){
-        PropertyLocations propertyLocations = (PropertyLocations)annotation;
-        context.getPropertyLoader().getLocations().clear();
-        String[] locations = propertyLocations.directories();
-        for(String location : locations){
-            context.getPropertyLoader().getLocations().atDirectory(location);
-        }
-        Class[] classes = propertyLocations.resourcesForClasses();
+        Class[] classes = ((PropertyLocations)annotation).resourcesForClasses();
         for(Class clazz : classes){
             context.getPropertyLoader().getLocations().atRelativeToClass(clazz);
         }

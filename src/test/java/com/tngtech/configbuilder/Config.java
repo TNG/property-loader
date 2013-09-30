@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.tngtech.configbuilder.annotations.*;
 import com.tngtech.configbuilder.interfaces.FieldValueProvider;
 import com.tngtech.propertyloader.PropertyLoader;
-import org.omg.CosNaming.NamingContextPackage.NotEmpty;
 
 import java.util.Collection;
 
@@ -35,7 +34,7 @@ public class Config {
 
     @LoadingOrder(value = {CommandLineValue.class})
     @CommandLineValue(shortOpt = "p", longOpt = "pidFixFactory")
-    @ValueProvider(PidFixFactory.class)
+    @ValueTransformer(PidFixFactory.class)
     private Collection<String> pidFixes;
 
     public String getValue(){

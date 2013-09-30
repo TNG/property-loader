@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class PropertiesFilesProcessorTest {
 
     @Mock
-    private ConfigBuilderContext context;
+    private BuilderConfiguration context;
     @Mock
     private PropertiesFiles propertiesFiles;
     @Mock
@@ -33,7 +33,7 @@ public class PropertiesFilesProcessorTest {
         when(context.getPropertyLoader()).thenReturn(propertyLoader);
         when(propertiesFiles.value()).thenReturn(fileNames);
 
-        propertiesFilesProcessor.configurePropertyLoader(propertiesFiles, context);
+        propertiesFilesProcessor.updateBuilderConfiguration(propertiesFiles, context);
 
         verify(propertyLoader).withBaseNames(Lists.newArrayList(fileNames));
     }

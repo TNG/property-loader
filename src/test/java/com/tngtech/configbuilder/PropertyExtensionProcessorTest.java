@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 public class PropertyExtensionProcessorTest {
 
     @Mock
-    private ConfigBuilderContext context;
+    private BuilderConfiguration context;
     @Mock
     private PropertyExtension propertyExtension;
     @Mock
@@ -30,7 +30,7 @@ public class PropertyExtensionProcessorTest {
         when(context.getPropertyLoader()).thenReturn(propertyLoader);
         when(propertyExtension.value()).thenReturn("extension");
 
-        propertyExtensionProcessor.configurePropertyLoader(propertyExtension, context);
+        propertyExtensionProcessor.updateBuilderConfiguration(propertyExtension, context);
 
         verify(propertyLoader).withExtension("extension");
     }

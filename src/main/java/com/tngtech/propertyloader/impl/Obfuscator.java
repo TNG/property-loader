@@ -17,17 +17,17 @@ public class Obfuscator {
     private static final String ENCRYPTION_ALGORITHM_MODIFIER = "/ECB/PKCS5Padding";
     private BASE64Encoder base64Encoder = new BASE64Encoder();
     private BASE64Decoder base64Decoder = new BASE64Decoder();
-    private String encoding = "ISO-8859-1";
+    private String encoding = "UTF-8";
     private SecretKeySpec dataEncryptionSecretKeySpec;
 
-    public Obfuscator(String key, String encoding){
-        byte[] salt = "kahjkshfkjh".getBytes();
+    public Obfuscator(String password){
+
+        byte[] salt = "ladphvioeawdiohvjkls".getBytes();
         SecretKeyFactory factory;
         try {
             factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            SecretKey tmp = factory.generateSecret(new PBEKeySpec(key.toCharArray(), salt, 100, 128));
+            SecretKey tmp = factory.generateSecret(new PBEKeySpec(password.toCharArray(), salt, 100, 128));
             dataEncryptionSecretKeySpec = new SecretKeySpec(tmp.getEncoded(), ENCRYPTION_ALGORITHM);
-
         } catch(Exception e){
 
         }
@@ -51,7 +51,7 @@ public class Obfuscator {
 
             return encryptedBytes;
         } catch (GeneralSecurityException e) {
-            throw new RuntimeException("Exception during encryptInternal: " + e, e);
+            throw new RuntimeException("Exception during decryptInternal: " + e, e);
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("Exception during encryptInternal: " + e, e);
         }
@@ -84,7 +84,7 @@ public class Obfuscator {
     }
 
     public static void main(String[] args) {
-        Obfuscator obfuscator = new Obfuscator("password", "ISO-8859-1");
+        Obfuscator obfuscator = new Obfuscator("password");
 
         if (args.length == 0) {
 

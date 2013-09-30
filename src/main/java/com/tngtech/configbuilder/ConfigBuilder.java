@@ -2,9 +2,14 @@ package com.tngtech.configbuilder;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.ValueExtractorProcessor;
 import com.tngtech.configbuilder.annotations.*;
+import com.tngtech.configbuilder.annotations.metaannotations.BuilderConfigurationAnnotation;
+import com.tngtech.configbuilder.annotations.metaannotations.ValueExtractorAnnotation;
+import com.tngtech.configbuilder.annotations.metaannotations.ValueTransformerAnnotation;
 import com.tngtech.configbuilder.context.Context;
-import com.tngtech.configbuilder.interfaces.AnnotationProcessor;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.BuilderConfigurationProcessor;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.ValueTransformerProcessor;
 import org.apache.commons.cli.*;
 import org.apache.log4j.Logger;
 
@@ -23,20 +28,22 @@ public class ConfigBuilder<T> {
 
     private final static Logger log = Logger.getLogger(ConfigBuilder.class);
 
-    private final ConfigBuilderContext builderContext;
+    private final BuilderConfiguration builderConfiguration;
+    private final ResultConfiguration resultConfiguration;
 
     private Class<T> configClass;
     private Map<Field,List<Annotation>> fieldConfig;
 
     private MiscFactory miscFactory;
 
-    public ConfigBuilder(ConfigBuilderContext builderContext, MiscFactory miscFactory) {
-        this.builderContext = builderContext;
+    public ConfigBuilder(BuilderConfiguration builderConfiguration, ResultConfiguration resultConfiguration, MiscFactory miscFactory) {
+        this.builderConfiguration = builderConfiguration;
+        this.resultConfiguration = resultConfiguration;
         this.miscFactory = miscFactory;
     }
 
     public ConfigBuilder() {
-        this(Context.getBean(ConfigBuilderContext.class), Context.getBean(MiscFactory.class));
+        this(Context.getBean(BuilderConfiguration.class), Context.getBean(ResultConfiguration.class), Context.getBean(MiscFactory.class));
     }
 
     public Class<T> getConfigClass() {
@@ -63,30 +70,36 @@ public class ConfigBuilder<T> {
         this.configClass = configClass;
         this.fieldConfig = Maps.newLinkedHashMap();
 
-        fillFieldMap();
         fillBuilderContext();
+
+        resultConfiguration.setProperties(builderConfiguration.getPropertyLoader().load());
+
+        fillFieldMap();
 
         return this;
     }
 
     private void fillBuilderContext() {
-        builderContext.setPropertyLoader(miscFactory.createPropertyLoader().withDefaultConfig());
-        for (Annotation annotation : configClass.getAnnotations()) {
-            Class<? extends AnnotationProcessor<Annotation,ConfigBuilderContext,ConfigBuilderContext>> processor;
-            try {
-                processor = (Class)annotation.annotationType().getMethod("processor").invoke(annotation);
-                Context.getBean(processor).process(annotation, builderContext);
-            } catch (Exception e) {
 
+        if(configClass.isAnnotationPresent(LoadingOrder.class)){
+            builderConfiguration.setAnnotationOrder(configClass.getAnnotation(LoadingOrder.class).value());
+        }
+
+        builderConfiguration.setPropertyLoader(miscFactory.createPropertyLoader().withDefaultConfig());
+
+        for (Annotation annotation : configClass.getAnnotations()) {
+            Class<? extends BuilderConfigurationProcessor> processor;
+            if(annotation.annotationType().isAnnotationPresent(BuilderConfigurationAnnotation.class)) {
+                processor = annotation.annotationType().getAnnotation(BuilderConfigurationAnnotation.class).value();
+                Context.getBean(processor).updateBuilderConfiguration(annotation, builderConfiguration);
             }
         }
-        builderContext.setProperties(builderContext.getPropertyLoader().load());
     }
 
     private void fillFieldMap() {
         for(Field field : configClass.getDeclaredFields()) {
             List<Annotation> fieldAnnotations = Lists.newArrayList();
-            Class<? extends Annotation>[] annotationOrderOfField = field.isAnnotationPresent(LoadingOrder.class) ? field.getAnnotation(LoadingOrder.class).value() : builderContext.annotationOrder;
+            Class<? extends Annotation>[] annotationOrderOfField = field.isAnnotationPresent(LoadingOrder.class) ? field.getAnnotation(LoadingOrder.class).value() : builderConfiguration.getAnnotationOrder();
             for(Class<? extends Annotation> annotationClass : annotationOrderOfField){
                 if(field.isAnnotationPresent(annotationClass)){
                     fieldAnnotations.add(field.getAnnotation(annotationClass));
@@ -112,7 +125,7 @@ public class ConfigBuilder<T> {
 
         CommandLineParser parser = miscFactory.createCommandLineParser();
         try {
-            builderContext.setCommandLineArgs(parser.parse(options, args));
+            resultConfiguration.setCommandLineArgs(parser.parse(options, args));
         } catch (ParseException e) {
 
         }
@@ -140,12 +153,10 @@ public class ConfigBuilder<T> {
         String value = null;
 
         for (Annotation annotation : fieldListEntry.getValue()) {
-            Class<? extends AnnotationProcessor<Annotation,ConfigBuilderContext,String>> processor;
-            try {
-                processor = (Class)annotation.annotationType().getMethod("processor").invoke(annotation);
-                value = Context.getBean(processor).process(annotation, builderContext);
-            } catch (Exception e) {
-
+            Class<? extends ValueExtractorProcessor> processor;
+            if(annotation.annotationType().isAnnotationPresent(ValueExtractorAnnotation.class)) {
+                processor = annotation.annotationType().getAnnotation(ValueExtractorAnnotation.class).value();
+                value = Context.getBean(processor).getValue(annotation, resultConfiguration);
             }
 
             if (value != null) break;
@@ -156,12 +167,12 @@ public class ConfigBuilder<T> {
     private Object getTransformedFieldValueIfApplicable(Field field, String value) {
         Object fieldValue = value;
 
-        if (field.isAnnotationPresent(ValueProvider.class))
+        if (field.isAnnotationPresent(ValueTransformer.class))
         {
-            ValueProvider valueProvider = field.getAnnotation(ValueProvider.class);
-            Class<? extends AnnotationProcessor<ValueProvider,String,Object>> processor;
-            processor = valueProvider.processor();
-            fieldValue = Context.getBean(processor).process(valueProvider, value);
+            ValueTransformer valueTransformer = field.getAnnotation(ValueTransformer.class);
+            Class<? extends ValueTransformerProcessor<Object>> processor;
+            processor = valueTransformer.annotationType().getAnnotation(ValueTransformerAnnotation.class).value();
+            fieldValue = Context.getBean(processor).transformString(valueTransformer, value);
         }
 
         return fieldValue;

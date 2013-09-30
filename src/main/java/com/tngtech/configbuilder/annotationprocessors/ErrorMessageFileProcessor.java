@@ -1,16 +1,17 @@
 package com.tngtech.configbuilder.annotationprocessors;
 
 import com.google.common.collect.Lists;
-import com.tngtech.configbuilder.ConfigBuilderContext;
+import com.tngtech.configbuilder.BuilderConfiguration;
 import com.tngtech.configbuilder.annotations.ErrorMessageFile;
-import com.tngtech.configbuilder.interfaces.AnnotationProcessor;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.BuilderConfigurationProcessor;
 import org.springframework.stereotype.Component;
 
-@Component
-public class ErrorMessageFileProcessor implements AnnotationProcessor<ErrorMessageFile,ConfigBuilderContext,ConfigBuilderContext> {
+import java.lang.annotation.Annotation;
 
-    public ConfigBuilderContext process(ErrorMessageFile annotation, ConfigBuilderContext context) {
-        context.getPropertyLoader().withBaseNames(Lists.newArrayList(annotation.value()));
-        return context;
+@Component
+public class ErrorMessageFileProcessor implements BuilderConfigurationProcessor {
+
+    public void updateBuilderConfiguration(Annotation annotation, BuilderConfiguration builderConfiguration) {
+        builderConfiguration.getPropertyLoader().withBaseNames(Lists.newArrayList(((ErrorMessageFile)annotation).value()));
     }
 }
