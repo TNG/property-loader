@@ -6,6 +6,8 @@ import com.tngtech.configbuilder.annotations.PropertyValue;
 import org.apache.commons.cli.CommandLine;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import java.lang.annotation.Annotation;
 import java.util.Properties;
 
 @Component
@@ -14,7 +16,7 @@ public class BuilderConfiguration {
 
     private Properties properties;
     private CommandLine commandLineArgs;
-    private Class[] annotationOrder = new Class[]{CommandLineValue.class, PropertyValue.class, DefaultValue.class};
+    private Class<? extends Annotation>[] annotationOrder = new Class[]{CommandLineValue.class, PropertyValue.class, DefaultValue.class};
 
     public BuilderConfiguration() {
         properties = new Properties();
@@ -37,11 +39,11 @@ public class BuilderConfiguration {
         this.commandLineArgs = commandLineArgs;
     }
 
-    public void setAnnotationOrder(Class[] annotationOrder) {
+    public void setAnnotationOrder(Class<? extends Annotation>[] annotationOrder) {
         this.annotationOrder = annotationOrder;
     }
 
-    public Class[] getAnnotationOrder(){
+    public Class<? extends Annotation>[] getAnnotationOrder(){
         return annotationOrder;
     }
 }

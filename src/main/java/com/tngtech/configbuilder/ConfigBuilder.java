@@ -69,7 +69,7 @@ public class ConfigBuilder<T> {
     private PropertyLoader configurePropertyLoader() {
 
         PropertyLoader propertyLoader = miscFactory.createPropertyLoader().withDefaultConfig();
-        for (Annotation annotation : annotationUtils.getAnnotationsOfType(configClass,PropertyLoaderConfigurationAnnotation.class)) {
+        for (Annotation annotation : annotationUtils.getAnnotationsOfType(configClass.getDeclaredAnnotations(),PropertyLoaderConfigurationAnnotation.class)) {
             Class<? extends IBuilderConfigurationProcessor> processor;
             processor = annotation.annotationType().getAnnotation(PropertyLoaderConfigurationAnnotation.class).value();
             Context.getBean(processor).configurePropertyLoader(annotation, propertyLoader);

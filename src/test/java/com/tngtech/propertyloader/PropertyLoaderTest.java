@@ -264,6 +264,7 @@ public class PropertyLoaderTest {
         Stack<String> fileNameStack = new Stack<>();
         when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);
         when(propertyLoaderFactory.getEmptyFileNameStack()).thenReturn(fileNameStack);
+        when(propertyLoaderFactory.getStringBuilder()).thenReturn(new StringBuilder());
         List<String> fileNames = Lists.newArrayList("file1.properties", "file2.properties");
         ArrayList<String> suffixes = Lists.newArrayList();
         when(propertySuffix.getSuffixes()).thenReturn(suffixes);

@@ -14,9 +14,11 @@ import static org.reflections.ReflectionUtils.withAnnotation;
 
 @Component
 public class AnnotationUtils {
-    public List<Annotation> getAnnotationsOfType(Field field, Class annotationClass){
+
+
+    public List<Annotation> getAnnotationsOfType(Annotation[] annotations, Class<? extends Annotation> annotationClass){
         List<Annotation> result = Lists.newArrayList();
-        for(Annotation annotation : field.getDeclaredAnnotations()){
+        for(Annotation annotation : annotations){
             if(annotation.annotationType().isAnnotationPresent(annotationClass)){
                 result.add(annotation);
             }
@@ -24,19 +26,9 @@ public class AnnotationUtils {
         return result;
     }
 
-    public List<Annotation> getAnnotationsOfType(Class clazz, Class annotationClass){
+    public List<Annotation> getAnnotationsInOrder(Field field, Class<? extends Annotation>[] annotationOrder){
         List<Annotation> result = Lists.newArrayList();
-        for(Annotation annotation : clazz.getDeclaredAnnotations()){
-            if(annotation.annotationType().isAnnotationPresent(annotationClass)){
-                result.add(annotation);
-            }
-        }
-        return result;
-    }
-
-    public List<Annotation> getAnnotationsInOrder(Field field, Class[] annotationOrder){
-        List<Annotation> result = Lists.newArrayList();
-        for(Class annotationClass : annotationOrder){
+        for(Class<? extends Annotation> annotationClass : annotationOrder){
             if(field.isAnnotationPresent(annotationClass)){
                 result.add(field.getAnnotation(annotationClass));
             }
@@ -44,7 +36,7 @@ public class AnnotationUtils {
         return result;
     }
 
-    public Set<Field> getFieldsAnnotatedWith(Class clazz, Class annotationClass){
+    public Set<Field> getFieldsAnnotatedWith(Class clazz, Class<? extends Annotation> annotationClass){
         return getAllFields(clazz, withAnnotation(annotationClass));
     }
 }

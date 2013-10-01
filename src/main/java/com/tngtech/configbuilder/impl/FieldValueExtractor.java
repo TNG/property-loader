@@ -25,7 +25,7 @@ public class FieldValueExtractor {
     public Object extractValue(Field field, BuilderConfiguration builderConfiguration) {
 
         String value = null;
-        Class[] annotationOrderOfField = field.isAnnotationPresent(LoadingOrder.class) ? field.getAnnotation(LoadingOrder.class).value() : builderConfiguration.getAnnotationOrder();
+        Class<? extends Annotation>[] annotationOrderOfField = field.isAnnotationPresent(LoadingOrder.class) ? field.getAnnotation(LoadingOrder.class).value() : builderConfiguration.getAnnotationOrder();
         Class<? extends IValueExtractorProcessor> processor;
 
         for (Annotation annotation : annotationUtils.getAnnotationsInOrder(field, annotationOrderOfField)) {
@@ -41,7 +41,7 @@ public class FieldValueExtractor {
         Object fieldValue = value;
         Class<? extends IValueTransformerProcessor<Object>> processor;
 
-        for(Annotation annotation : annotationUtils.getAnnotationsOfType(field, ValueTransformerAnnotation.class)){
+        for(Annotation annotation : annotationUtils.getAnnotationsOfType(field.getDeclaredAnnotations(), ValueTransformerAnnotation.class)){
             processor = annotation.annotationType().getAnnotation(ValueTransformerAnnotation.class).value();
             fieldValue = Context.getBean(processor).transformString(annotation, value);
         }
