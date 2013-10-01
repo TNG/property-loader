@@ -20,9 +20,8 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class ConfigBuilderTest {
 
-    private ConfigBuilder<Config> configBuilder;
+    private ConfigBuilder<TestConfig> configBuilder;
     private Properties properties;
-
 
     @Mock
     private BuilderConfiguration builderConfiguration;
@@ -52,7 +51,7 @@ public class ConfigBuilderTest {
 
     @Before
     public void setUp(){
-        configBuilder = new ConfigBuilder<>(Config.class, builderConfiguration, annotationUtils, commandLineHelper, jsrValidator, fieldSetter, miscFactory);
+        configBuilder = new ConfigBuilder<>(TestConfig.class, builderConfiguration, annotationUtils, commandLineHelper, jsrValidator, fieldSetter, miscFactory);
         properties = new Properties();
 
         when(miscFactory.createPropertyLoader()).thenReturn(propertyLoader);

@@ -5,6 +5,6 @@ import com.tngtech.configbuilder.impl.BuilderConfiguration;
 
 import java.lang.annotation.Annotation;
 
-public interface ValueExtractorProcessor {
+public interface IValueExtractorProcessor {
     public String getValue(Annotation annotation, BuilderConfiguration argument);
 }

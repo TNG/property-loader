@@ -1,4 +1,4 @@
-package com.tngtech.configbuilder;
+package com.tngtech.configbuilder.annotationprocessors;
 
 import com.tngtech.configbuilder.annotationprocessors.CommandLineValueProcessor;
 import com.tngtech.configbuilder.annotations.CommandLineValue;

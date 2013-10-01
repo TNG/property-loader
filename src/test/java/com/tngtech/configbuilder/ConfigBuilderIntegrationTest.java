@@ -8,18 +8,18 @@ import static org.junit.Assert.assertTrue;
 
 public class ConfigBuilderIntegrationTest {
 
-    private ConfigBuilder<Config> configBuilder;
+    private ConfigBuilder<TestConfig> configBuilder;
 
     @Before
     public void setUp(){
 
-        configBuilder = new ConfigBuilder<>(Config.class);
+        configBuilder = new ConfigBuilder<>(TestConfig.class);
     }
 
     @org.junit.Test
     public void TestConfigBuilder(){
         String[] args = new String[]{"-u", "Mueller", "--pidFixFactory", "PIDs fixed with"};
-        Config c = configBuilder.withCommandLineArgs(args).build();
+        TestConfig c = configBuilder.withCommandLineArgs(args).build();
         System.out.println(c.getValue());
         System.out.println(c.getHelloWorld());
         System.out.println(c.getSurName());

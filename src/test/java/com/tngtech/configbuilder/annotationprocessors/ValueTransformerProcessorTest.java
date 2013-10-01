@@ -1,6 +1,5 @@
-package com.tngtech.configbuilder;
+package com.tngtech.configbuilder.annotationprocessors;
 
-import com.tngtech.configbuilder.annotationprocessors.ValueProviderTransformer;
 import com.tngtech.configbuilder.annotations.ValueTransformer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ValueProviderTransformerTest {
+public class ValueTransformerProcessorTest {
 
     public static class ValueProviderTestClass {
         public Object getValue(String fieldString) {
@@ -28,11 +27,11 @@ public class ValueProviderTransformerTest {
     @Test
     public void testValueProviderTransformer() throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException{
 
-        ValueProviderTransformer valueProviderTransformer = new ValueProviderTransformer();
+        ValueTransformerProcessor valueTransformerProcessor = new ValueTransformerProcessor();
 
         when(valueTransformer.value()).thenReturn(ValueProviderTestClass.class);
 
-        assertEquals("testString", valueProviderTransformer.transformString(valueTransformer,"fieldString"));
+        assertEquals("testString", valueTransformerProcessor.transformString(valueTransformer,"fieldString"));
 
     }
 }

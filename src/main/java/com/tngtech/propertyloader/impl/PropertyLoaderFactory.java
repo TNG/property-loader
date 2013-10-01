@@ -69,4 +69,8 @@ public class PropertyLoaderFactory {
     public Stack<String> getEmptyFileNameStack() {
         return new Stack<>();
     }
+
+    public StringBuilder getStringBuilder() {
+        return new StringBuilder();
+    }
 }

@@ -1,8 +1,8 @@
 package com.tngtech.configbuilder.impl;
 
 
-import com.tngtech.configbuilder.ConfigBuilder;
-import org.apache.log4j.Logger;
+import com.tngtech.configbuilder.ConfigBuilderException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintViolation;
@@ -14,14 +14,23 @@ import java.util.Set;
 @Component
 public class JSRValidator<T> {
 
-    private final static Logger log = Logger.getLogger(ConfigBuilder.class);
+    private final MiscFactory miscFactory;
+
+    @Autowired
+    public JSRValidator(MiscFactory miscFactory) {
+        this.miscFactory = miscFactory;
+    }
 
     public void validate(T instanceOfConfigClass) {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(instanceOfConfigClass);
-        for(ConstraintViolation constraintViolation : constraintViolations){
-            log.warn(constraintViolation.getMessage());
+        if(!constraintViolations.isEmpty()){
+            StringBuilder sb = miscFactory.getStringBuilder();
+            for(ConstraintViolation constraintViolation : constraintViolations){
+                sb.append(constraintViolation.toString() + "\n");
+            }
+            throw new ConfigBuilderException(sb.toString());
         }
     }
 }

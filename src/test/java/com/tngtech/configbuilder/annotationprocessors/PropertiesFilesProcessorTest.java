@@ -1,4 +1,4 @@
-package com.tngtech.configbuilder;
+package com.tngtech.configbuilder.annotationprocessors;
 
 import com.google.common.collect.Lists;
 import com.tngtech.configbuilder.annotationprocessors.PropertiesFilesProcessor;

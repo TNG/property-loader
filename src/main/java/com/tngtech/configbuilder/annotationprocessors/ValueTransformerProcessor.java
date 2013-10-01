@@ -1,8 +1,8 @@
 package com.tngtech.configbuilder.annotationprocessors;
 
 import com.tngtech.configbuilder.ConfigBuilderException;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.IValueTransformerProcessor;
 import com.tngtech.configbuilder.annotations.ValueTransformer;
-import com.tngtech.configbuilder.annotationprocessors.interfaces.ValueTransformerProcessor;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -10,7 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 @Component
-public class ValueProviderTransformer implements ValueTransformerProcessor<Object> {
+public class ValueTransformerProcessor implements IValueTransformerProcessor<Object> {
 
     public Object transformString(Annotation annotation, String fieldString) {
         Class valueProvidingClass = ((ValueTransformer)annotation).value();

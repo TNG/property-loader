@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ConfigLoaderTest {
+public class ConfigBuilderComponentTest {
 
     private Properties properties;
     private Properties errors;
@@ -43,7 +43,7 @@ public class ConfigLoaderTest {
     @Test
     public void testThatCommandLineValueHandlerLoadsStringFromAnnotation(){
         try{
-            CommandLineValue commandLineValue = Config.class.getDeclaredField("surName").getAnnotation(CommandLineValue.class);
+            CommandLineValue commandLineValue = TestConfig.class.getDeclaredField("surName").getAnnotation(CommandLineValue.class);
 
             String[] args = new String[]{"-u", "Mueller"};
             Options options = new Options();
@@ -66,7 +66,7 @@ public class ConfigLoaderTest {
     @Test
     public void testThatPropertyValueHandlerLoadsStringFromAnnotation(){
         try{
-            PropertyValue propertyValue = Config.class.getDeclaredField("helloWorld").getAnnotation(PropertyValue.class);
+            PropertyValue propertyValue = TestConfig.class.getDeclaredField("helloWorld").getAnnotation(PropertyValue.class);
             Properties properties = new Properties();
             PropertyValueProcessor propertyValueProcessor = new PropertyValueProcessor();
             when(builderConfiguration.getProperties()).thenReturn(properties);
@@ -80,7 +80,7 @@ public class ConfigLoaderTest {
     @Test
     public void testThatDefaultValueHandlerLoadsStringFromAnnotation(){
         try{
-            DefaultValue defaultValue = Config.class.getDeclaredField("userName").getAnnotation(DefaultValue.class);
+            DefaultValue defaultValue = TestConfig.class.getDeclaredField("userName").getAnnotation(DefaultValue.class);
             DefaultValueProcessor defaultValueProcessor = new DefaultValueProcessor();
             String result =  defaultValueProcessor.getValue(defaultValue, builderConfiguration);
             assertEquals("user",result);

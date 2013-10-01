@@ -240,7 +240,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
 
     private void throwIfRecursionInIncludes(String fileName) {
         if (fileNameStack.contains(fileName)) {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = propertyLoaderFactory.getStringBuilder();
             sb.append("property file include recursion: ");
             Enumeration<String> elements = fileNameStack.elements();
             while (elements.hasMoreElements()) {

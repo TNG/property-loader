@@ -12,7 +12,7 @@ import java.util.Collection;
 @PropertyLocations(resourcesForClasses = {PropertyLoader.class})
 @PropertiesFiles("demoapp-configuration")
 @LoadingOrder(value = {CommandLineValue.class, PropertyValue.class, DefaultValue.class})
-public class Config {
+public class TestConfig {
 
     public static class PidFixFactory implements FieldValueProvider<Collection<String>> {
 

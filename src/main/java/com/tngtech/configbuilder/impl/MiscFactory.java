@@ -9,10 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MiscFactory {
 
-    public JSRValidator getJSRValidator(){
-        return new JSRValidator();
-    }
-
     public CommandLineParser createCommandLineParser() {
         return new GnuParser();
     }
@@ -23,5 +19,9 @@ public class MiscFactory {
 
     public PropertyLoader createPropertyLoader() {
         return new PropertyLoader();
+    }
+
+    public StringBuilder getStringBuilder() {
+        return new StringBuilder();
     }
 }

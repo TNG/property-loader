@@ -3,11 +3,9 @@ package com.tngtech.configbuilder.impl;
 import com.tngtech.configbuilder.annotations.CommandLineValue;
 import com.tngtech.configbuilder.annotations.DefaultValue;
 import com.tngtech.configbuilder.annotations.PropertyValue;
-import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.CommandLine;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import java.util.Properties;
 
 @Component
