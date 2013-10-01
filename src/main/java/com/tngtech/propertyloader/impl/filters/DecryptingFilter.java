@@ -1,6 +1,6 @@
 package com.tngtech.propertyloader.impl.filters;
 
-import com.tngtech.propertyloader.impl.Obfuscator;
+import com.tngtech.obfuscator.Obfuscator;
 
 import java.util.Properties;
 
