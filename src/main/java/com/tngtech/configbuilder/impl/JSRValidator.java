@@ -25,7 +25,7 @@ public class JSRValidator<T> {
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(instanceOfConfigClass);
         if(!constraintViolations.isEmpty()){
-            StringBuilder sb = miscFactory.getStringBuilder();
+            StringBuilder sb = miscFactory.createStringBuilder();
             sb.append("\n" + "Validation found the following constraint violations:");
             for(ConstraintViolation constraintViolation : constraintViolations){
                 sb.append("\n" + constraintViolation.getMessage());

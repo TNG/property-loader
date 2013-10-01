@@ -53,7 +53,7 @@ public class JSRValidatorTest {
         constraintViolations.add(constraintViolation2);
 
         when(miscFactory.getValidatorFactory()).thenReturn(validatorFactory);
-        when(miscFactory.getStringBuilder()).thenReturn(new StringBuilder());
+        when(miscFactory.createStringBuilder()).thenReturn(new StringBuilder());
         when(validatorFactory.getValidator()).thenReturn(validator);
         when(validator.validate(testConfig)).thenReturn(constraintViolations);
         when(constraintViolation1.getMessage()).thenReturn("Constraint Violation 1");

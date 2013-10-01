@@ -1,6 +1,5 @@
 package com.tngtech.configbuilder.annotationprocessors;
 
-import com.tngtech.configbuilder.annotationprocessors.PropertySuffixProcessor;
 import com.tngtech.configbuilder.annotations.PropertySuffixes;
 import com.tngtech.propertyloader.PropertyLoader;
 import com.tngtech.propertyloader.impl.DefaultPropertySuffixContainer;

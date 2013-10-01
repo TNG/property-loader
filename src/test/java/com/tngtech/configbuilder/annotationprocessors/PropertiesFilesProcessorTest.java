@@ -1,7 +1,6 @@
 package com.tngtech.configbuilder.annotationprocessors;
 
 import com.google.common.collect.Lists;
-import com.tngtech.configbuilder.annotationprocessors.PropertiesFilesProcessor;
 import com.tngtech.configbuilder.annotations.PropertiesFiles;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.junit.Test;

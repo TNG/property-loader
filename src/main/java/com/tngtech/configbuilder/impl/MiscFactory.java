@@ -24,7 +24,7 @@ public class MiscFactory {
         return new PropertyLoader();
     }
 
-    public StringBuilder getStringBuilder() {
+    public StringBuilder createStringBuilder() {
         return new StringBuilder();
     }
 

@@ -1,6 +1,5 @@
 package com.tngtech.configbuilder.annotationprocessors;
 
-import com.tngtech.configbuilder.annotationprocessors.PropertyValueProcessor;
 import com.tngtech.configbuilder.annotations.PropertyValue;
 import com.tngtech.configbuilder.impl.BuilderConfiguration;
 import org.junit.Test;
