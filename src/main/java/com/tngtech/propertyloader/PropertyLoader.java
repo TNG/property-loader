@@ -195,6 +195,11 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
         return this;
     }
 
+    public PropertyLoader withDecryptingFilter() {
+        propertyLoaderFilters.withDecryptingFilter();
+        return this;
+    }
+
     public Properties load(String baseName) {
         fileNameStack = propertyLoaderFactory.getEmptyFileNameStack();
 

@@ -1,4 +1,4 @@
-package com.tngtech.infrastructure;
+package com.tngtech.obfuscator;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -22,14 +22,14 @@ public class Obfuscator {
 
     public Obfuscator(String password){
 
-        byte[] salt = "ladphvioeawdiohvjkls".getBytes();
+        byte[] salt = {65,110,100,114,111,105,100,75,105,116,75,97,116,13,1,20,20,9,1,19};
         SecretKeyFactory factory;
         try {
             factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
             SecretKey tmp = factory.generateSecret(new PBEKeySpec(password.toCharArray(), salt, 100, 128));
             dataEncryptionSecretKeySpec = new SecretKeySpec(tmp.getEncoded(), ENCRYPTION_ALGORITHM);
         } catch(Exception e){
-
+            throw new RuntimeException(e);
         }
     }
 
@@ -47,9 +47,7 @@ public class Obfuscator {
 
             Cipher cipher = Cipher.getInstance(ENCRYPTION_ALGORITHM + ENCRYPTION_ALGORITHM_MODIFIER);
             cipher.init(Cipher.ENCRYPT_MODE, key);
-            byte[] encryptedBytes = cipher.doFinal(toEncrypt.getBytes(encoding));
-
-            return encryptedBytes;
+            return cipher.doFinal(toEncrypt.getBytes(encoding));
         } catch (GeneralSecurityException e) {
             throw new RuntimeException("Exception during decryptInternal: " + e, e);
         } catch (UnsupportedEncodingException e) {

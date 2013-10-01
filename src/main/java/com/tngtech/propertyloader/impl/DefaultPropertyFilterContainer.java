@@ -31,7 +31,13 @@ public class DefaultPropertyFilterContainer implements PropertyFilterContainer<D
         return this.withVariableResolvingFilter()
                 .withEnvironmentResolvingFilter()
                 .withWarnIfPropertyHasToBeDefined()
-                .withWarnOnSurroundingWhitespace();
+                .withWarnOnSurroundingWhitespace()
+                .withDecryptingFilter();
+    }
+
+    public DefaultPropertyFilterContainer withDecryptingFilter() {
+        filters.add(propertyLoaderFactory.getDecryptingFilter());
+        return this;
     }
 
     public DefaultPropertyFilterContainer withVariableResolvingFilter() {

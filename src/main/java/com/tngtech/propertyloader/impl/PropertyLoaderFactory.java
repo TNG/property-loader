@@ -1,9 +1,6 @@
 package com.tngtech.propertyloader.impl;
 
-import com.tngtech.propertyloader.impl.filters.EnvironmentResolvingFilter;
-import com.tngtech.propertyloader.impl.filters.WarnIfPropertyHasToBeDefined;
-import com.tngtech.propertyloader.impl.filters.VariableResolvingFilter;
-import com.tngtech.propertyloader.impl.filters.WarnOnSurroundingWhitespace;
+import com.tngtech.propertyloader.impl.filters.*;
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderFilter;
 import com.tngtech.propertyloader.impl.openers.*;
 import org.springframework.stereotype.Component;
@@ -72,5 +69,9 @@ public class PropertyLoaderFactory {
 
     public StringBuilder getStringBuilder() {
         return new StringBuilder();
+    }
+
+    public PropertyLoaderFilter getDecryptingFilter() {
+        return new DecryptingFilter();
     }
 }
