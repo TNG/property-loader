@@ -56,7 +56,7 @@ public class PropertyLoaderFactory {
     }
 
     public PropertyLoaderFilter getWarnIfPropertyHasToBeDefined(){
-        return new WarnIfPropertyHasToBeDefined();
+        return new ThrowIfPropertyHasToBeDefined();
     }
 
     public PropertyLoaderFilter getWarnOnSurroundingWhitespace(){

@@ -1,8 +1,8 @@
 package com.tngtech.propertyloader.impl;
 
 import com.tngtech.propertyloader.impl.filters.EnvironmentResolvingFilter;
+import com.tngtech.propertyloader.impl.filters.ThrowIfPropertyHasToBeDefined;
 import com.tngtech.propertyloader.impl.filters.VariableResolvingFilter;
-import com.tngtech.propertyloader.impl.filters.WarnIfPropertyHasToBeDefined;
 import com.tngtech.propertyloader.impl.filters.WarnOnSurroundingWhitespace;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +30,7 @@ public class DefaultPropertyFilterContainerTest {
     @Mock
     private WarnOnSurroundingWhitespace warnOnSurroundingWhitespace;
     @Mock
-    private WarnIfPropertyHasToBeDefined warnIfPropertyHasToBeDefined;
+    private ThrowIfPropertyHasToBeDefined throwIfPropertyHasToBeDefined;
 
     @Before
     public void setUp() throws MalformedURLException {
@@ -38,7 +38,7 @@ public class DefaultPropertyFilterContainerTest {
         when(propertyLoaderFactory.getVariableResolvingFilter()).thenReturn(variableResolvingFilter);
         when(propertyLoaderFactory.getEnvironmentResolvingFilter()).thenReturn(environmentResolvingFilter);
         when(propertyLoaderFactory.getWarnOnSurroundingWhitespace()).thenReturn(warnOnSurroundingWhitespace);
-        when(propertyLoaderFactory.getWarnIfPropertyHasToBeDefined()).thenReturn(warnIfPropertyHasToBeDefined);
+        when(propertyLoaderFactory.getWarnIfPropertyHasToBeDefined()).thenReturn(throwIfPropertyHasToBeDefined);
 
     }
 
@@ -67,7 +67,7 @@ public class DefaultPropertyFilterContainerTest {
     @Test
     public void testWithWarnIfPropertyHasToBeDefined() throws Exception {
         assertEquals(propertyFilter, propertyFilter.withWarnIfPropertyHasToBeDefined());
-        assertTrue(propertyFilter.getFilters().contains(warnIfPropertyHasToBeDefined));
+        assertTrue(propertyFilter.getFilters().contains(throwIfPropertyHasToBeDefined));
     }
 
     @Test

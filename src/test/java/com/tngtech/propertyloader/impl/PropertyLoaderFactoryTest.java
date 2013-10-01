@@ -1,8 +1,8 @@
 package com.tngtech.propertyloader.impl;
 
 import com.tngtech.propertyloader.impl.filters.EnvironmentResolvingFilter;
+import com.tngtech.propertyloader.impl.filters.ThrowIfPropertyHasToBeDefined;
 import com.tngtech.propertyloader.impl.filters.VariableResolvingFilter;
-import com.tngtech.propertyloader.impl.filters.WarnIfPropertyHasToBeDefined;
 import com.tngtech.propertyloader.impl.filters.WarnOnSurroundingWhitespace;
 import com.tngtech.propertyloader.impl.openers.ClassLoaderOpener;
 import com.tngtech.propertyloader.impl.openers.ContextClassLoaderOpener;
@@ -90,7 +90,7 @@ public class PropertyLoaderFactoryTest {
 
     @Test
     public void testGetWarnIfPropertyHasToBeDefined() throws Exception {
-        assertTrue(propertyLoaderFactory.getWarnIfPropertyHasToBeDefined().getClass().equals(WarnIfPropertyHasToBeDefined.class));
+        assertTrue(propertyLoaderFactory.getWarnIfPropertyHasToBeDefined().getClass().equals(ThrowIfPropertyHasToBeDefined.class));
     }
 
     @Test

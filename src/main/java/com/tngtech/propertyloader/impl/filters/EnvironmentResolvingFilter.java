@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class EnvironmentResolvingFilter extends ValueModifyingFilter {
 
-    private final static Logger log = Logger.getLogger(WarnOnSurroundingWhitespace.class);
+    private final static Logger log = Logger.getLogger(EnvironmentResolvingFilter.class);
 
     private static final Pattern PATTERN = Pattern.compile("\\$ENV\\{(.*)\\}");
 
