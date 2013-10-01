@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.Set;
@@ -22,13 +21,14 @@ public class JSRValidator<T> {
     }
 
     public void validate(T instanceOfConfigClass) {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        ValidatorFactory factory = miscFactory.getValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(instanceOfConfigClass);
         if(!constraintViolations.isEmpty()){
             StringBuilder sb = miscFactory.getStringBuilder();
+            sb.append("\n" + "Validation found the following constraint violations:");
             for(ConstraintViolation constraintViolation : constraintViolations){
-                sb.append(constraintViolation.toString() + "\n");
+                sb.append("\n" + constraintViolation.getMessage());
             }
             throw new ConfigBuilderException(sb.toString());
         }

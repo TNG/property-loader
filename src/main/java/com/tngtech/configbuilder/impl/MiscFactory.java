@@ -6,6 +6,9 @@ import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.Options;
 import org.springframework.stereotype.Component;
 
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
+
 @Component
 public class MiscFactory {
 
@@ -23,5 +26,9 @@ public class MiscFactory {
 
     public StringBuilder getStringBuilder() {
         return new StringBuilder();
+    }
+
+    public ValidatorFactory getValidatorFactory() {
+        return Validation.buildDefaultValidatorFactory();
     }
 }
