@@ -39,6 +39,8 @@ public class JSRValidatorTest {
     private ConstraintViolation constraintViolation1;
     @Mock
     private ConstraintViolation constraintViolation2;
+    @Mock
+    private ErrorMessageSetup errorMessageSetup;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -46,7 +48,7 @@ public class JSRValidatorTest {
     @Before
     public void setUp() throws Exception {
 
-        jsrValidator = new JSRValidator<>(miscFactory);
+        jsrValidator = new JSRValidator<>(miscFactory, errorMessageSetup);
 
         Set<ConstraintViolation<TestConfig>> constraintViolations = Sets.newHashSet();
         constraintViolations.add(constraintViolation1);
@@ -56,8 +58,10 @@ public class JSRValidatorTest {
         when(miscFactory.createStringBuilder()).thenReturn(new StringBuilder());
         when(validatorFactory.getValidator()).thenReturn(validator);
         when(validator.validate(testConfig)).thenReturn(constraintViolations);
-        when(constraintViolation1.getMessage()).thenReturn("Constraint Violation 1");
-        when(constraintViolation2.getMessage()).thenReturn("Constraint Violation 2");
+        when(constraintViolation1.getMessage()).thenReturn("ConstraintViolation1");
+        when(constraintViolation2.getMessage()).thenReturn("ConstraintViolation2");
+        when(errorMessageSetup.getString("ConstraintViolation1")).thenReturn("Constraint Violation 1");
+        when(errorMessageSetup.getString("ConstraintViolation2")).thenReturn("Constraint Violation 2");
     }
 
     @Test

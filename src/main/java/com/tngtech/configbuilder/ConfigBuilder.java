@@ -1,44 +1,42 @@
 package com.tngtech.configbuilder;
 
-import com.tngtech.configbuilder.annotationprocessors.interfaces.IBuilderConfigurationProcessor;
+import com.tngtech.configbuilder.annotations.ErrorMessageFile;
 import com.tngtech.configbuilder.annotations.LoadingOrder;
-import com.tngtech.configbuilder.annotations.metaannotations.PropertyLoaderConfigurationAnnotation;
 import com.tngtech.configbuilder.context.Context;
 import com.tngtech.configbuilder.impl.*;
-import com.tngtech.propertyloader.PropertyLoader;
-
-import java.lang.annotation.Annotation;
 
 public class ConfigBuilder<T> {
 
     private final BuilderConfiguration builderConfiguration;
-    private final AnnotationUtils annotationUtils;
+    private final PropertyLoaderConfigurator propertyLoaderConfigurator;
     private final CommandLineHelper commandLineHelper;
     private final FieldSetter<T> fieldSetter;
     private final JSRValidator<T> jsrValidator;
-    private final MiscFactory miscFactory;
+    private final ErrorMessageSetup errorMessageSetup;
 
     private Class<T> configClass;
     private String[] commandLineArgs;
 
-    public ConfigBuilder(Class<T> configClass, BuilderConfiguration builderConfiguration, AnnotationUtils annotationUtils, CommandLineHelper commandLineHelper, JSRValidator<T> jsrValidator, FieldSetter<T> fieldSetter, MiscFactory miscFactory) {
+    public ConfigBuilder(Class<T> configClass, BuilderConfiguration builderConfiguration, PropertyLoaderConfigurator propertyLoaderConfigurator, CommandLineHelper commandLineHelper, JSRValidator<T> jsrValidator, FieldSetter<T> fieldSetter, ErrorMessageSetup errorMessageSetup) {
         this.configClass = configClass;
         this.builderConfiguration = builderConfiguration;
-        this.annotationUtils = annotationUtils;
+        this.propertyLoaderConfigurator = propertyLoaderConfigurator;
         this.commandLineHelper = commandLineHelper;
         this.jsrValidator = jsrValidator;
         this.fieldSetter = fieldSetter;
-        this.miscFactory = miscFactory;
+        this.errorMessageSetup = errorMessageSetup;
+
+        if(configClass.isAnnotationPresent(ErrorMessageFile.class)) this.errorMessageSetup.initialize(configClass.getAnnotation(ErrorMessageFile.class).value());
     }
 
     public ConfigBuilder(Class<T> configClass) {
         this(configClass,
                 Context.getBean(BuilderConfiguration.class),
-                Context.getBean(AnnotationUtils.class),
+                Context.getBean(PropertyLoaderConfigurator.class),
                 Context.getBean(CommandLineHelper.class),
                 Context.getBean(JSRValidator.class),
                 Context.getBean(FieldSetter.class),
-                Context.getBean(MiscFactory.class));
+                Context.getBean(ErrorMessageSetup.class));
     }
 
     public ConfigBuilder<T> withCommandLineArgs(String[] args) {
@@ -54,26 +52,17 @@ public class ConfigBuilder<T> {
             fieldSetter.setFields(instanceOfConfigClass, builderConfiguration);
             jsrValidator.validate(instanceOfConfigClass);
             return instanceOfConfigClass;
-        } catch (InstantiationException | IllegalAccessException e) {
-            throw new ConfigBuilderException(e);
+        } catch (InstantiationException e) {
+            throw new ConfigBuilderException(errorMessageSetup.getString("instantiationException") + e);
+        }
+        catch (IllegalAccessException e) {
+            throw new ConfigBuilderException(errorMessageSetup.getString("illegalAccessExceptionInstantiatingConfig") + e);
         }
     }
 
     private void setupBuilderConfiguration() {
-
-        builderConfiguration.setCommandLineArgs(commandLineHelper.getCommandLine(configClass, commandLineArgs));
-        builderConfiguration.setProperties(configurePropertyLoader().load());
         if(configClass.isAnnotationPresent(LoadingOrder.class)) builderConfiguration.setAnnotationOrder(configClass.getAnnotation(LoadingOrder.class).value());
-    }
-
-    private PropertyLoader configurePropertyLoader() {
-
-        PropertyLoader propertyLoader = miscFactory.createPropertyLoader().withDefaultConfig();
-        for (Annotation annotation : annotationUtils.getAnnotationsOfType(configClass.getDeclaredAnnotations(),PropertyLoaderConfigurationAnnotation.class)) {
-            Class<? extends IBuilderConfigurationProcessor> processor;
-            processor = annotation.annotationType().getAnnotation(PropertyLoaderConfigurationAnnotation.class).value();
-            Context.getBean(processor).configurePropertyLoader(annotation, propertyLoader);
-        }
-        return propertyLoader;
+        builderConfiguration.setCommandLine(commandLineHelper.getCommandLine(configClass, commandLineArgs));
+        builderConfiguration.setProperties(propertyLoaderConfigurator.configurePropertyLoader(configClass).load());
     }
 }

@@ -3,6 +3,8 @@ package com.tngtech.configbuilder;
 
 import org.junit.Before;
 
+import java.util.Locale;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 

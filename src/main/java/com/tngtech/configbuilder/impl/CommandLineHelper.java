@@ -13,11 +13,13 @@ public class CommandLineHelper {
 
     private final MiscFactory miscFactory;
     private final AnnotationUtils annotationUtils;
+    private final ErrorMessageSetup errorMessageSetup;
 
     @Autowired
-    public CommandLineHelper(MiscFactory miscFactory, AnnotationUtils annotationUtils) {
+    public CommandLineHelper(MiscFactory miscFactory, AnnotationUtils annotationUtils, ErrorMessageSetup errorMessageSetup) {
         this.miscFactory = miscFactory;
         this.annotationUtils = annotationUtils;
+        this.errorMessageSetup = errorMessageSetup;
     }
 
     public CommandLine getCommandLine(Class configClass, String[] args) {
@@ -38,7 +40,7 @@ public class CommandLineHelper {
         try {
             commandLine = parser.parse(options, args);
         } catch (ParseException e) {
-            throw new ConfigBuilderException("unable to parse command line arguments");
+            throw new ConfigBuilderException(String.format(errorMessageSetup.getString("commandLineException")));
         }
         return commandLine;
     }

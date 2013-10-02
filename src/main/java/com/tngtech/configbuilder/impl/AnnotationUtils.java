@@ -16,7 +16,7 @@ import static org.reflections.ReflectionUtils.withAnnotation;
 public class AnnotationUtils {
 
 
-    public List<Annotation> getAnnotationsOfType(Annotation[] annotations, Class<? extends Annotation> annotationClass){
+    public List<Annotation> getAnnotationsAnnotatedWith(Annotation[] annotations, Class<? extends Annotation> annotationClass){
         List<Annotation> result = Lists.newArrayList();
         for(Annotation annotation : annotations){
             if(annotation.annotationType().isAnnotationPresent(annotationClass)){

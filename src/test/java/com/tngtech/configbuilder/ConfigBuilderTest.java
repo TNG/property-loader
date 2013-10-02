@@ -33,10 +33,10 @@ public class ConfigBuilderTest {
     private JSRValidator jsrValidator;
     @Mock
     private FieldSetter fieldSetter;
-
-
     @Mock
-    private MiscFactory miscFactory;
+    private PropertyLoaderConfigurator propertyLoaderConfigurator;
+    @Mock
+    private ErrorMessageSetup errorMessageSetup;
 
     @Mock
     private PropertyLoader propertyLoader;
@@ -51,10 +51,9 @@ public class ConfigBuilderTest {
 
     @Before
     public void setUp(){
-        configBuilder = new ConfigBuilder<>(TestConfig.class, builderConfiguration, annotationUtils, commandLineHelper, jsrValidator, fieldSetter, miscFactory);
+        configBuilder = new ConfigBuilder<>(TestConfig.class, builderConfiguration, propertyLoaderConfigurator, commandLineHelper, jsrValidator, fieldSetter, errorMessageSetup);
         properties = new Properties();
 
-        when(miscFactory.createPropertyLoader()).thenReturn(propertyLoader);
         when(propertyLoader.getSuffixes()).thenReturn(propertySuffix);
         when(propertyLoader.getLocations()).thenReturn(propertyLocation);
         when(propertyLocation.atDefaultLocations()).thenReturn(propertyLocation);
@@ -66,19 +65,10 @@ public class ConfigBuilderTest {
     public void testWithCommandLineArguments() throws ParseException {
         String[] args = new String[]{"-u", "Mueller"};
 
-        Options options = mock(Options.class);
-        when(miscFactory.createOptions()).thenReturn(options);
-
-        CommandLineParser parser = mock(CommandLineParser.class);
-        when(miscFactory.createCommandLineParser()).thenReturn(parser);
-
-        CommandLine commandLine = mock(CommandLine.class);
-        when(parser.parse(options, args)).thenReturn(commandLine);
-
         configBuilder.withCommandLineArgs(args);
 
         //verify(options,times(2)).addOption(Matchers.any(Option.class));
-        //verify(builderConfiguration).setCommandLineArgs(commandLine);
+        //verify(builderConfiguration).setCommandLine(commandLine);
     }
 
 }

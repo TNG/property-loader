@@ -8,16 +8,19 @@ import org.springframework.stereotype.Component;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 @Component
 public class JSRValidator<T> {
 
     private final MiscFactory miscFactory;
+    private final ErrorMessageSetup errorMessageSetup;
 
     @Autowired
-    public JSRValidator(MiscFactory miscFactory) {
+    public JSRValidator(MiscFactory miscFactory, ErrorMessageSetup errorMessageSetup) {
         this.miscFactory = miscFactory;
+        this.errorMessageSetup = errorMessageSetup;
     }
 
     public void validate(T instanceOfConfigClass) {
@@ -26,9 +29,9 @@ public class JSRValidator<T> {
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(instanceOfConfigClass);
         if(!constraintViolations.isEmpty()){
             StringBuilder sb = miscFactory.createStringBuilder();
-            sb.append("\n" + "Validation found the following constraint violations:");
+            sb.append(errorMessageSetup.getString("constraintViolationsFound"));
             for(ConstraintViolation constraintViolation : constraintViolations){
-                sb.append("\n" + constraintViolation.getMessage());
+                sb.append("\n" + errorMessageSetup.getString(constraintViolation.getMessage()));
             }
             throw new ConfigBuilderException(sb.toString());
         }

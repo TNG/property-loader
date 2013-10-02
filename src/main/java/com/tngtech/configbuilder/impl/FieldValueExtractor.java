@@ -41,7 +41,7 @@ public class FieldValueExtractor {
         Object fieldValue = value;
         Class<? extends IValueTransformerProcessor<Object>> processor;
 
-        for(Annotation annotation : annotationUtils.getAnnotationsOfType(field.getDeclaredAnnotations(), ValueTransformerAnnotation.class)){
+        for(Annotation annotation : annotationUtils.getAnnotationsAnnotatedWith(field.getDeclaredAnnotations(), ValueTransformerAnnotation.class)){
             processor = annotation.annotationType().getAnnotation(ValueTransformerAnnotation.class).value();
             fieldValue = Context.getBean(processor).transformString(annotation, value);
         }

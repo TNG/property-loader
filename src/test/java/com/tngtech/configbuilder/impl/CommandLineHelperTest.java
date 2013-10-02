@@ -1,6 +1,5 @@
 package com.tngtech.configbuilder.impl;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.tngtech.configbuilder.TestConfig;
 import com.tngtech.configbuilder.annotations.CommandLineValue;
@@ -39,11 +38,13 @@ public class CommandLineHelperTest {
     private MiscFactory miscFactory;
     @Mock
     private AnnotationUtils annotationUtils;
+    @Mock
+    private ErrorMessageSetup errorMessageSetup;
 
 
     @Before
     public void setUp() throws Exception {
-        commandLineHelper = new CommandLineHelper(miscFactory,annotationUtils);
+        commandLineHelper = new CommandLineHelper(miscFactory,annotationUtils, errorMessageSetup);
 
         Set<Field> fields = Sets.newHashSet();
         fields.add(TestConfig.class.getDeclaredField("surName"));

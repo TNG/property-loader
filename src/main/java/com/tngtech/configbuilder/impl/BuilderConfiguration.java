@@ -8,7 +8,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
+import java.util.Locale;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 @Component
 @Scope("prototype")
@@ -35,7 +37,7 @@ public class BuilderConfiguration {
         this.properties = properties;
     }
 
-    public void setCommandLineArgs(CommandLine commandLineArgs) {
+    public void setCommandLine(CommandLine commandLineArgs) {
         this.commandLineArgs = commandLineArgs;
     }
 
