@@ -19,6 +19,7 @@ import java.util.Set;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -60,12 +61,15 @@ public class JSRValidatorTest {
         when(validator.validate(testConfig)).thenReturn(constraintViolations);
         when(constraintViolation1.getMessage()).thenReturn("ConstraintViolation1");
         when(constraintViolation2.getMessage()).thenReturn("ConstraintViolation2");
-        when(errorMessageSetup.getString("ConstraintViolation1")).thenReturn("Constraint Violation 1");
-        when(errorMessageSetup.getString("ConstraintViolation2")).thenReturn("Constraint Violation 2");
+
     }
 
     @Test
     public void testValidate() throws Exception {
+
+        when(errorMessageSetup.getString("ConstraintViolation1")).thenReturn("Constraint Violation 1");
+        when(errorMessageSetup.getString("ConstraintViolation2")).thenReturn("Constraint Violation 2");
+
         try{
             jsrValidator.validate(testConfig);
             verify(constraintViolation1).getMessage();

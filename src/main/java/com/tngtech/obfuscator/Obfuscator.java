@@ -80,24 +80,4 @@ public class Obfuscator {
             throw new RuntimeException("Exception during encryptInternal: " + e, e);
         }
     }
-
-    public static void main(String[] args) {
-        Obfuscator obfuscator = new Obfuscator("password");
-
-        if (args.length == 0) {
-
-            String encryptedHelloWorld = obfuscator.encrypt("Hello, World!");
-
-            System.out.println("usage: java " + Obfuscator.class.getName() + " ENCRYPT|DECRPYT <password>");
-            System.out.println("e.g. ENCRYPT \"Hello, World!\" will result in: " + encryptedHelloWorld);
-            System.out.println("e.g. DECRYPT \"" + encryptedHelloWorld + "\" will result in: " + obfuscator.decrypt(encryptedHelloWorld));
-        } else {
-            if (args[0].equals("ENCRYPT")) {
-                System.out.println(obfuscator.encrypt(args[1]));
-            }
-            if (args[0].equals("DECRYPT")) {
-                System.out.println(obfuscator.decrypt(args[1]));
-            }
-        }
-    }
 }

@@ -37,9 +37,9 @@ public class PropertyLocationsProcessorTest {
         propertyLocationsProcessor.configurePropertyLoader(propertyLocations, propertyLoader);
 
         verify(propertyLocation).clear();
-        verify(propertyLocation).atDirectory("dir1");
-        verify(propertyLocation).atDirectory("dir2");
-        verify(propertyLocation).atRelativeToClass(this.getClass());
-        verify(propertyLocation).atRelativeToClass(Object.class);
+        verify(propertyLoader).atDirectory("dir1");
+        verify(propertyLoader).atDirectory("dir2");
+        verify(propertyLoader).atRelativeToClass(this.getClass());
+        verify(propertyLoader).atRelativeToClass(Object.class);
     }
 }

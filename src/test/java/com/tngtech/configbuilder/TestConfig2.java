@@ -9,12 +9,12 @@ import java.util.Collection;
 
 @PropertyExtension("testproperties")
 @PropertySuffixes(extraSuffixes = {"test"})
-@PropertyLocations(resourcesForClasses = {PropertyLoader.class})
+@PropertyLocations(resourcesForClasses = {PropertyLoader.class},fromClassLoader = true)
 @PropertiesFiles("demoapp-configuration")
 @LoadingOrder(value = {CommandLineValue.class, PropertyValue.class, DefaultValue.class})
-public class TestConfig {
+public class TestConfig2 {
 
-    public TestConfig(){
+    public TestConfig2(String object, Integer i){
 
     }
 

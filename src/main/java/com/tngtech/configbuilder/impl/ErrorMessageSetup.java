@@ -1,39 +1,22 @@
 package com.tngtech.configbuilder.impl;
 
-import com.tngtech.configbuilder.ConfigBuilderException;
+import com.tngtech.propertyloader.PropertyLoader;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.util.Properties;
 
 @Component
 public class ErrorMessageSetup {
 
-    private ResourceBundle resourceBundle;
+    private Properties errorMessages;
 
-    @PostConstruct
-    public void initialize(){
-        try{
-            this.resourceBundle = ResourceBundle.getBundle("errors", Locale.getDefault());
-        }
-        catch (MissingResourceException e) {
-            this.resourceBundle = ResourceBundle.getBundle("errors", new Locale("en","US"));
-        }
-    }
-
-    public void initialize(String baseName) {
-
-        try{
-            this.resourceBundle = ResourceBundle.getBundle("errors", Locale.getDefault());
-        }
-        catch (MissingResourceException e) {
-            throw new ConfigBuilderException(this.getString("errorMessageFileException").replace("${fileName}",baseName + "_" + Locale.getDefault().getLanguage()));
-        }
+    public void initialize(String baseName, PropertyLoader propertyLoader){
+        this.errorMessages = propertyLoader.load(baseName);
+        if(this.errorMessages.isEmpty()) this.errorMessages = propertyLoader.withExtension("properties").load("errors_" + System.getProperty("user.language"));
+        if(this.errorMessages.isEmpty()) this.errorMessages = propertyLoader.withExtension("properties").load("errors_en");
     }
 
     public String getString(String error) {
-        return resourceBundle.getString(error);
+        return errorMessages.getProperty(error);
     }
 }

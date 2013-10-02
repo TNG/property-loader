@@ -15,10 +15,12 @@ import java.lang.reflect.Field;
 @Component
 public class FieldValueExtractor {
     private final AnnotationUtils annotationUtils;
+    private final MiscFactory miscFactory;
 
     @Autowired
-    public FieldValueExtractor(AnnotationUtils annotationUtils) {
+    public FieldValueExtractor(AnnotationUtils annotationUtils, MiscFactory miscFactory) {
         this.annotationUtils = annotationUtils;
+        this.miscFactory = miscFactory;
     }
 
 
@@ -30,7 +32,7 @@ public class FieldValueExtractor {
 
         for (Annotation annotation : annotationUtils.getAnnotationsInOrder(field, annotationOrderOfField)) {
             processor = annotation.annotationType().getAnnotation(ValueExtractorAnnotation.class).value();
-            value = Context.getBean(processor).getValue(annotation, builderConfiguration);
+            value = miscFactory.getValueExtractorProcessor(processor).getValue(annotation, builderConfiguration);
             if (value != null) break;
         }
 
@@ -43,7 +45,7 @@ public class FieldValueExtractor {
 
         for(Annotation annotation : annotationUtils.getAnnotationsAnnotatedWith(field.getDeclaredAnnotations(), ValueTransformerAnnotation.class)){
             processor = annotation.annotationType().getAnnotation(ValueTransformerAnnotation.class).value();
-            fieldValue = Context.getBean(processor).transformString(annotation, value);
+            fieldValue = miscFactory.getValueTransformerProcessor(processor).transformString(annotation, value);
         }
 
         return fieldValue;

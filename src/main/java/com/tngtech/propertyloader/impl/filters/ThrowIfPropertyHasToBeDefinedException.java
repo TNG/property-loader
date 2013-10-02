@@ -7,12 +7,4 @@ public class ThrowIfPropertyHasToBeDefinedException extends PropertyLoaderExcept
     public ThrowIfPropertyHasToBeDefinedException(String message) {
         super(message);
     }
-
-    public ThrowIfPropertyHasToBeDefinedException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public ThrowIfPropertyHasToBeDefinedException(Throwable cause) {
-        super(cause);
-    }
 }

@@ -4,6 +4,10 @@ import com.tngtech.configbuilder.annotations.ErrorMessageFile;
 import com.tngtech.configbuilder.annotations.LoadingOrder;
 import com.tngtech.configbuilder.context.Context;
 import com.tngtech.configbuilder.impl.*;
+import com.tngtech.propertyloader.PropertyLoader;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 public class ConfigBuilder<T> {
 
@@ -25,8 +29,6 @@ public class ConfigBuilder<T> {
         this.jsrValidator = jsrValidator;
         this.fieldSetter = fieldSetter;
         this.errorMessageSetup = errorMessageSetup;
-
-        if(configClass.isAnnotationPresent(ErrorMessageFile.class)) this.errorMessageSetup.initialize(configClass.getAnnotation(ErrorMessageFile.class).value());
     }
 
     public ConfigBuilder(Class<T> configClass) {
@@ -45,24 +47,45 @@ public class ConfigBuilder<T> {
         return this;
     }
 
-    public T build() {
-        setupBuilderConfiguration();
+    public T build(Object... objects) {
+        setupBuilderConfigurationAndErrorMessages();
+        T instanceOfConfigClass = instantiateConfig(objects);
+        fieldSetter.setFields(instanceOfConfigClass, builderConfiguration);
+        jsrValidator.validate(instanceOfConfigClass);
+        return instanceOfConfigClass;
+    }
+
+    private T instantiateConfig(Object[] objects) {
         try {
-            T instanceOfConfigClass = configClass.newInstance();
-            fieldSetter.setFields(instanceOfConfigClass, builderConfiguration);
-            jsrValidator.validate(instanceOfConfigClass);
-            return instanceOfConfigClass;
+            Constructor[] constructors = configClass.getDeclaredConstructors();
+            for(Constructor<T> constructor : constructors){
+                Class<?>[] parameterTypes = constructor.getParameterTypes();
+                if(parameterTypes.length != objects.length) break;
+                boolean isConstructor = true;
+                for(int i=0; i < parameterTypes.length; i++){
+                    isConstructor = isConstructor && parameterTypes[i].isAssignableFrom(objects[i].getClass());
+                }
+                if(isConstructor) {
+                    return constructor.newInstance(objects);
+                }
+            }
+            throw new ConfigBuilderException(errorMessageSetup.getString("noSuitableConstructorFound"));
         } catch (InstantiationException e) {
             throw new ConfigBuilderException(errorMessageSetup.getString("instantiationException") + e);
-        }
-        catch (IllegalAccessException e) {
+        }catch (IllegalAccessException e) {
             throw new ConfigBuilderException(errorMessageSetup.getString("illegalAccessExceptionInstantiatingConfig") + e);
+        }catch (InvocationTargetException e) {
+            throw new ConfigBuilderException(errorMessageSetup.getString("InvocationTargetException") + e);
         }
     }
 
-    private void setupBuilderConfiguration() {
+
+    private void setupBuilderConfigurationAndErrorMessages() {
         if(configClass.isAnnotationPresent(LoadingOrder.class)) builderConfiguration.setAnnotationOrder(configClass.getAnnotation(LoadingOrder.class).value());
         builderConfiguration.setCommandLine(commandLineHelper.getCommandLine(configClass, commandLineArgs));
-        builderConfiguration.setProperties(propertyLoaderConfigurator.configurePropertyLoader(configClass).load());
+        PropertyLoader propertyLoader = propertyLoaderConfigurator.configurePropertyLoader(configClass);
+        builderConfiguration.setProperties(propertyLoader.load());
+        String errorMessageFile = configClass.isAnnotationPresent(ErrorMessageFile.class) ? configClass.getAnnotation(ErrorMessageFile.class).value() : "errors";
+        errorMessageSetup.initialize(errorMessageFile, propertyLoader);
     }
 }

@@ -3,6 +3,8 @@ package com.tngtech.obfuscator;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class ObfuscatorTest {
 
     private Obfuscator obfuscator;
@@ -14,11 +16,11 @@ public class ObfuscatorTest {
 
     @Test
     public void testEncrypt() throws Exception {
-
+        assertEquals("kqUL7kDnwITX6+xNagUBsA==\n",obfuscator.encrypt("Hello, World!"));
     }
 
     @Test
     public void testDecrypt() throws Exception {
-
+        assertEquals("Hello, World!", obfuscator.decrypt("kqUL7kDnwITX6+xNagUBsA=="));
     }
 }

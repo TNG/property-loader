@@ -1,7 +1,7 @@
 package com.tngtech.configbuilder.annotationprocessors;
 
 
-import com.tngtech.configbuilder.annotationprocessors.interfaces.IBuilderConfigurationProcessor;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.IPropertyLoaderConfigurationProcessor;
 import com.tngtech.configbuilder.annotations.PropertySuffixes;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.lang.annotation.Annotation;
 
 @Component
-public class PropertySuffixProcessor implements IBuilderConfigurationProcessor {
+public class PropertySuffixProcessor implements IPropertyLoaderConfigurationProcessor {
 
     public void configurePropertyLoader(Annotation annotation, PropertyLoader propertyLoader) {
         propertyLoader.getSuffixes().clear();

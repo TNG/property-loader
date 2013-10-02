@@ -27,10 +27,10 @@ public class FieldSetter<T> {
                 field.setAccessible(true);
                 field.set(instanceOfConfigClass, value);
             } catch(IllegalAccessException e){
-                throw new ConfigBuilderException(String.format(errorMessageSetup.getString("illegalAccessExceptionSettingFields").replace("${fieldName}",field.getName()).replace("${fieldType}", field.getType().getName()).replace("${valueType}", value.getClass().getName())));
+                throw new ConfigBuilderException(String.format(errorMessageSetup.getString("illegalAccessExceptionSettingFields").replace("fieldName",field.getName()).replace("fieldType", field.getType().getName()).replace("valueType", value.getClass().getName())));
 
             } catch(ConfigBuilderException e){
-                throw new ConfigBuilderException(String.format(errorMessageSetup.getString("targetTypeException").replace("${fieldName}",field.getName()).replace("${fieldType}",field.getType().getName()).replace("${valueType}",value.getClass().getName())));
+                throw new ConfigBuilderException(String.format(errorMessageSetup.getString("targetTypeException").replace("fieldName",field.getName()).replace("fieldType",field.getType().getName()).replace("valueType",value.getClass().getName())));
             }
         }
     }

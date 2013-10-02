@@ -1,9 +1,8 @@
 package com.tngtech.configbuilder.impl;
 
 
-import com.tngtech.configbuilder.annotationprocessors.interfaces.IBuilderConfigurationProcessor;
+import com.tngtech.configbuilder.annotationprocessors.interfaces.IPropertyLoaderConfigurationProcessor;
 import com.tngtech.configbuilder.annotations.metaannotations.PropertyLoaderConfigurationAnnotation;
-import com.tngtech.configbuilder.context.Context;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,9 +24,9 @@ public class PropertyLoaderConfigurator {
 
         PropertyLoader propertyLoader = miscFactory.createPropertyLoader().withDefaultConfig();
         for (Annotation annotation : annotationUtils.getAnnotationsAnnotatedWith(configClass.getDeclaredAnnotations(), PropertyLoaderConfigurationAnnotation.class)) {
-            Class<? extends IBuilderConfigurationProcessor> processor;
+            Class<? extends IPropertyLoaderConfigurationProcessor> processor;
             processor = annotation.annotationType().getAnnotation(PropertyLoaderConfigurationAnnotation.class).value();
-            Context.getBean(processor).configurePropertyLoader(annotation, propertyLoader);
+            miscFactory.getPropertyConfiguratorProcessor(processor).configurePropertyLoader(annotation, propertyLoader);
         }
         return propertyLoader;
     }
