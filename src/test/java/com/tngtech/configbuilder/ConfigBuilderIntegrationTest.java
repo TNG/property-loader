@@ -1,12 +1,22 @@
 package com.tngtech.configbuilder;
 
 
+import com.tngtech.configbuilder.exception.ConfigBuilderException;
+import com.tngtech.configbuilder.testclasses.TestConfig;
+import com.tngtech.configbuilder.testclasses.TestConfig2;
+import com.tngtech.configbuilder.testclasses.TestConfig3;
 import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ConfigBuilderIntegrationTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void setUp(){
@@ -14,7 +24,7 @@ public class ConfigBuilderIntegrationTest {
 
     }
 
-    @org.junit.Test
+    @Test
     public void TestConfigBuilder(){
         ConfigBuilder<TestConfig> configBuilder = new ConfigBuilder<>(TestConfig.class);
         String[] args = new String[]{"-u", "Mueller", "--pidFixFactory", "PIDs fixed with"};
@@ -29,19 +39,20 @@ public class ConfigBuilderIntegrationTest {
         assertEquals("Mueller", c.getSurName());
         assertTrue(c.getPidFixes().contains("PIDs fixed with success"));
     }
-    @org.junit.Test
-    public void TestConfigBuilder2(){
-        ConfigBuilder<TestConfig2> configBuilder = new ConfigBuilder<>(TestConfig2.class);
-        String[] args = new String[]{"-u", "Mueller", "--pidFixFactory", "PIDs fixed with"};
-        TestConfig2 c = configBuilder.withCommandLineArgs(args).build("sss", 3);
-        System.out.println(c.getUserName());
-        System.out.println(c.getHelloWorld());
-        System.out.println(c.getSurName());
-        System.out.println(c.getPidFixes());
 
-        assertEquals("user", c.getUserName());
-        assertEquals("Hello, World!", c.getHelloWorld());
-        assertEquals("Mueller", c.getSurName());
-        assertTrue(c.getPidFixes().contains("PIDs fixed with success"));
+    @Test
+    public void TestConfigBuilder2(){
+        expectedException.expect(ConfigBuilderException.class);
+        expectedException.expectMessage("integer");
+        ConfigBuilder<TestConfig2> configBuilder = new ConfigBuilder<>(TestConfig2.class);
+        configBuilder.build();
+    }
+
+    @Test
+    public void TestConfigBuilder3(){
+        ConfigBuilder<TestConfig3> configBuilder = new ConfigBuilder<>(TestConfig3.class);
+        TestConfig3 c = configBuilder.build(3);
+
+        assertEquals(3,c.getNumber());
     }
 }

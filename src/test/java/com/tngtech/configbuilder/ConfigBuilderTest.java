@@ -1,6 +1,9 @@
 package com.tngtech.configbuilder;
 
-import com.tngtech.configbuilder.impl.*;
+import com.tngtech.configbuilder.configuration.BuilderConfiguration;
+import com.tngtech.configbuilder.configuration.ErrorMessageSetup;
+import com.tngtech.configbuilder.testclasses.TestConfig;
+import com.tngtech.configbuilder.util.*;
 import com.tngtech.propertyloader.PropertyLoader;
 import com.tngtech.propertyloader.impl.DefaultPropertyLocationContainer;
 import com.tngtech.propertyloader.impl.DefaultPropertySuffixContainer;
@@ -26,7 +29,7 @@ public class ConfigBuilderTest {
     @Mock
     private BuilderConfiguration builderConfiguration;
     @Mock
-    private AnnotationUtils annotationUtils;
+    private AnnotationHelper annotationHelper;
     @Mock
     private CommandLineHelper commandLineHelper;
     @Mock
@@ -37,21 +40,20 @@ public class ConfigBuilderTest {
     private PropertyLoaderConfigurator propertyLoaderConfigurator;
     @Mock
     private ErrorMessageSetup errorMessageSetup;
-
     @Mock
     private PropertyLoader propertyLoader;
-
     @Mock
     private DefaultPropertySuffixContainer propertySuffix;
-
     @Mock
     private DefaultPropertyLocationContainer propertyLocation;
+    @Mock
+    private ConstructionHelper constructionHelper;
 
 
 
     @Before
     public void setUp(){
-        configBuilder = new ConfigBuilder<>(TestConfig.class, builderConfiguration, propertyLoaderConfigurator, commandLineHelper, jsrValidator, fieldSetter, errorMessageSetup);
+        configBuilder = new ConfigBuilder<>(TestConfig.class, builderConfiguration, propertyLoaderConfigurator, commandLineHelper, jsrValidator, fieldSetter, errorMessageSetup, constructionHelper);
         properties = new Properties();
 
         when(propertyLoader.getSuffixes()).thenReturn(propertySuffix);

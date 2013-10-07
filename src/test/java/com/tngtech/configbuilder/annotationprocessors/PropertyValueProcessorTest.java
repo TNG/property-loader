@@ -1,7 +1,10 @@
 package com.tngtech.configbuilder.annotationprocessors;
 
-import com.tngtech.configbuilder.annotations.PropertyValue;
-import com.tngtech.configbuilder.impl.BuilderConfiguration;
+import com.tngtech.configbuilder.annotation.propertyloaderconfiguration.PropertiesFilesProcessor;
+import com.tngtech.configbuilder.annotation.valueextractor.PropertyValue;
+import com.tngtech.configbuilder.annotation.valueextractor.PropertyValueProcessor;
+import com.tngtech.configbuilder.configuration.BuilderConfiguration;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -15,6 +18,8 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class PropertyValueProcessorTest {
 
+    private PropertyValueProcessor propertyValueProcessor;
+
     @Mock
     private BuilderConfiguration builderConfiguration;
     @Mock
@@ -22,10 +27,13 @@ public class PropertyValueProcessorTest {
     @Mock
     PropertyValue propertyValue;
 
+    @Before
+    public void setUp() throws Exception {
+        propertyValueProcessor = new PropertyValueProcessor();
+    }
+
     @Test
     public void testPropertyValueProcessor(){
-
-        PropertyValueProcessor propertyValueProcessor = new PropertyValueProcessor();
 
         when(builderConfiguration.getProperties()).thenReturn(properties);
         when(propertyValue.value()).thenReturn("test");

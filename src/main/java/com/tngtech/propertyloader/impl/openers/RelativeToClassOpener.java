@@ -18,6 +18,6 @@ public class RelativeToClassOpener implements PropertyLoaderOpener {
 
     @Override
     public String toString() {
-        return "near class " + reference;
+        return "near " + reference;
     }
 }

@@ -1,8 +1,10 @@
 package com.tngtech.configbuilder.annotationprocessors;
 
 import com.google.common.collect.Lists;
-import com.tngtech.configbuilder.annotations.PropertiesFiles;
+import com.tngtech.configbuilder.annotation.propertyloaderconfiguration.PropertiesFiles;
+import com.tngtech.configbuilder.annotation.propertyloaderconfiguration.PropertiesFilesProcessor;
 import com.tngtech.propertyloader.PropertyLoader;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -20,10 +22,15 @@ public class PropertiesFilesProcessorTest {
     @Mock
     PropertyLoader propertyLoader;
 
+    private PropertiesFilesProcessor propertiesFilesProcessor;
+
+    @Before
+    public void setUp() throws Exception {
+        propertiesFilesProcessor = new PropertiesFilesProcessor();
+    }
+
     @Test
     public void testPropertiesFilesProcessor(){
-
-        PropertiesFilesProcessor propertiesFilesProcessor = new PropertiesFilesProcessor();
 
         String[] fileNames = new String[]{"file1","file2"};
 

@@ -1,10 +1,8 @@
 package com.tngtech.configbuilder;
 
-import com.tngtech.configbuilder.annotationprocessors.CommandLineValueProcessor;
-import com.tngtech.configbuilder.annotationprocessors.DefaultValueProcessor;
-import com.tngtech.configbuilder.annotationprocessors.PropertyValueProcessor;
-import com.tngtech.configbuilder.annotations.*;
-import com.tngtech.configbuilder.impl.BuilderConfiguration;
+import com.tngtech.configbuilder.annotation.valueextractor.*;
+import com.tngtech.configbuilder.configuration.BuilderConfiguration;
+import com.tngtech.configbuilder.testclasses.TestConfig;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.*;
 import org.junit.Before;
@@ -47,7 +45,7 @@ public class ConfigBuilderComponentTest {
 
             String[] args = new String[]{"-u", "Mueller"};
             Options options = new Options();
-            options.addOption("u", true, "surName");
+            options.addOption("u", true, "testString");
             CommandLineParser parser = new GnuParser();
             try {
                 CommandLine commandLineArgs = parser.parse( options, args);
