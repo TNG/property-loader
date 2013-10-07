@@ -43,7 +43,7 @@ public class ErrorMessageSetupTest {
         System.setProperty("user.language", "de");
         System.setProperty("user.country", "DE");
         errorMessageSetup.initialize("errors", propertyLoader);
-        assertEquals("Command Line Argumente konnten nicht verarbeitet werden.",errorMessageSetup.getErrorMessage("commandLineException"));
+        assertEquals("Command Line Argumente konnten nicht verarbeitet werden.",errorMessageSetup.getErrorMessage("org.apache.commons.cli.ParseException"));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class ErrorMessageSetupTest {
         System.setProperty("user.language", "en");
         System.setProperty("user.country", "US");
         errorMessageSetup.initialize("errors", propertyLoader);
-        assertEquals("unable to parse command line arguments",errorMessageSetup.getErrorMessage("commandLineException"));
+        assertEquals("unable to parse command line arguments",errorMessageSetup.getErrorMessage("org.apache.commons.cli.ParseException"));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class ErrorMessageSetupTest {
         System.setProperty("user.language", "is");
         System.setProperty("user.country", "IS");
         errorMessageSetup.initialize("errors", propertyLoader);
-        assertEquals("unable to parse command line arguments",errorMessageSetup.getErrorMessage("commandLineException"));
+        assertEquals("unable to parse command line arguments",errorMessageSetup.getErrorMessage("org.apache.commons.cli.ParseException"));
     }
 
     @Test

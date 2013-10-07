@@ -6,9 +6,11 @@ import com.tngtech.configbuilder.configuration.BuilderConfiguration;
 import com.tngtech.configbuilder.configuration.ErrorMessageSetup;
 import com.tngtech.configbuilder.context.Context;
 import com.tngtech.configbuilder.exception.ConfigBuilderException;
+import com.tngtech.configbuilder.exception.NoConstructorFoundException;
 import com.tngtech.configbuilder.util.*;
 import com.tngtech.propertyloader.PropertyLoader;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class ConfigBuilder<T> {
@@ -57,7 +59,9 @@ public class ConfigBuilder<T> {
             PropertyLoader propertyLoader = propertyLoaderConfigurator.configurePropertyLoader(configClass);
             setupBuilderConfiguration(propertyLoader);
             initializeErrorMessageSetup(propertyLoader);
-            T instanceOfConfigClass = constructionHelper.findSuitableConstructor(configClass, objects).newInstance(objects);
+            Constructor<T> tConstructor = constructionHelper.findSuitableConstructor(configClass, objects);
+            tConstructor.setAccessible(true);
+            T instanceOfConfigClass = tConstructor.newInstance(objects);
             fieldSetter.setFields(instanceOfConfigClass, builderConfiguration);
             jsrValidator.validate(instanceOfConfigClass);
             return instanceOfConfigClass;
@@ -72,7 +76,6 @@ public class ConfigBuilder<T> {
             builderConfiguration.setAnnotationOrder(configClass.getAnnotation(LoadingOrder.class).value());
         }
         builderConfiguration.setCommandLine(commandLineHelper.getCommandLine(configClass, commandLineArgs));
-
         builderConfiguration.setProperties(propertyLoader.load());
         initializeErrorMessageSetup(propertyLoader);
     }

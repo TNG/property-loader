@@ -34,13 +34,11 @@ public class JSRValidator<T> {
     }
 
     private void throwConstraintViolationException(Set<ConstraintViolation<T>> constraintViolations) {
-        StringBuilder sb = beanFactory.getBean(StringBuilder.class);
+        StringBuilder sb = new StringBuilder();
         for(ConstraintViolation constraintViolation : constraintViolations){
             sb.append("\n");
             sb.append(errorMessageSetup.getErrorMessage(constraintViolation.getMessage()));
         }
-        ValidatorException validatorException = new ValidatorException();
-        String message = errorMessageSetup.getErrorMessage(validatorException);
-        throw new ValidatorException(message + sb);
+        throw new ValidatorException(errorMessageSetup.getErrorMessage(ValidatorException.class) + sb);
     }
 }

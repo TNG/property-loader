@@ -19,12 +19,6 @@ public class Context {
     }
 
     @Bean
-    @Scope("prototype")
-    public StringBuilder stringBuilder() {
-        return new StringBuilder();
-    }
-
-    @Bean
     public CommandLineParser createCommandLineParser() {
         return new GnuParser();
     }

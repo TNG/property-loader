@@ -4,14 +4,13 @@ import com.google.common.collect.Sets;
 import com.tngtech.configbuilder.annotation.valueextractor.CommandLineValue;
 import com.tngtech.configbuilder.annotation.valueextractor.DefaultValue;
 import com.tngtech.configbuilder.configuration.ErrorMessageSetup;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
+import com.tngtech.configbuilder.exception.ConfigBuilderException;
+import org.apache.commons.cli.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.BeanFactory;
@@ -28,7 +27,7 @@ import static org.mockito.Mockito.when;
 public class CommandLineHelperTest {
 
     private static class TestConfig {
-        @CommandLineValue(shortOpt = "u", longOpt = "user")
+        @CommandLineValue(shortOpt = "u", longOpt = "user", required = true)
         public String testString;
     }
 
@@ -54,20 +53,28 @@ public class CommandLineHelperTest {
         commandLineHelper = new CommandLineHelper(beanFactory, annotationHelper, errorMessageSetup);
 
         Set<Field> fields = Sets.newHashSet(TestConfig.class.getDeclaredField("testString"));
-
-        when(beanFactory.getBean(CommandLineParser.class)).thenReturn(parser);
-        when(beanFactory.getBean(Options.class)).thenReturn(options);
         when(annotationHelper.getFieldsAnnotatedWith(TestConfig.class, CommandLineValue.class)).thenReturn(fields);
         when(parser.parse(options, args)).thenReturn(commandLine);
     }
 
     @Test
     public void testGetCommandLine() throws Exception {
+        when(beanFactory.getBean(CommandLineParser.class)).thenReturn(parser);
+        when(beanFactory.getBean(Options.class)).thenReturn(options);
         ArgumentCaptor<Option> captor = ArgumentCaptor.forClass(Option.class);
         assertEquals(commandLine,commandLineHelper.getCommandLine(TestConfig.class, args));
         verify(options, times(1)).addOption(captor.capture());
         verify(parser).parse(options,args);
         Option option = captor.getValue();
         assertEquals("user",option.getLongOpt());
+        assertEquals("u",option.getOpt());
+    }
+
+    @Test(expected = ConfigBuilderException.class)
+    public void testGetCommandLineThrowsException() throws Exception {
+        when(beanFactory.getBean(CommandLineParser.class)).thenReturn(new GnuParser());
+        when(beanFactory.getBean(Options.class)).thenReturn(new Options());
+        args = new String[]{"nd","notDefined"};
+        commandLineHelper.getCommandLine(TestConfig.class, args);
     }
 }

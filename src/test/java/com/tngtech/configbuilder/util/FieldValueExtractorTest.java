@@ -123,6 +123,11 @@ public class FieldValueExtractorTest {
     public void testExtractValueWithNullValue() throws Exception {
         field = TestConfig.class.getDeclaredField("testField");
 
+        PropertyValue propertyValue = field.getAnnotation(PropertyValue.class);
+        CommandLineValue commandLineValue = field.getAnnotation(CommandLineValue.class);
+        List<Annotation> orderList = Lists.newArrayList(propertyValue,commandLineValue);
+        when(annotationHelper.getAnnotationsInOrder(Matchers.any(Field.class), Matchers.any(Class[].class))).thenReturn(orderList);
+
         when(propertyValueProcessor.getValue(Matchers.any(PropertyValue.class),Matchers.any(BuilderConfiguration.class))).thenReturn(null);
         when(commandLineValueProcessor.getValue(Matchers.any(CommandLineValue.class),Matchers.any(BuilderConfiguration.class))).thenReturn(null);
         when(valueTransformerProcessor.transformString(Matchers.any(ValueTransformer.class), Matchers.anyString())).thenReturn(null);

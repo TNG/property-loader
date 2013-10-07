@@ -2,9 +2,11 @@ package com.tngtech.configbuilder;
 
 
 import com.tngtech.configbuilder.exception.ConfigBuilderException;
+import com.tngtech.configbuilder.exception.NoConstructorFoundException;
 import com.tngtech.configbuilder.testclasses.TestConfig;
 import com.tngtech.configbuilder.testclasses.TestConfig2;
 import com.tngtech.configbuilder.testclasses.TestConfig3;
+import com.tngtech.configbuilder.testclasses.TestConfig4;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -54,5 +56,23 @@ public class ConfigBuilderIntegrationTest {
         TestConfig3 c = configBuilder.build(3);
 
         assertEquals(3,c.getNumber());
+    }
+
+    @Test
+    public void TestConfigBuilderThrowsNoConstructorFoundException(){
+        expectedException.expect(NoConstructorFoundException.class);
+        expectedException.expectMessage("build()");
+        ConfigBuilder<TestConfig3> configBuilder = new ConfigBuilder<>(TestConfig3.class);
+        TestConfig3 c = configBuilder.build();
+
+        assertEquals(3,c.getNumber());
+    }
+
+    @Test
+    public void TestConfigBuilderThrowsException(){
+        expectedException.expect(ConfigBuilderException.class);
+        expectedException.expectMessage("InvocationTargetException");
+        ConfigBuilder<TestConfig4> configBuilder = new ConfigBuilder<>(TestConfig4.class);
+        configBuilder.build(3);
     }
 }

@@ -52,7 +52,7 @@ public class CommandLineHelper {
         try {
             commandLine = beanFactory.getBean(CommandLineParser.class).parse(options, args);
         } catch (ParseException e) {
-            throw new ConfigBuilderException(String.format(errorMessageSetup.getErrorMessage("commandLineException")), e);
+            throw new ConfigBuilderException(errorMessageSetup.getErrorMessage(e.getClass().getSuperclass()), e);
         }
         return commandLine;
     }

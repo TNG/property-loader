@@ -1,7 +1,7 @@
 package com.tngtech.configbuilder.util;
 
 import com.tngtech.configbuilder.configuration.ErrorMessageSetup;
-import com.tngtech.configbuilder.exception.ConfigBuilderException;
+import com.tngtech.configbuilder.exception.NoConstructorFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ public class ConstructionHelper<T> {
     private ErrorMessageSetup errorMessageSetup;
 
     @Autowired
-    public ConstructionHelper(ErrorMessageSetup errorMessageSetup){
+    public ConstructionHelper(ErrorMessageSetup errorMessageSetup) {
         this.errorMessageSetup = errorMessageSetup;
     }
 
@@ -32,6 +32,6 @@ public class ConstructionHelper<T> {
             }
 
         }
-        throw new ConfigBuilderException(errorMessageSetup.getErrorMessage("noSuitableConstructorFound"));
+        throw new NoConstructorFoundException(errorMessageSetup.getErrorMessage(NoConstructorFoundException.class));
     }
 }

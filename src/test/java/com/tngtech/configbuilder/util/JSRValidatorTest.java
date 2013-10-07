@@ -52,7 +52,6 @@ public class JSRValidatorTest {
 
         jsrValidator = new JSRValidator<>(beanFactory, errorMessageSetup);
         when(beanFactory.getBean(ValidatorFactory.class)).thenReturn(validatorFactory);
-        when(beanFactory.getBean(StringBuilder.class)).thenReturn(new StringBuilder());
         when(validatorFactory.getValidator()).thenReturn(validator);
 
 

@@ -28,21 +28,18 @@ public class ErrorMessageSetup {
         return properties;
     }
 
-    public String getErrorMessage(String error) {
-        return errorMessages.getProperty(error);
-    }
-
-    public String getErrorMessage(Throwable e) {
-        return errorMessages.getProperty(e.getClass().getName());
-    }
-
     public String getErrorMessage(Throwable e, String... variables) {
         String message = errorMessages.getProperty(e.getClass().getName());
-        return  String.format(message, variables);
+        return message == null ? null : String.format(message, variables);
+    }
+
+    public String getErrorMessage(Class exceptionClass, String... variables) {
+        String message = errorMessages.getProperty(exceptionClass.getName());
+        return  message == null ? null : String.format(message, variables);
     }
 
     public String getErrorMessage(String error, String... variables) {
         String message = errorMessages.getProperty(error);
-        return String.format(message, variables);
+        return message == null ? null : String.format(message, variables);
     }
 }
