@@ -1,4 +1,4 @@
-package com.tngtech.obfuscator;
+package com.tngtech.propertyloader;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -33,14 +33,25 @@ public class Obfuscator {
         }
     }
 
+    /**
+     * Encrypt and base64-encode a String.
+     *
+     * @param toEncrypt - the String to encrypt.
+     * @return the Blowfish-encrypted and base64-encoded String.
+     */
     public String encrypt(String toEncrypt) {
 
         byte[] encryptedBytes = encryptInternal(dataEncryptionSecretKeySpec, toEncrypt);
         return base64Encoder.encodeBuffer(encryptedBytes);
     }
 
-
-
+    /**
+     * Internal Encryption method.
+     *
+     * @param key       - the SecretKeySpec used to encrypt
+     * @param toEncrypt - the String to encrypt
+     * @return the encrypted String (as byte[])
+     */
     private byte[] encryptInternal(SecretKeySpec key, String toEncrypt) {
 
         try {
@@ -55,6 +66,12 @@ public class Obfuscator {
         }
     }
 
+    /**
+     * Decrypt an encrypted and base64-encoded String
+     *
+     * @param toDecrypt - the encrypted and base64-encoded String
+     * @return the plaintext String
+     */
     public String decrypt(String toDecrypt) {
         try{
             byte[] encryptedBytes = base64Decoder.decodeBuffer(toDecrypt);
@@ -64,6 +81,13 @@ public class Obfuscator {
         }
     }
 
+    /**
+     * Internal decryption method.
+     *
+     * @param key            - the SecretKeySpec used to decrypt
+     * @param encryptedBytes - the byte[] to decrypt
+     * @return the decrypted plaintext String.
+     */
     private String decryptInternal(SecretKeySpec key, byte[] encryptedBytes) {
 
         try {

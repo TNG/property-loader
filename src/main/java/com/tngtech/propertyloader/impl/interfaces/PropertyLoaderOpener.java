@@ -11,6 +11,7 @@ import java.io.InputStream;
  * In that case, "system classpath" would be a reasonable return value of toString().
  */
 public interface PropertyLoaderOpener {
+
     /**
      * Attempt to find and open some property file.
      *

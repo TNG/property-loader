@@ -15,7 +15,6 @@ import static org.reflections.ReflectionUtils.withAnnotation;
 @Component
 public class AnnotationHelper {
 
-
     public List<Annotation> getAnnotationsAnnotatedWith(Annotation[] annotations, Class<? extends Annotation> annotationClass){
         List<Annotation> result = Lists.newArrayList();
         for(Annotation annotation : annotations){

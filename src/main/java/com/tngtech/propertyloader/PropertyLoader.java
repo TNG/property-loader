@@ -15,6 +15,14 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Stack;
 
+/**
+ * Implements loading of java.util.Properties from properties-like or XML key-value files.
+ * <p/>
+ * To obtain an instance with default configuration, use <code>new PropertyLoader().withDefaultConfig()</code>.
+ * <p/>
+ * To see which search paths are currently implemented, see the impl.openers subpackage.
+ * To see which postprocessing steps are implemented, see the impl.filters subpackage.
+ */
 @Component
 public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader>, PropertySuffixContainer<PropertyLoader>, PropertyFilterContainer<PropertyLoader> {
 

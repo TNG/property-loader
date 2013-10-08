@@ -1,5 +1,6 @@
 package com.tngtech.obfuscator;
 
+import com.tngtech.propertyloader.Obfuscator;
 import org.junit.Before;
 import org.junit.Test;
 
