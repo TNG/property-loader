@@ -1,15 +1,14 @@
 package com.tngtech.configbuilder.configuration;
 
-import com.tngtech.configbuilder.configuration.ErrorMessageSetup;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.commons.cli.ParseException;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.Locale;
 import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
@@ -32,41 +31,39 @@ public class ErrorMessageSetupTest {
 
     @Test
     public void testInitializeDE() throws Exception {
-        System.setProperty("user.language", "de");
-        System.setProperty("user.country", "DE");
+        Locale.setDefault(Locale.GERMAN);
         errorMessageSetup.initialize("errors", propertyLoader);
         assertEquals("Command Line Argumente konnten nicht verarbeitet werden.", errorMessageSetup.getErrorMessage(ParseException.class));
     }
 
     @Test
     public void testInitializeEN() throws Exception {
-        System.setProperty("user.language", "en");
-        System.setProperty("user.country", "US");
+        Locale.setDefault(Locale.ENGLISH);
         errorMessageSetup.initialize("errors", propertyLoader);
         assertEquals("unable to parse command line arguments",errorMessageSetup.getErrorMessage(ParseException.class));
     }
 
     @Test
-    @Ignore("depends on locale")
     public void testInitializeOther() throws Exception {
-        System.setProperty("user.language", "is");
-        System.setProperty("user.country", "IS");
+        Locale.setDefault(Locale.ITALIAN);
         errorMessageSetup.initialize("errors", propertyLoader);
         assertEquals("unable to parse command line arguments",errorMessageSetup.getErrorMessage(ParseException.class));
     }
 
     @Test
     public void testGetErrorMessageForExceptionInstance() throws Exception {
+        Locale.setDefault(Locale.ENGLISH);
         errorMessageSetup.initialize(null, propertyLoader);
         ParseException parseException = new ParseException("message");
-        assertEquals("Command Line Argumente konnten nicht verarbeitet werden.",errorMessageSetup.getErrorMessage(parseException));
+        assertEquals("unable to parse command line arguments",errorMessageSetup.getErrorMessage(parseException));
     }
 
     @Test
     public void testGetErrorMessageForUnknownException() throws Exception {
+        Locale.setDefault(Locale.ENGLISH);
         errorMessageSetup.initialize(null, propertyLoader);
         RuntimeException runtimeException = new RuntimeException();
-        assertEquals("Es gab eine Exception vom Typ java.lang.RuntimeException",errorMessageSetup.getErrorMessage(runtimeException));
-        assertEquals("Es gab eine Exception vom Typ java.lang.RuntimeException",errorMessageSetup.getErrorMessage(RuntimeException.class));
+        assertEquals("java.lang.RuntimeException was thrown",errorMessageSetup.getErrorMessage(runtimeException));
+        assertEquals("java.lang.RuntimeException was thrown",errorMessageSetup.getErrorMessage(RuntimeException.class));
     }
 }

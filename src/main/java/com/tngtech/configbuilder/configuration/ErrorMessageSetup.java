@@ -19,8 +19,7 @@ public class ErrorMessageSetup {
      * @param propertyLoader the PropertyLoader used to load additional error messages
      */
     public void initialize(String baseName, PropertyLoader propertyLoader){
-        Locale locale = new Locale(System.getProperty("user.language"));
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("errors", locale);
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("errors");
         errorMessages = convertResourceBundleToProperties(resourceBundle);
         if(baseName != null){
             errorMessages.putAll(propertyLoader.load(baseName));
