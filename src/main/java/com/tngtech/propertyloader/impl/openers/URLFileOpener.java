@@ -6,6 +6,11 @@ import java.net.URL;
 
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 
+/**
+ * Searches for properties files at a file system path.
+ * The search path can be provided as a String or an URL.
+ * Use the empty constructor to search the current directory.
+ */
 public class URLFileOpener implements PropertyLoaderOpener {
 
     private URL url;
@@ -30,6 +35,13 @@ public class URLFileOpener implements PropertyLoaderOpener {
         }
     }
 
+    /**
+     * Tries to open the given file.
+     * A filename that starts with '/' is understood as an absolute path,
+     * i.e. the URLFileOpener forgets about its path.
+     * @param fileName the filename
+     * @return
+     */
     public InputStream open(String fileName){
 
         try {

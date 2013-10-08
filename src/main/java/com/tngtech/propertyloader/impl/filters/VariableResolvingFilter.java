@@ -2,6 +2,9 @@ package com.tngtech.propertyloader.impl.filters;
 
 import java.util.Properties;
 
+/**
+ * Resolves variables.
+ */
 public class VariableResolvingFilter extends ValueModifyingFilter {
     private static final String VARIABLE_PREFIX = "${";
     private static final String VARIABLE_SUFFIX = "}";

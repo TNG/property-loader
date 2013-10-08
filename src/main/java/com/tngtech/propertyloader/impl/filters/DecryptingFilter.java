@@ -4,6 +4,10 @@ import com.tngtech.propertyloader.Obfuscator;
 
 import java.util.Properties;
 
+/**
+ * Decrypts property values that are prefixed with 'DECRYPT:'.
+ * The password must be provided in the properties, with key 'decryptingFilterPassword'
+ */
 public class DecryptingFilter extends ValueModifyingFilter {
     public static final String DECRYPT_PREFIX = "DECRYPT:";
 

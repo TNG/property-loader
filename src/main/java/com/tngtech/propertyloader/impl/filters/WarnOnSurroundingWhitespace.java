@@ -4,6 +4,9 @@ import org.apache.log4j.Logger;
 
 import java.util.Properties;
 
+/**
+ * Warns if property values end with whitespace.
+ */
 public class WarnOnSurroundingWhitespace extends ValueModifyingFilter {
 
     private final static Logger log = Logger.getLogger(WarnOnSurroundingWhitespace.class);

@@ -4,6 +4,9 @@ import java.io.InputStream;
 
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 
+/**
+ * Searches for properties files relative to the location of a given class.
+ */
 public class RelativeToClassOpener implements PropertyLoaderOpener {
 
     private final Class<?> reference;

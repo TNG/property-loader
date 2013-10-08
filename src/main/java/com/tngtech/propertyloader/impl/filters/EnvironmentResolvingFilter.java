@@ -6,6 +6,9 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Resolves Environment variables.
+ */
 public class EnvironmentResolvingFilter extends ValueModifyingFilter {
 
     private final static Logger log = Logger.getLogger(EnvironmentResolvingFilter.class);
