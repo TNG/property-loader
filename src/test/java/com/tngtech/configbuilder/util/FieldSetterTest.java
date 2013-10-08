@@ -28,19 +28,19 @@ public class FieldSetterTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    private static class TestConfig1 {
+    private static class TestConfig {
         @DefaultValue("user")
         public String testString;
     }
-    private static class TestConfig2 {
+    private static class TestConfigForTargetTypeException {
         @DefaultValue("user")
         public Collection<String> testField;
     }
-    private static class TestConfig3 {
+    private static class TestConfigForIllegalArgumentException {
         @DefaultValue("user")
         public int testInt;
     }
-    private static class TestConfig4 {
+    private static class TestConfigWithoutAnnotations {
 
         public String testString ="testString";
     }
@@ -58,51 +58,48 @@ public class FieldSetterTest {
 
     @Before
     public void setUp() throws Exception {
-
+        when(annotationHelper.fieldHasAnnotationAnnotatedWith(Matchers.any(Field.class), Matchers.any(Class.class))).thenReturn(true);
     }
 
     @Test
     public void testSetFields() throws Exception {
         when(fieldValueExtractor.extractValue(Matchers.any(Field.class),Matchers.any(BuilderConfiguration.class))).thenReturn("value");
         when(errorMessageSetup.getErrorMessage(Matchers.any(TargetTypeException.class),Matchers.any(String.class),Matchers.any(String.class),Matchers.any(String.class))).thenReturn("TargetTypeException");
-        when(annotationHelper.fieldHasAnnotationAnnotatedWith(Matchers.any(Field.class), Matchers.any(Class.class))).thenReturn(true);
 
-        FieldSetter<TestConfig1> fieldSetter = new FieldSetter<>(fieldValueExtractor,errorMessageSetup, annotationHelper);
-        TestConfig1 testConfig1 = new TestConfig1();
+        FieldSetter<TestConfig> fieldSetter = new FieldSetter<>(fieldValueExtractor,errorMessageSetup, annotationHelper);
+        TestConfig testConfig = new TestConfig();
 
-        fieldSetter.setFields(testConfig1, builderConfiguration);
+        fieldSetter.setFields(testConfig, builderConfiguration);
 
-        assertEquals("value", testConfig1.testString);
+        assertEquals("value", testConfig.testString);
     }
 
     @Test
     public void testSetFieldsThrowsTargetTypeException() throws Exception {
         when(fieldValueExtractor.extractValue(Matchers.any(Field.class),Matchers.any(BuilderConfiguration.class))).thenReturn("value");
         when(errorMessageSetup.getErrorMessage(Matchers.any(TargetTypeException.class),Matchers.any(String.class),Matchers.any(String.class),Matchers.any(String.class))).thenReturn("TargetTypeException");
-        when(annotationHelper.fieldHasAnnotationAnnotatedWith(Matchers.any(Field.class), Matchers.any(Class.class))).thenReturn(true);
 
-        FieldSetter<TestConfig2> fieldSetter = new FieldSetter<>(fieldValueExtractor,errorMessageSetup, annotationHelper);
-        TestConfig2 testConfig2 = new TestConfig2();
+        FieldSetter<com.tngtech.configbuilder.util.FieldSetterTest.TestConfigForIllegalArgumentException> fieldSetter = new FieldSetter<>(fieldValueExtractor,errorMessageSetup, annotationHelper);
+        com.tngtech.configbuilder.util.FieldSetterTest.TestConfigForIllegalArgumentException testConfigForIllegalArgumentException = new com.tngtech.configbuilder.util.FieldSetterTest.TestConfigForIllegalArgumentException();
 
         expectedException.expect(ConfigBuilderException.class);
         expectedException.expectMessage("TargetTypeException");
 
-        fieldSetter.setFields(testConfig2, builderConfiguration);
+        fieldSetter.setFields(testConfigForIllegalArgumentException, builderConfiguration);
     }
 
     @Test
     public void testSetFieldsThrowsIllegalArgumentException() throws Exception {
         when(fieldValueExtractor.extractValue(Matchers.any(Field.class),Matchers.any(BuilderConfiguration.class))).thenReturn(null);
         when(errorMessageSetup.getErrorMessage(Matchers.any(IllegalArgumentException.class),Matchers.any(String.class),Matchers.any(String.class),Matchers.any(String.class))).thenReturn("IllegalArgumentException");
-        when(annotationHelper.fieldHasAnnotationAnnotatedWith(Matchers.any(Field.class), Matchers.any(Class.class))).thenReturn(true);
 
-        FieldSetter<TestConfig3> fieldSetter = new FieldSetter<>(fieldValueExtractor,errorMessageSetup, annotationHelper);
-        TestConfig3 testConfig3 = new TestConfig3();
+        FieldSetter<TestConfigForIllegalArgumentException> fieldSetter = new FieldSetter<>(fieldValueExtractor,errorMessageSetup, annotationHelper);
+        TestConfigForIllegalArgumentException testConfigForIllegalArgumentException = new TestConfigForIllegalArgumentException();
 
         expectedException.expect(ConfigBuilderException.class);
         expectedException.expectMessage("IllegalArgumentException");
 
-        fieldSetter.setFields(testConfig3, builderConfiguration);
+        fieldSetter.setFields(testConfigForIllegalArgumentException, builderConfiguration);
     }
 
     @Test
@@ -110,11 +107,11 @@ public class FieldSetterTest {
         when(fieldValueExtractor.extractValue(Matchers.any(Field.class),Matchers.any(BuilderConfiguration.class))).thenReturn(null);
         when(annotationHelper.fieldHasAnnotationAnnotatedWith(Matchers.any(Field.class), Matchers.any(Class.class))).thenReturn(false);
 
-        FieldSetter<TestConfig4> fieldSetter = new FieldSetter<>(fieldValueExtractor,errorMessageSetup, annotationHelper);
-        TestConfig4 testConfig4 = new TestConfig4();
+        FieldSetter<TestConfigWithoutAnnotations> fieldSetter = new FieldSetter<>(fieldValueExtractor,errorMessageSetup, annotationHelper);
+        TestConfigWithoutAnnotations testConfigWithoutAnnotations = new TestConfigWithoutAnnotations();
 
-        fieldSetter.setFields(testConfig4, builderConfiguration);
+        fieldSetter.setFields(testConfigWithoutAnnotations, builderConfiguration);
 
-        assertEquals("testString", testConfig4.testString);
+        assertEquals("testString", testConfigWithoutAnnotations.testString);
     }
 }

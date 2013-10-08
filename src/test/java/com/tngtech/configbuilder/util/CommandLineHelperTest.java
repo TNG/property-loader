@@ -68,6 +68,7 @@ public class CommandLineHelperTest {
         Option option = captor.getValue();
         assertEquals("user",option.getLongOpt());
         assertEquals("u",option.getOpt());
+        assertEquals(true,option.isRequired());
     }
 
     @Test(expected = ConfigBuilderException.class)

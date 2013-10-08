@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 import java.lang.annotation.Annotation;
 import java.util.Properties;
 
+/**
+ * Stores the configuration for the ConfigBuilder, i.e. the CommandLine, the Properties and the global annotation processing order.
+ */
 @Component
 @Scope("prototype")
 public class BuilderConfiguration {

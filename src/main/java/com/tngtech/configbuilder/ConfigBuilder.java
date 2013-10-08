@@ -68,7 +68,7 @@ public class ConfigBuilder<T> {
     }
 
     /**
-     * 
+     *
      * @param configClass The config class of which an instance shall be built.
      */
     public ConfigBuilder(Class<T> configClass) {
@@ -103,22 +103,16 @@ public class ConfigBuilder<T> {
      * @return An instance of the config class.
      */
     public T build(Object... objects) {
-        try {
-            PropertyLoader propertyLoader = propertyLoaderConfigurator.configurePropertyLoader(configClass);
-            setupBuilderConfiguration(propertyLoader);
-            initializeErrorMessageSetup(propertyLoader);
-            Constructor<T> tConstructor = constructionHelper.findSuitableConstructor(configClass, objects);
-            log.info(String.format("found constructor - instantiating %s", configClass.getName()));
-            tConstructor.setAccessible(true);
-            T instanceOfConfigClass = tConstructor.newInstance(objects);
-            fieldSetter.setFields(instanceOfConfigClass, builderConfiguration);
-            jsrValidator.validate(instanceOfConfigClass);
-            return instanceOfConfigClass;
-        }
-        catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new ConfigBuilderException(errorMessageSetup.getErrorMessage(e), e);
-        }
+        PropertyLoader propertyLoader = propertyLoaderConfigurator.configurePropertyLoader(configClass);
+        setupBuilderConfiguration(propertyLoader);
+        initializeErrorMessageSetup(propertyLoader);
+        T instanceOfConfigClass = constructionHelper.getInstance(configClass, objects);
+        fieldSetter.setFields(instanceOfConfigClass, builderConfiguration);
+        jsrValidator.validate(instanceOfConfigClass);
+        return instanceOfConfigClass;
     }
+
+
 
     private void setupBuilderConfiguration(PropertyLoader propertyLoader) {
         if (configClass.isAnnotationPresent(LoadingOrder.class)){
@@ -130,8 +124,7 @@ public class ConfigBuilder<T> {
     }
 
     private void initializeErrorMessageSetup(PropertyLoader propertyLoader) {
-        String errorMessageFile = configClass.isAnnotationPresent(ErrorMessageFile.class) ? configClass.getAnnotation(ErrorMessageFile.class).value() : "errors";
+        String errorMessageFile = configClass.isAnnotationPresent(ErrorMessageFile.class) ? configClass.getAnnotation(ErrorMessageFile.class).value() : null;
         errorMessageSetup.initialize(errorMessageFile, propertyLoader);
     }
-
 }

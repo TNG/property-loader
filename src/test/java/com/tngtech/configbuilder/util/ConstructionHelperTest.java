@@ -10,21 +10,28 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConstructionHelperTest {
 
-    private static class TestConfig1 {
-        public TestConfig1(){
+    private static class TestConfig {
+        private String string;
+        private Integer integer;
+        public TestConfig(String string, Integer integer){
+            this.string = string;
+            this.integer = integer;
+        }
+        private Integer getInteger() {
+            return integer;
+        }
+        private String getString() {
+            return string;
         }
     }
-    private static class TestConfig2 {
-        public TestConfig2(String string, Integer integer){
-        }
-    }
-    private static class TestConfig3 {
-        public TestConfig3(String string, int i){
+    private static class TestConfigForException {
+        public TestConfigForException(String string, int i){
         }
     }
 
@@ -40,16 +47,18 @@ public class ConstructionHelperTest {
     }
 
     @Test
-    public void testFindSuitableConstructor() throws Exception {
-        ConstructionHelper<TestConfig2> constructionHelper = new ConstructionHelper<>(errorMessageSetup);
-        constructionHelper.findSuitableConstructor(TestConfig2.class, "string", 3);
+    public void testGetInstance() throws Exception {
+        ConstructionHelper<TestConfig> constructionHelper = new ConstructionHelper<>(errorMessageSetup);
+        TestConfig testConfig = constructionHelper.getInstance(TestConfig.class, "string", 3);
+        assertEquals("string", testConfig.getString());
+        assertEquals(3,(long) testConfig.getInteger());
     }
 
     @Test
-    public void testFindSuitableConstructorThrowsException() throws Exception {
+    public void testGetInstanceThrowsException() throws Exception {
         expectedException.expect(NoConstructorFoundException.class);
         expectedException.expectMessage("NoConstructorFoundException");
-        ConstructionHelper<TestConfig3> constructionHelper = new ConstructionHelper<>(errorMessageSetup);
-        constructionHelper.findSuitableConstructor(TestConfig3.class, "string", 3);
+        ConstructionHelper<TestConfigForException> constructionHelper = new ConstructionHelper<>(errorMessageSetup);
+        constructionHelper.getInstance(TestConfigForException.class, "string", 3);
     }
 }

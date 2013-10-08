@@ -33,16 +33,7 @@ public class JSRValidator<T> {
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(instanceOfConfigClass);
         if(!constraintViolations.isEmpty()){
-            throwConstraintViolationException(constraintViolations);
+            throw new ValidatorException(errorMessageSetup.getErrorMessage(ValidatorException.class),constraintViolations);
         }
-    }
-
-    private void throwConstraintViolationException(Set<ConstraintViolation<T>> constraintViolations) {
-        StringBuilder sb = new StringBuilder();
-        for(ConstraintViolation constraintViolation : constraintViolations){
-            sb.append("\n");
-            sb.append(errorMessageSetup.getErrorMessage(constraintViolation.getMessage()));
-        }
-        throw new ValidatorException(errorMessageSetup.getErrorMessage(ValidatorException.class) + sb);
     }
 }

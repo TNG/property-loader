@@ -3,7 +3,6 @@ package com.tngtech.configbuilder.util;
 import com.google.common.collect.Lists;
 import com.tngtech.configbuilder.annotation.propertyloaderconfiguration.PropertyLoaderConfigurationAnnotation;
 import com.tngtech.configbuilder.annotation.valueextractor.CommandLineValue;
-import com.tngtech.configbuilder.annotation.valueextractor.DefaultValue;
 import com.tngtech.configbuilder.annotation.valueextractor.PropertyValue;
 import com.tngtech.configbuilder.annotation.valuetransformer.ValueTransformer;
 import com.tngtech.configbuilder.annotation.valueextractor.ValueExtractorAnnotation;
@@ -25,24 +24,28 @@ import static org.junit.Assert.assertTrue;
 @RunWith(MockitoJUnitRunner.class)
 public class AnnotationUtilsTest {
 
-    public class ValueProviderTestClass implements FieldValueProvider<Object> {
-        public Object getValue(String fieldString) {
-            return "testString";
+    public class TestConfig {
+        public class ValueProviderTestClass implements FieldValueProvider<Object> {
+            public Object getValue(String fieldString) {
+                return "testString";
+            }
         }
+
+        @PropertyValue("testField")
+        @CommandLineValue(shortOpt = "t", longOpt = "testField")
+        @ValueTransformer(ValueProviderTestClass.class)
+        private Collection<String> testField;
     }
+
+
 
     private AnnotationHelper annotationHelper;
     private Field field;
     private Class<? extends Annotation>[] annotationOrder = new Class[]{CommandLineValue.class,PropertyValue.class};
 
-    @PropertyValue("testField")
-    @CommandLineValue(shortOpt = "t", longOpt = "testField")
-    @ValueTransformer(ValueProviderTestClass.class)
-    private Collection<String> testField;
-
-    @Before
+     @Before
     public void setUp() throws Exception {
-        field = this.getClass().getDeclaredField("testField");
+        field = TestConfig.class.getDeclaredField("testField");
         annotationHelper = new AnnotationHelper();
     }
 
@@ -65,7 +68,7 @@ public class AnnotationUtilsTest {
 
     @Test
     public void testGetFieldsAnnotatedWith() throws Exception {
-        assertTrue(annotationHelper.getFieldsAnnotatedWith(this.getClass(), PropertyValue.class).contains(field));
+        assertTrue(annotationHelper.getFieldsAnnotatedWith(TestConfig.class, PropertyValue.class).contains(field));
     }
 
     @Test

@@ -35,24 +35,28 @@ public class FieldSetter<T> {
                 continue;
             }
             Object value = fieldValueExtractor.extractValue(field, builderConfiguration);
-            try{
-                verifyCorrectTargetType(field, value);
-                setFieldValue(instanceOfConfigClass, field, value);
-                log.info(String.format("set field %s of type %s to a value of type %s", field.getName(), field.getType().getName(), value.getClass().getName()));
-            } catch(IllegalAccessException | IllegalArgumentException | TargetTypeException e){
-                throw new ConfigBuilderException(errorMessageSetup.getErrorMessage(e, field.getName(), field.getType().getName(), value == null ? "null" : value.toString()), e);
-            }
+            verifyAndSet(instanceOfConfigClass, field, value);
         }
     }
 
-    private void setFieldValue(T instanceOfConfigClass, Field field, Object value) throws IllegalAccessException,IllegalArgumentException {
-        field.setAccessible(true);
-        field.set(instanceOfConfigClass, value);
+    private void verifyAndSet(T instanceOfConfigClass, Field field, Object value) {
+        try{
+            verifyCorrectTargetType(field, value);
+            setFieldValue(instanceOfConfigClass, field, value);
+            log.info(String.format("set field %s of type %s to a value of type %s", field.getName(), field.getType().getName(), value == null ? "null" : value.getClass().getName()));
+        } catch(Exception e){
+            throw new ConfigBuilderException(errorMessageSetup.getErrorMessage(e, field.getName(), field.getType().getName(), value == null ? "null" : value.toString()), e);
+        }
     }
 
     private void verifyCorrectTargetType(Field field, Object value) throws TargetTypeException {
         if (value != null && !field.getType().isAssignableFrom(value.getClass())) {
             throw new TargetTypeException();
         }
+    }
+
+    private void setFieldValue(T instanceOfConfigClass, Field field, Object value) throws IllegalAccessException,IllegalArgumentException {
+        field.setAccessible(true);
+        field.set(instanceOfConfigClass, value);
     }
 }

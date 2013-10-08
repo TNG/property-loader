@@ -5,16 +5,26 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+/**
+ * Stores error messages for the ConfigBuilder in a Properties object.
+ */
 @Component
 public class ErrorMessageSetup {
 
     private Properties errorMessages;
 
+    /**
+     * loads the default error messages for the system locale, then merges them with additional error messages loaded with the PropertyLoader
+     * @param baseName the filename for additional error messages
+     * @param propertyLoader the PropertyLoader used to load additional error messages
+     */
     public void initialize(String baseName, PropertyLoader propertyLoader){
         Locale locale = new Locale(System.getProperty("user.language"));
         ResourceBundle resourceBundle = ResourceBundle.getBundle("errors", locale);
         errorMessages = convertResourceBundleToProperties(resourceBundle);
-        errorMessages.putAll(propertyLoader.load(baseName));
+        if(baseName != null){
+            errorMessages.putAll(propertyLoader.load(baseName));
+        }
     }
 
     private Properties convertResourceBundleToProperties(ResourceBundle resource) {
@@ -30,16 +40,11 @@ public class ErrorMessageSetup {
 
     public String getErrorMessage(Throwable e, String... variables) {
         String message = errorMessages.getProperty(e.getClass().getName());
-        return message == null ? null : String.format(message, variables);
+        return message == null ? String.format(errorMessages.getProperty("standardMessage"),e.getClass().getName()) : String.format(message, variables);
     }
 
     public String getErrorMessage(Class exceptionClass, String... variables) {
         String message = errorMessages.getProperty(exceptionClass.getName());
-        return  message == null ? null : String.format(message, variables);
-    }
-
-    public String getErrorMessage(String error, String... variables) {
-        String message = errorMessages.getProperty(error);
-        return message == null ? null : String.format(message, variables);
+        return  message == null ? String.format(errorMessages.getProperty("standardMessage"), exceptionClass.getName()) : String.format(message, variables);
     }
 }

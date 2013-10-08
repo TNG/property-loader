@@ -3,10 +3,8 @@ package com.tngtech.configbuilder;
 
 import com.tngtech.configbuilder.exception.ConfigBuilderException;
 import com.tngtech.configbuilder.exception.NoConstructorFoundException;
-import com.tngtech.configbuilder.testclasses.TestConfig;
-import com.tngtech.configbuilder.testclasses.TestConfig2;
-import com.tngtech.configbuilder.testclasses.TestConfig3;
-import com.tngtech.configbuilder.testclasses.TestConfig4;
+import com.tngtech.configbuilder.exception.ValidatorException;
+import com.tngtech.configbuilder.testclasses.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,11 +29,6 @@ public class ConfigBuilderIntegrationTest {
         ConfigBuilder<TestConfig> configBuilder = new ConfigBuilder<>(TestConfig.class);
         String[] args = new String[]{"-u", "Mueller", "--pidFixFactory", "PIDs fixed with"};
         TestConfig c = configBuilder.withCommandLineArgs(args).build();
-        System.out.println(c.getUserName());
-        System.out.println(c.getHelloWorld());
-        System.out.println(c.getSurName());
-        System.out.println(c.getPidFixes());
-
         assertEquals("user", c.getUserName());
         assertEquals("Hello, World!", c.getHelloWorld());
         assertEquals("Mueller", c.getSurName());
@@ -43,18 +36,17 @@ public class ConfigBuilderIntegrationTest {
     }
 
     @Test
-    public void TestConfigBuilder2(){
+    public void TestConfigBuilderThrowsIllegalArgumentException(){
         expectedException.expect(ConfigBuilderException.class);
         expectedException.expectMessage("integer");
-        ConfigBuilder<TestConfig2> configBuilder = new ConfigBuilder<>(TestConfig2.class);
+        ConfigBuilder<TestConfigThrowsIllegalArgumentException> configBuilder = new ConfigBuilder<>(TestConfigThrowsIllegalArgumentException.class);
         configBuilder.build();
     }
 
     @Test
-    public void TestConfigBuilder3(){
-        ConfigBuilder<TestConfig3> configBuilder = new ConfigBuilder<>(TestConfig3.class);
-        TestConfig3 c = configBuilder.build(3);
-
+    public void TestConfigBuilderWithConstructorArgument(){
+        ConfigBuilder<TestConfigWithoutDefaultConstructor> configBuilder = new ConfigBuilder<>(TestConfigWithoutDefaultConstructor.class);
+        TestConfigWithoutDefaultConstructor c = configBuilder.build(3);
         assertEquals(3,c.getNumber());
     }
 
@@ -62,17 +54,22 @@ public class ConfigBuilderIntegrationTest {
     public void TestConfigBuilderThrowsNoConstructorFoundException(){
         expectedException.expect(NoConstructorFoundException.class);
         expectedException.expectMessage("build()");
-        ConfigBuilder<TestConfig3> configBuilder = new ConfigBuilder<>(TestConfig3.class);
-        TestConfig3 c = configBuilder.build();
-
-        assertEquals(3,c.getNumber());
+        ConfigBuilder<TestConfigWithoutDefaultConstructor> configBuilder = new ConfigBuilder<>(TestConfigWithoutDefaultConstructor.class);
+        configBuilder.build();
     }
 
     @Test
-    public void TestConfigBuilderThrowsException(){
+    public void TestConfigBuilderThrowsInvocationTargetExceptionException(){
         expectedException.expect(ConfigBuilderException.class);
         expectedException.expectMessage("InvocationTargetException");
-        ConfigBuilder<TestConfig4> configBuilder = new ConfigBuilder<>(TestConfig4.class);
+        ConfigBuilder<TestConfigThrowsInvocationTargetExceptionException> configBuilder = new ConfigBuilder<>(TestConfigThrowsInvocationTargetExceptionException.class);
         configBuilder.build(3);
+    }
+
+    @Test
+    public void TestConfigBuilderThrowsValidatorException(){
+        expectedException.expect(ValidatorException.class);
+        ConfigBuilder<TestConfigNotNullViolation> configBuilder = new ConfigBuilder<>(TestConfigNotNullViolation.class);
+        configBuilder.build();
     }
 }

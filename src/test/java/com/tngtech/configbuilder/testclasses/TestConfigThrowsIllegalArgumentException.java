@@ -17,19 +17,19 @@ import java.util.Collection;
 
 @PropertyExtension("testproperties")
 @PropertySuffixes(extraSuffixes = {"test"})
-@PropertyLocations(resourcesForClasses = {PropertyLoader.class})
+@PropertyLocations(resourcesForClasses = {PropertyLoader.class},fromClassLoader = true)
 @PropertiesFiles("demoapp-configuration")
 @LoadingOrder(value = {CommandLineValue.class, PropertyValue.class, DefaultValue.class})
-public class TestConfig3 {
+public class TestConfigThrowsIllegalArgumentException {
 
-    private int number;
+    public static class IntegerFactory implements FieldValueProvider<Integer> {
 
-    public TestConfig3(Integer i){
-        this.number = i;
+        public Integer getValue(String optionValue) {
+            return null;
+        }
     }
 
-
-    public int getNumber(){
-        return number;
-    }
+    @DefaultValue("what")
+    @ValueTransformer(IntegerFactory.class)
+    private int integer;
 }

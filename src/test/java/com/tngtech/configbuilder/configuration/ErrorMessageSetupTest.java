@@ -2,6 +2,7 @@ package com.tngtech.configbuilder.configuration;
 
 import com.tngtech.configbuilder.configuration.ErrorMessageSetup;
 import com.tngtech.propertyloader.PropertyLoader;
+import org.apache.commons.cli.ParseException;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -25,17 +26,8 @@ public class ErrorMessageSetupTest {
     @Before
     public void setUp() throws Exception {
         errorMessageSetup = new ErrorMessageSetup();
-        Properties propertiesDE = new Properties();
-        propertiesDE.put("commandLineException","Command Line Argumente konnten nicht verarbeitet werden.");
-        Properties propertiesEN = new Properties();
-        propertiesEN.put("commandLineException","unable to parse command line arguments");
-
         when(propertyLoader.withExtension("properties")).thenReturn(propertyLoader);
         when(propertyLoader.load("errors")).thenReturn(new Properties());
-        when(propertyLoader.load("errors_is")).thenReturn(new Properties());
-        when(propertyLoader.load("errors_de")).thenReturn(propertiesDE);
-        when(propertyLoader.load("errors_en")).thenReturn(propertiesEN);
-
     }
 
     @Test
@@ -43,7 +35,7 @@ public class ErrorMessageSetupTest {
         System.setProperty("user.language", "de");
         System.setProperty("user.country", "DE");
         errorMessageSetup.initialize("errors", propertyLoader);
-        assertEquals("Command Line Argumente konnten nicht verarbeitet werden.",errorMessageSetup.getErrorMessage("org.apache.commons.cli.ParseException"));
+        assertEquals("Command Line Argumente konnten nicht verarbeitet werden.", errorMessageSetup.getErrorMessage(ParseException.class));
     }
 
     @Test
@@ -51,7 +43,7 @@ public class ErrorMessageSetupTest {
         System.setProperty("user.language", "en");
         System.setProperty("user.country", "US");
         errorMessageSetup.initialize("errors", propertyLoader);
-        assertEquals("unable to parse command line arguments",errorMessageSetup.getErrorMessage("org.apache.commons.cli.ParseException"));
+        assertEquals("unable to parse command line arguments",errorMessageSetup.getErrorMessage(ParseException.class));
     }
 
     @Test
@@ -60,11 +52,21 @@ public class ErrorMessageSetupTest {
         System.setProperty("user.language", "is");
         System.setProperty("user.country", "IS");
         errorMessageSetup.initialize("errors", propertyLoader);
-        assertEquals("unable to parse command line arguments",errorMessageSetup.getErrorMessage("org.apache.commons.cli.ParseException"));
+        assertEquals("unable to parse command line arguments",errorMessageSetup.getErrorMessage(ParseException.class));
     }
 
     @Test
-    public void testGetString() throws Exception {
+    public void testGetErrorMessageForExceptionInstance() throws Exception {
+        errorMessageSetup.initialize(null, propertyLoader);
+        ParseException parseException = new ParseException("message");
+        assertEquals("Command Line Argumente konnten nicht verarbeitet werden.",errorMessageSetup.getErrorMessage(parseException));
+    }
 
+    @Test
+    public void testGetErrorMessageForUnknownException() throws Exception {
+        errorMessageSetup.initialize(null, propertyLoader);
+        RuntimeException runtimeException = new RuntimeException();
+        assertEquals("Es gab eine Exception vom Typ java.lang.RuntimeException",errorMessageSetup.getErrorMessage(runtimeException));
+        assertEquals("Es gab eine Exception vom Typ java.lang.RuntimeException",errorMessageSetup.getErrorMessage(RuntimeException.class));
     }
 }

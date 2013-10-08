@@ -1,6 +1,5 @@
 package com.tngtech.configbuilder.testclasses;
 
-import com.google.common.collect.Lists;
 import com.tngtech.configbuilder.FieldValueProvider;
 import com.tngtech.configbuilder.annotation.configuration.LoadingOrder;
 import com.tngtech.configbuilder.annotation.propertyloaderconfiguration.PropertiesFiles;
@@ -13,14 +12,14 @@ import com.tngtech.configbuilder.annotation.valueextractor.PropertyValue;
 import com.tngtech.configbuilder.annotation.valuetransformer.ValueTransformer;
 import com.tngtech.propertyloader.PropertyLoader;
 
-import java.util.Collection;
+import javax.validation.constraints.NotNull;
 
 @PropertyExtension("testproperties")
 @PropertySuffixes(extraSuffixes = {"test"})
 @PropertyLocations(resourcesForClasses = {PropertyLoader.class},fromClassLoader = true)
 @PropertiesFiles("demoapp-configuration")
 @LoadingOrder(value = {CommandLineValue.class, PropertyValue.class, DefaultValue.class})
-public class TestConfig2 {
+public class TestConfigNotNullViolation {
 
     public static class IntegerFactory implements FieldValueProvider<Integer> {
 
@@ -29,7 +28,8 @@ public class TestConfig2 {
         }
     }
 
+    @NotNull
     @DefaultValue("what")
     @ValueTransformer(IntegerFactory.class)
-    private int integer;
+    private String string;
 }

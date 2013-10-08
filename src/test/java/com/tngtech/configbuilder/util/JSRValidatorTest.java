@@ -45,7 +45,7 @@ public class JSRValidatorTest {
     private ErrorMessageSetup errorMessageSetup;
 
     @Rule
-    public ExpectedException exception = ExpectedException.none();
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void setUp() throws Exception {
@@ -53,8 +53,6 @@ public class JSRValidatorTest {
         jsrValidator = new JSRValidator<>(beanFactory, errorMessageSetup);
         when(beanFactory.getBean(ValidatorFactory.class)).thenReturn(validatorFactory);
         when(validatorFactory.getValidator()).thenReturn(validator);
-
-
     }
 
     @Test
@@ -63,23 +61,12 @@ public class JSRValidatorTest {
         Set<ConstraintViolation<TestConfig>> constraintViolations = Sets.newHashSet(constraintViolation1, constraintViolation2);
 
         when(validator.validate(testConfig)).thenReturn(constraintViolations);
-        when(constraintViolation1.getMessage()).thenReturn("ConstraintViolation1");
-        when(constraintViolation2.getMessage()).thenReturn("ConstraintViolation2");
-        when(errorMessageSetup.getErrorMessage("ConstraintViolation1")).thenReturn("Constraint Violation 1");
-        when(errorMessageSetup.getErrorMessage("ConstraintViolation2")).thenReturn("Constraint Violation 2");
-        when(errorMessageSetup.getErrorMessage(Matchers.any(ValidatorException.class))).thenReturn("Validation found the following constraint violations:");
+        when(errorMessageSetup.getErrorMessage(Matchers.any(Class.class))).thenReturn("Validation found the following constraint violations:");
 
-        try{
-            jsrValidator.validate(testConfig);
-            verify(constraintViolation1).getMessage();
-            verify(constraintViolation2).getMessage();
-            fail("expected ConfigBuilderException");
-        }
-        catch(ValidatorException e) {
-            System.out.println(e.toString());
-            assertTrue(e.toString().contains("Constraint Violation 1"));
-            assertTrue(e.toString().contains("Constraint Violation 2"));
-        }
+        expectedException.expect(ValidatorException.class);
+        expectedException.expectMessage("Validation found the following constraint violations:");
+
+        jsrValidator.validate(testConfig);
     }
 
     @Test
