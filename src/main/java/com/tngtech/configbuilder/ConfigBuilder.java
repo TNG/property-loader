@@ -9,11 +9,14 @@ import com.tngtech.configbuilder.exception.ConfigBuilderException;
 import com.tngtech.configbuilder.exception.NoConstructorFoundException;
 import com.tngtech.configbuilder.util.*;
 import com.tngtech.propertyloader.PropertyLoader;
+import org.apache.log4j.Logger;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class ConfigBuilder<T> {
+
+    private final static Logger log = Logger.getLogger(ConfigBuilder.class);
 
     private final BuilderConfiguration builderConfiguration;
     private final PropertyLoaderConfigurator propertyLoaderConfigurator;
@@ -60,6 +63,7 @@ public class ConfigBuilder<T> {
             setupBuilderConfiguration(propertyLoader);
             initializeErrorMessageSetup(propertyLoader);
             Constructor<T> tConstructor = constructionHelper.findSuitableConstructor(configClass, objects);
+            log.info(String.format("found constructor - instantiating %s", configClass.getName()));
             tConstructor.setAccessible(true);
             T instanceOfConfigClass = tConstructor.newInstance(objects);
             fieldSetter.setFields(instanceOfConfigClass, builderConfiguration);

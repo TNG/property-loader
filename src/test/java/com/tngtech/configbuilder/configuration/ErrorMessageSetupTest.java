@@ -1,4 +1,4 @@
-package com.tngtech.configbuilder.util;
+package com.tngtech.configbuilder.configuration;
 
 import com.tngtech.configbuilder.configuration.ErrorMessageSetup;
 import com.tngtech.propertyloader.PropertyLoader;

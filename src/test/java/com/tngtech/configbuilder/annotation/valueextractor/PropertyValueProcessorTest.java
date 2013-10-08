@@ -1,4 +1,4 @@
-package com.tngtech.configbuilder.annotationprocessors;
+package com.tngtech.configbuilder.annotation.valueextractor;
 
 import com.tngtech.configbuilder.annotation.propertyloaderconfiguration.PropertiesFilesProcessor;
 import com.tngtech.configbuilder.annotation.valueextractor.PropertyValue;

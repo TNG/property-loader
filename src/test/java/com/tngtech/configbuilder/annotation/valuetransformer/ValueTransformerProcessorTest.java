@@ -1,4 +1,4 @@
-package com.tngtech.configbuilder.annotationprocessors;
+package com.tngtech.configbuilder.annotation.valuetransformer;
 
 import com.tngtech.configbuilder.annotation.valuetransformer.ValueTransformer;
 import com.tngtech.configbuilder.FieldValueProvider;

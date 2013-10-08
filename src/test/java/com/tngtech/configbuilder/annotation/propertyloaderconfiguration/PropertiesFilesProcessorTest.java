@@ -1,4 +1,4 @@
-package com.tngtech.configbuilder.annotationprocessors;
+package com.tngtech.configbuilder.annotation.propertyloaderconfiguration;
 
 import com.google.common.collect.Lists;
 import com.tngtech.configbuilder.annotation.propertyloaderconfiguration.PropertiesFiles;
@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 

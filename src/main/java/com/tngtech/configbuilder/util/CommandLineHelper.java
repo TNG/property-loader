@@ -4,6 +4,7 @@ import com.tngtech.configbuilder.configuration.ErrorMessageSetup;
 import com.tngtech.configbuilder.exception.ConfigBuilderException;
 import com.tngtech.configbuilder.annotation.valueextractor.CommandLineValue;
 import org.apache.commons.cli.*;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,8 @@ import java.lang.reflect.Field;
 
 @Component
 public class CommandLineHelper {
+
+    private final static Logger log = Logger.getLogger(CommandLineHelper.class);
 
     private final BeanFactory beanFactory;
     private final AnnotationHelper annotationHelper;
@@ -25,6 +28,7 @@ public class CommandLineHelper {
     }
 
     public CommandLine getCommandLine(Class configClass, String[] args) {
+        log.info("getting command line options from fields and parsing command line arguments");
         Options options = getOptions(configClass);
         return parseCommandLine(args, options);
     }
@@ -40,6 +44,7 @@ public class CommandLineHelper {
     @SuppressWarnings("AccessStaticViaInstance")
     private Option getOption(Field field) {
         CommandLineValue commandLineValue = field.getAnnotation(CommandLineValue.class);
+        log.debug(String.format("adding command line option %s for field %s", commandLineValue.shortOpt(), field.getName()));
         return OptionBuilder.withLongOpt(commandLineValue.longOpt())
                 .hasArg()
                 .isRequired(commandLineValue.required())
