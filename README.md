@@ -82,10 +82,8 @@ public class Config {
 ```
 
 
-> @LoadingOrder
-
 To specify a global order for parsing ValueExtractorAnnotation annotations, annotate the class with 
-LoadingOrder
+@LoadingOrder
 
 To specify your own error messages file (which is loaded by the PropertyLoader with the same settings as other the properties files), annotate the class with 
 ErrorMessageFile
