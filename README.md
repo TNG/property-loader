@@ -32,9 +32,9 @@ public class Config {
 ####2. Annotate the class (configure the loading of properties files)
 
 If you want the ConfigBuilder to get values from properties files, 
-you can specify the filenames (without file extension or path) by 
+you can specify the files' basenames (no file extension or path) by 
 annotating your config class with the @PropertiesFiles annotation. 
-You can specify multiple filenames like this: 
+You can specify multiple basenames like this: 
 ```java
 @PropertiesFiles({file1,file2,...})
 ```
