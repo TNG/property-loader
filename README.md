@@ -11,6 +11,10 @@ Java ConfigBuilder
 What It Is
 ----------
 
+The ConfigBuilder makes use of annotations and reflections in order to build configured instances of custom classes.
+It features configuring of not only String values, but fields of arbitrary types and JSR303 validation of the instances
+it builds.
+
 Motivation
 ----------
 
