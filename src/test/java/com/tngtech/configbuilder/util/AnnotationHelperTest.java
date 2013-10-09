@@ -22,7 +22,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AnnotationUtilsTest {
+public class AnnotationHelperTest {
 
     public class TestConfig {
         public class ValueProviderTestClass implements FieldValueProvider<Object> {

@@ -7,6 +7,23 @@
     <groupId>com.tngtech.internal</groupId>
     <artifactId>property-loader-rewrite</artifactId>
     <version>0.1-SNAPSHOT</version>
+    <contributors>
+        <contributor>
+            <name>Matthias Bollwein</name>
+            <email>matthias.bollwein@tngtech.com</email>
+            <organization>TNG Technology Consulting</organization>
+        </contributor>
+        <contributor>
+            <name>Thomas Endres</name>
+            <email>thomas.endres@tngtech.com</email>
+            <organization>TNG Technology Consulting</organization>
+        </contributor>
+        <contributor>
+            <name>Andreas Würl</name>
+            <email>andreas.wuerl@tngtech.com</email>
+            <organization>TNG Technology Consulting</organization>
+        </contributor>
+    </contributors>
 
     <properties>
         <spring.version>3.1.4.RELEASE</spring.version>

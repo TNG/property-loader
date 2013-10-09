@@ -6,10 +6,12 @@ import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Set;
 
 import static org.reflections.ReflectionUtils.getAllFields;
+import static org.reflections.ReflectionUtils.getAllMethods;
 import static org.reflections.ReflectionUtils.withAnnotation;
 
 @Component
@@ -37,6 +39,10 @@ public class AnnotationHelper {
 
     public Set<Field> getFieldsAnnotatedWith(Class clazz, Class<? extends Annotation> annotationClass){
         return getAllFields(clazz, withAnnotation(annotationClass));
+    }
+
+    public Set<Method> getFMethodsAnnotatedWith(Class clazz, Class<? extends Annotation> annotationClass){
+        return getAllMethods(clazz, withAnnotation(annotationClass));
     }
 
     public boolean fieldHasAnnotationAnnotatedWith(Field field, Class<? extends Annotation> annotationClass) {

@@ -38,7 +38,7 @@ import java.lang.reflect.InvocationTargetException;
  * {@link ErrorMessageFile}<p>
  *
  * @author Matthias Bollwein
- * @version 1.0
+ * @version 0.1-SNAPSHOT
  * @param <T> The type of the config class which shall be instantiated.
  */
 public class ConfigBuilder<T> {
@@ -89,7 +89,6 @@ public class ConfigBuilder<T> {
      * @return the instance of ConfigBuilder
      */
     public ConfigBuilder<T> withCommandLineArgs(String[] args) {
-
         this.commandLineArgs = args;
         return this;
     }
