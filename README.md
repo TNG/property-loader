@@ -11,6 +11,16 @@ Java ConfigBuilder
 How To Build Your Config
 ------------------------
 
+####1. Create your class:
+```java
+public class Config {
+    private String userName;
+    private Collection<PidFix> pidFixes
+    ...
+}
+```
+####2.Annotate it
+
 If you want the ConfigBuilder to get values from properties files, 
 you can specify the filenames (without file extension or path) by 
 annotating your config class with the @PropertiesFiles annotation. 
