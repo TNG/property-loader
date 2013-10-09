@@ -86,13 +86,22 @@ public class Config {
     ...
 }
 ```
+####4. Optional: Change the order in which annotations are processed and use your own error messages
 
+You can change the order in which annotations are processed glabally or individually for each field.
+To specify a global order for parsing ValueExtractorAnnotation annotations, annotate the class with the
+@LoadingOrder annotation. To change the order for a certain field, annotate the field.
+The order may only contain ValueExtractorAnnotations, i.e. 
+CommandLineValue.class, PropertyValue.class and DefaultValue.class. Example:
+```java
+@LoadingOrder({PropertyValue.class, CommandLineValue.class, DefaultValue.class})
+```
 
-To specify a global order for parsing ValueExtractorAnnotation annotations, annotate the class with 
-@LoadingOrder
-
-To specify your own error messages file (which is loaded by the PropertyLoader with the same settings as other the properties files), annotate the class with 
-ErrorMessageFile
+To specify your own error messages file (which is loaded by the PropertyLoader with the same settings as other the properties files), 
+annotate the class with the @ErrorMessageFile annotation:
+```java
+@ErrorMessageFile("myErrorMessages)
+```
 
 ####5. Build an instance of your class
 ```java
