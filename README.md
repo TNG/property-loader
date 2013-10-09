@@ -6,7 +6,8 @@ Java ConfigBuilder
 [Motivation](#motivation)  
 [Download](#download)  
 [How To Build Your Config](#how-to-build-your-config)  
-[Usage example](#usage-example)
+[Usage example](#usage-example)  
+[Java Doc](#java-doc)  
 
 How To Build Your Config
 ------------------------
@@ -122,3 +123,6 @@ To build a configured instance, simply call
 ```java
 Config myConfig = new ConfigBuilder(Config.class).withCommandLineArgs(args).build();
 ```
+
+Java Doc
+--------
