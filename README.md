@@ -98,6 +98,11 @@ To specify a global order for parsing ValueExtractorAnnotation annotations, anno
 To specify your own error messages file (which is loaded by the PropertyLoader with the same settings as other the properties files), annotate the class with 
 ErrorMessageFile
 
+####5. Build an instance of your class
+```java
+Config myConfig = new ConfigBuilder(Config.class).withCommandLineArgs(args).build();
+```
+
 Usage example
 -------------
 Say you have a config class that looks like this:
