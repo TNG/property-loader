@@ -18,16 +18,16 @@ import java.util.Properties;
 public class BuilderConfiguration {
 
     private Properties properties;
-    private CommandLine commandLineArgs;
-    private Class<? extends Annotation>[] annotationOrder = new Class[]{CommandLineValue.class, PropertyValue.class, DefaultValue.class};
+    private CommandLine commandLine;
+    private Class<? extends Annotation>[] annotationOrder = new Class[]{PropertyValue.class, DefaultValue.class};
 
     public BuilderConfiguration() {
         properties = new Properties();
-        commandLineArgs = null;
+        commandLine = null;
     }
 
-    public CommandLine getCommandLineArgs() {
-        return commandLineArgs;
+    public CommandLine getCommandLine() {
+        return commandLine;
     }
 
     public Properties getProperties() {
@@ -38,8 +38,9 @@ public class BuilderConfiguration {
         this.properties = properties;
     }
 
-    public void setCommandLine(CommandLine commandLineArgs) {
-        this.commandLineArgs = commandLineArgs;
+    public void setCommandLine(CommandLine commandLine) {
+        this.commandLine = commandLine;
+        this.annotationOrder = new Class[]{CommandLineValue.class, PropertyValue.class, DefaultValue.class};
     }
 
     public void setAnnotationOrder(Class<? extends Annotation>[] annotationOrder) {

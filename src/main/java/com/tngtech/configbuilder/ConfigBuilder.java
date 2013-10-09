@@ -50,7 +50,7 @@ public class ConfigBuilder<T> {
     private final ConstructionHelper<T> constructionHelper;
 
     private Class<T> configClass;
-    private String[] commandLineArgs;
+    private String[] commandLineArgs = {};
 
     private ConfigBuilder(Class<T> configClass, BuilderConfiguration builderConfiguration, PropertyLoaderConfigurator propertyLoaderConfigurator, CommandLineHelper commandLineHelper, ConfigValidator<T> configValidator, FieldSetter<T> fieldSetter, ErrorMessageSetup errorMessageSetup, ConstructionHelper<T> constructionHelper) {
         this.configClass = configClass;

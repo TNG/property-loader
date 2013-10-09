@@ -1,16 +1,11 @@
 package com.tngtech.configbuilder.annotation.valueextractor;
 
-import com.tngtech.configbuilder.annotation.valueextractor.CommandLineValue;
-import com.tngtech.configbuilder.annotation.valueextractor.CommandLineValueProcessor;
-import com.tngtech.configbuilder.annotation.valueextractor.DefaultValueProcessor;
 import com.tngtech.configbuilder.configuration.BuilderConfiguration;
 import org.apache.commons.cli.CommandLine;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
@@ -36,7 +31,7 @@ public class CommandLineValueProcessorTest {
     @Test
     public void testCommandLineValueProcessor(){
 
-        when(builderConfiguration.getCommandLineArgs()).thenReturn(commandLine);
+        when(builderConfiguration.getCommandLine()).thenReturn(commandLine);
         when(commandLineValue.shortOpt()).thenReturn("value");
         when(commandLine.getOptionValue("value")).thenReturn("passed");
         assertEquals("passed", commandLineValueProcessor.getValue(commandLineValue, builderConfiguration));

@@ -3,7 +3,6 @@ package com.tngtech.configbuilder.configuration;
 import com.tngtech.configbuilder.annotation.valueextractor.CommandLineValue;
 import com.tngtech.configbuilder.annotation.valueextractor.DefaultValue;
 import com.tngtech.configbuilder.annotation.valueextractor.PropertyValue;
-import com.tngtech.configbuilder.configuration.BuilderConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,7 +22,7 @@ public class BuilderConfigurationTest {
 
     @Test
     public void testGetCommandLineArgs() throws Exception {
-        assertEquals(null,builderConfiguration.getCommandLineArgs());
+        assertEquals(null,builderConfiguration.getCommandLine());
     }
 
     @Test
@@ -48,6 +47,6 @@ public class BuilderConfigurationTest {
 
     @Test
     public void testGetAnnotationOrder() throws Exception {
-        assertEquals(new Class[]{CommandLineValue.class, PropertyValue.class, DefaultValue.class},builderConfiguration.getAnnotationOrder());
+
     }
 }

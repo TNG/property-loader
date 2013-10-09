@@ -10,6 +10,6 @@ import java.lang.annotation.Annotation;
 public class CommandLineValueProcessor  implements IValueExtractorProcessor {
 
     public String getValue(Annotation annotation, BuilderConfiguration builderConfiguration) {
-        return builderConfiguration.getCommandLineArgs().getOptionValue(((CommandLineValue)annotation).shortOpt());
+        return builderConfiguration.getCommandLine().getOptionValue(((CommandLineValue)annotation).shortOpt());
     }
 }

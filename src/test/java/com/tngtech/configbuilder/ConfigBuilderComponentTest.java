@@ -50,7 +50,7 @@ public class ConfigBuilderComponentTest {
             try {
                 CommandLine commandLineArgs = parser.parse( options, args);
                 CommandLineValueProcessor commandLineValueProcessor = new CommandLineValueProcessor();
-                when(builderConfiguration.getCommandLineArgs()).thenReturn(commandLineArgs);
+                when(builderConfiguration.getCommandLine()).thenReturn(commandLineArgs);
                 String result =  commandLineValueProcessor.getValue(commandLineValue, builderConfiguration);
                 assertEquals("Mueller", result);
 
