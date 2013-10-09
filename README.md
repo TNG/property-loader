@@ -42,11 +42,36 @@ by annotating your config class with
 
 ####3. Annotate the fields
 
-#####4. 
-> @DefaultValue
-> @PropertyValue
-> @CommandLineValue
-> @ValueTransformer
+#####3.1 Get the String value
+There are three annotations that specify where the String value that configures a field comes from:
+> @DefaultValue("value")
+> @PropertyValue("property.key")
+> @CommandLineValue(shortOpt = "o", longOpt = "option")
+
+By default, any value found on the command line overwrites a value found in properties, which in turn overwrites the default value.
+This order can be customized, see...
+
+#####3.2 Transform it to any object
+Fields don't have to be Strings. You can have any type and configure it, if you annotate the field with the
+@ValueTransformer annotation and specify a class that implements the (see)FieldValueProvider interface, like so:
+```java
+@ValueTransformer(MyFieldValueProvider.class)
+private AnyType fieldOfAnyType;
+```
+
+The MyFieldValueProvider.class is an inner class of your config and implements the getValue(String optionValue) method:
+```java
+public class Config {
+    public static class MyFieldValueProvider implements FieldValueProvider<AnyType> {
+        public AnyType getValues(String optionValue) {
+            <...>
+        }
+    }
+    ...
+}
+```
+
+
 > @LoadingOrder
 
 To specify a global order for parsing ValueExtractorAnnotation annotations, annotate the class with 
