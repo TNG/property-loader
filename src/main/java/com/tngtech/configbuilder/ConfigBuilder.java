@@ -5,13 +5,9 @@ import com.tngtech.configbuilder.annotation.configuration.LoadingOrder;
 import com.tngtech.configbuilder.configuration.BuilderConfiguration;
 import com.tngtech.configbuilder.configuration.ErrorMessageSetup;
 import com.tngtech.configbuilder.context.Context;
-import com.tngtech.configbuilder.exception.ConfigBuilderException;
 import com.tngtech.configbuilder.util.*;
 import com.tngtech.propertyloader.PropertyLoader;
 import org.apache.log4j.Logger;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * Builds a config object.
@@ -49,19 +45,19 @@ public class ConfigBuilder<T> {
     private final PropertyLoaderConfigurator propertyLoaderConfigurator;
     private final CommandLineHelper commandLineHelper;
     private final FieldSetter<T> fieldSetter;
-    private final JSRValidator<T> jsrValidator;
+    private final ConfigValidator<T> configValidator;
     private final ErrorMessageSetup errorMessageSetup;
     private final ConstructionHelper<T> constructionHelper;
 
     private Class<T> configClass;
     private String[] commandLineArgs;
 
-    private ConfigBuilder(Class<T> configClass, BuilderConfiguration builderConfiguration, PropertyLoaderConfigurator propertyLoaderConfigurator, CommandLineHelper commandLineHelper, JSRValidator<T> jsrValidator, FieldSetter<T> fieldSetter, ErrorMessageSetup errorMessageSetup, ConstructionHelper<T> constructionHelper) {
+    private ConfigBuilder(Class<T> configClass, BuilderConfiguration builderConfiguration, PropertyLoaderConfigurator propertyLoaderConfigurator, CommandLineHelper commandLineHelper, ConfigValidator<T> configValidator, FieldSetter<T> fieldSetter, ErrorMessageSetup errorMessageSetup, ConstructionHelper<T> constructionHelper) {
         this.configClass = configClass;
         this.builderConfiguration = builderConfiguration;
         this.propertyLoaderConfigurator = propertyLoaderConfigurator;
         this.commandLineHelper = commandLineHelper;
-        this.jsrValidator = jsrValidator;
+        this.configValidator = configValidator;
         this.fieldSetter = fieldSetter;
         this.errorMessageSetup = errorMessageSetup;
         this.constructionHelper = constructionHelper;
@@ -76,7 +72,7 @@ public class ConfigBuilder<T> {
                 Context.getBean(BuilderConfiguration.class),
                 Context.getBean(PropertyLoaderConfigurator.class),
                 Context.getBean(CommandLineHelper.class),
-                Context.getBean(JSRValidator.class),
+                Context.getBean(ConfigValidator.class),
                 Context.getBean(FieldSetter.class),
                 Context.getBean(ErrorMessageSetup.class),
                 Context.getBean(ConstructionHelper.class));
@@ -107,7 +103,7 @@ public class ConfigBuilder<T> {
         initializeErrorMessageSetup(propertyLoader);
         T instanceOfConfigClass = constructionHelper.getInstance(configClass, objects);
         fieldSetter.setFields(instanceOfConfigClass, builderConfiguration);
-        jsrValidator.validate(instanceOfConfigClass);
+        configValidator.validate(instanceOfConfigClass);
         return instanceOfConfigClass;
     }
 
