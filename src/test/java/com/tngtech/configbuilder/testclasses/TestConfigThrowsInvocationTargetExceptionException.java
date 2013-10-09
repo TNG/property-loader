@@ -19,7 +19,7 @@ public class TestConfigThrowsInvocationTargetExceptionException {
 
     private int number;
 
-    private TestConfigThrowsInvocationTargetExceptionException(Integer i){
+    private TestConfigThrowsInvocationTargetExceptionException(){
         throw new RuntimeException();
     }
 }

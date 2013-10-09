@@ -1,46 +1,50 @@
 package com.tngtech.configbuilder;
 
 
-import com.tngtech.configbuilder.exception.ConfigBuilderException;
-import com.tngtech.configbuilder.exception.NoConstructorFoundException;
-import com.tngtech.configbuilder.exception.ValidatorException;
+import com.google.common.collect.Lists;
 import com.tngtech.configbuilder.testclasses.*;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.unitils.reflectionassert.ReflectionAssert.assertReflectionEquals;
 
+@RunWith(Parameterized.class)
 public class ConfigBuilderIntegrationTest {
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
+    private Class configClass;
+    private Object configInstance;
 
     @Before
-    public void setUp(){
+    public void setUp(){}
 
+    @Parameterized.Parameters
+    public static Collection configs() {
+        TestConfig testConfig = new TestConfig();
+        testConfig.setHelloWorld("Hello, World!");
+        testConfig.setUserName("user");
+        testConfig.setSurName("Mueller");
+        testConfig.setPidFixes(Lists.newArrayList("PIDs fixed with success"));
 
+        return Arrays.asList(new Object[][]{{TestConfig.class, testConfig}});
+    }
+
+    public ConfigBuilderIntegrationTest(Class configClass, Object configInstance) {
+        this.configClass = configClass;
+        this.configInstance = configInstance;
     }
 
     @Test
-    public void TestConfigBuilder(){
-        ConfigBuilder<TestConfig> configBuilder = new ConfigBuilder<>(TestConfig.class);
+    public void TestConfigBuilderWithParameters(){
+        ConfigBuilder configBuilder = new ConfigBuilder(configClass);
         String[] args = new String[]{"-u", "Mueller", "--pidFixFactory", "PIDs fixed with"};
-        TestConfig c = configBuilder.withCommandLineArgs(args).build();
-        assertEquals("user", c.getUserName());
-        assertEquals("Hello, World!", c.getHelloWorld());
-        assertEquals("Mueller", c.getSurName());
-        assertTrue(c.getPidFixes().contains("PIDs fixed with success"));
-    }
-
-    @Test
-    public void TestConfigBuilderThrowsIllegalArgumentException(){
-        expectedException.expect(ConfigBuilderException.class);
-        expectedException.expectMessage("integer");
-        ConfigBuilder<TestConfigThrowsIllegalArgumentException> configBuilder = new ConfigBuilder<>(TestConfigThrowsIllegalArgumentException.class);
-        configBuilder.build();
+        Object result = configBuilder.withCommandLineArgs(args).build();
+        assertReflectionEquals(configInstance, result);
     }
 
     @Test
@@ -48,28 +52,5 @@ public class ConfigBuilderIntegrationTest {
         ConfigBuilder<TestConfigWithoutDefaultConstructor> configBuilder = new ConfigBuilder<>(TestConfigWithoutDefaultConstructor.class);
         TestConfigWithoutDefaultConstructor c = configBuilder.build(3);
         assertEquals(3,c.getNumber());
-    }
-
-    @Test
-    public void TestConfigBuilderThrowsNoConstructorFoundException(){
-        expectedException.expect(NoConstructorFoundException.class);
-        expectedException.expectMessage("build()");
-        ConfigBuilder<TestConfigWithoutDefaultConstructor> configBuilder = new ConfigBuilder<>(TestConfigWithoutDefaultConstructor.class);
-        configBuilder.build();
-    }
-
-    @Test
-    public void TestConfigBuilderThrowsInvocationTargetExceptionException(){
-        expectedException.expect(ConfigBuilderException.class);
-        expectedException.expectMessage("InvocationTargetException");
-        ConfigBuilder<TestConfigThrowsInvocationTargetExceptionException> configBuilder = new ConfigBuilder<>(TestConfigThrowsInvocationTargetExceptionException.class);
-        configBuilder.build(3);
-    }
-
-    @Test
-    public void TestConfigBuilderThrowsValidatorException(){
-        expectedException.expect(ValidatorException.class);
-        ConfigBuilder<TestConfigNotNullViolation> configBuilder = new ConfigBuilder<>(TestConfigNotNullViolation.class);
-        configBuilder.build();
     }
 }

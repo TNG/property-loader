@@ -79,13 +79,13 @@ public class FieldSetterTest {
         when(fieldValueExtractor.extractValue(Matchers.any(Field.class),Matchers.any(BuilderConfiguration.class))).thenReturn("value");
         when(errorMessageSetup.getErrorMessage(Matchers.any(TargetTypeException.class),Matchers.any(String.class),Matchers.any(String.class),Matchers.any(String.class))).thenReturn("TargetTypeException");
 
-        FieldSetter<com.tngtech.configbuilder.util.FieldSetterTest.TestConfigForIllegalArgumentException> fieldSetter = new FieldSetter<>(fieldValueExtractor,errorMessageSetup, annotationHelper);
-        com.tngtech.configbuilder.util.FieldSetterTest.TestConfigForIllegalArgumentException testConfigForIllegalArgumentException = new com.tngtech.configbuilder.util.FieldSetterTest.TestConfigForIllegalArgumentException();
+        FieldSetter<TestConfigForTargetTypeException> fieldSetter = new FieldSetter<>(fieldValueExtractor,errorMessageSetup, annotationHelper);
+        TestConfigForTargetTypeException testConfigForTargetTypeException = new TestConfigForTargetTypeException();
 
         expectedException.expect(ConfigBuilderException.class);
         expectedException.expectMessage("TargetTypeException");
 
-        fieldSetter.setFields(testConfigForIllegalArgumentException, builderConfiguration);
+        fieldSetter.setFields(testConfigForTargetTypeException, builderConfiguration);
     }
 
     @Test

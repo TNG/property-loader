@@ -26,6 +26,22 @@ public class TestConfig {
 
     }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setHelloWorld(String helloWorld) {
+        this.helloWorld = helloWorld;
+    }
+
+    public void setSurName(String surName) {
+        this.surName = surName;
+    }
+
+    public void setPidFixes(Collection<String> pidFixes) {
+        this.pidFixes = pidFixes;
+    }
+
     public static class PidFixFactory implements FieldValueProvider<Collection<String>> {
 
         public Collection<String> getValue(String optionValue) {
