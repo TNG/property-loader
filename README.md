@@ -79,7 +79,7 @@ Fields don't have to be Strings. You can have any type and configure it, if you 
 private AnyType fieldOfAnyType;
 ```
 
-The MyFieldValueProvider.class is an inner class of your config and implements the getValue(String optionValue) method:
+The MyFieldValueProvider.class is an inner class of your config and implements the getValue method:
 ```java
 public class Config {
     public static class MyFieldValueProvider implements FieldValueProvider<AnyType> {
@@ -109,7 +109,7 @@ annotate the class with the @ErrorMessageFile annotation:
 
 ####5. Build an instance of your class
 ```java
-Config myConfig = new ConfigBuilder(Config.class).withCommandLineArgs(args).build();
+Config myConfig = new ConfigBuilder<Config>(Config.class).withCommandLineArgs(args).build();
 ```
 
 Usage example
@@ -144,7 +144,7 @@ public class Config {
 ```
 To build a configured instance, simply call
 ```java
-Config myConfig = new ConfigBuilder(Config.class).withCommandLineArgs(args).build();
+Config myConfig = new ConfigBuilder<Config>(Config.class).withCommandLineArgs(args).build();
 ```
 
 Java Doc
