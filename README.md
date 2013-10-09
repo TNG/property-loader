@@ -5,7 +5,7 @@ Java ConfigBuilder
 [What is it](#what-is-it)  
 [Motivation](#motivation)  
 [Download](#download)  
-[How To Build Your Config](#how-to-build-your-config)
+[How To Build Your Config](#how-to-build-your-config)  
 [Usage example](#usage example)
 
 How To Build Your Config
