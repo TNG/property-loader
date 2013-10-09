@@ -7,6 +7,8 @@ Java ConfigBuilder
 [Download](#download)  
 [Usage example](#usage)
 
+Usage example
+-------------
 Say you have a config class that looks like this:
 ```java
 @PropertyLocations(directories = {"/home/user"}, resourcesForClasses={MyApp.class}, contextClassLoader = true)
