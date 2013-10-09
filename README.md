@@ -25,28 +25,38 @@ If you want the ConfigBuilder to get values from properties files,
 you can specify the filenames (without file extension or path) by 
 annotating your config class with the @PropertiesFiles annotation. 
 You can specify multiple filenames like this: 
-> @PropertiesFiles({file1,file2,...})
+```java
+@PropertiesFiles({file1,file2,...})
+```
 
 By default, properties files are loaded using the PropertyLoader's default config, which 
 searches for files in the current directory, the ContextClassLoader and the user's home directory.
 You can manually specify the search locations by annotating your config class with the @PropertyLocations annotation, e.g.
+```java
 > @PropertyLocations(directories = {"/home/user"}, resourcesForClasses={MyApp.class}, contextClassLoader = true)
+```
 
 The PropertyLoader also searches for files with the default suffixes, i.e. the user name, local host names and 'override'.
 You can manually set the suffixes by annotating your config class with the @PropertySuffixes annotation like this:
+```java
 > @PropertySuffixes(extraSuffixes = {"tngtech","myname"}, hostNames = true)
+```
 
 The default file extensions are .properties and .xml. You can replace the .properties file extension with your own
 by annotating your config class with 
+```java
 > @PropertyExtension("fileextension")
+```
 
 ####3. Annotate the fields
 
 #####3.1 Get the String value
 There are three annotations that specify where the String value that configures a field comes from:
+```java
 > @DefaultValue("value")
 > @PropertyValue("property.key")
 > @CommandLineValue(shortOpt = "o", longOpt = "option")
+```
 
 By default, any value found on the command line overwrites a value found in properties, which in turn overwrites the default value.
 This order can be customized, see...
