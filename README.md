@@ -19,7 +19,7 @@ public class Config {
     ...
 }
 ```
-####2.Annotate it
+####2.Annotate the class (configure the loading of properties files)
 
 If you want the ConfigBuilder to get values from properties files, 
 you can specify the filenames (without file extension or path) by 
@@ -40,12 +40,14 @@ The default file extensions are .properties and .xml. You can replace the .prope
 by annotating your config class with 
 > @PropertyExtension("fileextension")
 
-Fields of the config class can have the following annotations:
-DefaultValue
-PropertyValue
-CommandLineValue
-ValueTransformer
-LoadingOrder
+####3. Annotate the fields
+
+#####4. 
+> @DefaultValue
+> @PropertyValue
+> @CommandLineValue
+> @ValueTransformer
+> @LoadingOrder
 
 To specify a global order for parsing ValueExtractorAnnotation annotations, annotate the class with 
 LoadingOrder
