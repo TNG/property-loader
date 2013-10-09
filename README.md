@@ -5,7 +5,43 @@ Java ConfigBuilder
 [What is it](#what-is-it)  
 [Motivation](#motivation)  
 [Download](#download)  
-[Usage example](#usage)
+[How To Build Your Config](#how-to-build-your-config)
+[Usage example](#usage example)
+
+How To Build Your Config
+------------------------
+
+If you want the ConfigBuilder to get values from properties files, 
+you can specify the filenames (without file extension or path) by 
+annotating your config class with the @PropertiesFiles annotation. 
+You can specify multiple filenames like this: 
+> @PropertiesFiles({file1,file2,...})
+
+By default, properties files are loaded using the PropertyLoader's default config, which 
+searches for files in the current directory, the ContextClassLoader and the user's home directory.
+You can manually specify the search locations by annotating your config class with the @PropertyLocations annotation, e.g.
+> @PropertyLocations(directories = {"/home/user"}, resourcesForClasses={MyApp.class}, contextClassLoader = true)
+
+The PropertyLoader also searches for files with the default suffixes, i.e. the user name, local host names and 'override'.
+You can manually set the suffixes by annotating your config class with the @PropertySuffixes annotation like this:
+> @PropertySuffixes(extraSuffixes = {"tngtech","myname"}, hostNames = true)
+
+The default file extensions are .properties and .xml. You can replace the .properties file extension with your own
+by annotating your config class with 
+> @PropertyExtension("fileextension")
+
+Fields of the config class can have the following annotations:
+DefaultValue
+PropertyValue
+CommandLineValue
+ValueTransformer
+LoadingOrder
+
+To specify a global order for parsing ValueExtractorAnnotation annotations, annotate the class with 
+LoadingOrder
+
+To specify your own error messages file (which is loaded by the PropertyLoader with the same settings as other the properties files), annotate the class with 
+ErrorMessageFile
 
 Usage example
 -------------
