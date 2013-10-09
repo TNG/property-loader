@@ -86,7 +86,7 @@ public class Config {
     ...
 }
 ```
-####4. Optional: Change the order in which annotations are processed and use your own error messages
+####4. Change the order in which annotations are processed and use your own error messages
 
 You can change the order in which annotations are processed glabally or individually for each field.
 To specify a global order for parsing ValueExtractorAnnotation annotations, annotate the class with the
