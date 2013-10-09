@@ -100,7 +100,7 @@ CommandLineValue.class, PropertyValue.class and DefaultValue.class. Example:
 To specify your own error messages file (which is loaded by the PropertyLoader with the same settings as other the properties files), 
 annotate the class with the @ErrorMessageFile annotation:
 ```java
-@ErrorMessageFile("myErrorMessages)
+@ErrorMessageFile("myErrorMessages")
 ```
 
 ####5. Build an instance of your class
