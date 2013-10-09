@@ -19,7 +19,7 @@ public class Config {
     ...
 }
 ```
-####2.Annotate the class (configure the loading of properties files)
+####2. Annotate the class (configure the loading of properties files)
 
 If you want the ConfigBuilder to get values from properties files, 
 you can specify the filenames (without file extension or path) by 
