@@ -65,7 +65,7 @@ There are three annotations that specify where the String value that configures 
 ```
 
 By default, any value found on the command line overwrites a value found in properties, which in turn overwrites the default value.
-This order can be customized, see [4. Change the order in which annotations are processed and use your own error messages][].
+This order can be customized, see [ii](#4-change-the-order-in-which-annotations-are-processed-and-use-your-own-error-messages).
 
 #####3.2 Transform it to any object
 Fields don't have to be Strings. You can have any type and configure it, if you annotate the field with the
