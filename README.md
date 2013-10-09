@@ -6,7 +6,7 @@ Java ConfigBuilder
 [Motivation](#motivation)  
 [Download](#download)  
 [How To Build Your Config](#how-to-build-your-config)  
-[Usage example](#usage example)
+[Usage example](#usage-example)
 
 How To Build Your Config
 ------------------------
