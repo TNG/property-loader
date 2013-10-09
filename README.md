@@ -3,8 +3,7 @@ Java ConfigBuilder
 
 #### Table of Contents
 [What It Is](#what-is-it)  
-[Motivation](#motivation)  
-[Download](#download)  
+[Motivation](#motivation)    
 [How To Build Your Config](#how-to-build-your-config)  
 [Usage example](#usage-example)  
 [Java Doc](#java-doc)  
@@ -14,9 +13,6 @@ What It Is
 
 Motivation
 ----------
-
-Download
---------
 
 How To Build Your Config
 ------------------------
