@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/property-loader-rewrite.iml" filepath="$PROJECT_DIR$/property-loader-rewrite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/property-loader.iml" filepath="$PROJECT_DIR$/property-loader.iml" />
     </modules>
   </component>
 </project>
