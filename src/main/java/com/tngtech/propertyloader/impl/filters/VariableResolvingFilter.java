@@ -11,7 +11,7 @@ public class VariableResolvingFilter extends ValueModifyingFilter {
 
     @Override
     protected String filterValue(String key, String value, Properties properties) {
-        if (! value.contains(VARIABLE_PREFIX)) {
+        if (!value.contains(VARIABLE_PREFIX)) {
             return value;
         }
 

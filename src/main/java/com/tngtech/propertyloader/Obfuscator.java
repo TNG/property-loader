@@ -20,15 +20,15 @@ public class Obfuscator {
     private String encoding = "UTF-8";
     private SecretKeySpec dataEncryptionSecretKeySpec;
 
-    public Obfuscator(String password){
+    public Obfuscator(String password) {
 
-        byte[] salt = {65,110,100,114,111,105,100,75,105,116,75,97,116,13,1,20,20,9,1,19};
+        byte[] salt = {65, 110, 100, 114, 111, 105, 100, 75, 105, 116, 75, 97, 116, 13, 1, 20, 20, 9, 1, 19};
         SecretKeyFactory factory;
         try {
             factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
             SecretKey tmp = factory.generateSecret(new PBEKeySpec(password.toCharArray(), salt, 100, 128));
             dataEncryptionSecretKeySpec = new SecretKeySpec(tmp.getEncoded(), ENCRYPTION_ALGORITHM);
-        } catch(Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -73,7 +73,7 @@ public class Obfuscator {
      * @return the plaintext String
      */
     public String decrypt(String toDecrypt) {
-        try{
+        try {
             byte[] encryptedBytes = base64Decoder.decodeBuffer(toDecrypt);
             return decryptInternal(dataEncryptionSecretKeySpec, encryptedBytes);
         } catch (IOException e) {

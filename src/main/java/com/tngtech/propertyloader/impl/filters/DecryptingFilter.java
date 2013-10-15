@@ -20,7 +20,7 @@ public class DecryptingFilter extends ValueModifyingFilter {
         String encryptedValue = value.substring(DECRYPT_PREFIX.length());
         String password = properties.getProperty("decryptingFilterPassword");
 
-        if(password == null) {
+        if (password == null) {
             throw new DecryptingFilterException("Decryption failed: Password not found in properties");
         }
 

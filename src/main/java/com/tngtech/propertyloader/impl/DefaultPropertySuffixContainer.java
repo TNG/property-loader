@@ -3,39 +3,30 @@ package com.tngtech.propertyloader.impl;
 import com.google.common.collect.Lists;
 import com.tngtech.propertyloader.impl.helpers.HostsHelper;
 import com.tngtech.propertyloader.impl.interfaces.PropertySuffixContainer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.List;
 
-@Component
-@Scope("prototype")
 public class DefaultPropertySuffixContainer implements PropertySuffixContainer<DefaultPropertySuffixContainer> {
 
     private final HostsHelper hostsHelper;
 
     private List<String> suffixes = Lists.newArrayList();
 
-    @Autowired
     public DefaultPropertySuffixContainer(HostsHelper hostsHelper) {
         this.hostsHelper = hostsHelper;
     }
 
-    public DefaultPropertySuffixContainer addUserName()
-    {
+    public DefaultPropertySuffixContainer addUserName() {
         this.suffixes.add(System.getProperty("user.name"));
         return this;
     }
 
-    public DefaultPropertySuffixContainer addLocalHostNames()
-    {
+    public DefaultPropertySuffixContainer addLocalHostNames() {
         this.suffixes.addAll(hostsHelper.getLocalHostNames());
         return this;
     }
 
-    public DefaultPropertySuffixContainer addString(String suffix)
-    {
+    public DefaultPropertySuffixContainer addString(String suffix) {
         this.suffixes.add(suffix);
         return this;
     }
@@ -45,8 +36,7 @@ public class DefaultPropertySuffixContainer implements PropertySuffixContainer<D
         return this;
     }
 
-    public List<String> getSuffixes()
-    {
+    public List<String> getSuffixes() {
         return suffixes;
     }
 
@@ -62,7 +52,6 @@ public class DefaultPropertySuffixContainer implements PropertySuffixContainer<D
         suffixes.clear();
         return this;
     }
-
 
 
 }

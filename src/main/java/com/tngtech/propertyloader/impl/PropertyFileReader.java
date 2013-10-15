@@ -3,9 +3,6 @@ package com.tngtech.propertyloader.impl;
 
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,15 +10,12 @@ import java.io.Reader;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
-@Component
-@Scope("prototype")
 public class PropertyFileReader {
 
     private final static Logger log = Logger.getLogger(PropertyFileReader.class);
 
     private final PropertyLoaderFactory propertyLoaderFactory;
 
-    @Autowired
     public PropertyFileReader(PropertyLoaderFactory propertyLoaderFactory) {
         this.propertyLoaderFactory = propertyLoaderFactory;
     }
@@ -31,30 +25,25 @@ public class PropertyFileReader {
 
         InputStream stream = opener.open(fileName);
 
-        if(stream == null){
+        if (stream == null) {
             log.debug(String.format("file %s not found %s", fileName, opener.toString()));
             newProperties = propertyLoaderFactory.getEmptyProperties();
-        }
-        else{
+        } else {
             log.info(String.format("file %s found for reading %s with encoding %s", fileName, opener.toString(), propertyFileEncoding));
-            if(fileName.toLowerCase().endsWith("xml")){
+            if (fileName.toLowerCase().endsWith("xml")) {
                 log.debug(String.format("attempting to find and read xml file %s %s", fileName, opener.toString()));
-                try{
+                try {
                     newProperties = readFromXML(stream);
-                }
-                catch(InvalidPropertiesFormatException e){
+                } catch (InvalidPropertiesFormatException e) {
                     throw new PropertyFileReaderException(String.format("error reading properties from from '%s': this xml file is not a valid properties format", fileName), e);
-                }
-                catch(IOException e){
+                } catch (IOException e) {
                     throw new PropertyFileReaderException(String.format("error reading properties from stream created from '%s' in opener '%s'", fileName, opener.toString()), e);
                 }
-            }
-            else {
+            } else {
                 log.debug(String.format("attempting to find and read properties file %s with encoding %s %s", fileName, propertyFileEncoding, opener.toString()));
-                try{
+                try {
                     newProperties = read(stream, propertyFileEncoding);
-                }
-                catch(IOException e){
+                } catch (IOException e) {
                     throw new PropertyFileReaderException(String.format("error reading properties from stream created from '%s' with encoding '%s' in opener '%s'", fileName, propertyFileEncoding, opener.toString()), e);
                 }
             }
@@ -63,9 +52,8 @@ public class PropertyFileReader {
     }
 
 
-    private Properties read(InputStream stream, String propertyFileEncoding) throws IOException
-    {
-        Properties loadedProperties =  propertyLoaderFactory.getEmptyProperties();
+    private Properties read(InputStream stream, String propertyFileEncoding) throws IOException {
+        Properties loadedProperties = propertyLoaderFactory.getEmptyProperties();
         Reader reader = propertyLoaderFactory.getInputStreamReader(stream, propertyFileEncoding);
         loadedProperties.load(reader);
 
@@ -73,7 +61,7 @@ public class PropertyFileReader {
     }
 
     private Properties readFromXML(InputStream stream) throws IOException {
-        Properties loadedProperties =  propertyLoaderFactory.getEmptyProperties();
+        Properties loadedProperties = propertyLoaderFactory.getEmptyProperties();
         loadedProperties.loadFromXML(stream);
         return loadedProperties;
     }

@@ -6,7 +6,7 @@ import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderFilter;
 import java.util.Map;
 import java.util.Properties;
 
-public abstract class ValueModifyingFilter implements PropertyLoaderFilter{
+public abstract class ValueModifyingFilter implements PropertyLoaderFilter {
     public void filter(Properties properties) {
         for (Map.Entry<Object, Object> entry : properties.entrySet()) {
             String key = entry.getKey().toString();

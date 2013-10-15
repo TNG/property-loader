@@ -3,22 +3,16 @@ package com.tngtech.propertyloader.impl;
 import com.google.common.collect.Lists;
 import com.tngtech.propertyloader.impl.interfaces.PropertyFilterContainer;
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderFilter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-@Scope("prototype")
 public class DefaultPropertyFilterContainer implements PropertyFilterContainer<DefaultPropertyFilterContainer> {
 
     private final PropertyLoaderFactory propertyLoaderFactory;
 
     private List<PropertyLoaderFilter> filters = Lists.newArrayList();
 
-    @Autowired
-    public DefaultPropertyFilterContainer(PropertyLoaderFactory propertyLoaderFactory){
+    public DefaultPropertyFilterContainer(PropertyLoaderFactory propertyLoaderFactory) {
 
         this.propertyLoaderFactory = propertyLoaderFactory;
     }

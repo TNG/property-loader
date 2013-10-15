@@ -1,13 +1,11 @@
 package com.tngtech.propertyloader;
 
 import com.google.common.collect.Lists;
-import com.tngtech.propertyloader.context.Context;
 import com.tngtech.propertyloader.exception.PropertyLoaderException;
 import com.tngtech.propertyloader.impl.*;
+import com.tngtech.propertyloader.impl.helpers.HostsHelper;
 import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
 import com.tngtech.propertyloader.impl.interfaces.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.util.Enumeration;
@@ -23,7 +21,6 @@ import java.util.Stack;
  * To see which search paths are currently implemented, see the impl.openers subpackage.
  * To see which postprocessing steps are implemented, see the impl.filters subpackage.
  */
-@Component
 public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader>, PropertySuffixContainer<PropertyLoader>, PropertyFilterContainer<PropertyLoader> {
 
     private static final String INCLUDE_KEY = "$include";
@@ -40,8 +37,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
     private DefaultPropertyFilterContainer propertyLoaderFilters;
     private Stack<String> fileNameStack;
 
-    @Autowired
-    public PropertyLoader(PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader, PropertyLoaderFactory propertyLoaderFactory, DefaultPropertySuffixContainer propertySuffix, DefaultPropertyLocationContainer propertyLocation, DefaultPropertyFilterContainer propertyLoaderFilters) {
+    protected PropertyLoader(PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader, PropertyLoaderFactory propertyLoaderFactory, DefaultPropertySuffixContainer propertySuffix, DefaultPropertyLocationContainer propertyLocation, DefaultPropertyFilterContainer propertyLoaderFilters) {
         this.propertyFileNameHelper = propertyFileNameHelper;
         this.propertyFileReader = propertyFileReader;
         this.propertyLoaderFactory = propertyLoaderFactory;
@@ -50,13 +46,17 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
         this.propertyLoaderFilters = propertyLoaderFilters;
     }
 
-    public PropertyLoader(){
-        this(Context.getBean(PropertyFileNameHelper.class),
-                Context.getBean(PropertyFileReader.class),
-                Context.getBean(PropertyLoaderFactory.class),
-                Context.getBean(DefaultPropertySuffixContainer.class),
-                Context.getBean(DefaultPropertyLocationContainer.class),
-                Context.getBean(DefaultPropertyFilterContainer.class));
+    public PropertyLoader() {
+
+        PropertyLoaderFactory propertyLoaderFactory = new PropertyLoaderFactory();
+        HostsHelper hostsHelper = propertyLoaderFactory.getBean(HostsHelper.class);
+
+        this.propertyFileNameHelper = propertyLoaderFactory.getBean(PropertyFileNameHelper.class);
+        this.propertyFileReader = new PropertyFileReader(propertyLoaderFactory);
+        this.propertyLoaderFactory = propertyLoaderFactory;
+        this.propertySuffix = new DefaultPropertySuffixContainer(hostsHelper);
+        this.propertyLocation = new DefaultPropertyLocationContainer(propertyLoaderFactory);
+        this.propertyLoaderFilters = new DefaultPropertyFilterContainer(propertyLoaderFactory);
     }
 
     public PropertyLoader withEncoding(String propertyFileEncoding) {
@@ -71,6 +71,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
     public DefaultPropertySuffixContainer getSuffixes() {
         return propertySuffix;
     }
+
     public DefaultPropertyFilterContainer getFilters() {
         return propertyLoaderFilters;
     }
@@ -109,61 +110,58 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
     }
 
 
-    public PropertyLoader atDefaultLocations(){
+    public PropertyLoader atDefaultLocations() {
         propertyLocation.atDefaultLocations();
         return this;
     }
 
-    public PropertyLoader atCurrentDirectory(){
+    public PropertyLoader atCurrentDirectory() {
         propertyLocation.atCurrentDirectory();
         return this;
     }
 
-    public PropertyLoader atHomeDirectory(){
+    public PropertyLoader atHomeDirectory() {
         propertyLocation.atHomeDirectory();
         return this;
     }
 
-    public PropertyLoader atDirectory(String directory){
+    public PropertyLoader atDirectory(String directory) {
         propertyLocation.atDirectory(directory);
         return this;
     }
 
 
-    public PropertyLoader atContextClassPath(){
+    public PropertyLoader atContextClassPath() {
         propertyLocation.atContextClassPath();
         return this;
     }
 
-    public PropertyLoader atRelativeToClass(Class<?> reference){
+    public PropertyLoader atRelativeToClass(Class<?> reference) {
         propertyLocation.atRelativeToClass(reference);
         return this;
     }
 
-    public PropertyLoader atClassLoader(ClassLoader classLoader){
+    public PropertyLoader atClassLoader(ClassLoader classLoader) {
         propertyLocation.atClassLoader(classLoader);
         return this;
     }
 
-    public PropertyLoader atBaseURL(URL url){
+    public PropertyLoader atBaseURL(URL url) {
         propertyLocation.atBaseURL(url);
         return this;
     }
 
-    public PropertyLoader addUserName()
-    {
+    public PropertyLoader addUserName() {
         propertySuffix.addUserName();
         return this;
     }
 
-    public PropertyLoader addLocalHostNames()
-    {
+    public PropertyLoader addLocalHostNames() {
         propertySuffix.addLocalHostNames();
         return this;
     }
 
-    public PropertyLoader addString(String suffix)
-    {
+    public PropertyLoader addString(String suffix) {
         propertySuffix.addString(suffix);
         return this;
     }
@@ -234,13 +232,11 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
 
     private Properties loadPropertiesFromBaseNameList(List<String> baseNames) {
         Properties loadedProperties = propertyLoaderFactory.getEmptyProperties();
-        for (String fileName : propertyFileNameHelper.getFileNames(baseNames, propertySuffix.getSuffixes(), fileExtension))
-        {
+        for (String fileName : propertyFileNameHelper.getFileNames(baseNames, propertySuffix.getSuffixes(), fileExtension)) {
             throwIfRecursionInIncludes(fileName);
 
             fileNameStack.push(fileName);
-            for (PropertyLoaderOpener opener : propertyLocation.getOpeners())
-            {
+            for (PropertyLoaderOpener opener : propertyLocation.getOpeners()) {
                 Properties newProperties = propertyFileReader.tryToReadPropertiesFromFile(fileName, propertyFileEncoding, opener);
                 Properties includedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(collectIncludesAndRemoveKey(newProperties)));
                 newProperties.putAll(includedProperties);
@@ -268,7 +264,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
 
     private String[] collectIncludesAndRemoveKey(Properties properties) {
         String[] includes = new String[]{};
-        if(properties.containsKey(INCLUDE_KEY)) {
+        if (properties.containsKey(INCLUDE_KEY)) {
             includes = properties.getProperty(INCLUDE_KEY).split(",");
             properties.remove(INCLUDE_KEY);
         }
@@ -276,7 +272,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
     }
 
     private void filterProperties(Properties loadedProperties) {
-        for(PropertyLoaderFilter filter : propertyLoaderFilters.getFilters()) {
+        for (PropertyLoaderFilter filter : propertyLoaderFilters.getFilters()) {
             filter.filter(loadedProperties);
         }
     }

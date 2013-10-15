@@ -2,8 +2,10 @@ package com.tngtech.propertyloader.impl;
 
 import com.tngtech.propertyloader.impl.filters.*;
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderFilter;
-import com.tngtech.propertyloader.impl.openers.*;
-import org.springframework.stereotype.Component;
+import com.tngtech.propertyloader.impl.openers.ClassLoaderOpener;
+import com.tngtech.propertyloader.impl.openers.ContextClassLoaderOpener;
+import com.tngtech.propertyloader.impl.openers.RelativeToClassOpener;
+import com.tngtech.propertyloader.impl.openers.URLFileOpener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,10 +14,17 @@ import java.net.URL;
 import java.util.Properties;
 import java.util.Stack;
 
-@Component
 public class PropertyLoaderFactory {
 
-    public Properties getEmptyProperties(){
+    public <T> T getBean(Class<T> clazz) {
+        try {
+            return clazz.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException();
+        }
+    }
+
+    public Properties getEmptyProperties() {
         return new Properties();
     }
 
@@ -23,43 +32,43 @@ public class PropertyLoaderFactory {
         return new InputStreamReader(stream, encoding);
     }
 
-    public URLFileOpener getURLFileOpener(){
+    public URLFileOpener getURLFileOpener() {
         return new URLFileOpener();
     }
 
-    public URLFileOpener getURLFileOpener(String directory){
+    public URLFileOpener getURLFileOpener(String directory) {
         return new URLFileOpener(directory);
     }
 
-    public ContextClassLoaderOpener getContextClassLoaderOpener(){
+    public ContextClassLoaderOpener getContextClassLoaderOpener() {
         return new ContextClassLoaderOpener();
     }
 
-    public RelativeToClassOpener getRelativeToClass(Class<?> tClass){
+    public RelativeToClassOpener getRelativeToClass(Class<?> tClass) {
         return new RelativeToClassOpener(tClass);
     }
 
-    public ClassLoaderOpener getClassLoaderOpener(ClassLoader classLoader){
+    public ClassLoaderOpener getClassLoaderOpener(ClassLoader classLoader) {
         return new ClassLoaderOpener(classLoader);
     }
 
-    public URLFileOpener getURLFileOpener(URL url){
+    public URLFileOpener getURLFileOpener(URL url) {
         return new URLFileOpener(url);
     }
 
-    public PropertyLoaderFilter getVariableResolvingFilter(){
+    public PropertyLoaderFilter getVariableResolvingFilter() {
         return new VariableResolvingFilter();
     }
 
-    public PropertyLoaderFilter getEnvironmentResolvingFilter(){
+    public PropertyLoaderFilter getEnvironmentResolvingFilter() {
         return new EnvironmentResolvingFilter();
     }
 
-    public PropertyLoaderFilter getWarnIfPropertyHasToBeDefined(){
+    public PropertyLoaderFilter getWarnIfPropertyHasToBeDefined() {
         return new ThrowIfPropertyHasToBeDefined();
     }
 
-    public PropertyLoaderFilter getWarnOnSurroundingWhitespace(){
+    public PropertyLoaderFilter getWarnOnSurroundingWhitespace() {
         return new WarnOnSurroundingWhitespace();
     }
 

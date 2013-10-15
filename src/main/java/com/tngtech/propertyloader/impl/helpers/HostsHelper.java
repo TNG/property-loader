@@ -3,8 +3,6 @@ package com.tngtech.propertyloader.impl.helpers;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -12,10 +10,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-@Component
 public class HostsHelper {
 
-    public List<String> getLocalHostNames(){
+    public List<String> getLocalHostNames() {
 
         Set<String> hostSet = Sets.newHashSet();
 

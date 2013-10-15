@@ -22,10 +22,9 @@ public class ThrowIfPropertyHasToBeDefined implements PropertyLoaderFilter {
                 sb.append("\n" + "Configuration incomplete: property " + key +
                         " is still mapped to " + value);
                 properties.remove(entry.getKey());
-                try{
+                try {
                     filter(properties);
-                }
-                catch(ThrowIfPropertyHasToBeDefinedException e){
+                } catch (ThrowIfPropertyHasToBeDefinedException e) {
                     sb.append(e.getMessage());
                 }
                 throw new ThrowIfPropertyHasToBeDefinedException(sb.toString());

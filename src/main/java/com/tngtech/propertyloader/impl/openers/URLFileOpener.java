@@ -1,10 +1,12 @@
 package com.tngtech.propertyloader.impl.openers;
 
-import java.io.*;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 
 /**
  * Searches for properties files at a file system path.
@@ -39,18 +41,18 @@ public class URLFileOpener implements PropertyLoaderOpener {
      * Tries to open the given file.
      * A filename that starts with '/' is understood as an absolute path,
      * i.e. the URLFileOpener forgets about its path.
+     *
      * @param fileName the filename
      * @return
      */
-    public InputStream open(String fileName){
+    public InputStream open(String fileName) {
 
         try {
             URL urlToFile = new URL(url, fileName);
             return urlToFile.openStream();
-        }
-        catch (MalformedURLException e) {
+        } catch (MalformedURLException e) {
             throw new RuntimeException(String.format("error while forming new URL from URL %s and filename %s", url.getPath(), fileName), e);
-        }catch (IOException e) {
+        } catch (IOException e) {
             return null;
         }
     }
