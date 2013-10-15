@@ -1,0 +1,33 @@
+# prod, qa, test, dev
+environment=dev
+
+coresystem.url.prod = http://production
+coresystem.url.dev  = http://development
+coresystem.url.qa   = http://qa
+coresystem.url.test = http://test
+
+coresystem.url = ${coresystem.url.${environment}}
+
+coresystem.pw.prod = prod
+coresystem.pw.dev  = dev
+coresystem.pw.qa   = qa
+coresystem.pw.test = test
+
+coresystem.pw = ${coresystem.pw.${environment}}
+
+testInclude.dev = <HAS_TO_BE_DEFINED_IF_REFERENCED>
+testInclude.prod = <HAS_TO_BE_DEFINED_IF_REFERENCED>
+testInclude     = ${testInclude.${environment}}
+
+#blub=<HAS_TO_BE_DEFINED>
+#blab=${blub}/blab
+
+#undefined=${undefined}
+
+$include = toBeIncluded
+
+xxx=${definedInIncluded}
+
+a=Hello, World!
+b=${a}
+c=${b}
