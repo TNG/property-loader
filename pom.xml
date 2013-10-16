@@ -29,6 +29,21 @@
             <email>matthias.bollwein@tngtech.com</email>
             <organization>TNG Technology Consulting</organization>
         </developer>
+        <developer>
+            <name>Gerhard Müller</name>
+            <email>gerhard.mueller@tngtech.com</email>
+            <organization>TNG Technology Consulting</organization>
+        </developer>
+        <developer>
+            <name>Michael Echerer</name>
+            <email>michael.echerer@tngtech.com</email>
+            <organization>TNG Technology Consulting</organization>
+        </developer>
+        <developer>
+            <name>Thomas Endres</name>
+            <email>thomas.endres@tngtech.com</email>
+            <organization>TNG Technology Consulting</organization>
+        </developer>
     </developers>
 
     <build>
