@@ -2,11 +2,34 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
     <groupId>com.tngtech.java</groupId>
     <artifactId>property-loader</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>Property-Loader</name>
+    <description>The property loader is a java library for managing property configurations.</description>
+    <url>https://github.com/TNG/config-builder</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>git@github.com:TNG/property-loader.git</url>
+        <connection>scm:git:git@github.com:TNG/property-loader.git</connection>
+        <developerConnection>scm:git:git@github.com:TNG/property-loader.git</developerConnection>
+    </scm>
+    <developers>
+        <developer>
+            <name>Matthias Bollwein</name>
+            <email>matthias.bollwein@tngtech.com</email>
+            <organization>TNG Technology Consulting</organization>
+        </developer>
+    </developers>
 
     <build>
         <plugins>
@@ -19,11 +42,29 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+            </plugin>
         </plugins>
     </build>
 
     <dependencies>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -51,7 +92,5 @@
             <artifactId>guava</artifactId>
             <version>15.0</version>
         </dependency>
-
-
     </dependencies>
 </project>
