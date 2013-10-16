@@ -49,9 +49,9 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
     public PropertyLoader() {
 
         PropertyLoaderFactory propertyLoaderFactory = new PropertyLoaderFactory();
-        HostsHelper hostsHelper = propertyLoaderFactory.getBean(HostsHelper.class);
+        HostsHelper hostsHelper = propertyLoaderFactory.createInstance(HostsHelper.class);
 
-        this.propertyFileNameHelper = propertyLoaderFactory.getBean(PropertyFileNameHelper.class);
+        this.propertyFileNameHelper = propertyLoaderFactory.createInstance(PropertyFileNameHelper.class);
         this.propertyFileReader = new PropertyFileReader(propertyLoaderFactory);
         this.propertyLoaderFactory = propertyLoaderFactory;
         this.propertySuffix = new DefaultPropertySuffixContainer(hostsHelper);

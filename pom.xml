@@ -55,6 +55,10 @@
             <organization>TNG Technology Consulting</organization>
         </developer>
     </developers>
+    <organization>
+        <name>TNG Technology Consulting</name>
+        <url>http://www.tngtech.com/</url>
+    </organization>
 
     <build>
         <plugins>

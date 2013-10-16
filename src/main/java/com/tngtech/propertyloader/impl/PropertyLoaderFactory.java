@@ -16,11 +16,11 @@ import java.util.Stack;
 
 public class PropertyLoaderFactory {
 
-    public <T> T getBean(Class<T> clazz) {
+    public <T> T createInstance(Class<T> clazz) {
         try {
             return clazz.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
