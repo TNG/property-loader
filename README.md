@@ -20,10 +20,10 @@ $ maven install
 4. Load properties
 
 ```java
-        Properties properties = new PropertyLoader().withDefaultConfig();
+        PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
 
         // loads: "props.properties", "props.$hostname.properties", "props.$user.properties" in this order
-        Properties props = loader.load("props")
+        Properties properties = propertyLoader.load("props")
 ```
 
 ### JavaDoc###
