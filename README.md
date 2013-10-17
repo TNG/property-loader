@@ -4,8 +4,8 @@ Property loader [![Build Status](https://travis-ci.org/TNG/property-loader.png?b
 #### Table of Contents
 [What It Is](#what-is-it)    
 [Quick Start](#quick-start)  
+[Postprocessing Features](#postprocessing-features)   
 [Advanced Configuration](#advanced-configuration)  
-[Postprocessing Features](#postprocessing-features)  
 [Usage example](#usage-example)  
 [Java Doc](#java-doc)  
 
@@ -39,56 +39,6 @@ PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
 Properties properties = propertyLoader.load("props")
 ```
 
-Advanced Configuration
-----------------------
-
-####1. Search Locations
-Tell the PropertyLoader to search for properties files at its default locations (/home/user, current directory and context classpath):
-```java
-propertyLoader.atDefaultLocations()
-```
-
-#####1. Folders and URLs
-Tell the PropertyLoader to search for properties files at custom paths:
-```java
-propertyLoader.atDirectory(String directory)
-propertyLoader.atBaseURL(URL url)
-propertyLoader.atCurrentDirectory()
-propertyLoader.atHomeDirectory()
-```
-
-#####2. Classpath
-Tell the PropertyLoader to search for properties files in the current thread's classpath:
-```java
-propertyLoader.atContextClassPath()
-```
-This will get the classloader from the current thread and use it to find properties files.
-
-#####3. Classloader
-Tell the PropertyLoader to search for properties files using a custom ClassLoader:
-```java
-propertyLoader.atClassLoader(ClassLoader classLoader)
-```
-
-#####4. Relative To A Class
-Tell the PropertyLoader to search for properties files relative to the location of a class:
-```java
-propertyLoader.atRelativeToClass(Class<?> clazz)
-```
-
-####2. Suffixes
-Tell the PropertyLoader to use default suffixes (local host names, user name and "override"):
-```java
-propertyLoader.addDefaultSuffixes()
-```
-Tell the PropertyLoader to use custom suffixes:
-```java
-propertyLoader.addSuffix(String directory)
-propertyLoader.addSuffixList(List<String> suffixes)
-propertyLoader.addUserName()
-propertyLoader.addLocalHostNames()
-```
-
 Postprocessing Features
 -----------------------
 
@@ -119,6 +69,75 @@ Encrypted property values that are prefixed with
 DECRYPT:
 ```
 will be decrypted after loading.
+
+
+Advanced Configuration
+----------------------
+
+The PropertyLoader's default configuration includes default search paths, suffixes and applies all available postprocessing filters.
+
+The default search paths are:
+1. The current directory.
+2. The user's home directory.
+3. The context classpath.
+
+The default suffixes are:
+1. Local host names.
+2. The user name.
+3. 'override'
+
+####1. Search Locations
+Tell the PropertyLoader to search for properties files at its default locations (/home/user, current directory and context classpath):
+```java
+propertyLoader.atDefaultLocations()
+```
+
+#####1.1 Folders and URLs
+Tell the PropertyLoader to search for properties files at custom paths:
+```java
+propertyLoader.atDirectory(String directory)
+propertyLoader.atBaseURL(URL url)
+propertyLoader.atCurrentDirectory()
+propertyLoader.atHomeDirectory()
+```
+
+#####1.2 Classpath
+Tell the PropertyLoader to search for properties files in the current thread's classpath:
+```java
+propertyLoader.atContextClassPath()
+```
+This will get the classloader from the current thread and use it to find properties files.
+
+#####1.3 Classloader
+Tell the PropertyLoader to search for properties files using a custom ClassLoader:
+```java
+propertyLoader.atClassLoader(ClassLoader classLoader)
+```
+
+#####1.4 Relative To A Class
+Tell the PropertyLoader to search for properties files relative to the location of a class:
+```java
+propertyLoader.atRelativeToClass(Class<?> clazz)
+```
+
+####2. Suffixes
+Tell the PropertyLoader to use default suffixes (local host names, user name and "override"):
+```java
+propertyLoader.addDefaultSuffixes()
+```
+Tell the PropertyLoader to use custom suffixes:
+```java
+propertyLoader.addSuffix(String directory)
+propertyLoader.addSuffixList(List<String> suffixes)
+propertyLoader.addUserName()
+propertyLoader.addLocalHostNames()
+```
+
+####3. Postprocessing
+
+You can define which postprocessing filters are applied:
+```java
+```
 
 
 Usage example
