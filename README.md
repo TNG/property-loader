@@ -35,7 +35,7 @@ $ maven install
 ```java
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
 
-        // loads: "props.properties", "props.$hostname.properties", "props.$user.properties" in this order
+        //loads: "props.properties", "props.$hostname.properties", "props.$user.properties"
         Properties properties = propertyLoader.load("props")
 ```
 
