@@ -1,10 +1,11 @@
-# Property loader [![Build Status](https://travis-ci.org/TNG/property-loader.png?branch=master)](https://travis-ci.org/TNG/property-loader)
+Property loader [![Build Status](https://travis-ci.org/TNG/property-loader.png?branch=master)](https://travis-ci.org/TNG/property-loader)
+===============
 
 #### Table of Contents
-[What It Is](#what-is-it)  
-[Motivation](#motivation)    
-[How To Build Your Config](#how-to-build-your-config)  
-[How To Merge With An Existing Config](#how-to-merge-with-an-existing-config)  
+[What It Is](#what-is-it)    
+[Quick Start](#quick-start)  
+[Advanced Configuration](#advanced-configuration)  
+[Processing Features](#processing-features)  
 [Usage example](#usage-example)  
 [Java Doc](#java-doc)  
 
@@ -20,7 +21,8 @@ It supports several property loading strategies and features e.g.:
 3. Recursive Property Resolution
 4. Property encryption
 
-### Quick start ###
+Quick Start
+-----------
 
 1. Build the lib
 ```
@@ -37,6 +39,24 @@ $ maven install
         Properties properties = propertyLoader.load("props")
 ```
 
-### JavaDoc###
+Advanced Configuration
+----------------------
 
-Full javadoc of the code can be found here http://tng.github.io/property-loader/
+####1. Search Locations
+####2. Suffixes
+
+Processing Features
+-------------------
+
+####1. Variable Resolving
+####2. Includes
+####3. Decryption
+
+
+Usage example
+-------------
+
+Java Doc
+--------
+
+Full Java Doc of the code can be found here http://tng.github.io/property-loader/
