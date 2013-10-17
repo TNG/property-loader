@@ -82,7 +82,7 @@ The default search paths are:
 3. the context classpath   
 
 The default suffixes are:   
-1. local host names.   
+1. local host names   
 2. the user name   
 3. 'override'   
 
@@ -135,8 +135,14 @@ propertyLoader.addLocalHostNames()
 
 ####3. Postprocessing
 
-You can define which postprocessing filters are applied:
+You can define which postprocessing filters are applied (includes are always processed if the key is present):
 ```java
+propertyLoader.withDefaultFilters() 
+propertyLoader.withVariableResolvingFilter() 
+propertyLoader.withEnvironmentResolvingFilter() 
+propertyLoader.withDecryptingFilter()
+propertyLoader.withWarnIfPropertyHasToBeDefined() 
+propertyLoader.withWarnOnSurroundingWhitespace() 
 ```
 
 
