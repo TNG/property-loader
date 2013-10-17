@@ -1,5 +1,16 @@
 # Property loader [![Build Status](https://travis-ci.org/TNG/property-loader.png?branch=master)](https://travis-ci.org/TNG/property-loader)
 
+#### Table of Contents
+[What It Is](#what-is-it)  
+[Motivation](#motivation)    
+[How To Build Your Config](#how-to-build-your-config)  
+[How To Merge With An Existing Config](#how-to-merge-with-an-existing-config)  
+[Usage example](#usage-example)  
+[Java Doc](#java-doc)  
+
+What It Is
+----------
+
 The property loader is a java library for managing property configurations.
 
 It supports several property loading strategies and features e.g.:
@@ -11,13 +22,13 @@ It supports several property loading strategies and features e.g.:
 
 ### Quick start ###
 
-1. Build the lib:
+1. Build the lib
 ```
 $ maven install
 ```
-2. Include jar file to your application.
-3. Add property files, e.g. props.properties, to your application's classpath.
-4. Load properties:
+2. Include jar file to your application
+3. Add property files eg props.properties to your applications classpath
+4. Load properties
 
 ```java
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
