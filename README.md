@@ -43,10 +43,12 @@ Advanced Configuration
 ----------------------
 
 ####1. Search Locations
+Tell the PropertyLoader to search for properties files at its default locations (/home/user, current directory and context classpath):
 ```java
 propertyLoader.atDefaultLocations()
 ```
 #####1. Folders and URLs
+Tell the PropertyLoader to search for properties files at custom paths:
 ```java
 propertyLoader.atDirectory(String directory)
 propertyLoader.atBaseURL(URL url)
@@ -54,6 +56,7 @@ propertyLoader.atCurrentDirectory()
 propertyLoader.atHomeDirectory()
 ```
 #####2. Classpath
+Tell the PropertyLoader to search for properties files in the current thread's classpath:
 ```java
 propertyLoader.atContextClassPath()
 ```
