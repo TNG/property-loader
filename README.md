@@ -47,6 +47,7 @@ Tell the PropertyLoader to search for properties files at its default locations 
 ```java
 propertyLoader.atDefaultLocations()
 ```
+
 #####1. Folders and URLs
 Tell the PropertyLoader to search for properties files at custom paths:
 ```java
@@ -55,24 +56,32 @@ propertyLoader.atBaseURL(URL url)
 propertyLoader.atCurrentDirectory()
 propertyLoader.atHomeDirectory()
 ```
+
 #####2. Classpath
 Tell the PropertyLoader to search for properties files in the current thread's classpath:
 ```java
 propertyLoader.atContextClassPath()
 ```
+This will get the classloader from the current thread and use it to find properties files.
+
 #####3. Classloader
+Tell the PropertyLoader to search for properties files using a custom ClassLoader:
 ```java
 propertyLoader.atClassLoader(ClassLoader classLoader)
 ```
+
 #####4. Relative To A Class
+Tell the PropertyLoader to search for properties files relative to the location of a class:
 ```java
 propertyLoader.atRelativeToClass(Class<?> clazz)
 ```
 
 ####2. Suffixes
+Tell the PropertyLoader to use default suffixes (local host names, user name and "override"):
 ```java
 propertyLoader.addDefaultSuffixes()
 ```
+Tell the PropertyLoader to use custom suffixes:
 ```java
 propertyLoader.addSuffix(String directory)
 propertyLoader.addSuffixList(List<String> suffixes)
