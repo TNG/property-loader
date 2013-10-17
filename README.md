@@ -76,12 +76,12 @@ Advanced Configuration
 
 The PropertyLoader's default configuration includes default search paths, suffixes and applies all available postprocessing filters.
 
-The default search paths are:
+The default search paths are:   
 1. the current directory   
 2. the user's home directory   
 3. the context classpath   
 
-The default suffixes are:
+The default suffixes are:   
 1. local host names.   
 2. the user name   
 3. 'override'   
