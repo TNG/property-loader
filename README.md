@@ -5,7 +5,7 @@ Property loader [![Build Status](https://travis-ci.org/TNG/property-loader.png?b
 [What It Is](#what-is-it)    
 [Quick Start](#quick-start)  
 [Advanced Configuration](#advanced-configuration)  
-[Processing Features](#processing-features)  
+[Postprocessing Features](#postprocessing-features)  
 [Usage example](#usage-example)  
 [Java Doc](#java-doc)  
 
@@ -89,12 +89,36 @@ propertyLoader.addUserName()
 propertyLoader.addLocalHostNames()
 ```
 
-Processing Features
--------------------
+Postprocessing Features
+-----------------------
 
 ####1. Variable Resolving
+
+Variables in property values can be defined with
+```
+{$...}
+```
+Even nested variables are allowed, e.g.:
+```
+{$var{$innervar}e}
+```
+In the case above, the PropertyLoader will first resolve the inner variable, replace it, then resolve the outer variable.
+
 ####2. Includes
+
+In order to include additional properties files from a properties files, add %include as a key with the file basenames
+separated by commas as its value, e.g.:
+```
+%include=file1,file2,file3
+```
+
 ####3. Decryption
+
+Encrypted property values that are prefixed with
+```
+DECRYPT:
+```
+will be decrypted after loading.
 
 
 Usage example
