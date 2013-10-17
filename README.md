@@ -43,7 +43,39 @@ Advanced Configuration
 ----------------------
 
 ####1. Search Locations
+```java
+propertyLoader.atDefaultLocations()
+```
+#####1. Folders and URLs
+```java
+propertyLoader.atDirectory(String directory)
+propertyLoader.atBaseURL(URL url)
+propertyLoader.atCurrentDirectory()
+propertyLoader.atHomeDirectory()
+```
+#####2. Classpath
+```java
+propertyLoader.atContextClassPath()
+```
+#####3. Classloader
+```java
+propertyLoader.atClassLoader(ClassLoader classLoader)
+```
+#####4. Relative To A Class
+```java
+propertyLoader.atRelativeToClass(Class<?> clazz)
+```
+
 ####2. Suffixes
+```java
+propertyLoader.addDefaultSuffixes()
+```
+```java
+propertyLoader.addSuffix(String directory)
+propertyLoader.addSuffixList(List<String> suffixes)
+propertyLoader.addUserName()
+propertyLoader.addLocalHostNames()
+```
 
 Processing Features
 -------------------
