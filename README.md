@@ -11,13 +11,13 @@ It supports several property loading strategies and features e.g.:
 
 ### Quick start ###
 
-1. Build the lib
+1. Build the lib:
 ```
 $ maven install
 ```
-2. Include jar file to your application
-3. Add property files eg props.properties to your applications classpath
-4. Load properties
+2. Include jar file to your application.
+3. Add property files, e.g. props.properties, to your application's classpath.
+4. Load properties:
 
 ```java
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
