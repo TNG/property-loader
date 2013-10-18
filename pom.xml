@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.tngtech.java</groupId>
     <artifactId>property-loader</artifactId>
-    <version>1.1</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Property-Loader</name>
     <description>The property loader is a java library for managing property configurations.</description>
@@ -20,7 +20,7 @@
         <url>git@github.com:TNG/property-loader.git</url>
         <connection>scm:git:git@github.com:TNG/property-loader.git</connection>
         <developerConnection>scm:git:git@github.com:TNG/property-loader.git</developerConnection>
-      <tag>property-loader-1.1</tag>
+      <tag>HEAD</tag>
   </scm>
     <developers>
         <developer>
