@@ -58,6 +58,12 @@
         <name>TNG Technology Consulting</name>
         <url>http://www.tngtech.com/</url>
     </organization>
+    
+    <parent>
+       <groupId>org.sonatype.oss</groupId>
+       <artifactId>oss-parent</artifactId>
+       <version>7</version>
+    </parent>
 
     <build>
         <plugins>
