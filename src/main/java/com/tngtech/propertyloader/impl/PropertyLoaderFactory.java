@@ -19,7 +19,7 @@ public class PropertyLoaderFactory {
     public <T> T createInstance(Class<T> clazz) {
         try {
             return clazz.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -73,7 +73,7 @@ public class PropertyLoaderFactory {
     }
 
     public Stack<String> getEmptyFileNameStack() {
-        return new Stack<>();
+        return new Stack<String>();
     }
 
     public StringBuilder getStringBuilder() {
