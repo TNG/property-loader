@@ -1,16 +1,16 @@
 package com.tngtech.propertyloader.impl;
 
-import com.google.common.collect.Lists;
 import com.tngtech.propertyloader.impl.helpers.HostsHelper;
 import com.tngtech.propertyloader.impl.interfaces.PropertySuffixContainer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultPropertySuffixContainer implements PropertySuffixContainer<DefaultPropertySuffixContainer> {
 
     private final HostsHelper hostsHelper;
 
-    private List<String> suffixes = Lists.newArrayList();
+    private List<String> suffixes = new ArrayList<String>();
 
     public DefaultPropertySuffixContainer(HostsHelper hostsHelper) {
         this.hostsHelper = hostsHelper;

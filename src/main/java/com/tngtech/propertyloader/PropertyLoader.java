@@ -1,6 +1,5 @@
 package com.tngtech.propertyloader;
 
-import com.google.common.collect.Lists;
 import com.tngtech.propertyloader.exception.PropertyLoaderException;
 import com.tngtech.propertyloader.impl.*;
 import com.tngtech.propertyloader.impl.helpers.HostsHelper;
@@ -8,6 +7,8 @@ import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
 import com.tngtech.propertyloader.impl.interfaces.*;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
@@ -30,7 +31,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
     private final PropertyLoaderFactory propertyLoaderFactory;
 
     private String propertyFileEncoding = "ISO-8859-1";
-    private List<String> baseNames = Lists.newArrayList();
+    private List<String> baseNames = new ArrayList<String>();
     private String fileExtension = "properties";
     private DefaultPropertySuffixContainer propertySuffix;
     private DefaultPropertyLocationContainer propertyLocation;
@@ -209,7 +210,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
     public Properties load(String baseName) {
         fileNameStack = propertyLoaderFactory.getEmptyFileNameStack();
 
-        Properties loadedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(baseName));
+        Properties loadedProperties = loadPropertiesFromBaseNameList(Arrays.asList(baseName));
         filterProperties(loadedProperties);
         return loadedProperties;
     }
@@ -217,7 +218,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
     public Properties load(String[] baseNames) {
         fileNameStack = propertyLoaderFactory.getEmptyFileNameStack();
 
-        Properties loadedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(baseNames));
+        Properties loadedProperties = loadPropertiesFromBaseNameList(Arrays.asList(baseNames));
         filterProperties(loadedProperties);
         return loadedProperties;
     }
@@ -238,7 +239,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
             fileNameStack.push(fileName);
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners()) {
                 Properties newProperties = propertyFileReader.tryToReadPropertiesFromFile(fileName, propertyFileEncoding, opener);
-                Properties includedProperties = loadPropertiesFromBaseNameList(Lists.newArrayList(collectIncludesAndRemoveKey(newProperties)));
+                Properties includedProperties = loadPropertiesFromBaseNameList(Arrays.asList(collectIncludesAndRemoveKey(newProperties)));
                 newProperties.putAll(includedProperties);
                 loadedProperties.putAll(newProperties);
             }

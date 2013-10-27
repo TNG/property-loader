@@ -1,11 +1,11 @@
 package com.tngtech.propertyloader;
 
-import com.google.common.collect.Lists;
 import com.tngtech.propertyloader.exception.PropertyLoaderException;
 import com.tngtech.propertyloader.impl.*;
 import com.tngtech.propertyloader.impl.helpers.HostsHelper;
 import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.Stack;
@@ -192,7 +193,7 @@ public class PropertyLoaderTest {
 
     @Test
     public void testAddSuffixList() throws Exception {
-        List<String> suf = Lists.newArrayList();
+        List<String> suf = new ArrayList<String>();
         assertEquals(propertyLoader, propertyLoader.addSuffixList(suf));
         verify(propertySuffix).addSuffixList(suf);
     }
@@ -261,15 +262,15 @@ public class PropertyLoaderTest {
     @org.junit.Test(expected=PropertyLoaderException.class)
     public void testLoadPropertiesFromBaseNameList_Calls_PropertyFileReader_And_Prevents_StackOverflow()
     {
-        Stack<String> fileNameStack = new Stack<>();
+        Stack<String> fileNameStack = new Stack<String>();
         when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);
         when(propertyLoaderFactory.getEmptyFileNameStack()).thenReturn(fileNameStack);
         when(propertyLoaderFactory.getStringBuilder()).thenReturn(new StringBuilder());
-        List<String> fileNames = Lists.newArrayList("file1.properties", "file2.properties");
-        ArrayList<String> suffixes = Lists.newArrayList();
+        List<String> fileNames = Arrays.asList("file1.properties", "file2.properties");
+        ArrayList<String> suffixes = new ArrayList<String>();
         when(propertySuffix.getSuffixes()).thenReturn(suffixes);
         when(propertyFileNameHelper.getFileNames(Matchers.anyCollection(),Matchers.anyCollection(),Matchers.anyString())).thenReturn(fileNames);
-        when(propertyLocation.getOpeners()).thenReturn(Lists.<PropertyLoaderOpener>newArrayList(propertyLoaderOpener1,propertyLoaderOpener2));
+        when(propertyLocation.getOpeners()).thenReturn(Arrays.<PropertyLoaderOpener>asList(propertyLoaderOpener1,propertyLoaderOpener2));
         when(propertyFileReader.tryToReadPropertiesFromFile(Matchers.anyString(),Matchers.anyString(),Matchers.any(PropertyLoaderOpener.class))).thenReturn(properties);
 
         propertyLoader.load();
