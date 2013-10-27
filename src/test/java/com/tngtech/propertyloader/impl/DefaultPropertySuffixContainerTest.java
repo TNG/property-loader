@@ -1,13 +1,14 @@
 package com.tngtech.propertyloader.impl;
 
-import com.google.common.collect.Lists;
 import com.tngtech.propertyloader.impl.helpers.HostsHelper;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -27,7 +28,7 @@ public class DefaultPropertySuffixContainerTest {
 
     @Before
     public void SetUp() {
-        list = Lists.newArrayList(testAddLocalHostNamesAndAddSuffixList);
+        list = Arrays.asList(testAddLocalHostNamesAndAddSuffixList);
         when(hostshelper.getLocalHostNames()).thenReturn(list);
         propertySuffix = new DefaultPropertySuffixContainer((hostshelper));
         propertySuffix.addString("testThatAddMethodDoesNotClearList");

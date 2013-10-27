@@ -1,16 +1,16 @@
 package com.tngtech.propertyloader.impl;
 
-import com.google.common.collect.Lists;
 import com.tngtech.propertyloader.impl.interfaces.PropertyFilterContainer;
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderFilter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultPropertyFilterContainer implements PropertyFilterContainer<DefaultPropertyFilterContainer> {
 
     private final PropertyLoaderFactory propertyLoaderFactory;
 
-    private List<PropertyLoaderFilter> filters = Lists.newArrayList();
+    private List<PropertyLoaderFilter> filters = new ArrayList<PropertyLoaderFilter>();
 
     public DefaultPropertyFilterContainer(PropertyLoaderFactory propertyLoaderFactory) {
 

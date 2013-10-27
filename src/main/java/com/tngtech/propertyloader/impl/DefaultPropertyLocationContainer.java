@@ -1,10 +1,10 @@
 package com.tngtech.propertyloader.impl;
 
-import com.google.common.collect.Lists;
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 import com.tngtech.propertyloader.impl.interfaces.PropertyLocationsContainer;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultPropertyLocationContainer implements PropertyLocationsContainer<DefaultPropertyLocationContainer> {
@@ -16,7 +16,7 @@ public class DefaultPropertyLocationContainer implements PropertyLocationsContai
         this.propertyLoaderFactory = propertyLoaderFactory;
     }
 
-    private List<PropertyLoaderOpener> openers = Lists.newArrayList();
+    private List<PropertyLoaderOpener> openers = new ArrayList<PropertyLoaderOpener>();
 
     public List<PropertyLoaderOpener> getOpeners() {
         return openers;
