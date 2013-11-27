@@ -1,6 +1,7 @@
 package com.tngtech.propertyloader.impl.filters;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 
@@ -9,7 +10,7 @@ import java.util.Properties;
  */
 public class WarnOnSurroundingWhitespace extends ValueModifyingFilter {
 
-    private final static Logger log = Logger.getLogger(WarnOnSurroundingWhitespace.class);
+    private final static Logger log = LoggerFactory.getLogger(WarnOnSurroundingWhitespace.class);
 
     @Override
     protected String filterValue(String key, String value, Properties properties) {

@@ -1,6 +1,7 @@
 package com.tngtech.propertyloader.impl.filters;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 import java.util.regex.Matcher;
@@ -11,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public class EnvironmentResolvingFilter extends ValueModifyingFilter {
 
-    private final static Logger log = Logger.getLogger(EnvironmentResolvingFilter.class);
+    private final static Logger log = LoggerFactory.getLogger(EnvironmentResolvingFilter.class);
 
     private static final Pattern PATTERN = Pattern.compile("\\$ENV\\{(.*)\\}");
 
