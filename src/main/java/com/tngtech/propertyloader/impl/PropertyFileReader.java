@@ -2,7 +2,8 @@ package com.tngtech.propertyloader.impl;
 
 
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +13,7 @@ import java.util.Properties;
 
 public class PropertyFileReader {
 
-    private final static Logger log = Logger.getLogger(PropertyFileReader.class);
+    private final static Logger log = LoggerFactory.getLogger(PropertyFileReader.class);
 
     private final PropertyLoaderFactory propertyLoaderFactory;
 
