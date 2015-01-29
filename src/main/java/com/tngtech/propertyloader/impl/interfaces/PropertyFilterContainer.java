@@ -1,13 +1,14 @@
 package com.tngtech.propertyloader.impl.interfaces;
 
 public interface PropertyFilterContainer<T> {
-    public T withDefaultFilters();
 
-    public T withVariableResolvingFilter();
+    T withDefaultFilters();
 
-    public T withEnvironmentResolvingFilter();
+    T withVariableResolvingFilter();
 
-    public T withWarnIfPropertyHasToBeDefined();
+    T withEnvironmentResolvingFilter();
 
-    public T withWarnOnSurroundingWhitespace();
+    T withWarnIfPropertyHasToBeDefined();
+
+    T withWarnOnSurroundingWhitespace();
 }

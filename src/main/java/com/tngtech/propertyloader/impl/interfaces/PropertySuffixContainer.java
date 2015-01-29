@@ -3,13 +3,14 @@ package com.tngtech.propertyloader.impl.interfaces;
 import java.util.List;
 
 public interface PropertySuffixContainer<T> {
-    public T addUserName();
 
-    public T addLocalHostNames();
+    T addUserName();
 
-    public T addString(String suffix);
+    T addLocalHostNames();
 
-    public T addSuffixList(List<String> suffixes);
+    T addString(String suffix);
 
-    public T addDefaultSuffixes();
+    T addSuffixList(List<String> suffixes);
+
+    T addDefaultSuffixes();
 }

@@ -9,5 +9,5 @@ import java.util.Properties;
  */
 public interface PropertyLoaderFilter {
 
-    public void filter(Properties properties);
+    void filter(Properties properties);
 }

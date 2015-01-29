@@ -3,19 +3,20 @@ package com.tngtech.propertyloader.impl.interfaces;
 import java.net.URL;
 
 public interface PropertyLocationsContainer<T> {
-    public T atDefaultLocations();
 
-    public T atCurrentDirectory();
+    T atDefaultLocations();
 
-    public T atHomeDirectory();
+    T atCurrentDirectory();
 
-    public T atDirectory(String directory);
+    T atHomeDirectory();
 
-    public T atContextClassPath();
+    T atDirectory(String directory);
 
-    public T atRelativeToClass(Class<?> reference);
+    T atContextClassPath();
 
-    public T atClassLoader(ClassLoader classLoader);
+    T atRelativeToClass(Class<?> reference);
 
-    public T atBaseURL(URL url);
+    T atClassLoader(ClassLoader classLoader);
+
+    T atBaseURL(URL url);
 }
