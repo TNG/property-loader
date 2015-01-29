@@ -8,9 +8,7 @@ import com.tngtech.propertyloader.impl.openers.ClassLoaderOpener;
 import com.tngtech.propertyloader.impl.openers.ContextClassLoaderOpener;
 import com.tngtech.propertyloader.impl.openers.RelativeToClassOpener;
 import com.tngtech.propertyloader.impl.openers.URLFileOpener;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.io.*;
 import java.net.URL;
@@ -23,21 +21,16 @@ public class PropertyLoaderFactoryTest {
 
     private final PropertyLoaderFactory propertyLoaderFactory = new PropertyLoaderFactory();
 
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
-
-
     @Test
     public void testGetEmptyProperties() {
         assertTrue(propertyLoaderFactory.getEmptyProperties().getClass().equals(Properties.class));
     }
 
-    @Test
+    @Test(expected = UnsupportedEncodingException.class)
     public void testGetInputStreamReader() throws IOException {
         InputStream stream = mock(InputStream.class);
         assertTrue(propertyLoaderFactory.getInputStreamReader(stream, "ISO-8859-1").getClass().equals(InputStreamReader.class));
 
-        exception.expect(UnsupportedEncodingException.class);
         propertyLoaderFactory.getInputStreamReader(stream, "");
     }
 
