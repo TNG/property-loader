@@ -27,7 +27,7 @@ public class DefaultPropertySuffixContainerTest {
     private HostsHelper hostshelper;
 
     @Before
-    public void SetUp() {
+    public void setUp() {
         list = Arrays.asList(testAddLocalHostNamesAndAddSuffixList);
         when(hostshelper.getLocalHostNames()).thenReturn(list);
         propertySuffix = new DefaultPropertySuffixContainer((hostshelper));

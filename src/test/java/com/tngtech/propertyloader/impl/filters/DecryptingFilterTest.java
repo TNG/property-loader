@@ -14,7 +14,7 @@ public class DecryptingFilterTest {
     private Properties properties;
 
     @Before
-    public void SetUp(){
+    public void setUp(){
         decryptingFilter = new DecryptingFilter();
         properties = new Properties();
 
