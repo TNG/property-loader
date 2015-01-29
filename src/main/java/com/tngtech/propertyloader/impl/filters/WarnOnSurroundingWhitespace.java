@@ -10,7 +10,7 @@ import java.util.Properties;
  */
 public class WarnOnSurroundingWhitespace extends ValueModifyingFilter {
 
-    private final static Logger log = LoggerFactory.getLogger(WarnOnSurroundingWhitespace.class);
+    private static final Logger log = LoggerFactory.getLogger(WarnOnSurroundingWhitespace.class);
 
     @Override
     protected String filterValue(String key, String value, Properties properties) {

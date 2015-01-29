@@ -12,7 +12,7 @@ import java.util.Properties;
 
 public class PropertyFileReader {
 
-    private final static Logger log = LoggerFactory.getLogger(PropertyFileReader.class);
+    private static final Logger log = LoggerFactory.getLogger(PropertyFileReader.class);
 
     private final PropertyLoaderFactory propertyLoaderFactory;
 

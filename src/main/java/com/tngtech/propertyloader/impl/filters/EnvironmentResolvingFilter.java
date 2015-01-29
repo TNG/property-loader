@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public class EnvironmentResolvingFilter extends ValueModifyingFilter {
 
-    private final static Logger log = LoggerFactory.getLogger(EnvironmentResolvingFilter.class);
+    private static final Logger log = LoggerFactory.getLogger(EnvironmentResolvingFilter.class);
 
     private static final Pattern PATTERN = Pattern.compile("\\$ENV\\{(.*)\\}");
 
