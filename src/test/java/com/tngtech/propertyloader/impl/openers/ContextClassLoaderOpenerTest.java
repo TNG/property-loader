@@ -10,7 +10,6 @@ import java.io.Reader;
 import java.util.Properties;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.verify;
 
 public class ContextClassLoaderOpenerTest {
     @Before
