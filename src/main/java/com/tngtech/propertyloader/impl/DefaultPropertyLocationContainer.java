@@ -23,7 +23,6 @@ public class DefaultPropertyLocationContainer implements PropertyLocationsContai
     }
 
     public DefaultPropertyLocationContainer atDefaultLocations() {
-
         atCurrentDirectory();
         atContextClassPath();
         atHomeDirectory();
@@ -44,7 +43,6 @@ public class DefaultPropertyLocationContainer implements PropertyLocationsContai
         openers.add(propertyLoaderFactory.getURLFileOpener(directory));
         return this;
     }
-
 
     public DefaultPropertyLocationContainer atContextClassPath() {
         openers.add(propertyLoaderFactory.getContextClassLoaderOpener());
@@ -70,5 +68,4 @@ public class DefaultPropertyLocationContainer implements PropertyLocationsContai
         openers.clear();
         return this;
     }
-
 }

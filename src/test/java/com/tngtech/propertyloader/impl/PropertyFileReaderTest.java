@@ -42,7 +42,7 @@ public class PropertyFileReaderTest {
 
         when(propertyLoaderOpener.open("test.properties")).thenReturn(stream);
         when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);
-        when(propertyLoaderFactory.getInputStreamReader(stream,"ISO-8859-1")).thenReturn(inputStreamReader);
+        when(propertyLoaderFactory.getInputStreamReader(stream, "ISO-8859-1")).thenReturn(inputStreamReader);
         doNothing().when(properties).load(inputStreamReader);
 
         assertEquals(properties, reader.tryToReadPropertiesFromFile("test.properties", "ISO-8859-1", propertyLoaderOpener));

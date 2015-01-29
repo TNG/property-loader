@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.tngtech.java</groupId>
     <artifactId>property-loader</artifactId>
@@ -20,8 +19,8 @@
         <url>git@github.com:TNG/property-loader.git</url>
         <connection>scm:git:git@github.com:TNG/property-loader.git</connection>
         <developerConnection>scm:git:git@github.com:TNG/property-loader.git</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
     <developers>
         <developer>
             <name>Matthias Bollwein</name>
@@ -58,13 +57,11 @@
         <name>TNG Technology Consulting</name>
         <url>http://www.tngtech.com/</url>
     </organization>
-    
     <parent>
-       <groupId>org.sonatype.oss</groupId>
-       <artifactId>oss-parent</artifactId>
-       <version>7</version>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
     </parent>
-
     <build>
         <plugins>
             <plugin>
@@ -97,7 +94,6 @@
             </plugin>
         </plugins>
     </build>
-
     <profiles>
         <profile>
             <id>signing</id>
@@ -121,8 +117,6 @@
             </build>
         </profile>
     </profiles>
-
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -148,7 +142,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <properties>
         <slf4j.version>1.7.5</slf4j.version>
     </properties>

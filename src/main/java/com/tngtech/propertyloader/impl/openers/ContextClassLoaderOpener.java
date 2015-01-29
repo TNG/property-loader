@@ -8,6 +8,7 @@ import java.io.InputStream;
  * Searches for properties files using the ContextClassLoader from the current thread.
  */
 public class ContextClassLoaderOpener implements PropertyLoaderOpener {
+
     public InputStream open(String fileName) {
         ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
         return contextClassLoader.getResourceAsStream(fileName);

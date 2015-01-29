@@ -9,6 +9,7 @@ import java.util.Properties;
  * The password must be provided in the properties, with key 'decryptingFilterPassword'
  */
 public class DecryptingFilter extends ValueModifyingFilter {
+
     public static final String DECRYPT_PREFIX = "DECRYPT:";
 
     @Override

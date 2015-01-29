@@ -1,6 +1,5 @@
 package com.tngtech.propertyloader.impl.helpers;
 
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import java.util.Set;
 public class HostsHelper {
 
     public List<String> getLocalHostNames() {
-
         Set<String> hostSet = new HashSet<String>();
 
         for (InetAddress host : getLocalHosts()) {

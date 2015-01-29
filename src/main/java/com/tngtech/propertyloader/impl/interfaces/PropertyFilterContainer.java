@@ -1,6 +1,5 @@
 package com.tngtech.propertyloader.impl.interfaces;
 
-
 public interface PropertyFilterContainer<T> {
     public T withDefaultFilters();
 

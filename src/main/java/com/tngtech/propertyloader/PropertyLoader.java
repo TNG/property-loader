@@ -48,7 +48,6 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
     }
 
     public PropertyLoader() {
-
         PropertyLoaderFactory propertyLoaderFactory = new PropertyLoaderFactory();
         HostsHelper hostsHelper = propertyLoaderFactory.createInstance(HostsHelper.class);
 
@@ -110,7 +109,6 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
         return this;
     }
 
-
     public PropertyLoader atDefaultLocations() {
         propertyLocation.atDefaultLocations();
         return this;
@@ -130,7 +128,6 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
         propertyLocation.atDirectory(directory);
         return this;
     }
-
 
     public PropertyLoader atContextClassPath() {
         propertyLocation.atContextClassPath();

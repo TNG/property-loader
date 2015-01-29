@@ -17,7 +17,7 @@ public class ObfuscatorTest {
 
     @Test
     public void testEncrypt() throws Exception {
-        assertEquals("kqUL7kDnwITX6+xNagUBsA==\n",obfuscator.encrypt("Hello, World!"));
+        assertEquals("kqUL7kDnwITX6+xNagUBsA==\n", obfuscator.encrypt("Hello, World!"));
     }
 
     @Test

@@ -1,6 +1,5 @@
 package com.tngtech.propertyloader.impl;
 
-
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +50,6 @@ public class PropertyFileReader {
         }
         return newProperties;
     }
-
 
     private Properties read(InputStream stream, String propertyFileEncoding) throws IOException {
         Properties loadedProperties = propertyLoaderFactory.getEmptyProperties();

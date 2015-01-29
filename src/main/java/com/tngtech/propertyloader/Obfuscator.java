@@ -13,6 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 
 public class Obfuscator {
+
     private static final String ENCRYPTION_ALGORITHM = "Blowfish";
     private static final String ENCRYPTION_ALGORITHM_MODIFIER = "/ECB/PKCS5Padding";
     private BASE64Encoder base64Encoder = new BASE64Encoder();
@@ -40,7 +41,6 @@ public class Obfuscator {
      * @return the Blowfish-encrypted and base64-encoded String.
      */
     public String encrypt(String toEncrypt) {
-
         byte[] encryptedBytes = encryptInternal(dataEncryptionSecretKeySpec, toEncrypt);
         return base64Encoder.encodeBuffer(encryptedBytes);
     }
@@ -53,9 +53,7 @@ public class Obfuscator {
      * @return the encrypted String (as byte[])
      */
     private byte[] encryptInternal(SecretKeySpec key, String toEncrypt) {
-
         try {
-
             Cipher cipher = Cipher.getInstance(ENCRYPTION_ALGORITHM + ENCRYPTION_ALGORITHM_MODIFIER);
             cipher.init(Cipher.ENCRYPT_MODE, key);
             return cipher.doFinal(toEncrypt.getBytes(encoding));
@@ -89,7 +87,6 @@ public class Obfuscator {
      * @return the decrypted plaintext String.
      */
     private String decryptInternal(SecretKeySpec key, byte[] encryptedBytes) {
-
         try {
             // do the decryption
             Cipher cipher = Cipher.getInstance(ENCRYPTION_ALGORITHM + ENCRYPTION_ALGORITHM_MODIFIER);

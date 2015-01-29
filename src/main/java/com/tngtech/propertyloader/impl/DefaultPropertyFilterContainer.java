@@ -13,7 +13,6 @@ public class DefaultPropertyFilterContainer implements PropertyFilterContainer<D
     private List<PropertyLoaderFilter> filters = new ArrayList<PropertyLoaderFilter>();
 
     public DefaultPropertyFilterContainer(PropertyLoaderFactory propertyLoaderFactory) {
-
         this.propertyLoaderFactory = propertyLoaderFactory;
     }
 

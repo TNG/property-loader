@@ -39,7 +39,6 @@ public class DefaultPropertyFilterContainerTest {
         when(propertyLoaderFactory.getEnvironmentResolvingFilter()).thenReturn(environmentResolvingFilter);
         when(propertyLoaderFactory.getWarnOnSurroundingWhitespace()).thenReturn(warnOnSurroundingWhitespace);
         when(propertyLoaderFactory.getWarnIfPropertyHasToBeDefined()).thenReturn(throwIfPropertyHasToBeDefined);
-
     }
 
     @Test

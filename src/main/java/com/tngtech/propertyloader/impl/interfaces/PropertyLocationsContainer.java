@@ -1,6 +1,5 @@
 package com.tngtech.propertyloader.impl.interfaces;
 
-
 import java.net.URL;
 
 public interface PropertyLocationsContainer<T> {

@@ -1,6 +1,5 @@
 package com.tngtech.propertyloader.impl.openers;
 
-
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 
 import java.io.InputStream;
@@ -9,6 +8,7 @@ import java.io.InputStream;
  * Searches for properties files using a provided ClassLoader.
  */
 public class ClassLoaderOpener implements PropertyLoaderOpener {
+
     private final ClassLoader classLoader;
 
     public ClassLoaderOpener(ClassLoader classLoader) {

@@ -20,8 +20,7 @@ public class DefaultPropertySuffixContainerTest {
 
     private DefaultPropertySuffixContainer propertySuffix;
     private List<String> list;
-    String[] testAddLocalHostNamesAndAddSuffixList = {"testAddLocalHostNames","testAddSuffixList"};
-
+    String[] testAddLocalHostNamesAndAddSuffixList = {"testAddLocalHostNames", "testAddSuffixList"};
 
     @Mock
     private HostsHelper hostshelper;

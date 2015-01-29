@@ -14,8 +14,8 @@ public class WarnOnSurroundingWhitespaceTest {
     public void setUp() throws Exception {
         warnOnSurroundingWhitespace = new WarnOnSurroundingWhitespace();
         properties = new Properties();
-        properties.put("key1","haswhitespaceattheend          ");
-        properties.put("key2","isignored          \n");
+        properties.put("key1", "haswhitespaceattheend          ");
+        properties.put("key2", "isignored          \n");
     }
 
     @Test

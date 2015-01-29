@@ -41,7 +41,6 @@ public class DefaultPropertySuffixContainer implements PropertySuffixContainer<D
     }
 
     public DefaultPropertySuffixContainer addDefaultSuffixes() {
-
         addUserName();
         addLocalHostNames();
         addString("override");
@@ -52,6 +51,4 @@ public class DefaultPropertySuffixContainer implements PropertySuffixContainer<D
         suffixes.clear();
         return this;
     }
-
-
 }

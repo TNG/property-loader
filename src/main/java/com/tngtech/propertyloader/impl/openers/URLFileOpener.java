@@ -46,7 +46,6 @@ public class URLFileOpener implements PropertyLoaderOpener {
      * @return
      */
     public InputStream open(String fileName) {
-
         try {
             URL urlToFile = new URL(url, fileName);
             return urlToFile.openStream();
