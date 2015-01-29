@@ -88,12 +88,9 @@ public class Obfuscator {
      */
     private String decryptInternal(SecretKeySpec key, byte[] encryptedBytes) {
         try {
-            // do the decryption
             Cipher cipher = Cipher.getInstance(ENCRYPTION_ALGORITHM + ENCRYPTION_ALGORITHM_MODIFIER);
             cipher.init(Cipher.DECRYPT_MODE, key);
             byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
-
-            // return as String
             return new String(decryptedBytes, encoding);
         } catch (GeneralSecurityException e) {
             throw new RuntimeException("Exception during decryptInternal: " + e, e);
