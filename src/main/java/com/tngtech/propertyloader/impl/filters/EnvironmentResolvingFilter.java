@@ -22,7 +22,7 @@ public class EnvironmentResolvingFilter extends ValueModifyingFilter {
         if (matcher.matches()) {
             value = getenv(matcher.group(1));
             if (value == null) {
-                log.warn("There is no system property called " + matcher.group(1));
+                log.warn("There is no system property called '{}'.", matcher.group(1));
             }
         }
         return value;

@@ -26,12 +26,12 @@ public class PropertyFileReader {
         InputStream stream = opener.open(fileName);
 
         if (stream == null) {
-            log.debug(String.format("file %s not found %s", fileName, opener.toString()));
+            log.debug("file {} not found {}", fileName, opener.toString());
             newProperties = propertyLoaderFactory.getEmptyProperties();
         } else {
-            log.info(String.format("file %s found for reading %s with encoding %s", fileName, opener.toString(), propertyFileEncoding));
+            log.info("file {} found for reading {} with encoding {}", fileName, opener.toString(), propertyFileEncoding);
             if (fileName.toLowerCase().endsWith("xml")) {
-                log.debug(String.format("attempting to find and read xml file %s %s", fileName, opener.toString()));
+                log.debug("attempting to find and read xml file {} {}", fileName, opener.toString());
                 try {
                     newProperties = readFromXML(stream);
                 } catch (InvalidPropertiesFormatException e) {
@@ -40,7 +40,7 @@ public class PropertyFileReader {
                     throw new PropertyFileReaderException(String.format("error reading properties from stream created from '%s' in opener '%s'", fileName, opener.toString()), e);
                 }
             } else {
-                log.debug(String.format("attempting to find and read properties file %s with encoding %s %s", fileName, propertyFileEncoding, opener.toString()));
+                log.debug("attempting to find and read properties file {} with encoding {} {}", fileName, propertyFileEncoding, opener.toString());
                 try {
                     newProperties = read(stream, propertyFileEncoding);
                 } catch (IOException e) {
