@@ -58,7 +58,7 @@ public class URLFileOpenerTest {
     }
 
     @Test
-    public void testThat_Path_Does_Not_Change_When_URLFileOpener_Opens_Files() throws IOException {
+    public void testThat_Path_Does_Not_Change_When_URLFileOpener_Opens_Files() {
         URL urls = this.getClass().getResource("/abc.def.properties");
         String path = urls.getPath().replace("abc.def.properties", "");
         URLFileOpener urlFileOpener = new URLFileOpener(path);
@@ -67,7 +67,7 @@ public class URLFileOpenerTest {
     }
 
     @Test
-    public void testToString() throws Exception {
+    public void testToString() {
 
     }
 }

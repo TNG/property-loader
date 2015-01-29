@@ -11,7 +11,7 @@ public class WarnOnSurroundingWhitespaceTest {
     private Properties properties;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         warnOnSurroundingWhitespace = new WarnOnSurroundingWhitespace();
         properties = new Properties();
         properties.put("key1", "haswhitespaceattheend          ");
@@ -19,7 +19,7 @@ public class WarnOnSurroundingWhitespaceTest {
     }
 
     @Test
-    public void testFilterValue() throws Exception {
+    public void testFilterValue() {
         warnOnSurroundingWhitespace.filter(properties);
     }
 }

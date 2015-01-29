@@ -58,57 +58,57 @@ public class PropertyLoaderTest {
     }
 
     @Test
-    public void testWithEncoding() throws Exception {
+    public void testWithEncoding() {
 
     }
 
     @Test
-    public void testGetLocations() throws Exception {
+    public void testGetLocations() {
         assertEquals(propertyLocation, propertyLoader.getLocations());
     }
 
     @Test
-    public void testGetSuffixes() throws Exception {
+    public void testGetSuffixes() {
         assertEquals(propertySuffix, propertyLoader.getSuffixes());
     }
 
     @Test
-    public void testGetFilters() throws Exception {
+    public void testGetFilters() {
         assertEquals(propertyFilter, propertyLoader.getFilters());
     }
 
     @Test
-    public void testGetExtension() throws Exception {
+    public void testGetExtension() {
         assertEquals("properties", propertyLoader.getExtension());
     }
 
     @Test
-    public void testWithSuffixes() throws Exception {
+    public void testWithSuffixes() {
 
     }
 
     @Test
-    public void testWithLocations() throws Exception {
+    public void testWithLocations() {
 
     }
 
     @Test
-    public void testWithFilters() throws Exception {
+    public void testWithFilters() {
 
     }
 
     @Test
-    public void testWithExtension() throws Exception {
+    public void testWithExtension() {
 
     }
 
     @Test
-    public void testWithBaseNames() throws Exception {
+    public void testWithBaseNames() {
 
     }
 
     @Test
-    public void testWithDefaultConfig() throws Exception {
+    public void testWithDefaultConfig() {
         when(propertyLocation.clear()).thenReturn(propertyLocation);
         when(propertySuffix.clear()).thenReturn(propertySuffix);
         when(propertyFilter.clear()).thenReturn(propertyFilter);
@@ -124,43 +124,43 @@ public class PropertyLoaderTest {
     }
 
     @Test
-    public void testAtDefaultLocations() throws Exception {
+    public void testAtDefaultLocations() {
         assertEquals(propertyLoader, propertyLoader.atDefaultLocations());
         verify(propertyLocation).atDefaultLocations();
     }
 
     @Test
-    public void testAtCurrentDirectory() throws Exception {
+    public void testAtCurrentDirectory() {
         assertEquals(propertyLoader, propertyLoader.atCurrentDirectory());
         verify(propertyLocation).atCurrentDirectory();
     }
 
     @Test
-    public void testAtHomeDirectory() throws Exception {
+    public void testAtHomeDirectory() {
         assertEquals(propertyLoader, propertyLoader.atHomeDirectory());
         verify(propertyLocation).atHomeDirectory();
     }
 
     @Test
-    public void testAtDirectory() throws Exception {
+    public void testAtDirectory() {
         assertEquals(propertyLoader, propertyLoader.atDirectory("dir"));
         verify(propertyLocation).atDirectory("dir");
     }
 
     @Test
-    public void testAtContextClassPath() throws Exception {
+    public void testAtContextClassPath() {
         assertEquals(propertyLoader, propertyLoader.atContextClassPath());
         verify(propertyLocation).atContextClassPath();
     }
 
     @Test
-    public void testAtRelativeToClass() throws Exception {
+    public void testAtRelativeToClass() {
         assertEquals(propertyLoader, propertyLoader.atRelativeToClass(this.getClass()));
         verify(propertyLocation).atRelativeToClass(this.getClass());
     }
 
     @Test
-    public void testFromClassLoader() throws Exception {
+    public void testFromClassLoader() {
         assertEquals(propertyLoader, propertyLoader.atClassLoader(this.getClass().getClassLoader()));
         verify(propertyLocation).atClassLoader(this.getClass().getClassLoader());
     }
@@ -173,68 +173,68 @@ public class PropertyLoaderTest {
     }
 
     @Test
-    public void testAddUserName() throws Exception {
+    public void testAddUserName() {
         assertEquals(propertyLoader, propertyLoader.addUserName());
         verify(propertySuffix).addUserName();
     }
 
     @Test
-    public void testAddLocalHostNames() throws Exception {
+    public void testAddLocalHostNames() {
         assertEquals(propertyLoader, propertyLoader.addLocalHostNames());
         verify(propertySuffix).addLocalHostNames();
     }
 
     @Test
-    public void testAddString() throws Exception {
+    public void testAddString() {
         assertEquals(propertyLoader, propertyLoader.addString("suf"));
         verify(propertySuffix).addString("suf");
     }
 
     @Test
-    public void testAddSuffixList() throws Exception {
+    public void testAddSuffixList() {
         List<String> suf = new ArrayList<String>();
         assertEquals(propertyLoader, propertyLoader.addSuffixList(suf));
         verify(propertySuffix).addSuffixList(suf);
     }
 
     @Test
-    public void testAddDefaultSuffixes() throws Exception {
+    public void testAddDefaultSuffixes() {
         assertEquals(propertyLoader, propertyLoader.addDefaultSuffixes());
         verify(propertySuffix).addDefaultSuffixes();
     }
 
     @Test
-    public void testWithDefaultFilters() throws Exception {
+    public void testWithDefaultFilters() {
         assertEquals(propertyLoader, propertyLoader.withDefaultFilters());
         verify(propertyFilter).withDefaultFilters();
     }
 
     @Test
-    public void testWithVariableResolvingFilter() throws Exception {
+    public void testWithVariableResolvingFilter() {
         assertEquals(propertyLoader, propertyLoader.withVariableResolvingFilter());
         verify(propertyFilter).withVariableResolvingFilter();
     }
 
     @Test
-    public void testWithEnvironmentResolvingFilter() throws Exception {
+    public void testWithEnvironmentResolvingFilter() {
         assertEquals(propertyLoader, propertyLoader.withEnvironmentResolvingFilter());
         verify(propertyFilter).withEnvironmentResolvingFilter();
     }
 
     @Test
-    public void testWithWarnIfPropertyHasToBeDefined() throws Exception {
+    public void testWithWarnIfPropertyHasToBeDefined() {
         assertEquals(propertyLoader, propertyLoader.withWarnIfPropertyHasToBeDefined());
         verify(propertyFilter).withWarnIfPropertyHasToBeDefined();
     }
 
     @Test
-    public void testWithWarnOnSurroundingWhitespace() throws Exception {
+    public void testWithWarnOnSurroundingWhitespace() {
         assertEquals(propertyLoader, propertyLoader.withWarnOnSurroundingWhitespace());
         verify(propertyFilter).withWarnOnSurroundingWhitespace();
     }
 
     @Test
-    public void testLoadFromBaseName_Calls_loadPropertiesFromBaseNameList_And_filterProperties() throws Exception {
+    public void testLoadFromBaseName_Calls_loadPropertiesFromBaseNameList_And_filterProperties() {
         propertyLoader.load("file");
         verify(propertyLoaderFactory).getEmptyFileNameStack();
         verify(propertyLoaderFactory).getEmptyProperties();
@@ -242,7 +242,7 @@ public class PropertyLoaderTest {
     }
 
     @Test
-    public void testLoadFromBaseNameList_Calls_loadPropertiesFromBaseNameList_And_filterProperties() throws Exception {
+    public void testLoadFromBaseNameList_Calls_loadPropertiesFromBaseNameList_And_filterProperties() {
         String[] baseNames = {"file"};
         propertyLoader.load(baseNames);
         verify(propertyLoaderFactory).getEmptyFileNameStack();
@@ -251,7 +251,7 @@ public class PropertyLoaderTest {
     }
 
     @Test
-    public void testLoad_Calls_loadPropertiesFromBaseNameList_And_filterProperties() throws Exception {
+    public void testLoad_Calls_loadPropertiesFromBaseNameList_And_filterProperties() {
         propertyLoader.load();
         verify(propertyLoaderFactory).getEmptyFileNameStack();
         verify(propertyLoaderFactory).getEmptyProperties();

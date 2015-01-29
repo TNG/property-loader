@@ -50,12 +50,12 @@ public class DefaultPropertyLocationContainerTest {
     }
 
     @Test
-    public void testGetOpeners() throws Exception {
+    public void testGetOpeners() {
 
     }
 
     @Test
-    public void testAtDefaultLocations() throws Exception {
+    public void testAtDefaultLocations() {
 
     }
 
@@ -72,7 +72,7 @@ public class DefaultPropertyLocationContainerTest {
     }
 
     @Test
-    public void testAtDirectory() throws Exception {
+    public void testAtDirectory() {
 
     }
 
@@ -101,7 +101,7 @@ public class DefaultPropertyLocationContainerTest {
     }
 
     @Test
-    public void testClear() throws Exception {
+    public void testClear() {
 
     }
 }

@@ -62,17 +62,17 @@ public class DefaultPropertySuffixContainerTest {
     }
 
     @Test
-    public void testGetSuffixes() throws Exception {
+    public void testGetSuffixes() {
 
     }
 
     @Test
-    public void testAddDefaultSuffixes() throws Exception {
+    public void testAddDefaultSuffixes() {
 
     }
 
     @Test
-    public void testClear() throws Exception {
+    public void testClear() {
 
     }
 }

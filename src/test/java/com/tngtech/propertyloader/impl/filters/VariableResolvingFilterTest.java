@@ -21,7 +21,7 @@ public class VariableResolvingFilterTest {
     }
 
     @Test
-    public void testResolvingNestedVariables() throws Exception {
+    public void testResolvingNestedVariables() {
         properties.put("nestedVariable", "${val${missingChar}e}");
         properties.put("missingChar", "u");
         properties.put("value", "variable");
@@ -32,7 +32,7 @@ public class VariableResolvingFilterTest {
     }
 
     @Test
-    public void testThatExceptionIsThrownWhenValueNotFound() throws Exception {
+    public void testThatExceptionIsThrownWhenValueNotFound() {
         properties.put("variable", "${value}");
         try {
             variableResolvingFilter.filter(properties);

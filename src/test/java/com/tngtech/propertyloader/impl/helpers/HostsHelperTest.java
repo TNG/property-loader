@@ -10,7 +10,7 @@ public class HostsHelperTest {
     }
 
     @Test
-    public void testGetLocalHostNames() throws Exception {
+    public void testGetLocalHostNames() {
 
     }
 }

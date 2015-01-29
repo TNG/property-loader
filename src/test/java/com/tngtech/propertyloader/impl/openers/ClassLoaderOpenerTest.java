@@ -28,7 +28,7 @@ public class ClassLoaderOpenerTest {
     }
 
     @Test
-    public void testOpen() throws IOException {
+    public void testOpen() {
         ClassLoaderOpener classLoaderOpener = new ClassLoaderOpener(classLoader);
         classLoaderOpener.open("test");
         verify(classLoader).getResourceAsStream("test");
@@ -61,7 +61,7 @@ public class ClassLoaderOpenerTest {
     }
 
     @Test
-    public void testToString() throws Exception {
+    public void testToString() {
 
     }
 }

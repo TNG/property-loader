@@ -34,7 +34,7 @@ public class PropertyLoaderFactoryTest {
 
 
     @Test
-    public void testGetEmptyProperties() throws Exception {
+    public void testGetEmptyProperties() {
         assertTrue(propertyLoaderFactory.getEmptyProperties().getClass().equals(Properties.class));
     }
 
@@ -48,27 +48,27 @@ public class PropertyLoaderFactoryTest {
     }
 
     @Test
-    public void testGetURLFileOpener() throws Exception {
+    public void testGetURLFileOpener() {
         assertTrue(propertyLoaderFactory.getURLFileOpener().getClass().equals(URLFileOpener.class));
     }
 
     @Test
-    public void testGetURLFileOpenerFromString() throws Exception {
+    public void testGetURLFileOpenerFromString() {
         assertTrue(propertyLoaderFactory.getURLFileOpener("").getClass().equals(URLFileOpener.class));
     }
 
     @Test
-    public void testGetContextClassLoaderOpener() throws Exception {
+    public void testGetContextClassLoaderOpener() {
         assertTrue(propertyLoaderFactory.getContextClassLoaderOpener().getClass().equals(ContextClassLoaderOpener.class));
     }
 
     @Test
-    public void testGetRelativeToClass() throws Exception {
+    public void testGetRelativeToClass() {
         assertTrue(propertyLoaderFactory.getRelativeToClass(this.getClass()).getClass().equals(RelativeToClassOpener.class));
     }
 
     @Test
-    public void testGetClassLoaderOpener() throws Exception {
+    public void testGetClassLoaderOpener() {
         assertTrue(propertyLoaderFactory.getClassLoaderOpener(this.getClass().getClassLoader()).getClass().equals(ClassLoaderOpener.class));
     }
 
@@ -79,22 +79,22 @@ public class PropertyLoaderFactoryTest {
     }
 
     @Test
-    public void testGetVariableResolvingFilter() throws Exception {
+    public void testGetVariableResolvingFilter() {
         assertTrue(propertyLoaderFactory.getVariableResolvingFilter().getClass().equals(VariableResolvingFilter.class));
     }
 
     @Test
-    public void testGetEnvironmentResolvingFilter() throws Exception {
+    public void testGetEnvironmentResolvingFilter() {
         assertTrue(propertyLoaderFactory.getEnvironmentResolvingFilter().getClass().equals(EnvironmentResolvingFilter.class));
     }
 
     @Test
-    public void testGetWarnIfPropertyHasToBeDefined() throws Exception {
+    public void testGetWarnIfPropertyHasToBeDefined() {
         assertTrue(propertyLoaderFactory.getWarnIfPropertyHasToBeDefined().getClass().equals(ThrowIfPropertyHasToBeDefined.class));
     }
 
     @Test
-    public void testGetWarnOnSurroundingWhitespace() throws Exception {
+    public void testGetWarnOnSurroundingWhitespace() {
         assertTrue(propertyLoaderFactory.getWarnOnSurroundingWhitespace().getClass().equals(WarnOnSurroundingWhitespace.class));
     }
 }

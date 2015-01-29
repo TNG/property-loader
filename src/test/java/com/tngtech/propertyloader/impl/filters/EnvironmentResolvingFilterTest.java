@@ -10,12 +10,12 @@ public class EnvironmentResolvingFilterTest {
     }
 
     @Test
-    public void testFilterValue() throws Exception {
+    public void testFilterValue() {
 
     }
 
     @Test
-    public void testGetenv() throws Exception {
+    public void testGetenv() {
 
     }
 }

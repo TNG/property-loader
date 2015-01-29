@@ -25,7 +25,7 @@ public class RelativeToClassOpenerTest {
     }
 
     @Test
-    public void testOpen() throws IOException {
+    public void testOpen() {
 
     }
 
@@ -54,7 +54,7 @@ public class RelativeToClassOpenerTest {
     }
 
     @Test
-    public void testToString() throws Exception {
+    public void testToString() {
 
     }
 }

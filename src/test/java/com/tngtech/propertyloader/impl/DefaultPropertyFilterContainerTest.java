@@ -42,41 +42,41 @@ public class DefaultPropertyFilterContainerTest {
     }
 
     @Test
-    public void testGetFilters() throws Exception {
+    public void testGetFilters() {
 
     }
 
     @Test
-    public void testWithDefaultFilters() throws Exception {
+    public void testWithDefaultFilters() {
 
     }
 
     @Test
-    public void testWithVariableResolvingFilter() throws Exception {
+    public void testWithVariableResolvingFilter() {
         assertEquals(propertyFilter, propertyFilter.withVariableResolvingFilter());
         assertTrue(propertyFilter.getFilters().contains(variableResolvingFilter));
     }
 
     @Test
-    public void testWithEnvironmentResolvingFilter() throws Exception {
+    public void testWithEnvironmentResolvingFilter() {
         assertEquals(propertyFilter, propertyFilter.withEnvironmentResolvingFilter());
         assertTrue(propertyFilter.getFilters().contains(environmentResolvingFilter));
     }
 
     @Test
-    public void testWithWarnIfPropertyHasToBeDefined() throws Exception {
+    public void testWithWarnIfPropertyHasToBeDefined() {
         assertEquals(propertyFilter, propertyFilter.withWarnIfPropertyHasToBeDefined());
         assertTrue(propertyFilter.getFilters().contains(throwIfPropertyHasToBeDefined));
     }
 
     @Test
-    public void testWithWarnOnSurroundingWhitespace() throws Exception {
+    public void testWithWarnOnSurroundingWhitespace() {
         assertEquals(propertyFilter, propertyFilter.withWarnOnSurroundingWhitespace());
         assertTrue(propertyFilter.getFilters().contains(warnOnSurroundingWhitespace));
     }
 
     @Test
-    public void testClear() throws Exception {
+    public void testClear() {
 
     }
 }

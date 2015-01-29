@@ -14,7 +14,7 @@ public class ThrowIfPropertyHasToBeDefinedTest {
     private Properties properties;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         throwIfPropertyHasToBeDefined = new ThrowIfPropertyHasToBeDefined();
         properties = new Properties();
         properties.put("key1", "<HAS_TO_BE_DEFINED>");
@@ -22,7 +22,7 @@ public class ThrowIfPropertyHasToBeDefinedTest {
     }
 
     @Test
-    public void testFilterValue() throws Exception {
+    public void testFilterValue() {
         try {
             throwIfPropertyHasToBeDefined.filter(properties);
             fail("should throw exception");
