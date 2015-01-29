@@ -258,7 +258,7 @@ public class PropertyLoaderTest {
         verify(propertyFilter).getFilters();
     }
 
-    @org.junit.Test(expected = PropertyLoaderException.class)
+    @Test(expected = PropertyLoaderException.class)
     public void testLoadPropertiesFromBaseNameList_Calls_PropertyFileReader_And_Prevents_StackOverflow() {
         Stack<String> fileNameStack = new Stack<String>();
         when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);

@@ -1,6 +1,7 @@
 package com.tngtech.propertyloader;
 
 import com.tngtech.propertyloader.exception.PropertyLoaderException;
+import org.junit.Test;
 
 import java.net.URL;
 import java.util.Properties;
@@ -11,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class PropertyLoaderIntegrationTest {
 
-    @org.junit.Test
+    @Test
     public void testLoadingFromDefaultLocationsOrFullPath() {
         URL urls = this.getClass().getResource("/abc.def.properties");
         String abcdefWithFullPath = urls.getPath().replace(".properties", "");
@@ -28,7 +29,7 @@ public class PropertyLoaderIntegrationTest {
         assertTrue(properties.containsKey("abc"));  //loaded with all FileOpeners because of correct full path (leading /)
     }
 
-    @org.junit.Test
+    @Test
     public void testLoadingFromContextClassLoaderOnly() {
         String[] args = {"toBeIncluded",
                 "/abc.def",
@@ -43,7 +44,7 @@ public class PropertyLoaderIntegrationTest {
         assertFalse(properties.containsKey("abc")); //not found by classpath opener because of leading slash
     }
 
-    @org.junit.Test
+    @Test
     public void testLoadingFromCurrentDirectoryOnly() {
         String[] args = {"toBeIncluded",
                 "src/test/resources/testUmlauts",
@@ -60,7 +61,7 @@ public class PropertyLoaderIntegrationTest {
         assertFalse(properties.containsKey("abc")); //not found because of leading slash but not a correct path
     }
 
-    @org.junit.Test
+    @Test
     public void testLoadingWithDefaultConfig_Loads_Includes_And_Resolves_Variables() {
         String[] args = {"testForIncludesAndVariableResolving"};
 
@@ -72,7 +73,7 @@ public class PropertyLoaderIntegrationTest {
         assertEquals("prod-blub", properties.getProperty("testInclude.prod")); //has to be defined, otherwise filter warns
     }
 
-    @org.junit.Test(expected = PropertyLoaderException.class)
+    @Test(expected = PropertyLoaderException.class)
     public void testLoadingWithDefaultConfig_Throws_Exception_On_Recursive_Includes() {
         String[] args = {"testForRecursiveIncludes1"};
 
@@ -80,7 +81,7 @@ public class PropertyLoaderIntegrationTest {
         propertyLoader.load(args);
     }
 
-    @org.junit.Test
+    @Test
     public void testLoadingWithDefaultConfig_Does_Pop_FileNameStack() {
         String[] args = {"testForDoubleIncludes1"};
 
