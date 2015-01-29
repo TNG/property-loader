@@ -16,13 +16,13 @@ public class Obfuscator {
 
     private static final String ENCRYPTION_ALGORITHM = "Blowfish";
     private static final String ENCRYPTION_ALGORITHM_MODIFIER = "/ECB/PKCS5Padding";
-    private BASE64Encoder base64Encoder = new BASE64Encoder();
-    private BASE64Decoder base64Decoder = new BASE64Decoder();
-    private String encoding = "UTF-8";
-    private SecretKeySpec dataEncryptionSecretKeySpec;
+    private static final String ENCODING = "UTF-8";
+
+    private final BASE64Encoder base64Encoder = new BASE64Encoder();
+    private final BASE64Decoder base64Decoder = new BASE64Decoder();
+    private final SecretKeySpec dataEncryptionSecretKeySpec;
 
     public Obfuscator(String password) {
-
         byte[] salt = {65, 110, 100, 114, 111, 105, 100, 75, 105, 116, 75, 97, 116, 13, 1, 20, 20, 9, 1, 19};
         SecretKeyFactory factory;
         try {
@@ -56,7 +56,7 @@ public class Obfuscator {
         try {
             Cipher cipher = Cipher.getInstance(ENCRYPTION_ALGORITHM + ENCRYPTION_ALGORITHM_MODIFIER);
             cipher.init(Cipher.ENCRYPT_MODE, key);
-            return cipher.doFinal(toEncrypt.getBytes(encoding));
+            return cipher.doFinal(toEncrypt.getBytes(ENCODING));
         } catch (GeneralSecurityException e) {
             throw new RuntimeException("Exception during decryptInternal: " + e, e);
         } catch (UnsupportedEncodingException e) {
@@ -91,7 +91,7 @@ public class Obfuscator {
             Cipher cipher = Cipher.getInstance(ENCRYPTION_ALGORITHM + ENCRYPTION_ALGORITHM_MODIFIER);
             cipher.init(Cipher.DECRYPT_MODE, key);
             byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
-            return new String(decryptedBytes, encoding);
+            return new String(decryptedBytes, ENCODING);
         } catch (GeneralSecurityException e) {
             throw new RuntimeException("Exception during decryptInternal: " + e, e);
         } catch (UnsupportedEncodingException e) {
