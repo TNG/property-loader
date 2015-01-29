@@ -1,6 +1,5 @@
 package com.tngtech.propertyloader.impl.openers;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -12,10 +11,6 @@ import java.util.Properties;
 import static org.junit.Assert.assertTrue;
 
 public class ContextClassLoaderOpenerTest {
-    @Before
-    public void setUp() throws Exception {
-
-    }
 
     @Test
     public void testOpen() {

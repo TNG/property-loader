@@ -1,7 +1,6 @@
 package com.tngtech.propertyloader.impl;
 
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -29,11 +28,6 @@ public class PropertyFileReaderTest {
     InputStreamReader inputStreamReader;
     @Mock
     Properties properties;
-
-    @Before
-    public void setUp() throws Exception {
-
-    }
 
     @Test
     public void testTryToReadProperties_From_Properties_File() throws Exception {

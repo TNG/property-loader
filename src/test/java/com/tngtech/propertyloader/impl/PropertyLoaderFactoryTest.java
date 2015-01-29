@@ -8,7 +8,6 @@ import com.tngtech.propertyloader.impl.openers.ClassLoaderOpener;
 import com.tngtech.propertyloader.impl.openers.ContextClassLoaderOpener;
 import com.tngtech.propertyloader.impl.openers.RelativeToClassOpener;
 import com.tngtech.propertyloader.impl.openers.URLFileOpener;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -23,11 +22,6 @@ import static org.mockito.Mockito.mock;
 public class PropertyLoaderFactoryTest {
 
     private final PropertyLoaderFactory propertyLoaderFactory = new PropertyLoaderFactory();
-
-    @Before
-    public void setUp() throws Exception {
-
-    }
 
     @Rule
     public ExpectedException exception = ExpectedException.none();

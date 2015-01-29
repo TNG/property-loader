@@ -1,7 +1,6 @@
 package com.tngtech.propertyloader.impl.openers;
 
 import com.tngtech.propertyloader.PropertyLoader;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -16,11 +15,6 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RelativeToClassOpenerTest {
-
-    @Before
-    public void setUp() throws Exception {
-
-    }
 
     @Test
     public void testOpen() {

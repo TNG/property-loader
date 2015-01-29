@@ -1,7 +1,6 @@
 package com.tngtech.propertyloader.impl.openers;
 
 import com.tngtech.propertyloader.PropertyLoader;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -20,11 +19,6 @@ public class ClassLoaderOpenerTest {
 
     @Mock
     private ClassLoader classLoader;
-
-    @Before
-    public void setUp() throws Exception {
-
-    }
 
     @Test
     public void testOpen() {

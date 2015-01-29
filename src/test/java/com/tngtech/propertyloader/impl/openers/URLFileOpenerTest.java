@@ -1,6 +1,5 @@
 package com.tngtech.propertyloader.impl.openers;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.io.*;
@@ -10,10 +9,6 @@ import java.util.Properties;
 import static org.junit.Assert.assertTrue;
 
 public class URLFileOpenerTest {
-    @Before
-    public void setUp() throws Exception {
-
-    }
 
     @Test
     public void testThatURLFileOpenerLoadsFromURL() throws IOException {
