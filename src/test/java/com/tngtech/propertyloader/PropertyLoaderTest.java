@@ -6,9 +6,9 @@ import com.tngtech.propertyloader.impl.helpers.HostsHelper;
 import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class PropertyLoaderTest {
 
+    @InjectMocks
     private PropertyLoader propertyLoader;
     @Mock
     private PropertyLoaderFactory propertyLoaderFactory;
@@ -51,11 +52,6 @@ public class PropertyLoaderTest {
     private PropertyLoaderOpener propertyLoaderOpener1;
     @Mock
     private PropertyLoaderOpener propertyLoaderOpener2;
-
-    @Before
-    public void setUp() {
-        propertyLoader = new PropertyLoader(propertyFileNameHelper, propertyFileReader, propertyLoaderFactory, propertySuffix, propertyLocation, propertyFilter);
-    }
 
     @Test
     public void testWithEncoding() {

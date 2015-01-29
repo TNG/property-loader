@@ -7,6 +7,7 @@ import com.tngtech.propertyloader.impl.filters.WarnOnSurroundingWhitespace;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -19,6 +20,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultPropertyFilterContainerTest {
 
+    @InjectMocks
     private DefaultPropertyFilterContainer propertyFilter;
 
     @Mock
@@ -34,7 +36,6 @@ public class DefaultPropertyFilterContainerTest {
 
     @Before
     public void setUp() throws MalformedURLException {
-        propertyFilter = new DefaultPropertyFilterContainer(propertyLoaderFactory);
         when(propertyLoaderFactory.getVariableResolvingFilter()).thenReturn(variableResolvingFilter);
         when(propertyLoaderFactory.getEnvironmentResolvingFilter()).thenReturn(environmentResolvingFilter);
         when(propertyLoaderFactory.getWarnOnSurroundingWhitespace()).thenReturn(warnOnSurroundingWhitespace);

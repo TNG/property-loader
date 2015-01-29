@@ -7,6 +7,7 @@ import com.tngtech.propertyloader.impl.openers.URLFileOpener;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -21,6 +22,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultPropertyLocationContainerTest {
 
+    @InjectMocks
     private DefaultPropertyLocationContainer propertyLocation;
 
     @Mock
@@ -38,7 +40,6 @@ public class DefaultPropertyLocationContainerTest {
 
     @Before
     public void setUp() throws MalformedURLException {
-        propertyLocation = new DefaultPropertyLocationContainer(propertyLoaderFactory);
         url = new File("").toURI().toURL();
 
         when(propertyLoaderFactory.getURLFileOpener()).thenReturn(urlFileOpener);
