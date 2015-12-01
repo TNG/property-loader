@@ -1,4 +1,4 @@
-Property loader [![Build Status](https://travis-ci.org/TNG/property-loader.png?branch=master)](https://travis-ci.org/TNG/property-loader)
+Property loader [![Build Status](https://travis-ci.org/TNG/property-loader.png?branch=master)](https://travis-ci.org/TNG/property-loader [![Coverage Status](https://coveralls.io/repos/wuan/property-loader/badge.svg?branch=coveralls&service=github)](https://coveralls.io/github/wuan/property-loader?branch=coveralls))
 ===============
 
 #### Table of Contents
