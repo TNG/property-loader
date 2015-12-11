@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Throws an exception if a key is still mapped to <HAS_TO_BE_DEFINED>.
+ * Throws an exception if a key is still mapped to &lt;HAS_TO_BE_DEFINED&gt;.
  */
 public class ThrowIfPropertyHasToBeDefined implements PropertyLoaderFilter {
 

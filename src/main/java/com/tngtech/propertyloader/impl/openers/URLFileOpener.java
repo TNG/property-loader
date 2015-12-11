@@ -43,7 +43,7 @@ public class URLFileOpener implements PropertyLoaderOpener {
      * i.e. the URLFileOpener forgets about its path.
      *
      * @param fileName the filename
-     * @return
+     * @return InputStream of the resource found at the given URL
      */
     public InputStream open(String fileName) {
         try {

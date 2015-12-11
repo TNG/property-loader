@@ -1,11 +1,5 @@
 package com.tngtech.propertyloader;
 
-import com.tngtech.propertyloader.exception.PropertyLoaderException;
-import com.tngtech.propertyloader.impl.*;
-import com.tngtech.propertyloader.impl.helpers.HostsHelper;
-import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
-import com.tngtech.propertyloader.impl.interfaces.*;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,31 +8,61 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Stack;
 
+import com.tngtech.propertyloader.exception.PropertyLoaderException;
+import com.tngtech.propertyloader.impl.DefaultPropertyFilterContainer;
+import com.tngtech.propertyloader.impl.DefaultPropertyLocationContainer;
+import com.tngtech.propertyloader.impl.DefaultPropertySuffixContainer;
+import com.tngtech.propertyloader.impl.PropertyFileReader;
+import com.tngtech.propertyloader.impl.PropertyLoaderFactory;
+import com.tngtech.propertyloader.impl.helpers.HostsHelper;
+import com.tngtech.propertyloader.impl.helpers.PropertyFileNameHelper;
+import com.tngtech.propertyloader.impl.interfaces.PropertyFilterContainer;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderFilter;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
+import com.tngtech.propertyloader.impl.interfaces.PropertyLocationsContainer;
+import com.tngtech.propertyloader.impl.interfaces.PropertySuffixContainer;
+
 /**
- * Implements loading of java.util.Properties from properties-like or XML key-value files.
- * <p/>
- * To obtain an instance with default configuration, use <code>new PropertyLoader().withDefaultConfig()</code>.
- * <p/>
- * To see which search paths are currently implemented, see the impl.openers subpackage.
- * To see which postprocessing steps are implemented, see the impl.filters subpackage.
+ * Implements loading of java.util.Properties from properties-like or XML
+ * key-value files.
+ *
+ * To obtain an instance with default configuration, use
+ * {@code new PropertyLoader().withDefaultConfig()}.
+ *
+ * To see which search paths are currently implemented, see the impl.openers
+ * subpackage. To see which postprocessing steps are implemented, see the
+ * impl.filters subpackage.
  */
-public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader>, PropertySuffixContainer<PropertyLoader>, PropertyFilterContainer<PropertyLoader> {
+public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader>,
+        PropertySuffixContainer<PropertyLoader>, PropertyFilterContainer<PropertyLoader> {
 
     private static final String INCLUDE_KEY = "$include";
 
     private final PropertyFileNameHelper propertyFileNameHelper;
+
     private final PropertyFileReader propertyFileReader;
+
     private final PropertyLoaderFactory propertyLoaderFactory;
 
     private String propertyFileEncoding = "ISO-8859-1";
+
     private List<String> baseNames = new ArrayList<String>();
+
     private String fileExtension = "properties";
+
     private DefaultPropertySuffixContainer propertySuffix;
+
     private DefaultPropertyLocationContainer propertyLocation;
+
     private DefaultPropertyFilterContainer propertyLoaderFilters;
+
     private Stack<String> fileNameStack;
 
-    protected PropertyLoader(PropertyFileNameHelper propertyFileNameHelper, PropertyFileReader propertyFileReader, PropertyLoaderFactory propertyLoaderFactory, DefaultPropertySuffixContainer propertySuffix, DefaultPropertyLocationContainer propertyLocation, DefaultPropertyFilterContainer propertyLoaderFilters) {
+    protected PropertyLoader(PropertyFileNameHelper propertyFileNameHelper,
+            PropertyFileReader propertyFileReader, PropertyLoaderFactory propertyLoaderFactory,
+            DefaultPropertySuffixContainer propertySuffix,
+            DefaultPropertyLocationContainer propertyLocation,
+            DefaultPropertyFilterContainer propertyLoaderFilters) {
         this.propertyFileNameHelper = propertyFileNameHelper;
         this.propertyFileReader = propertyFileReader;
         this.propertyLoaderFactory = propertyLoaderFactory;
@@ -51,7 +75,8 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
         PropertyLoaderFactory propertyLoaderFactory = new PropertyLoaderFactory();
         HostsHelper hostsHelper = propertyLoaderFactory.createInstance(HostsHelper.class);
 
-        this.propertyFileNameHelper = propertyLoaderFactory.createInstance(PropertyFileNameHelper.class);
+        this.propertyFileNameHelper = propertyLoaderFactory
+                .createInstance(PropertyFileNameHelper.class);
         this.propertyFileReader = new PropertyFileReader(propertyLoaderFactory);
         this.propertyLoaderFactory = propertyLoaderFactory;
         this.propertySuffix = new DefaultPropertySuffixContainer(hostsHelper);
@@ -230,13 +255,16 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
 
     private Properties loadPropertiesFromBaseNameList(List<String> baseNames) {
         Properties loadedProperties = propertyLoaderFactory.getEmptyProperties();
-        for (String fileName : propertyFileNameHelper.getFileNames(baseNames, propertySuffix.getSuffixes(), fileExtension)) {
+        for (String fileName : propertyFileNameHelper.getFileNames(baseNames, propertySuffix
+                .getSuffixes(), fileExtension)) {
             throwIfRecursionInIncludes(fileName);
 
             fileNameStack.push(fileName);
             for (PropertyLoaderOpener opener : propertyLocation.getOpeners()) {
-                Properties newProperties = propertyFileReader.tryToReadPropertiesFromFile(fileName, propertyFileEncoding, opener);
-                Properties includedProperties = loadPropertiesFromBaseNameList(Arrays.asList(collectIncludesAndRemoveKey(newProperties)));
+                Properties newProperties = propertyFileReader.tryToReadPropertiesFromFile(fileName,
+                        propertyFileEncoding, opener);
+                Properties includedProperties = loadPropertiesFromBaseNameList(Arrays
+                        .asList(collectIncludesAndRemoveKey(newProperties)));
                 newProperties.putAll(includedProperties);
                 loadedProperties.putAll(newProperties);
             }
@@ -261,7 +289,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
     }
 
     private String[] collectIncludesAndRemoveKey(Properties properties) {
-        String[] includes = new String[]{};
+        String[] includes = new String[] {};
         if (properties.containsKey(INCLUDE_KEY)) {
             includes = properties.getProperty(INCLUDE_KEY).split(",");
             properties.remove(INCLUDE_KEY);
@@ -275,4 +303,3 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
         }
     }
 }
-
