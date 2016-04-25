@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.tngtech.java</groupId>
     <artifactId>property-loader</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.3</version>
     <packaging>jar</packaging>
     <name>Property-Loader</name>
     <description>The property loader is a java library for managing property configurations.</description>
