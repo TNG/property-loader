@@ -1,4 +1,9 @@
-Property loader [![Build Status](https://travis-ci.org/TNG/property-loader.svg?branch=master)](https://travis-ci.org/TNG/property-loader) [![Coverage Status](https://coveralls.io/repos/TNG/property-loader/badge.svg?branch=master&service=github)](https://coveralls.io/github/TNG/property-loader?branch=master) [![Maven     Central](https://img.shields.io/maven-central/v/com.tngtech.java/property-loader.svg?maxAge=2592000?style=plastic)](http://search.maven.org/#search|ga|1|g%3A%22com.tngtech.java%22%20AND%20a%3A%22property-loader%22)
+[![Build Status](https://travis-ci.org/TNG/property-loader.svg?branch=master)](https://travis-ci.org/TNG/property-loader)
+[![Coverage Status](https://coveralls.io/repos/TNG/property-loader/badge.svg?branch=master&service=github)](https://coveralls.io/github/TNG/property-loader?branch=master)
+[![Stories in Ready](https://badge.waffle.io/TNG/property-loader.png?label=ready&title=Ready)](http://waffle.io/TNG/property-loader)
+[![Maven     Central](https://img.shields.io/maven-central/v/com.tngtech.java/property-loader.svg?maxAge=2592000?style=plastic)](http://search.maven.org/#search|ga|1|g%3A%22com.tngtech.java%22%20AND%20a%3A%22property-loader%22)
+
+# Property loader
 ===============
 
 #### Table of Contents
