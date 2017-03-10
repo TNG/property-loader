@@ -16,7 +16,7 @@ public class ObfuscatorTest {
 
     @Test
     public void testEncrypt() {
-        assertEquals("kqUL7kDnwITX6+xNagUBsA=="+ System.lineSeparator(), obfuscator.encrypt("Hello, World!"));
+        assertEquals("kqUL7kDnwITX6+xNagUBsA=="+ System.getProperty("line.separator"), obfuscator.encrypt("Hello, World!"));
     }
 
     @Test

@@ -4,3 +4,4 @@ script: "mvn -e clean test jacoco:report coveralls:report"
 jdk:
   - oraclejdk8
   - oraclejdk7
+  - openjdk6
