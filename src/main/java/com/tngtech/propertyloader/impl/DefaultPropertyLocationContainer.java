@@ -11,7 +11,7 @@ public class DefaultPropertyLocationContainer implements PropertyLocationsContai
 
     private final PropertyLoaderFactory propertyLoaderFactory;
 
-    private List<PropertyLoaderOpener> openers = new ArrayList<PropertyLoaderOpener>();
+    private final List<PropertyLoaderOpener> openers = new ArrayList<>();
 
     public DefaultPropertyLocationContainer(PropertyLoaderFactory propertyLoaderFactory) {
         this.propertyLoaderFactory = propertyLoaderFactory;

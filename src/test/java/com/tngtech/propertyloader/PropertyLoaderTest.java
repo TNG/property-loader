@@ -9,9 +9,9 @@ import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.File;
 import java.net.URL;
@@ -262,9 +262,9 @@ public class PropertyLoaderTest {
         List<String> fileNames = Arrays.asList("file1.properties", "file2.properties");
         ArrayList<String> suffixes = new ArrayList<String>();
         when(propertySuffix.getSuffixes()).thenReturn(suffixes);
-        when(propertyFileNameHelper.getFileNames(Matchers.anyCollection(), Matchers.anyCollection(), Matchers.anyString())).thenReturn(fileNames);
+        when(propertyFileNameHelper.getFileNames(ArgumentMatchers.anyCollection(), ArgumentMatchers.anyCollection(), ArgumentMatchers.anyString())).thenReturn(fileNames);
         when(propertyLocation.getOpeners()).thenReturn(Arrays.<PropertyLoaderOpener>asList(propertyLoaderOpener1, propertyLoaderOpener2));
-        when(propertyFileReader.tryToReadPropertiesFromFile(Matchers.anyString(), Matchers.anyString(), Matchers.any(PropertyLoaderOpener.class))).thenReturn(properties);
+        when(propertyFileReader.tryToReadPropertiesFromFile(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.any(PropertyLoaderOpener.class))).thenReturn(properties);
 
         propertyLoader.load();
 
