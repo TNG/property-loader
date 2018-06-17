@@ -3,7 +3,7 @@ package com.tngtech.propertyloader;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ObfuscatorTest {
 
@@ -16,11 +16,11 @@ public class ObfuscatorTest {
 
     @Test
     public void testEncrypt() {
-        assertEquals("kqUL7kDnwITX6+xNagUBsA=="+ System.getProperty("line.separator"), obfuscator.encrypt("Hello, World!"));
+        assertThat(obfuscator.encrypt("Hello, World!")).isEqualTo("kqUL7kDnwITX6+xNagUBsA==");
     }
 
     @Test
     public void testDecrypt() {
-        assertEquals("Hello, World!", obfuscator.decrypt("kqUL7kDnwITX6+xNagUBsA=="));
+        assertThat(obfuscator.decrypt("kqUL7kDnwITX6+xNagUBsA==")).isEqualTo("Hello, World!");
     }
 }

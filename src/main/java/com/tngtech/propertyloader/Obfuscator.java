@@ -1,16 +1,14 @@
 package com.tngtech.propertyloader;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
+import java.util.Base64;
 
 public class Obfuscator {
 
@@ -18,8 +16,8 @@ public class Obfuscator {
     private static final String ENCRYPTION_ALGORITHM_MODIFIER = "/ECB/PKCS5Padding";
     private static final String ENCODING = "UTF-8";
 
-    private final BASE64Encoder base64Encoder = new BASE64Encoder();
-    private final BASE64Decoder base64Decoder = new BASE64Decoder();
+    private final Base64.Encoder base64Encoder = Base64.getEncoder();
+    private final Base64.Decoder base64Decoder = Base64.getDecoder();
     private final SecretKeySpec dataEncryptionSecretKeySpec;
 
     public Obfuscator(String password) {
@@ -42,7 +40,7 @@ public class Obfuscator {
      */
     public String encrypt(String toEncrypt) {
         byte[] encryptedBytes = encryptInternal(dataEncryptionSecretKeySpec, toEncrypt);
-        return base64Encoder.encodeBuffer(encryptedBytes);
+        return new String(base64Encoder.encode(encryptedBytes));
     }
 
     /**
@@ -71,12 +69,8 @@ public class Obfuscator {
      * @return the plaintext String
      */
     public String decrypt(String toDecrypt) {
-        try {
-            byte[] encryptedBytes = base64Decoder.decodeBuffer(toDecrypt);
-            return decryptInternal(dataEncryptionSecretKeySpec, encryptedBytes);
-        } catch (IOException e) {
-            throw new RuntimeException("Exception during decodeBase64: " + e, e);
-        }
+        byte[] encryptedBytes = base64Decoder.decode(toDecrypt);
+        return decryptInternal(dataEncryptionSecretKeySpec, encryptedBytes);
     }
 
     /**

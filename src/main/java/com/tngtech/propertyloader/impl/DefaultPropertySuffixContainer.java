@@ -10,7 +10,7 @@ public class DefaultPropertySuffixContainer implements PropertySuffixContainer<D
 
     private final HostsHelper hostsHelper;
 
-    private List<String> suffixes = new ArrayList<String>();
+    private final List<String> suffixes = new ArrayList<>();
 
     public DefaultPropertySuffixContainer(HostsHelper hostsHelper) {
         this.hostsHelper = hostsHelper;
