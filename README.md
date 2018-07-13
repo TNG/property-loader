@@ -150,11 +150,11 @@ propertyLoader.withWarnIfPropertyHasToBeDefined()
 propertyLoader.withWarnOnSurroundingWhitespace() 
 ```
 
-
-Usage example
--------------
-
 Java Doc
 --------
 
 Full Java Doc of the code can be found here http://tng.github.io/property-loader/
+
+How to contribute
+-----------------
+Please have a look at [CONTRIBUTING.md](CONTRIBUTING.md)
