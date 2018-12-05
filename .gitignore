@@ -5,6 +5,7 @@ target
 .gradle/
 .project
 .settings/
+.vscode/
 bin/
 property-loader.ipr
 property-loader.iws
