@@ -23,11 +23,6 @@
     </scm>
     <developers>
         <developer>
-            <name>Matthias Bollwein</name>
-            <email>matthias.bollwein@tngtech.com</email>
-            <organization>TNG Technology Consulting</organization>
-        </developer>
-        <developer>
             <name>Gerhard Müller</name>
             <email>gerhard.mueller@tngtech.com</email>
             <organization>TNG Technology Consulting</organization>
@@ -45,11 +40,6 @@
         <developer>
             <name>Moritz Prinz</name>
             <email>moritz.prinz@tngtech.com</email>
-            <organization>TNG Technology Consulting</organization>
-        </developer>
-        <developer>
-            <name>Thomas Endres</name>
-            <email>thomas.endres@tngtech.com</email>
             <organization>TNG Technology Consulting</organization>
         </developer>
     </developers>
