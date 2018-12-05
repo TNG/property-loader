@@ -5,7 +5,7 @@
 
 # Property Loader
 
-## Table of Contents
+## Table of contents
 
 [What Is It](#what-is-it)  
 [Quick Start](#quick-start)  
@@ -14,9 +14,9 @@
 [Javadoc](#javadoc)  
 [How To Contribute](#how-to-contribute)  
 
-## What Is It
+## What is it
 
-The Property Loader is a java library for managing property configurations.
+The Property Loader is a Java library for managing property configurations.
 
 It supports several property loading strategies and features e.g.:
 
@@ -25,16 +25,19 @@ It supports several property loading strategies and features e.g.:
 3. Recursive property resolution
 4. Property encryption
 
-## Quick Start
+## Quick start
 
-1. Build the lib:
-
+1. Get the code:
+```
+$ git clone git@github.com:TNG/property-loader.git
+```
+2. Build the library:
 ```
 $ mvn install
 ```
-2. Include jar file to your application
-3. Add property files e.g. `props.properties` to your application's classpath
-4. Load properties:
+3. Include jar file to your application
+4. Add property files e.g. `props.properties` to your application's classpath
+5. Load properties:
 
 ```java
 PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
@@ -43,9 +46,9 @@ PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
 Properties properties = propertyLoader.load("props")
 ```
 
-## Postprocessing Features
+## Postprocessing features
 
-### 1. Variable Resolving
+### 1. Variable resolving
 
 Variables in property values can be defined with:
 
@@ -72,7 +75,7 @@ separated by commas as its value, e.g.:
 
 Encrypted property values that are prefixed with `DECRYPT:` will be decrypted after loading.
 
-## Advanced Configuration
+## Advanced configuration
 
 The PropertyLoader's default configuration includes default search paths, suffixes and applies all available postprocessing filters.
 
@@ -86,7 +89,7 @@ The default suffixes are:
 2. the user name
 3. 'override'
 
-### 1. Search Locations
+### 1. Search locations
 
 Tell the PropertyLoader to search for properties files at its default locations (user's home directory, current directory and context classpath):
 
@@ -123,7 +126,7 @@ Tell the PropertyLoader to search for properties files using a custom ClassLoade
 propertyLoader.atClassLoader(ClassLoader classLoader)
 ```
 
-#### 1.4 Relative To A Class
+#### 1.4 Relative to a class
 
 Tell the PropertyLoader to search for properties files relative to the location of a class:
 
@@ -165,6 +168,6 @@ propertyLoader.withWarnOnSurroundingWhitespace()
 
 Full Javadoc of the code can be found here http://tng.github.io/property-loader/.
 
-## How To Contribute
+## How to contribute
 
 Please have a look at [CONTRIBUTING.md](CONTRIBUTING.md).
