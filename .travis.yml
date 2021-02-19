@@ -9,3 +9,4 @@ jdk:
   - openjdk12
   - openjdk13
   - openjdk14
+  - openjdk15
