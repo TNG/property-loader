@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.com/TNG/property-loader.svg?branch=master)](https://travis-ci.com/TNG/property-loader)
-[![Coverage Status](https://coveralls.io/repos/TNG/property-loader/badge.svg?branch=master&service=github)](https://coveralls.io/github/TNG/property-loader?branch=master)
+[![Build Status](https://github.com/TNG/property-loader/actions/workflows/build.yml/badge.svg)](https://github.com/TNG/property-loader/actions/workflows/build.yml?query=branch%3Amaster)
+[![Coverage Status](https://codecov.io/gh/TNG/property-loader/branch/master/graphs/badge.svg)](https://app.codecov.io/gh/TNG/property-loader)
 [![Maven Central](https://img.shields.io/maven-central/v/com.tngtech.java/property-loader.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.tngtech.java%22%20AND%20a%3A%22property-loader%22)
 
 # Property Loader
