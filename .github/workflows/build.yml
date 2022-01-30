@@ -17,7 +17,7 @@ jobs:
           distribution: adopt
           java-version: ${{ matrix.java-version }}
       - name: Run tests
-        run: mvn -e test
+        run: mvn -e test -Dmaven.wagon.http.ssl.insecure=${{ matrix.java-version == 9 || matrix.java-version == 10 }}
 
   coverage:
     needs: test
