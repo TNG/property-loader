@@ -30,5 +30,5 @@ jobs:
       - name: Upload code coverage report
         uses: codecov/codecov-action@v3
         with:
-          files: ./**/target/site/jacoco/jacoco.xml
+          files: target/site/jacoco/jacoco.xml
           name: codecov
