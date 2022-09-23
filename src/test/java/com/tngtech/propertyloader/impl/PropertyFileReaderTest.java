@@ -1,10 +1,10 @@
 package com.tngtech.propertyloader.impl;
 
 import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,8 +15,8 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class PropertyFileReaderTest {
+@ExtendWith(MockitoExtension.class)
+class PropertyFileReaderTest {
 
     @Mock
     private PropertyLoaderOpener propertyLoaderOpener;
@@ -30,7 +30,7 @@ public class PropertyFileReaderTest {
     Properties properties;
 
     @Test
-    public void testTryToReadProperties_From_Properties_File() throws Exception {
+    void testTryToReadProperties_From_Properties_File() throws Exception {
         PropertyFileReader reader = new PropertyFileReader(propertyLoaderFactory);
 
         when(propertyLoaderOpener.open("test.properties")).thenReturn(stream);
@@ -47,7 +47,7 @@ public class PropertyFileReaderTest {
     }
 
     @Test
-    public void testTryToReadProperties_From_XML_File() throws Exception {
+    void testTryToReadProperties_From_XML_File() throws Exception {
         PropertyFileReader reader = new PropertyFileReader(propertyLoaderFactory);
 
         when(propertyLoaderOpener.open("test.xMl")).thenReturn(stream);

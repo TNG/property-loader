@@ -1,11 +1,11 @@
 package com.tngtech.propertyloader.impl.helpers;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class HostsHelperTest {
+class HostsHelperTest {
 
     @Test
-    public void testGetLocalHostNames() {
+    void testGetLocalHostNames() {
 
     }
 }

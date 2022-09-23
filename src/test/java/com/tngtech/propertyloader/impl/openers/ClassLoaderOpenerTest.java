@@ -1,10 +1,10 @@
 package com.tngtech.propertyloader.impl.openers;
 
 import com.tngtech.propertyloader.PropertyLoader;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.*;
 import java.net.URL;
@@ -14,21 +14,21 @@ import java.util.Properties;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
-public class ClassLoaderOpenerTest {
+@ExtendWith(MockitoExtension.class)
+class ClassLoaderOpenerTest {
 
     @Mock
     private ClassLoader classLoader;
 
     @Test
-    public void testOpen() {
+    void testOpen() {
         ClassLoaderOpener classLoaderOpener = new ClassLoaderOpener(classLoader);
         classLoaderOpener.open("test");
         verify(classLoader).getResourceAsStream("test");
     }
 
     @Test
-    public void testClassLoaderOpener() throws IOException {
+    void testClassLoaderOpener() throws IOException {
         ClassLoaderOpener classLoaderOpener = new ClassLoaderOpener(PropertyLoader.class.getClassLoader());
         Properties loadedProperties = new Properties();
         InputStream stream = classLoaderOpener.open("abc.def.properties");
@@ -40,7 +40,7 @@ public class ClassLoaderOpenerTest {
     }
 
     @Test
-    public void testClassLoaderOpenerForURLClassLoader() throws IOException {
+    void testClassLoaderOpenerForURLClassLoader() throws IOException {
         URL[] urls = {new File("").toURI().toURL()};
         ClassLoader classLoader = new URLClassLoader(urls);
         ClassLoaderOpener classLoaderOpener = new ClassLoaderOpener(classLoader);
@@ -54,7 +54,7 @@ public class ClassLoaderOpenerTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         ClassLoaderOpener classLoaderOpener = new ClassLoaderOpener(classLoader);
 
         assertThat(classLoaderOpener).hasToString("by classloader classLoader");

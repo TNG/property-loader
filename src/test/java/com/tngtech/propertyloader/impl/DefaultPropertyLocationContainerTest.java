@@ -4,12 +4,14 @@ import com.tngtech.propertyloader.impl.openers.ClassLoaderOpener;
 import com.tngtech.propertyloader.impl.openers.ContextClassLoaderOpener;
 import com.tngtech.propertyloader.impl.openers.RelativeToClassOpener;
 import com.tngtech.propertyloader.impl.openers.URLFileOpener;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -18,8 +20,9 @@ import java.net.URL;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class DefaultPropertyLocationContainerTest {
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
+class DefaultPropertyLocationContainerTest {
 
     @InjectMocks
     private DefaultPropertyLocationContainer propertyLocation;
@@ -37,8 +40,8 @@ public class DefaultPropertyLocationContainerTest {
 
     private URL url;
 
-    @Before
-    public void setUp() throws MalformedURLException {
+    @BeforeEach
+    void setUp() throws MalformedURLException {
         url = new File("").toURI().toURL();
 
         when(propertyLoaderFactory.getURLFileOpener()).thenReturn(urlFileOpener);
@@ -50,58 +53,58 @@ public class DefaultPropertyLocationContainerTest {
     }
 
     @Test
-    public void testGetOpeners() {
+    void testGetOpeners() {
 
     }
 
     @Test
-    public void testAtDefaultLocations() {
+    void testAtDefaultLocations() {
 
     }
 
     @Test
-    public void testAtCurrentDirectory() {
+    void testAtCurrentDirectory() {
         assertThat(propertyLocation.atDefaultLocations()).isSameAs(propertyLocation);
         assertThat(propertyLocation.getOpeners()).contains(urlFileOpener);
     }
 
     @Test
-    public void testAtHomeDirectory() {
+    void testAtHomeDirectory() {
         assertThat(propertyLocation.atHomeDirectory()).isSameAs(propertyLocation);
         assertThat(propertyLocation.getOpeners()).contains(urlFileOpener);
     }
 
     @Test
-    public void testAtDirectory() {
+    void testAtDirectory() {
 
     }
 
     @Test
-    public void testAtContextClassPath() {
+    void testAtContextClassPath() {
         assertThat(propertyLocation.atContextClassPath()).isSameAs(propertyLocation);
         assertThat(propertyLocation.getOpeners()).contains(contextClassLoader);
     }
 
     @Test
-    public void testAtRelativeToClass() {
+    void testAtRelativeToClass() {
         assertThat(propertyLocation.atRelativeToClass(this.getClass())).isSameAs(propertyLocation);
         assertThat(propertyLocation.getOpeners()).contains(relativeToClassOpener);
     }
 
     @Test
-    public void testFromClassLoader() {
+    void testFromClassLoader() {
         assertThat(propertyLocation.atClassLoader(this.getClass().getClassLoader())).isSameAs(propertyLocation);
         assertThat(propertyLocation.getOpeners()).contains(classLoaderOpener);
     }
 
     @Test
-    public void testAtBaseURL() {
+    void testAtBaseURL() {
         assertThat(propertyLocation.atBaseURL(url)).isSameAs(propertyLocation);
         assertThat(propertyLocation.getOpeners()).contains(urlFileOpener);
     }
 
     @Test
-    public void testClear() {
+    void testClear() {
 
     }
 }

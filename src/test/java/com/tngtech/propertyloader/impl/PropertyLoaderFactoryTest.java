@@ -8,7 +8,7 @@ import com.tngtech.propertyloader.impl.openers.ClassLoaderOpener;
 import com.tngtech.propertyloader.impl.openers.ContextClassLoaderOpener;
 import com.tngtech.propertyloader.impl.openers.RelativeToClassOpener;
 import com.tngtech.propertyloader.impl.openers.URLFileOpener;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.net.URL;
@@ -18,17 +18,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 
-public class PropertyLoaderFactoryTest {
+class PropertyLoaderFactoryTest {
 
     private final PropertyLoaderFactory propertyLoaderFactory = new PropertyLoaderFactory();
 
     @Test
-    public void testGetEmptyProperties() {
+    void testGetEmptyProperties() {
         assertThat(propertyLoaderFactory.getEmptyProperties()).isEqualTo(new Properties());
     }
 
     @Test
-    public void testGetInputStreamReader() throws IOException {
+    void testGetInputStreamReader() throws IOException {
         InputStream stream = mock(InputStream.class);
         assertThat(propertyLoaderFactory.getInputStreamReader(stream, "ISO-8859-1")).isInstanceOf(InputStreamReader.class);
 
@@ -37,53 +37,53 @@ public class PropertyLoaderFactoryTest {
     }
 
     @Test
-    public void testGetURLFileOpener() {
+    void testGetURLFileOpener() {
         assertThat(propertyLoaderFactory.getURLFileOpener()).isInstanceOf(URLFileOpener.class);
     }
 
     @Test
-    public void testGetURLFileOpenerFromString() {
+    void testGetURLFileOpenerFromString() {
         assertThat(propertyLoaderFactory.getURLFileOpener("")).isInstanceOf(URLFileOpener.class);
     }
 
     @Test
-    public void testGetContextClassLoaderOpener() {
+    void testGetContextClassLoaderOpener() {
         assertThat(propertyLoaderFactory.getContextClassLoaderOpener()).isInstanceOf(ContextClassLoaderOpener.class);
     }
 
     @Test
-    public void testGetRelativeToClass() {
+    void testGetRelativeToClass() {
         assertThat(propertyLoaderFactory.getRelativeToClass(this.getClass())).isInstanceOf(RelativeToClassOpener.class);
     }
 
     @Test
-    public void testGetClassLoaderOpener() {
+    void testGetClassLoaderOpener() {
         assertThat(propertyLoaderFactory.getClassLoaderOpener(this.getClass().getClassLoader())).isInstanceOf((ClassLoaderOpener.class));
     }
 
     @Test
-    public void testGetURLFileOpenerFromURL() throws Exception {
+    void testGetURLFileOpenerFromURL() throws Exception {
         URL url = new File("").toURI().toURL();
         assertThat(propertyLoaderFactory.getURLFileOpener(url)).isInstanceOf((URLFileOpener.class));
     }
 
     @Test
-    public void testGetVariableResolvingFilter() {
+    void testGetVariableResolvingFilter() {
         assertThat(propertyLoaderFactory.getVariableResolvingFilter()).isInstanceOf((VariableResolvingFilter.class));
     }
 
     @Test
-    public void testGetEnvironmentResolvingFilter() {
+    void testGetEnvironmentResolvingFilter() {
         assertThat(propertyLoaderFactory.getEnvironmentResolvingFilter()).isInstanceOf((EnvironmentResolvingFilter.class));
     }
 
     @Test
-    public void testGetWarnIfPropertyHasToBeDefined() {
+    void testGetWarnIfPropertyHasToBeDefined() {
         assertThat(propertyLoaderFactory.getWarnIfPropertyHasToBeDefined()).isInstanceOf((ThrowIfPropertyHasToBeDefined.class));
     }
 
     @Test
-    public void testGetWarnOnSurroundingWhitespace() {
+    void testGetWarnOnSurroundingWhitespace() {
         assertThat(propertyLoaderFactory.getWarnOnSurroundingWhitespace()).isInstanceOf((WarnOnSurroundingWhitespace.class));
     }
 }

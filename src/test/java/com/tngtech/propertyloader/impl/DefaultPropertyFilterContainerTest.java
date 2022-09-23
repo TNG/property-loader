@@ -4,20 +4,23 @@ import com.tngtech.propertyloader.impl.filters.EnvironmentResolvingFilter;
 import com.tngtech.propertyloader.impl.filters.ThrowIfPropertyHasToBeDefined;
 import com.tngtech.propertyloader.impl.filters.VariableResolvingFilter;
 import com.tngtech.propertyloader.impl.filters.WarnOnSurroundingWhitespace;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 
 import java.net.MalformedURLException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class DefaultPropertyFilterContainerTest {
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
+class DefaultPropertyFilterContainerTest {
 
     @InjectMocks
     private DefaultPropertyFilterContainer propertyFilter;
@@ -33,8 +36,8 @@ public class DefaultPropertyFilterContainerTest {
     @Mock
     private ThrowIfPropertyHasToBeDefined throwIfPropertyHasToBeDefined;
 
-    @Before
-    public void setUp() throws MalformedURLException {
+    @BeforeEach
+    void setUp() throws MalformedURLException {
         when(propertyLoaderFactory.getVariableResolvingFilter()).thenReturn(variableResolvingFilter);
         when(propertyLoaderFactory.getEnvironmentResolvingFilter()).thenReturn(environmentResolvingFilter);
         when(propertyLoaderFactory.getWarnOnSurroundingWhitespace()).thenReturn(warnOnSurroundingWhitespace);
@@ -42,41 +45,41 @@ public class DefaultPropertyFilterContainerTest {
     }
 
     @Test
-    public void testGetFilters() {
+    void testGetFilters() {
 
     }
 
     @Test
-    public void testWithDefaultFilters() {
+    void testWithDefaultFilters() {
 
     }
 
     @Test
-    public void testWithVariableResolvingFilter() {
+    void testWithVariableResolvingFilter() {
         assertThat(propertyFilter.withVariableResolvingFilter()).isSameAs(propertyFilter);
         assertThat(propertyFilter.getFilters()).contains(variableResolvingFilter);
     }
 
     @Test
-    public void testWithEnvironmentResolvingFilter() {
+    void testWithEnvironmentResolvingFilter() {
         assertThat(propertyFilter.withEnvironmentResolvingFilter()).isSameAs(propertyFilter);
         assertThat(propertyFilter.getFilters()).contains(environmentResolvingFilter);
     }
 
     @Test
-    public void testWithWarnIfPropertyHasToBeDefined() {
+    void testWithWarnIfPropertyHasToBeDefined() {
         assertThat(propertyFilter.withWarnIfPropertyHasToBeDefined()).isSameAs(propertyFilter);
         assertThat(propertyFilter.getFilters()).contains(throwIfPropertyHasToBeDefined);
     }
 
     @Test
-    public void testWithWarnOnSurroundingWhitespace() {
+    void testWithWarnOnSurroundingWhitespace() {
         assertThat(propertyFilter.withWarnOnSurroundingWhitespace()).isSameAs(propertyFilter);
         assertThat(propertyFilter.getFilters()).contains(warnOnSurroundingWhitespace);
     }
 
     @Test
-    public void testClear() {
+    void testClear() {
 
     }
 }

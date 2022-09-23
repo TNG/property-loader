@@ -1,18 +1,18 @@
 package com.tngtech.propertyloader.impl.helpers;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PropertyFileNameHelperTest {
+class PropertyFileNameHelperTest {
 
     private PropertyFileNameHelper propertyFileNameHelper = new PropertyFileNameHelper();
 
     @Test
-    public void testGetFileNames() {
+    void testGetFileNames() {
         List<String> baseNameList = asList("baseName1", "baseName2");
         List<String> suffixList = asList("suffix1", "suffix2");
 

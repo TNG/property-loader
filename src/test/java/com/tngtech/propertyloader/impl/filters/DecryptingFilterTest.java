@@ -1,26 +1,26 @@
 package com.tngtech.propertyloader.impl.filters;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class DecryptingFilterTest {
+class DecryptingFilterTest {
 
     private DecryptingFilter decryptingFilter;
     private Properties properties;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         decryptingFilter = new DecryptingFilter();
         properties = new Properties();
     }
 
     @Test
-    public void testFilterValue() {
+    void testFilterValue() {
         properties.put("toDecrypt", "DECRYPT:kqUL7kDnwITX6+xNagUBsA==");
         properties.put("decryptingFilterPassword", "password");
         decryptingFilter.filter(properties);
@@ -28,7 +28,7 @@ public class DecryptingFilterTest {
     }
 
     @Test
-    public void testThatExceptionIsThrownWhenPasswordNotFound() {
+    void testThatExceptionIsThrownWhenPasswordNotFound() {
         properties.put("toDecrypt", "DECRYPT:kqUL7kDnwITX6+xNagUBsA==");
         assertThatThrownBy(() -> decryptingFilter.filter(properties))
                 .isInstanceOf(DecryptingFilterException.class);

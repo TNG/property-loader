@@ -1,7 +1,7 @@
 package com.tngtech.propertyloader;
 
 import com.tngtech.propertyloader.exception.PropertyLoaderException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.net.URL;
 import java.util.Properties;
@@ -9,10 +9,10 @@ import java.util.Properties;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class PropertyLoaderIntegrationTest {
+class PropertyLoaderIntegrationTest {
 
     @Test
-    public void testLoadingFromDefaultLocationsOrFullPath() {
+    void testLoadingFromDefaultLocationsOrFullPath() {
         URL urls = this.getClass().getResource("/abc.def.properties");
         String abcdefWithFullPath = urls.getPath().replace(".properties", "");
         String[] args = {"toBeIncluded", "src/test/resources/testUmlauts", abcdefWithFullPath};
@@ -28,7 +28,7 @@ public class PropertyLoaderIntegrationTest {
     }
 
     @Test
-    public void testLoadingFromContextClassLoaderOnly() {
+    void testLoadingFromContextClassLoaderOnly() {
         String[] args = {"toBeIncluded", "/abc.def"};
 
         PropertyLoader propertyLoader = new PropertyLoader()
@@ -43,7 +43,7 @@ public class PropertyLoaderIntegrationTest {
     }
 
     @Test
-    public void testLoadingFromCurrentDirectoryOnly() {
+    void testLoadingFromCurrentDirectoryOnly() {
         String[] args = {"toBeIncluded", "src/test/resources/testUmlauts", "/src/test/resources/abc.def"};
 
         PropertyLoader propertyLoader = new PropertyLoader()
@@ -59,7 +59,7 @@ public class PropertyLoaderIntegrationTest {
     }
 
     @Test
-    public void testLoadingWithDefaultConfig_Loads_Includes_And_Resolves_Variables() {
+    void testLoadingWithDefaultConfig_Loads_Includes_And_Resolves_Variables() {
         String[] args = {"testForIncludesAndVariableResolving"};
 
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
@@ -72,7 +72,7 @@ public class PropertyLoaderIntegrationTest {
     }
 
     @Test
-    public void testLoadingWithDefaultConfig_Throws_Exception_On_Recursive_Includes() {
+    void testLoadingWithDefaultConfig_Throws_Exception_On_Recursive_Includes() {
         String[] args = {"testForRecursiveIncludes1"};
 
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
@@ -82,7 +82,7 @@ public class PropertyLoaderIntegrationTest {
     }
 
     @Test
-    public void testLoadingWithDefaultConfig_Does_Pop_FileNameStack() {
+    void testLoadingWithDefaultConfig_Does_Pop_FileNameStack() {
         String[] args = {"testForDoubleIncludes1"};
 
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();

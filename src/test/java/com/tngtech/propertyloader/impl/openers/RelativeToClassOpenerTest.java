@@ -1,9 +1,9 @@
 package com.tngtech.propertyloader.impl.openers;
 
 import com.tngtech.propertyloader.PropertyLoader;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,16 +13,16 @@ import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(MockitoJUnitRunner.class)
-public class RelativeToClassOpenerTest {
+@ExtendWith(MockitoExtension.class)
+class RelativeToClassOpenerTest {
 
     @Test
-    public void testOpen() {
+    void testOpen() {
 
     }
 
     @Test
-    public void testThatRelativeToClassOpener_Opens_From_Root() throws IOException {
+    void testThatRelativeToClassOpener_Opens_From_Root() throws IOException {
         RelativeToClassOpener relativeToClassOpener = new RelativeToClassOpener(PropertyLoader.class);
         Properties loadedProperties = new Properties();
         InputStream stream = relativeToClassOpener.open("/abc.def.properties");
@@ -34,7 +34,7 @@ public class RelativeToClassOpenerTest {
     }
 
     @Test
-    public void testRelativeToClassOpener_Opens_From_Path_Relative_To_Class() throws IOException {
+    void testRelativeToClassOpener_Opens_From_Path_Relative_To_Class() throws IOException {
         RelativeToClassOpener relativeToClassOpener = new RelativeToClassOpener(PropertyLoader.class);
         Properties loadedProperties = new Properties();
         InputStream stream = relativeToClassOpener.open("xyz.def.properties");
@@ -46,7 +46,7 @@ public class RelativeToClassOpenerTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
 
     }
 }

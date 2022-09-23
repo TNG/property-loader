@@ -1,17 +1,17 @@
 package com.tngtech.propertyloader.impl.filters;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Properties;
 
-public class WarnOnSurroundingWhitespaceTest {
+class WarnOnSurroundingWhitespaceTest {
 
     private WarnOnSurroundingWhitespace warnOnSurroundingWhitespace;
     private Properties properties;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         warnOnSurroundingWhitespace = new WarnOnSurroundingWhitespace();
         properties = new Properties();
         properties.put("key1", "haswhitespaceattheend          ");
@@ -19,7 +19,7 @@ public class WarnOnSurroundingWhitespaceTest {
     }
 
     @Test
-    public void testFilterValue() {
+    void testFilterValue() {
         warnOnSurroundingWhitespace.filter(properties);
     }
 }

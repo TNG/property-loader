@@ -1,6 +1,6 @@
 package com.tngtech.propertyloader.impl.openers;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,10 +11,10 @@ import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ContextClassLoaderOpenerTest {
+class ContextClassLoaderOpenerTest {
 
     @Test
-    public void testOpen() {
+    void testOpen() {
         ContextClassLoaderOpener contextClassLoaderOpener = new ContextClassLoaderOpener();
 
         final InputStream inputStream = contextClassLoaderOpener.open("abc.def.properties");
@@ -25,7 +25,7 @@ public class ContextClassLoaderOpenerTest {
     }
 
     @Test
-    public void testContextClassLoaderOpener() throws IOException {
+    void testContextClassLoaderOpener() throws IOException {
         ContextClassLoaderOpener contextClassLoaderOpener = new ContextClassLoaderOpener();
         Properties loadedProperties = new Properties();
         InputStream stream = contextClassLoaderOpener.open("abc.def.properties");
@@ -37,7 +37,7 @@ public class ContextClassLoaderOpenerTest {
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         ContextClassLoaderOpener contextClassLoaderOpener = new ContextClassLoaderOpener();
 
         assertThat(contextClassLoaderOpener).hasToString("in classpath");

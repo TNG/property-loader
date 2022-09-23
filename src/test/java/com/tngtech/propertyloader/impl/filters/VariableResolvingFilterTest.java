@@ -1,26 +1,26 @@
 package com.tngtech.propertyloader.impl.filters;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class VariableResolvingFilterTest {
+class VariableResolvingFilterTest {
 
     private VariableResolvingFilter variableResolvingFilter;
     private Properties properties;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    void setUp() {
         variableResolvingFilter = new VariableResolvingFilter();
         properties = new Properties();
     }
 
     @Test
-    public void testResolvingNestedVariables() {
+    void testResolvingNestedVariables() {
         properties.put("nestedVariable", "${val${missingChar}e}");
         properties.put("missingChar", "u");
         properties.put("value", "variable");
@@ -30,7 +30,7 @@ public class VariableResolvingFilterTest {
     }
 
     @Test
-    public void testThatExceptionIsThrownWhenValueNotFound() {
+    void testThatExceptionIsThrownWhenValueNotFound() {
         properties.put("variable", "${value}");
         assertThatThrownBy(() -> variableResolvingFilter.filter(properties))
                 .isInstanceOf(VariableResolvingFilterException.class)

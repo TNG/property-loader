@@ -1,16 +1,16 @@
 package com.tngtech.propertyloader.impl.filters;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class EnvironmentResolvingFilterTest {
+class EnvironmentResolvingFilterTest {
 
     @Test
-    public void testFilterValue() {
+    void testFilterValue() {
 
     }
 
     @Test
-    public void testGetenv() {
+    void testGetenv() {
 
     }
 }
