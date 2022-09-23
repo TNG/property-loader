@@ -2,24 +2,25 @@ package com.tngtech.propertyloader.impl.helpers;
 
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PropertyFileNameHelperTest {
 
     private PropertyFileNameHelper propertyFileNameHelper = new PropertyFileNameHelper();
-    private String[] baseNames = {"baseName1", "baseName2"};
-    private String[] suffixes = {"suffix1", "suffix2"};
-    List<String> baseNameList = Arrays.asList(baseNames);
-    List<String> suffixList = Arrays.asList(suffixes);
 
     @Test
     public void testGetFileNames() {
-        assertTrue(propertyFileNameHelper.getFileNames(baseNameList, suffixList, "extension").contains("baseName1.suffix1.extension"));
-        assertTrue(propertyFileNameHelper.getFileNames(baseNameList, suffixList, "extension").contains("baseName1.suffix2.extension"));
-        assertTrue(propertyFileNameHelper.getFileNames(baseNameList, suffixList, "extension").contains("baseName2.suffix1.extension"));
-        assertTrue(propertyFileNameHelper.getFileNames(baseNameList, suffixList, "extension").contains("baseName2.suffix2.extension"));
+        List<String> baseNameList = asList("baseName1", "baseName2");
+        List<String> suffixList = asList("suffix1", "suffix2");
+
+        assertThat(propertyFileNameHelper.getFileNames(baseNameList, suffixList, "extension")).contains(
+                "baseName1.suffix1.extension",
+                "baseName1.suffix2.extension",
+                "baseName2.suffix1.extension",
+                "baseName2.suffix2.extension"
+        );
     }
 }

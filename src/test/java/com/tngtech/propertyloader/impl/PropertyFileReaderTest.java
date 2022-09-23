@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,7 +38,7 @@ public class PropertyFileReaderTest {
         when(propertyLoaderFactory.getInputStreamReader(stream, "ISO-8859-1")).thenReturn(inputStreamReader);
         doNothing().when(properties).load(inputStreamReader);
 
-        assertEquals(properties, reader.tryToReadPropertiesFromFile("test.properties", "ISO-8859-1", propertyLoaderOpener));
+        assertThat(reader.tryToReadPropertiesFromFile("test.properties", "ISO-8859-1", propertyLoaderOpener)).isSameAs(properties);
 
         verify(propertyLoaderOpener).open("test.properties");
         verify(propertyLoaderFactory).getEmptyProperties();
@@ -55,7 +55,7 @@ public class PropertyFileReaderTest {
 
         doNothing().when(properties).loadFromXML(stream);
 
-        assertEquals(properties, reader.tryToReadPropertiesFromFile("test.xMl", "ISO-8859-1", propertyLoaderOpener));
+        assertThat(reader.tryToReadPropertiesFromFile("test.xMl", "ISO-8859-1", propertyLoaderOpener)).isSameAs(properties);
 
         verify(propertyLoaderOpener).open("test.xMl");
         verify(propertyLoaderFactory).getEmptyProperties();

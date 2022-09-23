@@ -6,9 +6,8 @@ import org.junit.Test;
 import java.net.URL;
 import java.util.Properties;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PropertyLoaderIntegrationTest {
 
@@ -16,49 +15,47 @@ public class PropertyLoaderIntegrationTest {
     public void testLoadingFromDefaultLocationsOrFullPath() {
         URL urls = this.getClass().getResource("/abc.def.properties");
         String abcdefWithFullPath = urls.getPath().replace(".properties", "");
-
-        String[] args = {"toBeIncluded",
-                "src/test/resources/testUmlauts",
-                abcdefWithFullPath
-        };
+        String[] args = {"toBeIncluded", "src/test/resources/testUmlauts", abcdefWithFullPath};
 
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
         Properties properties = propertyLoader.load(args);
-        assertTrue(properties.containsKey("definedInIncluded")); //loaded from context classpath
-        assertTrue(properties.containsKey("umlauts"));  //loaded from relative to current directory (no leading /)
-        assertTrue(properties.containsKey("abc"));  //loaded with all FileOpeners because of correct full path (leading /)
+
+        assertThat(properties).containsKeys(
+                "definedInIncluded",  // loaded from context classpath
+                "umlauts",  // loaded from relative to current directory (no leading /)
+                "abc"  // loaded with all FileOpeners because of correct full path (leading /)
+        );
     }
 
     @Test
     public void testLoadingFromContextClassLoaderOnly() {
-        String[] args = {"toBeIncluded",
-                "/abc.def",
-        };
+        String[] args = {"toBeIncluded", "/abc.def"};
 
         PropertyLoader propertyLoader = new PropertyLoader()
                 .atContextClassPath()
                 .addDefaultSuffixes()
                 .withDefaultFilters();
         Properties properties = propertyLoader.load(args);
-        assertTrue(properties.containsKey("definedInIncluded")); //is loaded from context classpath
-        assertFalse(properties.containsKey("abc")); //not found by classpath opener because of leading slash
+
+        assertThat(properties)
+                .containsKey("definedInIncluded")  // is loaded from context classpath
+                .doesNotContainKey("abc");  // not found by classpath opener because of leading slash
     }
 
     @Test
     public void testLoadingFromCurrentDirectoryOnly() {
-        String[] args = {"toBeIncluded",
-                "src/test/resources/testUmlauts",
-                "/src/test/resources/abc.def",
-        };
+        String[] args = {"toBeIncluded", "src/test/resources/testUmlauts", "/src/test/resources/abc.def"};
 
         PropertyLoader propertyLoader = new PropertyLoader()
                 .atCurrentDirectory()
                 .addDefaultSuffixes()
                 .withDefaultFilters();
         Properties properties = propertyLoader.load(args);
-        assertFalse(properties.containsKey("definedInIncluded")); //no loading from classpath etc
-        assertTrue(properties.containsKey("umlauts")); //correct path relative to current directory
-        assertFalse(properties.containsKey("abc")); //not found because of leading slash but not a correct path
+
+        assertThat(properties)
+                .doesNotContainKey("definedInIncluded")  // no loading from classpath etc
+                .containsKey("umlauts")  // correct path relative to current directory
+                .doesNotContainKey("abc");  // not found because of leading slash but not a correct path
     }
 
     @Test
@@ -68,17 +65,20 @@ public class PropertyLoaderIntegrationTest {
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
         Properties properties = propertyLoader.load(args);
 
-        assertEquals("Hello, World!", properties.getProperty("b")); //b is variable a
-        assertEquals("yes", properties.getProperty("xxx")); //xxx is defined in toBeIncluded
-        assertEquals("prod-blub", properties.getProperty("testInclude.prod")); //has to be defined, otherwise filter warns
+        assertThat(properties)
+                .containsEntry("b", "Hello, World!")  // b is variable a
+                .containsEntry("xxx", "yes")  // xxx is defined in toBeIncluded
+                .containsEntry("testInclude.prod", "prod-blub");  // has to be defined, otherwise filter warns
     }
 
-    @Test(expected = PropertyLoaderException.class)
+    @Test
     public void testLoadingWithDefaultConfig_Throws_Exception_On_Recursive_Includes() {
         String[] args = {"testForRecursiveIncludes1"};
 
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
-        propertyLoader.load(args);
+
+        assertThatThrownBy(() -> propertyLoader.load(args))
+                .isInstanceOf(PropertyLoaderException.class);
     }
 
     @Test
@@ -88,6 +88,6 @@ public class PropertyLoaderIntegrationTest {
         PropertyLoader propertyLoader = new PropertyLoader().withDefaultConfig();
         Properties properties = propertyLoader.load(args);
 
-        assertTrue(properties.containsKey("definedInIncluded"));
+        assertThat(properties).containsKey("definedInIncluded");
     }
 }

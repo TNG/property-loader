@@ -5,7 +5,8 @@ import org.junit.Test;
 
 import java.util.Properties;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class DecryptingFilterTest {
 
@@ -23,12 +24,13 @@ public class DecryptingFilterTest {
         properties.put("toDecrypt", "DECRYPT:kqUL7kDnwITX6+xNagUBsA==");
         properties.put("decryptingFilterPassword", "password");
         decryptingFilter.filter(properties);
-        assertEquals("Hello, World!", properties.getProperty("toDecrypt"));
+        assertThat(properties).containsEntry("toDecrypt", "Hello, World!");
     }
 
-    @Test(expected = DecryptingFilterException.class)
+    @Test
     public void testThatExceptionIsThrownWhenPasswordNotFound() {
         properties.put("toDecrypt", "DECRYPT:kqUL7kDnwITX6+xNagUBsA==");
-        decryptingFilter.filter(properties);
+        assertThatThrownBy(() -> decryptingFilter.filter(properties))
+                .isInstanceOf(DecryptingFilterException.class);
     }
 }

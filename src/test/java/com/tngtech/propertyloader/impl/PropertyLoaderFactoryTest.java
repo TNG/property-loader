@@ -14,7 +14,8 @@ import java.io.*;
 import java.net.URL;
 import java.util.Properties;
 
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 
 public class PropertyLoaderFactoryTest {
@@ -23,65 +24,66 @@ public class PropertyLoaderFactoryTest {
 
     @Test
     public void testGetEmptyProperties() {
-        assertTrue(propertyLoaderFactory.getEmptyProperties().getClass().equals(Properties.class));
+        assertThat(propertyLoaderFactory.getEmptyProperties()).isEqualTo(new Properties());
     }
 
-    @Test(expected = UnsupportedEncodingException.class)
+    @Test
     public void testGetInputStreamReader() throws IOException {
         InputStream stream = mock(InputStream.class);
-        assertTrue(propertyLoaderFactory.getInputStreamReader(stream, "ISO-8859-1").getClass().equals(InputStreamReader.class));
+        assertThat(propertyLoaderFactory.getInputStreamReader(stream, "ISO-8859-1")).isInstanceOf(InputStreamReader.class);
 
-        propertyLoaderFactory.getInputStreamReader(stream, "");
+        assertThatThrownBy(() -> propertyLoaderFactory.getInputStreamReader(stream, ""))
+                .isInstanceOf(UnsupportedEncodingException.class);
     }
 
     @Test
     public void testGetURLFileOpener() {
-        assertTrue(propertyLoaderFactory.getURLFileOpener().getClass().equals(URLFileOpener.class));
+        assertThat(propertyLoaderFactory.getURLFileOpener()).isInstanceOf(URLFileOpener.class);
     }
 
     @Test
     public void testGetURLFileOpenerFromString() {
-        assertTrue(propertyLoaderFactory.getURLFileOpener("").getClass().equals(URLFileOpener.class));
+        assertThat(propertyLoaderFactory.getURLFileOpener("")).isInstanceOf(URLFileOpener.class);
     }
 
     @Test
     public void testGetContextClassLoaderOpener() {
-        assertTrue(propertyLoaderFactory.getContextClassLoaderOpener().getClass().equals(ContextClassLoaderOpener.class));
+        assertThat(propertyLoaderFactory.getContextClassLoaderOpener()).isInstanceOf(ContextClassLoaderOpener.class);
     }
 
     @Test
     public void testGetRelativeToClass() {
-        assertTrue(propertyLoaderFactory.getRelativeToClass(this.getClass()).getClass().equals(RelativeToClassOpener.class));
+        assertThat(propertyLoaderFactory.getRelativeToClass(this.getClass())).isInstanceOf(RelativeToClassOpener.class);
     }
 
     @Test
     public void testGetClassLoaderOpener() {
-        assertTrue(propertyLoaderFactory.getClassLoaderOpener(this.getClass().getClassLoader()).getClass().equals(ClassLoaderOpener.class));
+        assertThat(propertyLoaderFactory.getClassLoaderOpener(this.getClass().getClassLoader())).isInstanceOf((ClassLoaderOpener.class));
     }
 
     @Test
     public void testGetURLFileOpenerFromURL() throws Exception {
         URL url = new File("").toURI().toURL();
-        assertTrue(propertyLoaderFactory.getURLFileOpener(url).getClass().equals(URLFileOpener.class));
+        assertThat(propertyLoaderFactory.getURLFileOpener(url)).isInstanceOf((URLFileOpener.class));
     }
 
     @Test
     public void testGetVariableResolvingFilter() {
-        assertTrue(propertyLoaderFactory.getVariableResolvingFilter().getClass().equals(VariableResolvingFilter.class));
+        assertThat(propertyLoaderFactory.getVariableResolvingFilter()).isInstanceOf((VariableResolvingFilter.class));
     }
 
     @Test
     public void testGetEnvironmentResolvingFilter() {
-        assertTrue(propertyLoaderFactory.getEnvironmentResolvingFilter().getClass().equals(EnvironmentResolvingFilter.class));
+        assertThat(propertyLoaderFactory.getEnvironmentResolvingFilter()).isInstanceOf((EnvironmentResolvingFilter.class));
     }
 
     @Test
     public void testGetWarnIfPropertyHasToBeDefined() {
-        assertTrue(propertyLoaderFactory.getWarnIfPropertyHasToBeDefined().getClass().equals(ThrowIfPropertyHasToBeDefined.class));
+        assertThat(propertyLoaderFactory.getWarnIfPropertyHasToBeDefined()).isInstanceOf((ThrowIfPropertyHasToBeDefined.class));
     }
 
     @Test
     public void testGetWarnOnSurroundingWhitespace() {
-        assertTrue(propertyLoaderFactory.getWarnOnSurroundingWhitespace().getClass().equals(WarnOnSurroundingWhitespace.class));
+        assertThat(propertyLoaderFactory.getWarnOnSurroundingWhitespace()).isInstanceOf((WarnOnSurroundingWhitespace.class));
     }
 }

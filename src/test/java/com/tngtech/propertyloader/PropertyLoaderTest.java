@@ -8,21 +8,21 @@ import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.Stack;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.times;
+import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -59,22 +59,22 @@ public class PropertyLoaderTest {
 
     @Test
     public void testGetLocations() {
-        assertEquals(propertyLocation, propertyLoader.getLocations());
+        assertThat(propertyLoader.getLocations()).isSameAs(propertyLocation);
     }
 
     @Test
     public void testGetSuffixes() {
-        assertEquals(propertySuffix, propertyLoader.getSuffixes());
+        assertThat(propertyLoader.getSuffixes()).isSameAs(propertySuffix);
     }
 
     @Test
     public void testGetFilters() {
-        assertEquals(propertyFilter, propertyLoader.getFilters());
+        assertThat(propertyLoader.getFilters()).isSameAs(propertyFilter);
     }
 
     @Test
     public void testGetExtension() {
-        assertEquals("properties", propertyLoader.getExtension());
+        assertThat(propertyLoader.getExtension()).isEqualTo("properties");
     }
 
     @Test
@@ -108,7 +108,7 @@ public class PropertyLoaderTest {
         when(propertySuffix.clear()).thenReturn(propertySuffix);
         when(propertyFilter.clear()).thenReturn(propertyFilter);
 
-        assertEquals(propertyLoader, propertyLoader.withDefaultConfig());
+        assertThat(propertyLoader.withDefaultConfig()).isSameAs(propertyLoader);
 
         verify(propertyLocation).clear();
         verify(propertySuffix).clear();
@@ -120,111 +120,111 @@ public class PropertyLoaderTest {
 
     @Test
     public void testAtDefaultLocations() {
-        assertEquals(propertyLoader, propertyLoader.atDefaultLocations());
+        assertThat(propertyLoader.atDefaultLocations()).isSameAs(propertyLoader);
         verify(propertyLocation).atDefaultLocations();
     }
 
     @Test
     public void testAtCurrentDirectory() {
-        assertEquals(propertyLoader, propertyLoader.atCurrentDirectory());
+        assertThat(propertyLoader.atCurrentDirectory()).isSameAs(propertyLoader);
         verify(propertyLocation).atCurrentDirectory();
     }
 
     @Test
     public void testAtHomeDirectory() {
-        assertEquals(propertyLoader, propertyLoader.atHomeDirectory());
+        assertThat(propertyLoader.atHomeDirectory()).isSameAs(propertyLoader);
         verify(propertyLocation).atHomeDirectory();
     }
 
     @Test
     public void testAtDirectory() {
-        assertEquals(propertyLoader, propertyLoader.atDirectory("dir"));
+        assertThat(propertyLoader.atDirectory("dir")).isSameAs(propertyLoader);
         verify(propertyLocation).atDirectory("dir");
     }
 
     @Test
     public void testAtContextClassPath() {
-        assertEquals(propertyLoader, propertyLoader.atContextClassPath());
+        assertThat(propertyLoader.atContextClassPath()).isSameAs(propertyLoader);
         verify(propertyLocation).atContextClassPath();
     }
 
     @Test
     public void testAtRelativeToClass() {
-        assertEquals(propertyLoader, propertyLoader.atRelativeToClass(this.getClass()));
+        assertThat(propertyLoader.atRelativeToClass(this.getClass())).isSameAs(propertyLoader);
         verify(propertyLocation).atRelativeToClass(this.getClass());
     }
 
     @Test
     public void testFromClassLoader() {
-        assertEquals(propertyLoader, propertyLoader.atClassLoader(this.getClass().getClassLoader()));
+        assertThat(propertyLoader.atClassLoader(this.getClass().getClassLoader())).isSameAs(propertyLoader);
         verify(propertyLocation).atClassLoader(this.getClass().getClassLoader());
     }
 
     @Test
     public void testAtBaseURL() throws Exception {
         URL url = new File("").toURI().toURL();
-        assertEquals(propertyLoader, propertyLoader.atBaseURL(url));
+        assertThat(propertyLoader.atBaseURL(url)).isSameAs(propertyLoader);
         verify(propertyLocation).atBaseURL(url);
     }
 
     @Test
     public void testAddUserName() {
-        assertEquals(propertyLoader, propertyLoader.addUserName());
+        assertThat(propertyLoader.addUserName()).isSameAs(propertyLoader);
         verify(propertySuffix).addUserName();
     }
 
     @Test
     public void testAddLocalHostNames() {
-        assertEquals(propertyLoader, propertyLoader.addLocalHostNames());
+        assertThat(propertyLoader.addLocalHostNames()).isSameAs(propertyLoader);
         verify(propertySuffix).addLocalHostNames();
     }
 
     @Test
     public void testAddString() {
-        assertEquals(propertyLoader, propertyLoader.addString("suf"));
+        assertThat(propertyLoader.addString("suf")).isSameAs(propertyLoader);
         verify(propertySuffix).addString("suf");
     }
 
     @Test
     public void testAddSuffixList() {
-        List<String> suf = new ArrayList<String>();
-        assertEquals(propertyLoader, propertyLoader.addSuffixList(suf));
+        List<String> suf = new ArrayList<>();
+        assertThat(propertyLoader.addSuffixList(suf)).isSameAs(propertyLoader);
         verify(propertySuffix).addSuffixList(suf);
     }
 
     @Test
     public void testAddDefaultSuffixes() {
-        assertEquals(propertyLoader, propertyLoader.addDefaultSuffixes());
+        assertThat(propertyLoader.addDefaultSuffixes()).isSameAs(propertyLoader);
         verify(propertySuffix).addDefaultSuffixes();
     }
 
     @Test
     public void testWithDefaultFilters() {
-        assertEquals(propertyLoader, propertyLoader.withDefaultFilters());
+        assertThat(propertyLoader.withDefaultFilters()).isSameAs(propertyLoader);
         verify(propertyFilter).withDefaultFilters();
     }
 
     @Test
     public void testWithVariableResolvingFilter() {
-        assertEquals(propertyLoader, propertyLoader.withVariableResolvingFilter());
+        assertThat(propertyLoader.withVariableResolvingFilter()).isSameAs(propertyLoader);
         verify(propertyFilter).withVariableResolvingFilter();
     }
 
     @Test
     public void testWithEnvironmentResolvingFilter() {
-        assertEquals(propertyLoader, propertyLoader.withEnvironmentResolvingFilter());
+        assertThat(propertyLoader.withEnvironmentResolvingFilter()).isSameAs(propertyLoader);
         verify(propertyFilter).withEnvironmentResolvingFilter();
     }
 
     @Test
     public void testWithWarnIfPropertyHasToBeDefined() {
-        assertEquals(propertyLoader, propertyLoader.withWarnIfPropertyHasToBeDefined());
+        assertThat(propertyLoader.withWarnIfPropertyHasToBeDefined()).isSameAs(propertyLoader);
         verify(propertyFilter).withWarnIfPropertyHasToBeDefined();
     }
 
     @Test
     public void testWithWarnOnSurroundingWhitespace() {
-        assertEquals(propertyLoader, propertyLoader.withWarnOnSurroundingWhitespace());
+        assertThat(propertyLoader.withWarnOnSurroundingWhitespace()).isSameAs(propertyLoader);
         verify(propertyFilter).withWarnOnSurroundingWhitespace();
     }
 
@@ -253,25 +253,20 @@ public class PropertyLoaderTest {
         verify(propertyFilter).getFilters();
     }
 
-    @Test(expected = PropertyLoaderException.class)
+    @Test
     public void testLoadPropertiesFromBaseNameList_Calls_PropertyFileReader_And_Prevents_StackOverflow() {
-        Stack<String> fileNameStack = new Stack<String>();
+        Stack<String> fileNameStack = new Stack<>();
         when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);
         when(propertyLoaderFactory.getEmptyFileNameStack()).thenReturn(fileNameStack);
         when(propertyLoaderFactory.getStringBuilder()).thenReturn(new StringBuilder());
-        List<String> fileNames = Arrays.asList("file1.properties", "file2.properties");
-        ArrayList<String> suffixes = new ArrayList<String>();
+        List<String> fileNames = asList("file1.properties", "file2.properties");
+        List<String> suffixes = new ArrayList<>();
         when(propertySuffix.getSuffixes()).thenReturn(suffixes);
         when(propertyFileNameHelper.getFileNames(ArgumentMatchers.anyCollection(), ArgumentMatchers.anyCollection(), ArgumentMatchers.anyString())).thenReturn(fileNames);
-        when(propertyLocation.getOpeners()).thenReturn(Arrays.<PropertyLoaderOpener>asList(propertyLoaderOpener1, propertyLoaderOpener2));
+        when(propertyLocation.getOpeners()).thenReturn(asList(propertyLoaderOpener1, propertyLoaderOpener2));
         when(propertyFileReader.tryToReadPropertiesFromFile(ArgumentMatchers.anyString(), ArgumentMatchers.anyString(), ArgumentMatchers.any(PropertyLoaderOpener.class))).thenReturn(properties);
 
-        propertyLoader.load();
-
-        verify(propertyFileReader).tryToReadPropertiesFromFile("file1.properties", "ISO-8859-1", propertyLoaderOpener1);
-        verify(propertyFileReader).tryToReadPropertiesFromFile("file2.properties", "ISO-8859-1", propertyLoaderOpener1);
-        verify(propertyFileReader).tryToReadPropertiesFromFile("file1.properties", "ISO-8859-1", propertyLoaderOpener2);
-        verify(propertyFileReader).tryToReadPropertiesFromFile("file2.properties", "ISO-8859-1", propertyLoaderOpener2);
-        verify(properties, times(4)).putAll(properties);
+        assertThatThrownBy(() ->propertyLoader.load())
+                .isInstanceOf(PropertyLoaderException.class);
     }
 }

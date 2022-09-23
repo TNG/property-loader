@@ -5,9 +5,8 @@ import org.junit.Test;
 
 import java.util.Properties;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class VariableResolvingFilterTest {
 
@@ -15,7 +14,7 @@ public class VariableResolvingFilterTest {
     private Properties properties;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         variableResolvingFilter = new VariableResolvingFilter();
         properties = new Properties();
     }
@@ -27,18 +26,14 @@ public class VariableResolvingFilterTest {
         properties.put("value", "variable");
 
         variableResolvingFilter.filter(properties);
-
-        assertEquals("variable", properties.getProperty("nestedVariable"));
+        assertThat(properties).containsEntry("nestedVariable", "variable");
     }
 
     @Test
     public void testThatExceptionIsThrownWhenValueNotFound() {
         properties.put("variable", "${value}");
-        try {
-            variableResolvingFilter.filter(properties);
-            fail("should throw exception");
-        } catch (VariableResolvingFilterException e) {
-            assertTrue(e.getMessage().contains("Error during variable resolution: No value found for variable value"));
-        }
+        assertThatThrownBy(() -> variableResolvingFilter.filter(properties))
+                .isInstanceOf(VariableResolvingFilterException.class)
+                .hasMessageContaining("Error during variable resolution: No value found for variable value");
     }
 }

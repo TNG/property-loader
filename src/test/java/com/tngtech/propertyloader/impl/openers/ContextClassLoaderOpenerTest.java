@@ -10,7 +10,6 @@ import java.util.Properties;
 import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class ContextClassLoaderOpenerTest {
 
@@ -34,13 +33,13 @@ public class ContextClassLoaderOpenerTest {
             Reader reader = new InputStreamReader(stream, "ISO-8859-1");
             loadedProperties.load(reader);
         }
-        assertTrue(loadedProperties.containsKey("abc"));
+        assertThat(loadedProperties).containsKey("abc");
     }
 
     @Test
     public void testToString() {
         ContextClassLoaderOpener contextClassLoaderOpener = new ContextClassLoaderOpener();
 
-        assertThat(contextClassLoaderOpener.toString()).isEqualTo("in classpath");
+        assertThat(contextClassLoaderOpener).hasToString("in classpath");
     }
 }

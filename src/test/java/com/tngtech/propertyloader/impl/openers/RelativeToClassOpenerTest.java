@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Properties;
 
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RelativeToClassOpenerTest {
@@ -30,7 +30,7 @@ public class RelativeToClassOpenerTest {
             Reader reader = new InputStreamReader(stream, "ISO-8859-1");
             loadedProperties.load(reader);
         }
-        assertTrue(loadedProperties.containsKey("abc"));
+        assertThat(loadedProperties).containsKey("abc");
     }
 
     @Test
@@ -42,7 +42,7 @@ public class RelativeToClassOpenerTest {
             Reader reader = new InputStreamReader(stream, "ISO-8859-1");
             loadedProperties.load(reader);
         }
-        assertTrue(loadedProperties.containsKey("xyz"));
+        assertThat(loadedProperties).containsKey("xyz");
     }
 
     @Test

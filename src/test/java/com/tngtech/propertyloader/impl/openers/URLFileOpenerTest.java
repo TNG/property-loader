@@ -6,7 +6,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.Properties;
 
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class URLFileOpenerTest {
 
@@ -21,7 +21,7 @@ public class URLFileOpenerTest {
             Reader reader = new InputStreamReader(stream, "ISO-8859-1");
             loadedProperties.load(reader);
         }
-        assertTrue(loadedProperties.containsKey("abc"));
+        assertThat(loadedProperties).containsKey("abc");
     }
 
     @Test
@@ -35,7 +35,7 @@ public class URLFileOpenerTest {
             Reader reader = new InputStreamReader(stream, "ISO-8859-1");
             loadedProperties.load(reader);
         }
-        assertTrue(loadedProperties.containsKey("abc"));
+        assertThat(loadedProperties).containsKey("abc");
     }
 
     @Test
@@ -49,7 +49,7 @@ public class URLFileOpenerTest {
             Reader reader = new InputStreamReader(stream, "ISO-8859-1");
             loadedProperties.load(reader);
         }
-        assertTrue(loadedProperties.containsKey("abc"));
+        assertThat(loadedProperties).containsKey("abc");
     }
 
     @Test
@@ -58,7 +58,7 @@ public class URLFileOpenerTest {
         String path = urls.getPath().replace("abc.def.properties", "");
         URLFileOpener urlFileOpener = new URLFileOpener(path);
         urlFileOpener.open(path + "abc.def.properties");
-        assertTrue(urlFileOpener.toString().replace("in path ", "").equals(path));
+        assertThat(urlFileOpener.toString().replace("in path ", "")).isEqualTo(path);
     }
 
     @Test

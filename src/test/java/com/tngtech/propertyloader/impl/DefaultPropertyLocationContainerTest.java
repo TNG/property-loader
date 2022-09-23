@@ -15,8 +15,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -62,14 +61,14 @@ public class DefaultPropertyLocationContainerTest {
 
     @Test
     public void testAtCurrentDirectory() {
-        assertEquals(propertyLocation, propertyLocation.atDefaultLocations());
-        assertTrue(propertyLocation.getOpeners().contains(urlFileOpener));
+        assertThat(propertyLocation.atDefaultLocations()).isSameAs(propertyLocation);
+        assertThat(propertyLocation.getOpeners()).contains(urlFileOpener);
     }
 
     @Test
     public void testAtHomeDirectory() {
-        assertEquals(propertyLocation, propertyLocation.atHomeDirectory());
-        assertTrue(propertyLocation.getOpeners().contains(urlFileOpener));
+        assertThat(propertyLocation.atHomeDirectory()).isSameAs(propertyLocation);
+        assertThat(propertyLocation.getOpeners()).contains(urlFileOpener);
     }
 
     @Test
@@ -79,26 +78,26 @@ public class DefaultPropertyLocationContainerTest {
 
     @Test
     public void testAtContextClassPath() {
-        assertEquals(propertyLocation, propertyLocation.atContextClassPath());
-        assertTrue(propertyLocation.getOpeners().contains(contextClassLoader));
+        assertThat(propertyLocation.atContextClassPath()).isSameAs(propertyLocation);
+        assertThat(propertyLocation.getOpeners()).contains(contextClassLoader);
     }
 
     @Test
     public void testAtRelativeToClass() {
-        assertEquals(propertyLocation, propertyLocation.atRelativeToClass(this.getClass()));
-        assertTrue(propertyLocation.getOpeners().contains(relativeToClassOpener));
+        assertThat(propertyLocation.atRelativeToClass(this.getClass())).isSameAs(propertyLocation);
+        assertThat(propertyLocation.getOpeners()).contains(relativeToClassOpener);
     }
 
     @Test
     public void testFromClassLoader() {
-        assertEquals(propertyLocation, propertyLocation.atClassLoader(this.getClass().getClassLoader()));
-        assertTrue(propertyLocation.getOpeners().contains(classLoaderOpener));
+        assertThat(propertyLocation.atClassLoader(this.getClass().getClassLoader())).isSameAs(propertyLocation);
+        assertThat(propertyLocation.getOpeners()).contains(classLoaderOpener);
     }
 
     @Test
     public void testAtBaseURL() {
-        assertEquals(propertyLocation, propertyLocation.atBaseURL(url));
-        assertTrue(propertyLocation.getOpeners().contains(urlFileOpener));
+        assertThat(propertyLocation.atBaseURL(url)).isSameAs(propertyLocation);
+        assertThat(propertyLocation.getOpeners()).contains(urlFileOpener);
     }
 
     @Test

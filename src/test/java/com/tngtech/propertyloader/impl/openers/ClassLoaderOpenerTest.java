@@ -12,7 +12,6 @@ import java.net.URLClassLoader;
 import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -37,7 +36,7 @@ public class ClassLoaderOpenerTest {
             Reader reader = new InputStreamReader(stream, "ISO-8859-1");
             loadedProperties.load(reader);
         }
-        assertTrue(loadedProperties.containsKey("abc"));
+        assertThat(loadedProperties).containsKey("abc");
     }
 
     @Test
@@ -51,13 +50,13 @@ public class ClassLoaderOpenerTest {
             Reader reader = new InputStreamReader(stream, "ISO-8859-1");
             loadedProperties.load(reader);
         }
-        assertTrue(loadedProperties.containsKey("abc"));
+        assertThat(loadedProperties).containsKey("abc");
     }
 
     @Test
     public void testToString() {
         ClassLoaderOpener classLoaderOpener = new ClassLoaderOpener(classLoader);
 
-        assertThat(classLoaderOpener.toString()).isEqualTo("by classloader classLoader");
+        assertThat(classLoaderOpener).hasToString("by classloader classLoader");
     }
 }

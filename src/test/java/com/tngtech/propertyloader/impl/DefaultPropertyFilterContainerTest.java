@@ -13,8 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.net.MalformedURLException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -54,26 +53,26 @@ public class DefaultPropertyFilterContainerTest {
 
     @Test
     public void testWithVariableResolvingFilter() {
-        assertEquals(propertyFilter, propertyFilter.withVariableResolvingFilter());
-        assertTrue(propertyFilter.getFilters().contains(variableResolvingFilter));
+        assertThat(propertyFilter.withVariableResolvingFilter()).isSameAs(propertyFilter);
+        assertThat(propertyFilter.getFilters()).contains(variableResolvingFilter);
     }
 
     @Test
     public void testWithEnvironmentResolvingFilter() {
-        assertEquals(propertyFilter, propertyFilter.withEnvironmentResolvingFilter());
-        assertTrue(propertyFilter.getFilters().contains(environmentResolvingFilter));
+        assertThat(propertyFilter.withEnvironmentResolvingFilter()).isSameAs(propertyFilter);
+        assertThat(propertyFilter.getFilters()).contains(environmentResolvingFilter);
     }
 
     @Test
     public void testWithWarnIfPropertyHasToBeDefined() {
-        assertEquals(propertyFilter, propertyFilter.withWarnIfPropertyHasToBeDefined());
-        assertTrue(propertyFilter.getFilters().contains(throwIfPropertyHasToBeDefined));
+        assertThat(propertyFilter.withWarnIfPropertyHasToBeDefined()).isSameAs(propertyFilter);
+        assertThat(propertyFilter.getFilters()).contains(throwIfPropertyHasToBeDefined);
     }
 
     @Test
     public void testWithWarnOnSurroundingWhitespace() {
-        assertEquals(propertyFilter, propertyFilter.withWarnOnSurroundingWhitespace());
-        assertTrue(propertyFilter.getFilters().contains(warnOnSurroundingWhitespace));
+        assertThat(propertyFilter.withWarnOnSurroundingWhitespace()).isSameAs(propertyFilter);
+        assertThat(propertyFilter.getFilters()).contains(warnOnSurroundingWhitespace);
     }
 
     @Test
