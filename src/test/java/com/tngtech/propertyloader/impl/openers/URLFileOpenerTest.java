@@ -6,6 +6,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.Properties;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class URLFileOpenerTest {
@@ -18,7 +19,7 @@ class URLFileOpenerTest {
         Properties loadedProperties = new Properties();
         InputStream stream = urlFileOpener.open("abc.def.properties");
         if (stream != null) {
-            Reader reader = new InputStreamReader(stream, "ISO-8859-1");
+            Reader reader = new InputStreamReader(stream, ISO_8859_1);
             loadedProperties.load(reader);
         }
         assertThat(loadedProperties).containsKey("abc");
@@ -32,7 +33,7 @@ class URLFileOpenerTest {
         Properties loadedProperties = new Properties();
         InputStream stream = urlFileOpener.open("abc.def.properties");
         if (stream != null) {
-            Reader reader = new InputStreamReader(stream, "ISO-8859-1");
+            Reader reader = new InputStreamReader(stream, ISO_8859_1);
             loadedProperties.load(reader);
         }
         assertThat(loadedProperties).containsKey("abc");
@@ -46,7 +47,7 @@ class URLFileOpenerTest {
         Properties loadedProperties = new Properties();
         InputStream stream = urlFileOpener.open(path + "abc.def.properties");
         if (stream != null) {
-            Reader reader = new InputStreamReader(stream, "ISO-8859-1");
+            Reader reader = new InputStreamReader(stream, ISO_8859_1);
             loadedProperties.load(reader);
         }
         assertThat(loadedProperties).containsKey("abc");

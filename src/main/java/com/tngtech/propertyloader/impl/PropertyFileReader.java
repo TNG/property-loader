@@ -26,25 +26,25 @@ public class PropertyFileReader {
         InputStream stream = opener.open(fileName);
 
         if (stream == null) {
-            log.debug("file {} not found {}", fileName, opener.toString());
+            log.debug("file {} not found {}", fileName, opener);
             newProperties = propertyLoaderFactory.getEmptyProperties();
         } else {
-            log.info("file {} found for reading {} with encoding {}", fileName, opener.toString(), propertyFileEncoding);
+            log.info("file {} found for reading {} with encoding {}", fileName, opener, propertyFileEncoding);
             if (fileName.toLowerCase().endsWith("xml")) {
-                log.debug("attempting to find and read xml file {} {}", fileName, opener.toString());
+                log.debug("attempting to find and read xml file {} {}", fileName, opener);
                 try {
                     newProperties = readFromXML(stream);
                 } catch (InvalidPropertiesFormatException e) {
                     throw new PropertyFileReaderException(String.format("error reading properties from from '%s': this xml file is not a valid properties format", fileName), e);
                 } catch (IOException e) {
-                    throw new PropertyFileReaderException(String.format("error reading properties from stream created from '%s' in opener '%s'", fileName, opener.toString()), e);
+                    throw new PropertyFileReaderException(String.format("error reading properties from stream created from '%s' in opener '%s'", fileName, opener), e);
                 }
             } else {
-                log.debug("attempting to find and read properties file {} with encoding {} {}", fileName, propertyFileEncoding, opener.toString());
+                log.debug("attempting to find and read properties file {} with encoding {} {}", fileName, propertyFileEncoding, opener);
                 try {
                     newProperties = read(stream, propertyFileEncoding);
                 } catch (IOException e) {
-                    throw new PropertyFileReaderException(String.format("error reading properties from stream created from '%s' with encoding '%s' in opener '%s'", fileName, propertyFileEncoding, opener.toString()), e);
+                    throw new PropertyFileReaderException(String.format("error reading properties from stream created from '%s' with encoding '%s' in opener '%s'", fileName, propertyFileEncoding, opener), e);
                 }
             }
         }

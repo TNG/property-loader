@@ -73,7 +73,7 @@ public class PropertyLoaderFactory {
     }
 
     public Stack<String> getEmptyFileNameStack() {
-        return new Stack<String>();
+        return new Stack<>();
     }
 
     public StringBuilder getStringBuilder() {

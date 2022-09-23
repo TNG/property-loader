@@ -11,6 +11,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Properties;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
@@ -33,7 +34,7 @@ class ClassLoaderOpenerTest {
         Properties loadedProperties = new Properties();
         InputStream stream = classLoaderOpener.open("abc.def.properties");
         if (stream != null) {
-            Reader reader = new InputStreamReader(stream, "ISO-8859-1");
+            Reader reader = new InputStreamReader(stream, ISO_8859_1);
             loadedProperties.load(reader);
         }
         assertThat(loadedProperties).containsKey("abc");
@@ -47,7 +48,7 @@ class ClassLoaderOpenerTest {
         Properties loadedProperties = new Properties();
         InputStream stream = classLoaderOpener.open("abc.def.properties");
         if (stream != null) {
-            Reader reader = new InputStreamReader(stream, "ISO-8859-1");
+            Reader reader = new InputStreamReader(stream, ISO_8859_1);
             loadedProperties.load(reader);
         }
         assertThat(loadedProperties).containsKey("abc");

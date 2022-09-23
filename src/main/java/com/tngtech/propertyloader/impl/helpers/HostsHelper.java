@@ -11,13 +11,12 @@ import java.util.Set;
 public class HostsHelper {
 
     public List<String> getLocalHostNames() {
-        Set<String> hostSet = new HashSet<String>();
-
+        Set<String> hostSet = new HashSet<>();
         for (InetAddress host : getLocalHosts()) {
             hostSet.add(host.getHostName());
         }
 
-        List<String> hostNames = new ArrayList<String>(hostSet);
+        List<String> hostNames = new ArrayList<>(hostSet);
         Collections.sort(hostNames);
 
         return hostNames;

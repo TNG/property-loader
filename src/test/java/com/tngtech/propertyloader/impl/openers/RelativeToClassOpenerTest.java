@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Properties;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,7 +28,7 @@ class RelativeToClassOpenerTest {
         Properties loadedProperties = new Properties();
         InputStream stream = relativeToClassOpener.open("/abc.def.properties");
         if (stream != null) {
-            Reader reader = new InputStreamReader(stream, "ISO-8859-1");
+            Reader reader = new InputStreamReader(stream, ISO_8859_1);
             loadedProperties.load(reader);
         }
         assertThat(loadedProperties).containsKey("abc");
@@ -39,7 +40,7 @@ class RelativeToClassOpenerTest {
         Properties loadedProperties = new Properties();
         InputStream stream = relativeToClassOpener.open("xyz.def.properties");
         if (stream != null) {
-            Reader reader = new InputStreamReader(stream, "ISO-8859-1");
+            Reader reader = new InputStreamReader(stream, ISO_8859_1);
             loadedProperties.load(reader);
         }
         assertThat(loadedProperties).containsKey("xyz");

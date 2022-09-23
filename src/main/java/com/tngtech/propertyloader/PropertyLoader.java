@@ -22,6 +22,8 @@ import com.tngtech.propertyloader.impl.interfaces.PropertyLoaderOpener;
 import com.tngtech.propertyloader.impl.interfaces.PropertyLocationsContainer;
 import com.tngtech.propertyloader.impl.interfaces.PropertySuffixContainer;
 
+import static java.util.Collections.singletonList;
+
 /**
  * Implements loading of java.util.Properties from properties-like or XML
  * key-value files.
@@ -46,7 +48,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
 
     private String propertyFileEncoding = "ISO-8859-1";
 
-    private List<String> baseNames = new ArrayList<String>();
+    private List<String> baseNames = new ArrayList<>();
 
     private String fileExtension = "properties";
 
@@ -232,7 +234,7 @@ public class PropertyLoader implements PropertyLocationsContainer<PropertyLoader
     public Properties load(String baseName) {
         fileNameStack = propertyLoaderFactory.getEmptyFileNameStack();
 
-        Properties loadedProperties = loadPropertiesFromBaseNameList(Arrays.asList(baseName));
+        Properties loadedProperties = loadPropertiesFromBaseNameList(singletonList(baseName));
         filterProperties(loadedProperties);
         return loadedProperties;
     }

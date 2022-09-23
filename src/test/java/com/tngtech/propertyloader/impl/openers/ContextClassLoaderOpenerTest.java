@@ -9,6 +9,7 @@ import java.io.Reader;
 import java.util.Properties;
 import java.util.Scanner;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ContextClassLoaderOpenerTest {
@@ -30,7 +31,7 @@ class ContextClassLoaderOpenerTest {
         Properties loadedProperties = new Properties();
         InputStream stream = contextClassLoaderOpener.open("abc.def.properties");
         if (stream != null) {
-            Reader reader = new InputStreamReader(stream, "ISO-8859-1");
+            Reader reader = new InputStreamReader(stream, ISO_8859_1);
             loadedProperties.load(reader);
         }
         assertThat(loadedProperties).containsKey("abc");

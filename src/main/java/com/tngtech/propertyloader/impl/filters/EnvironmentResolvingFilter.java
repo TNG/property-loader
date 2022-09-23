@@ -14,7 +14,7 @@ public class EnvironmentResolvingFilter extends ValueModifyingFilter {
 
     private static final Logger log = LoggerFactory.getLogger(EnvironmentResolvingFilter.class);
 
-    private static final Pattern PATTERN = Pattern.compile("\\$ENV\\{(.*)\\}");
+    private static final Pattern PATTERN = Pattern.compile("\\$ENV\\{(.*)}");
 
     @Override
     protected String filterValue(String key, String value, Properties properties) {

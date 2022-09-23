@@ -13,8 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
-import java.net.MalformedURLException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -37,7 +35,7 @@ class DefaultPropertyFilterContainerTest {
     private ThrowIfPropertyHasToBeDefined throwIfPropertyHasToBeDefined;
 
     @BeforeEach
-    void setUp() throws MalformedURLException {
+    void setUp() {
         when(propertyLoaderFactory.getVariableResolvingFilter()).thenReturn(variableResolvingFilter);
         when(propertyLoaderFactory.getEnvironmentResolvingFilter()).thenReturn(environmentResolvingFilter);
         when(propertyLoaderFactory.getWarnOnSurroundingWhitespace()).thenReturn(warnOnSurroundingWhitespace);

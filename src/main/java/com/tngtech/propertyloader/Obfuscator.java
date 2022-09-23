@@ -1,20 +1,19 @@
 package com.tngtech.propertyloader;
 
-
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.util.Base64;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class Obfuscator {
 
     private static final String ENCRYPTION_ALGORITHM = "Blowfish";
     private static final String ENCRYPTION_ALGORITHM_MODIFIER = "/ECB/PKCS5Padding";
-    private static final String ENCODING = "UTF-8";
 
     private final Base64.Encoder base64Encoder = Base64.getEncoder();
     private final Base64.Decoder base64Decoder = Base64.getDecoder();
@@ -54,11 +53,9 @@ public class Obfuscator {
         try {
             Cipher cipher = Cipher.getInstance(ENCRYPTION_ALGORITHM + ENCRYPTION_ALGORITHM_MODIFIER);
             cipher.init(Cipher.ENCRYPT_MODE, key);
-            return cipher.doFinal(toEncrypt.getBytes(ENCODING));
+            return cipher.doFinal(toEncrypt.getBytes(UTF_8));
         } catch (GeneralSecurityException e) {
             throw new RuntimeException("Exception during decryptInternal: " + e, e);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("Exception during encryptInternal: " + e, e);
         }
     }
 
@@ -85,11 +82,9 @@ public class Obfuscator {
             Cipher cipher = Cipher.getInstance(ENCRYPTION_ALGORITHM + ENCRYPTION_ALGORITHM_MODIFIER);
             cipher.init(Cipher.DECRYPT_MODE, key);
             byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
-            return new String(decryptedBytes, ENCODING);
+            return new String(decryptedBytes, UTF_8);
         } catch (GeneralSecurityException e) {
             throw new RuntimeException("Exception during decryptInternal: " + e, e);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("Exception during encryptInternal: " + e, e);
         }
     }
 }

@@ -11,7 +11,7 @@
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -45,7 +45,7 @@
     </developers>
     <organization>
         <name>TNG Technology Consulting</name>
-        <url>http://www.tngtech.com/</url>
+        <url>https://www.tngtech.com/</url>
     </organization>
     <parent>
         <groupId>org.sonatype.oss</groupId>
