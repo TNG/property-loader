@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java-version: [8, 10a, 11, 12a, 13a, 14a, 15a, 16a, 17, 18]
+        java-version: [8, 10a, 11, 12a, 13a, 14a, 15a, 16a, 17, 18, 19]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
