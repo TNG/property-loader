@@ -7,24 +7,17 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java-version: [8, 10a, 11, 12a, 13a, 14a, 15a, 16a, 17, 18, 19]
+        java-version: [8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Split Java version & distribution
-        id: java
-        run: |
-          [[ "${{matrix.java-version}}" =~ .*a$ ]] && distribution='adopt' || distribution='temurin'
-          echo "::set-output name=distribution::$distribution"
-          version=$(echo ${{matrix.java-version}} | sed 's/a$//')
-          echo "::set-output name=version::$version"
-      - name: Set up Java ${{steps.java.outputs.version}}
+      - name: Set up Java ${{matrix.java-version}}
         uses: actions/setup-java@v3
         with:
-          distribution: ${{steps.java.outputs.distribution}}
-          java-version: ${{steps.java.outputs.version}}
+          distribution: zulu
+          java-version: ${{matrix.java-version}}
       - name: Run tests
-        run: mvn -e test -Dmaven.wagon.http.ssl.insecure=${{ steps.java.outputs.version == 9 || steps.java.outputs.version == 10 }}
+        run: mvn -e test
 
   coverage:
     needs: test
