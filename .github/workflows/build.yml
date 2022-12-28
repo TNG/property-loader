@@ -32,3 +32,12 @@ jobs:
         with:
           files: target/site/jacoco/jacoco.xml
           name: codecov
+
+  dependency-check:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Check dependencies
+        run: mvn --batch-mode --no-transfer-progress -e dependency-check:check

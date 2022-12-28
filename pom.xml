@@ -103,6 +103,14 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>7.4.2</version>
+                <configuration>
+                    <failBuildOnCVSS>5</failBuildOnCVSS>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <profiles>
