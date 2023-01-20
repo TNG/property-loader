@@ -9,7 +9,7 @@ We love pull requests. Here is a quick guide:
 2. Fork the repo.
 3. Create a new branch from master.
 5. Add your change together with necessary tests.
-6. Run `mvn clean build` and ensure all tests are passing.
+6. Run `mvn clean verify` and ensure all tests are passing.
 7. Commit and push to your fork/branch and submit a pull request. Don't forget to sign-off your commit (see next section).
 8. Create a pull request.
 

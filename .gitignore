@@ -1,12 +1,5 @@
 *.iml
 .idea
 target
-.classpath
-.gradle/
-.project
-.settings/
-.vscode/
-bin/
-property-loader.ipr
-property-loader.iws
-build
+.mvn/wrapper/*.jar
+.mvn/settings.xml
