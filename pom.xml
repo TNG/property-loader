@@ -83,7 +83,7 @@
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M9</maven-surefire-plugin.version>
-        <dependency-check-maven.version>8.1.0</dependency-check-maven.version>
+        <dependency-check-maven.version>8.1.2</dependency-check-maven.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
