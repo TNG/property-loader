@@ -40,4 +40,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Check dependencies
-        run: ./mvnw --batch-mode --no-transfer-progress -e dependency-check:check
+        run: ./mvnw --batch-mode --no-transfer-progress -e dependency-check:check -DnvdApiKey='${{ secrets.NVD_API_KEY }}'
