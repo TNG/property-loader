@@ -40,4 +40,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Check dependencies
-        run: ./mvnw --batch-mode --no-transfer-progress -e dependency-check:check -DnvdApiKey='${{ secrets.NVD_API_KEY }}'
+        uses: dependency-check/Dependency-Check_Action@main
+        id: Depcheck
+        with:
+          project: 'property-loader'
+          path: '.'
+          format: 'HTML'
+          args: --failOnCVSS 5 --nvdApiKey '${{ secrets.NVD_API_KEY }}'
