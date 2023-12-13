@@ -53,4 +53,4 @@ jobs:
           project: 'property-loader'
           path: '.'
           format: 'HTML'
-          args: --failOnCVSS 5 --nvdApiKey '${{ secrets.NVD_API_KEY }}'
+          args: --failOnCVSS 5
