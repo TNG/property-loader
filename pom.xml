@@ -71,7 +71,7 @@
         <java.version>1.8</java.version>
 
         <!-- dependencies-->
-        <slf4j.version>2.0.12</slf4j.version>
+        <slf4j.version>2.0.13</slf4j.version>
 
         <assertj-core.version>3.25.3</assertj-core.version>
         <junit-jupiter.version>5.10.2</junit-jupiter.version>
