@@ -1,0 +1,118 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'signing'
+    id 'maven-publish'
+    id 'org.owasp.dependencycheck' version '12.2.0'
+}
+
+group = 'com.tngtech.java'
+version = '1.5.2-SNAPSHOT'
+
+description = 'The property loader is a java library for managing property configurations.'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(project.hasProperty('javaLanguageVersion') ? project.property('javaLanguageVersion') : 8)
+    }
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    withJavadocJar()
+    withSourcesJar()
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:2.0.17'
+
+    testImplementation 'org.assertj:assertj-core:3.27.7'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.14.2'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.11.0'
+    testImplementation 'org.slf4j:slf4j-reload4j:2.0.17'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+    }
+}
+
+dependencyCheck {
+    nvd.setApiKey(project.findProperty('nvdApiKey'))
+    analyzers.ossIndex.setUsername(project.findProperty('ossindexUsername'))
+    analyzers.ossIndex.setPassword(project.findProperty('ossindexPassword'))
+    setFailBuildOnCVSS(5)
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'property-loader'
+            from components.java
+            pom {
+                name = 'Property-Loader'
+                description = 'The property loader is a java library for managing property configurations.'
+                url = 'https://github.com/TNG/property-loader'
+
+                licenses {
+                    license {
+                        name = 'The Apache Software License, Version 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution = 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'echererm'
+                        name = 'Michael Echerer'
+                        email = 'michael.echerer@tngtech.com'
+                        organization = 'TNG Technology Consulting'
+                    }
+                    developer {
+                        id = 'eberlem'
+                        name = 'Markus Eberle'
+                        email = 'markus.eberle@tngtech.com'
+                        organization = 'TNG Technology Consulting'
+                    }
+                    developer {
+                        id = 'prinzm'
+                        name = 'Moritz Prinz'
+                        email = 'moritz.prinz@tngtech.com'
+                        organization = 'TNG Technology Consulting'
+                    }
+                    developer {
+                        id = 'hankem'
+                        name = 'Manfred Hanke'
+                        email = 'manfred.hanke@tngtech.com'
+                        organization = 'TNG Technology Consulting'
+                    }
+                }
+
+                organization {
+                    name = 'TNG Technology Consulting'
+                    url = 'https://www.tngtech.com/'
+                }
+
+                scm {
+                    url = 'git@github.com:TNG/property-loader.git'
+                    connection = 'scm:git:https://github.com/TNG/property-loader.git'
+                    developerConnection = 'scm:git:https://github.com/TNG/property-loader.git'
+                }
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
