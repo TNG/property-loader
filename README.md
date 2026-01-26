@@ -33,7 +33,7 @@ $ git clone git@github.com:TNG/property-loader.git
 ```
 2. Build the library:
 ```
-$ mvn install
+$ ./gradlew assemble
 ```
 3. Include jar file to your application
 4. Add property files e.g. `props.properties` to your application's classpath
