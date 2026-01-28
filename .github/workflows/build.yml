@@ -27,6 +27,7 @@ jobs:
         with:
           files: build/reports/jacoco/test/jacocoTestReport.xml
           name: codecov
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   dependency-check:
     needs: test
