@@ -166,7 +166,7 @@ propertyLoader.withWarnOnSurroundingWhitespace()
 
 ## Javadoc
 
-Full Javadoc of the code can be found here http://tng.github.io/property-loader/.
+Full Javadoc of the code can be found here https://tng.github.io/property-loader/.
 
 ## How to contribute
 
