@@ -33,8 +33,7 @@ class PropertyFileReaderTest {
     void testTryToReadProperties_From_Properties_File() throws Exception {
         PropertyFileReader reader = new PropertyFileReader(propertyLoaderFactory);
 
-        when(propertyLoaderOpener.open("test.properties")).thenReturn(stream);
-        when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);
+        setupPropertyLoaderFactoryGetEmptyPropertiesAndOpenStubs("test.properties");
         when(propertyLoaderFactory.getInputStreamReader(stream, "ISO-8859-1")).thenReturn(inputStreamReader);
         doNothing().when(properties).load(inputStreamReader);
 
@@ -50,8 +49,7 @@ class PropertyFileReaderTest {
     void testTryToReadProperties_From_XML_File() throws Exception {
         PropertyFileReader reader = new PropertyFileReader(propertyLoaderFactory);
 
-        when(propertyLoaderOpener.open("test.xMl")).thenReturn(stream);
-        when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);
+        setupPropertyLoaderFactoryGetEmptyPropertiesAndOpenStubs("test.xMl");
 
         doNothing().when(properties).loadFromXML(stream);
 
@@ -60,5 +58,10 @@ class PropertyFileReaderTest {
         verify(propertyLoaderOpener).open("test.xMl");
         verify(propertyLoaderFactory).getEmptyProperties();
         verify(properties).loadFromXML(stream);
+    }
+
+    private void setupPropertyLoaderFactoryGetEmptyPropertiesAndOpenStubs(String openArg1) {
+        when(propertyLoaderOpener.open(openArg1)).thenReturn(stream);
+        when(propertyLoaderFactory.getEmptyProperties()).thenReturn(properties);
     }
 }
